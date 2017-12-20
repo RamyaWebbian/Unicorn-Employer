@@ -1,0 +1,97 @@
+<div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+       <section id="login">  
+    <!--  <div class="login-blk">
+        <div class="header">
+          <img src="../../../assets/header-bg.jpg" class="header-bg img-responsive"/>
+          <img src="../../../assets/logo-frs.png" class="logo"/>
+        </div>
+		 </div> -->
+
+    <app-header-registration ></app-header-registration> 
+    
+		<div class="deskWidth">
+ <simple-notifications [options]="options"></simple-notifications>
+ <!--  [ngFormOptions]="{ updateOn: 'submit' }"  -->
+  <form [formGroup]="registerUser" (ngSubmit)="onSubmit(registerUser, registerUser.valid)" novalidate >
+        <div class="page-title">
+          <h2>registration</h2>
+        </div>
+        <div class="form input-section">
+          <div class="form-group filled-form">
+            <label for="businessName">Name of Your Business</label>
+            <input type="text" class="myInputStyle" id="enterEmail" formControlName="businessname" required>
+           <!--  <div class="inline-error" *ngIf="!registerUser.controls['businessname'].valid">-->
+                 <div [hidden]="registerUser.controls['businessname'].valid || registerUser.controls['businessname'].pristine" class="inline-error">
+                 Please enter a Business name!
+                </div>
+        
+          </div>
+
+          <div class="form-group filled-form">
+            <label for="fname">Your First Name</label>
+            <input type="text" class="myInputStyle"  id="pwd" formControlName="firstname"  required>
+             <!-- <div class="inline-error" [hidden]="registerUser.controls['firstname'].valid"> -->
+                <div [hidden]="registerUser.controls['firstname'].valid || registerUser.controls['firstname'].pristine" class="inline-error">
+                 Please enter first name
+                </div>
+          </div>
+          <div class="form-group filled-form">
+            <label for="lname">Your Last Name</label>
+            <input type="text" class="myInputStyle"  formControlName="lastname"  required>
+
+            <!-- <div class="inline-error" *ngIf="!registerUser.controls['lastname'].valid"> -->
+              <div [hidden]="registerUser.controls['lastname'].valid || registerUser.controls['lastname'].pristine" class="inline-error">
+                  Please enter last name
+                </div>
+          </div>
+          <div class="form-group filled-form">
+            <label for="emailid">Your Email Address</label>
+            <input type="email" class="myInputStyle"  id="pwd"  maxlength="100" formControlName="email" required>
+          <!--  <div class="inline-error" *ngIf="!registerUser.controls['email'].valid">-->
+               <div [hidden]="registerUser.controls['email'].valid || registerUser.controls['email'].pristine" class="inline-error">
+                  Email id is not valid
+                </div>
+          </div>
+          <div class="form-group filled-form">
+            <label for="emailid">Confirm Your Email Address</label>
+            <input type="email" class="myInputStyle" id="enterEmail" maxlength="100" name="confirmemail" formControlName="confirmemail"  required>
+          
+          <!--   <div class="inline-error" *ngIf="!registerUser.controls['confirmemail'].valid">-->
+                 <div [hidden]="(registerUser.controls['email'].value === registerUser.controls['confirmemail'].value ) || registerUser.controls['confirmemail'].pristine" class="inline-error">
+                  Email address does not match
+                </div>
+            
+          </div>
+          <div class="form-group filled-form">
+            <label for="contact">Your Phone Number</label>
+            <input type="number" class="myInputStyle" pattern="[0-9]{10}" minlength="10" maxlength="10" name="phone" id="pwd" formControlName="phone" required>
+           <!-- <div class="">Phone number must be of 10 digits</div> mask='000-000-0000' -->
+             <!--<div class="inline-error" *ngIf="!registerUser.controls['phone'].valid">
+                  Please enter a valid phone number(111-111-1111)
+                </div> -->
+      <div [hidden]="registerUser.controls['phone'].valid || registerUser.controls['phone'].pristine" class="inline-error">
+      <div [hidden]="!registerUser.controls.phone.hasError('pattern')">Mobile should be 10 digit</div>
+      <div [hidden]="!registerUser.controls.phone.hasError('required')">Mobile is required</div>
+     
+   </div>
+
+
+          </div>
+        </div>
+
+        <div class="goToNextBtn"> <!--  -->
+          <button  type="submit" [disabled]="registerUser.invalid" class="btn btn-primary">Register</button>
+            <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+        </div>
+        
+        <p class="goToInfo">Already have a Talentracker Account? <a  class="actionAnchor" (click)="gotologin()">Login </a></p>
+      </form>
+	  </div>
+     
+    </section>
+  </div>
+  </div>
+</div>
+<!-- <app-help-modal [(visible)]="showHelp"></app-help-modal> -->

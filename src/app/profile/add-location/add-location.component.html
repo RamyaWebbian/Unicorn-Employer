@@ -1,0 +1,66 @@
+<div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+       <section id="login">  
+      <div class="login-blk">
+        <div class="header">
+          <img src="../../../assets/header-bg.jpg" class="header-bg img-responsive"/>
+          <img src="../../../assets/logo-frs.png" class="logo"/>
+        </div>
+        <div class="deskWidth">
+        <div class="inner-page-title">
+          <h2>user profile</h2><a (click)= "helpText()"><img src="../../assets/question.png"/></a>
+        </div>
+        <div class="strips">
+          <div class="row">
+            <div class="col-12">
+                <div class="col-4 green-strip"></div>
+                <div class="col-4 green-strip"></div>
+                <div class="col-4 grey-strip"></div>
+            </div>
+          </div>
+        </div>
+        <div class="section-title">
+          <h5>add your business location</h5>
+          <small class="info">This will be the default work location for your employees.</small>
+        </div>
+        <div class="form input-section">
+          <div class="form-group filled-form">
+            <label for="address1">Address Line 1</label>
+            <input type="text" class="myInputStyle" id="address1" [(ngModel)]="address1">
+            <div class="inline-error"></div>
+          </div>
+
+          <div class="filled-form">
+            <label for="address2">Address Line 2</label>
+            <input type="text" class="myInputStyle"  id="address2" [(ngModel)] = "address2">
+            <div class="inline-error">Please enter a valid first name</div>
+          </div>
+          <div class="form-group filled-form">
+            <label for="zipcode">Zip Code</label>
+            <input type="number" class="myInputStyle" id="zipcode" [(ngModel)]="zipcodel">
+            <div class="inline-error">Please enter a valid zip code</div>
+          </div>
+          <div class="form-group filled-form">
+            <label for="state" >State</label>
+            <input type="text" class="myInputStyle"  id="state" [(ngModel)] = "state" [disabled]>
+            <div class="inline-error"></div>
+          </div>
+          <div class="form-group filled-form">
+            <label for="city">City</label>
+            <input type="text" class="myInputStyle"  id="city" [(ngModel)] = "city">
+            <div class="inline-error"></div>
+          </div>
+        </div>
+
+        <div class="goToNextBtn bgGrey">
+          <button type="button" class="btn btn-primary" (click) = "userProfileView()">save business location</button>
+        </div>
+
+      </div>
+    </div>
+  </section>
+  </div>
+  </div>
+</div>
+<app-help-modal [visible]="helpShow" (closeSection)="helpText()"></app-help-modal>

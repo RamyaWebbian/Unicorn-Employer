@@ -1,0 +1,75 @@
+<div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+       <section id="login">  
+      <div class="login-blk">
+        <div class="header">
+          <img src="../../../assets/header-bg.jpg" class="header-bg img-responsive"/>
+          <img src="../../../assets/logo-frs.png" class="logo"/>
+        </div>
+        <div class="deskWidth">
+        <div class="inner-page-title">
+          <h2>business profile</h2><a (click)= "helpText()"><img src="../../assets/question.png"/></a>
+        </div>
+        <div class="strips">
+          <div class="row">
+            <div class="col-12">
+                <div class="col-4 green-strip"></div>
+                <div class="col-4 green-strip"></div>
+                <div class="col-4 green-strip"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form input-section">
+          <div class="busImg">
+            <a href="#">
+              <div class="defaultImgText">
+                <img src="../../assets/photo-camera.png" class="all-icon" />
+                <p>Upload business logo</p>
+                <small>(This will be used as your profile picture)</small>
+              </div>
+            </a>
+            <div class="cameraActionItems">
+              <ul>
+                <li><a href="#">Upload New Image</a></li>
+                <li><a href="#">Remove Image</a></li>
+                <li><a href="#">Cancel</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="form-group filled-form">
+            <label for="topic">Topic</label>
+            <input type="text" class="myInputStyle" id="topic" [(ngModel)]="topic">
+          </div>
+          <div class="form-group filled-form busDesc">
+            <label for="busDesc">Description</label>
+            <textarea id="busDesc" [(ngModel)]="busDesc"></textarea>
+          </div>
+          <div class="show-more">
+            <div class="row">
+              <div class="col-12">
+                <a href="#" class="actionAnchor">Show more</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="add-new">
+          <div class="row">
+            <div class="col-12">
+                <img src="../../assets/plus.png" class="all-icon"/>
+                <a (click) = "addNewBusiness()" class="actionAnchor">Add New Topic</a>
+            </div>
+          </div>
+        </div>
+        <div class="goToNextBtn bgGrey">
+          <button type="button" class="btn btn-primary" (click) = "viewProfile()">Save business profile</button>
+        </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  </div>
+</div>
+<app-help-modal [visible]="helpShow" (closeSection)="helpText()"></app-help-modal>

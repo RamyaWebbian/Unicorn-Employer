@@ -1,18 +1,44 @@
+import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-
-
+// import { CommonModule } from '@angular/common';
 import { AppComponent } from './app.component';
+import { appRouter } from './app.route';
+import { ShowHideInput } from '../app/common/directives/show-hide-directive';
+import { Routes, RouterModule } from '@angular/router';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { PagenotfoundComponent } from './common/pagenotfound/pagenotfound.component';
+import { SharedModule } from './shared/shared.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AuthGuard } from './user/guards/index';
+import { UserService } from './services/index';
 
+ //import { HeaderRegistrationModule } from './common/header-registration/header-registration.module';
+// import { HeaderValidUserComponent } from './common/header-valid-user/header-valid-user.component';
+// import { EqualValidator } from './common/directives/equal-validator.directive';
+// import { HelpModalModule } from './help-modal/help-modal.module';
 
 @NgModule({
   declarations: [
-    AppComponent
-  ],
+    AppComponent,
+    PagenotfoundComponent,
+   // HeaderRegistrationComponent,
+   // HeaderValidUserComponent,
+    //EqualValidator
+    ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    // SharedModule,
+    HttpModule,
+    BrowserAnimationsModule,
+    NgbModule.forRoot(),
+    appRouter,
+    //HeaderRegistrationModule
+    
   ],
-  providers: [],
+    // exports: [RouterModule],
+  providers: [AuthGuard, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

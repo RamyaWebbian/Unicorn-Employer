@@ -1,1 +1,392 @@
+/* fonts */
+@font-face {
+    font-family: 'proxima_novaregular';
+    src: url('assets/font/proximanova-regular-webfont.woff2') format('woff2'),
+         url('assets/font/proximanova-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+h1 {
+    font-size: 30px !important;
+    font-weight: bold;
+}
+/* fonts */
+
 /* You can add global styles to this file, and also import other style files */
+.bgGrey {
+    background-color: #efefef;
+}
+img.all-icon {
+    vertical-align: sub;
+}
+.wrapper {
+    width: 80%;
+    margin: 20px auto;
+    text-align: center;
+}
+button {
+    margin: 20px 5px;
+}
+.login-wrapper,
+.signup-wrapper {
+    width: 50%;
+    margin: 0 auto;
+    text-align: center;
+}
+body, html {
+    font-family: proxima_novaregular !important;
+}
+h4, h2 {
+    text-align: center;
+}
+
+/* login page that will be used everywhere */
+.container-fluid > .row > .col-12 {
+    padding: 0;
+}
+input.myInputStyle {
+    padding: 15px 8px;
+    border-radius: 8px;
+    border: 1px solid #002d3f;
+    display: block;
+    width: 90%;
+    margin: auto;
+}
+input.myInputStyle:focus {
+    outline: 0;
+}
+.form-group.filled-form label {
+    color: #002d3f;
+    font-weight: 600;
+    top: -11px;
+    left: 8%;
+    padding: 0 5px;
+    display: inline-block;
+    position: absolute;
+    background-color: #fff;
+    z-index: 1;
+}
+h2 {
+    text-transform: uppercase;
+    font-size: 1.2rem !important;
+    font-weight: bold !important;
+}
+.header,
+.header-registration {
+    background: url(./assets/header-bg.jpg) repeat-x;
+    line-height: 150px;
+    text-align: center;
+}
+.logo {
+    width: 65%;
+}
+.rightAlign {
+    float: right;
+    clear: both;
+}
+.page-title {
+    padding: 20px 0;
+}
+.form.input-section {
+    padding: 40px 0 20px;
+}
+.myInputStyle:last-child {
+    margin-bottom: 0;
+}
+.form-group.filled-form {
+    margin-bottom: 18px;
+    position: relative;
+}
+.form-group.filled-form:last-child {
+    margin-bottom: 0;
+}
+.goToInfo {
+    padding: 20px;
+    text-align: center;
+} 
+a.actionAnchor {
+    text-decoration: none;
+    color: #002d3f !important;
+    font-weight: bold;
+    cursor: pointer;
+}
+.page-info {
+    text-align: center;
+}
+.pwd-eye {
+    width: 30px;
+    position: absolute;
+    right: 7%;
+    top: 13px;
+    z-index: 1;
+}
+
+/* heading inside pages  */
+.inner-page-title,
+.section-title h5,
+small {
+    text-align: left;
+    width: 90%;
+    margin: auto;
+    padding: 0;
+}
+.inner-page-title h2 {
+    display: inline;
+}
+.inner-page-title img {
+    width: 20px;
+    vertical-align: baseline;
+    margin: 0 10px;
+}
+small {
+    display: inherit;
+    padding: 0;
+}
+.info {
+    color: #4a7beb; 
+}
+.section-title h5 {
+    text-transform: capitalize;
+    font-weight: bold;
+}
+.section-title,
+.inner-page-title {
+    padding: 10px 0 0 0;
+} 
+/* heading inside pages  */
+
+/* Error CSS */
+.common-error {
+    text-align: center;
+    color: red;
+    visibility: hidden;
+}
+.inline-error {
+    color: red;
+    text-align: right;
+    height: 20px;
+    width: 90%;
+    margin: 0 auto;
+   /* visibility: hidden; */
+}
+/* Error CSS */
+
+/* Button CSS */
+.action-buttons {
+    width: 90%;
+    margin: auto;
+    padding: 20px 0;
+}
+.goToNextBtn {
+    padding: 20px;
+}
+.goToNextBtn .btn,
+.goToNextBtn .btn:hover {
+    width: 100%;
+    border-radius: 50px;
+    padding: 10px;
+    background-color: #3e7c95;
+    border-color: #3e7c95;
+    font-size: 21px;
+    text-transform: capitalize;
+    cursor: pointer;
+}
+.btn.cancel {
+    background-color: #999;
+    border: 1px solid #999;
+}
+/* Button CSS */
+
+/* strips section */
+.strips .col-4 {
+    width: 32.6%;
+    display: inline-block;
+}
+.green-strip {
+    border-bottom: 3px solid #149702;
+}
+.grey-strip {
+    border-bottom: 3px solid #ddd;
+}
+/* strips section */
+
+/* view section CSS */
+p {
+    line-height: 1.2;
+}
+.userTitle {
+    margin-bottom: 0;
+    font-size: 16px;
+    color: #555;
+}
+.userInfo {
+    font-weight: 600;
+    font-size: 19px;
+    color: #000;
+}
+.addedLoc,
+.additionalLoc,
+.add-new,
+.business-section,
+.form-group.filled-form.busDesc,
+.show-more {
+    width: 90%;
+    margin: auto;
+}
+.add-new {
+    padding: 15px 0;
+}
+.loc,
+.defaultImgText {
+    padding: 10px 0 10px;
+    position: relative;
+}
+.actionItems {
+    position: absolute;
+    right: 9%;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #fff;
+    margin-top: -30px;
+}
+.cameraActionItems {
+    position: absolute;
+    background-color: #002d3f;
+    z-index: 11;
+    left: 20vh;
+    width: 35%;
+}
+.actionItems ul,
+.cameraActionItems ul {
+    list-style-type: none;
+    padding: 5px 7px;
+    margin: 0;
+}
+.actionItems li {
+    border-bottom: 1px solid #ccc;
+}
+.cameraActionItems li {
+    border-bottom: 1px solid #000;
+    color: #fff
+}
+.actionItems li:last-of-type,
+.cameraActionItems li:last-of-type {
+    border-bottom: 0;
+}
+.actionItems li a {
+    color: #000;
+    font-weight: 600;
+    font-size: 16px;
+}
+.cameraActionItems li a {
+    color: #fff;
+}
+.all-icon {
+    width: 20px;
+}
+.additionalLoc .loc {
+    border-bottom: 1px solid #ccc;
+    padding: 10px 0 0;
+}
+.additionalLoc div.loc:last-of-type {
+    border-bottom: 0;
+}
+/* view section CSS */
+
+.form-check {
+    width: 90%;
+    margin: auto;
+    padding: 15px 0;
+    font-size: 18px;
+}
+.form-check input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+}
+
+/* business profile */
+.busImg {
+    border-radius: 8px;
+    border: 1px solid #002d3f;
+    width: 90%;
+    margin: auto auto 18px;
+    padding: 15% 10%;
+}
+.defaultImgText {
+    text-align: center;
+}
+.defaultImgText p {
+    margin: 0;
+}
+.busDesc textarea {
+    width: 100%;
+    height: 220px;
+    margin: auto auto 18px;
+    border: 1.3px solid #002d3f;
+    border-radius: 8px;
+    padding: 10px;
+}
+.form-group.filled-form.busDesc label {
+    left: 4%;
+}
+
+/* why important */
+.alert.profile-imp {
+    color: #fff;
+    min-height: 100vh;
+    min-width: 100vw;
+    background-color: rgb(13,39,49);
+    opacity: 0.9;
+    text-align: center;
+    position: fixed;
+    top: 0;
+    z-index: 1;
+}
+.alert-dismissible button.close {
+    padding: 0;
+    right: 3%;
+}
+.profile-imp p {
+    padding: 40px 50px;
+    font-size: 21px;
+}
+.profile-imp h1 {
+    padding: 10px 25px;
+}
+.green-border {
+    border-bottom: 3px solid green;
+    width: 20%;
+    margin: auto;
+}
+.closeIcon {
+    width: 100%;
+    display: block;
+    padding: 0 3% 10% 0;
+}
+button.close,
+button.close:focus, button.close:hover {
+    font-size: 65px;
+    font-weight: normal;
+    color: #fff;
+    text-shadow: 0 1px 0 #fff;
+    opacity: 1;
+    outline: 0;
+}
+/* why important */
+/* login page that will be used everywhere */
+@media screen and (min-width: 1024px) {
+    .deskWidth  {
+        max-width: 500px;
+        margin: auto;
+    }
+    .header-bg {
+        width: 100%;
+        display: block;
+        height: 100px;
+    }
+    .logo {
+        width: 15%;
+    }
+}
+/* width in desktop */
