@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { UserService, MemoryStorage } from '../../services/index';
 import {NotificationsService} from 'angular2-notifications';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,7 @@ export class LoginComponent implements OnInit {
 constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
-   private memoryStorage:MemoryStorage,
+   private cookieService:CookieService,
     private router: Router,
     private _notificationsService: NotificationsService
 ) { }
@@ -33,6 +34,8 @@ public loginform: FormGroup;
   };
 
   ngOnInit() { 
+  var user = this.userService.isLogedin();
+  //console.log(user);
 
     this.loginform = this.formBuilder.group({
       'password': ['', Validators.required],
@@ -62,18 +65,25 @@ onSubmitLogin(loginfields){
          // console.log(typeof localStorage)
           
          this._notificationsService.success('success','Login Success', { timeOut: 2500, showProgressBar: true, pauseOnHover: false, clickToClose: true });
- 
+         var token = {token:res['jwt_token']};
               if (this.userService.isLocalStorage()) {
                 
-              localStorage.setItem('userToken', JSON.stringify(res['jwt_token']));
+              localStorage.setItem('userToken', JSON.stringify(token));
               localStorage.setItem('currentUser', JSON.stringify(user));
               this.userService.setLogedIn(true);
             }else{
-              this.memoryStorage.setItem('userToken', JSON.stringify(res['jwt_token']));
-              this.memoryStorage.setItem('currentUser', JSON.stringify(user));
-              this.userService.setLogedIn(true);
-                alert('saveed token in memoryStorage')
-              }
+             // this.memoryStorage.setItem('userToken', res['jwt_token']);
+               // this.memoryStorage.setItem('currentUser', user);
+               
+             // if( this.cookieService.check('userToken')) {
+               this.cookieService.set('userToken', JSON.stringify(token));
+               this.cookieService.set('currentUser', JSON.stringify(user));
+               console.log( JSON.parse(this.cookieService.get('userToken')));
+               //console.log('check', this.cookieService.getAll())
+               this.userService.setLogedIn(true);
+                alert('saved token in cookieService')
+                }
+             // }
             this.loading = false;
             this.router.navigate(['./user-profile']);
 

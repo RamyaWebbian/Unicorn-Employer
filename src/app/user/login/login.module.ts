@@ -7,9 +7,9 @@ import { LoginComponent } from './login.component';
 // import {ShowHideInput} from '../../common/directives/show-hide-directive';
 import { LoginRoutingModule } from './login-routing.module';
 import { SharedModule } from '../../shared/shared.module';
-import { UserService, MemoryStorage } from '../../services/index';
-import { AuthGuard } from '../guards/index';
-
+import { UserService } from '../../services/index';
+// import { AuthGuard } from '../guards/index';
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
   imports: [
@@ -21,6 +21,6 @@ import { AuthGuard } from '../guards/index';
   SharedModule
   ],
   declarations: [LoginComponent],
- providers:[AuthGuard, MemoryStorage]
+ providers:[CookieService]
 })
 export class LoginModule { }

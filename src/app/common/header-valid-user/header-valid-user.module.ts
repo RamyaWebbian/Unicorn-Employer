@@ -5,7 +5,8 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { FormsModule } from '@angular/forms';
 import { HeaderValidUserComponent } from './header-valid-user.component';
-import { UserService, MemoryStorage } from '../../services/index';
+import { UserService } from '../../services/index';
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
   imports: [
@@ -17,6 +18,6 @@ import { UserService, MemoryStorage } from '../../services/index';
   ],
   exports:[HeaderValidUserComponent],
   declarations: [HeaderValidUserComponent],
-  providers:[UserService, MemoryStorage]
+  providers:[UserService, CookieService]
 })
 export class HeaderValidUserModule { }

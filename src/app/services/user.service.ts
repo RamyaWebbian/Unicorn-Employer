@@ -6,6 +6,9 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import {BehaviorSubject} from 'rxjs/Rx';
 import {Observable} from 'rxjs/Observable';
+// import { MemoryStorage } from './MemoryStorage';
+import { CookieService } from 'ngx-cookie-service';
+
 @Injectable()
 export class UserService {
   public switchUrl= 'http://dev-hwaredesign.pantheonsite.io/'; //https://test-frslive.pantheonsite.io/
@@ -32,9 +35,12 @@ export class UserService {
 //  @Input()
   private subjectIsLogin: Subject<Boolean> = new Subject<Boolean>();
 
-  constructor(private http: Http, private router: Router) {
+  constructor(private http: Http,
+  private cookieService:CookieService,
+  private router: Router) {
 
   }
+  
   create(user): any { // Array<Object>
     return this.http.post(this.registerUrl, user, { headers: this.authHeaders() })
       .map((res: Response) => res.json())
@@ -68,13 +74,24 @@ export class UserService {
   }
 
   isLogedin() {
-
-    const token = JSON.parse(localStorage.getItem('userToken'));
-    const user = JSON.parse(localStorage.getItem('currentUser'));
+  var token;
+  var user;
+  if(this.isLocalStorage()){
+      token = JSON.parse(localStorage.getItem('userToken'));
+      user = JSON.parse(localStorage.getItem('currentUser'));
+  }else{
+   // console.log('check', this.cookieService.getAll())
+    if( this.cookieService.check('userToken')) {
+      token = JSON.parse(this.cookieService.get('userToken'));
+      user = JSON.parse(this.cookieService.get('currentUser'));
+     // console.log('token', token)
+    }
+}
+ 
     if (token) {
       this.setLogedIn(true);
-        // this.router.navigate(['/']);
-        return user;
+      this.router.navigate(['/']);
+      return user;
     } else {
       this.setLogedIn(false);
       this.router.navigate(['/login']);
@@ -99,15 +116,27 @@ export class UserService {
 
 
   getUserData() {
-    const user  = JSON.parse(localStorage.getItem('currentUser'));
+
+    var user 
+     if(this.isLocalStorage()){
+    user = JSON.parse(localStorage.getItem('currentUser'));
+     }else{
+      user = JSON.parse(this.cookieService.get('userToken'));
+     }
       if (user) {
       //  console.log("USER data: ", user)
         const userId = {'uid': user.uid };
         this.accesData(userId).subscribe(
           res => {
             if (res) {
+              if(this.isLocalStorage()){
               localStorage.setItem('currentUser', JSON.stringify(res));
               this.setLogedIn(true);
+              }else{
+                 // JSON.parse(this.cookieService.get('userToken'));
+                 this.cookieService.set('currentUser', JSON.stringify(res));
+                 this.setLogedIn(true);
+              }
             }
           },
           error => {
@@ -167,13 +196,21 @@ export class UserService {
   }
 // just header setting
 isLocalStorage():boolean{
-  var isLocalStoragevar = false;
-   if (typeof localStorage === 'object') {
+ // var isLocalStoragevar = false;
+  	try {
+		localStorage.setItem('test', 'test');
+		localStorage.removeItem('test');
+		return true;
+	} catch (exception) {
+		return false;
+	}
+
+   /*if (typeof localStorage === 'object') {
     isLocalStoragevar = true;
    }else{
      isLocalStoragevar = false;
    }
-   return isLocalStoragevar;
+   return isLocalStoragevar; */
 }
   authHeaders() {
     const headers = new Headers();
@@ -202,7 +239,7 @@ isLocalStorage():boolean{
     // create authorization header with jwt token
     const userToken = JSON.parse(localStorage.getItem('userToken'));
     if (userToken) {
-      const headers = new Headers({ 'Authorization': 'Bearer ' + userToken });
+      const headers = new Headers({ 'Authorization': 'Bearer ' + userToken.token });
       return new RequestOptions({ headers: headers });
     }
   }

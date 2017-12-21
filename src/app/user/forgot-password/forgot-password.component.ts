@@ -5,6 +5,7 @@ import {Router} from '@angular/router';
 import {DOCUMENT} from '@angular/platform-browser';
 import {NotificationsService} from 'angular2-notifications';
 
+
 @Component({
   selector: 'app-forgot-password',
   templateUrl: './forgot-password.component.html',
@@ -30,7 +31,7 @@ public forgotPasswordForm: FormGroup;
   ) { }
 
   ngOnInit() {
-
+    var user = this.userService.isLogedin();
     //this.document.body.classList.remove('buildresume1');
 
     this.forgotPasswordForm = this.formBuilder.group(

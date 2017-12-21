@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService, MemoryStorage } from '../../services/index';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-header-valid-user',
@@ -15,8 +16,9 @@ export class HeaderValidUserComponent implements OnInit {
 
   constructor(
     private userService:UserService,
-    private memoryStorage:MemoryStorage,
+    private cookieService:CookieService,
     private router:Router
+
     ) { }
 
   ngOnInit() {
@@ -25,8 +27,12 @@ export class HeaderValidUserComponent implements OnInit {
       this.isLogedin = islogedin;
     // alert(islogedin)
       if (islogedin) {
-       
+        if (this.userService.isLocalStorage()) {
         this.user = JSON.parse(localStorage.getItem('currentUser'));
+        }else{
+           // token = JSON.parse(this.cookieService.get('userToken'));
+        this.user = JSON.parse(this.cookieService.get('currentUser'));
+        }
         if (this.user) {
           if (this.user.details) {
             if (this.user.details.field_name_of_your_business[0]) {
@@ -38,6 +44,7 @@ export class HeaderValidUserComponent implements OnInit {
           }
         } else {
           this.userService.setLogedIn(false);
+          alert('aaaaaaaaaaaaaaaa')
           this.router.navigate(['/login']);
         }
       } else {
@@ -55,10 +62,12 @@ console.log('isLocalStorage ',this.userService.isLocalStorage());
       localStorage.removeItem('currentUser');
       this.userService.setLogedIn(false);
    }else{
-      this.memoryStorage.removeItem('userToken');
-      this.memoryStorage.removeItem('currentUser');
-      this.userService.setLogedIn(false);
-   }
+     // this.memoryStorage.removeItem('userToken');
+    //  this.memoryStorage.removeItem('currentUser');
+    this.cookieService.delete('userToken');
+    this.cookieService.delete('currentUser');
+    this.userService.setLogedIn(false);
+   } 
 
  /* this.userService.logout().subscribe((res: any) => {
   console.log(res)

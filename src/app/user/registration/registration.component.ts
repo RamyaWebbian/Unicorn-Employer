@@ -31,6 +31,7 @@ public submitted: boolean = false;
   
 
   ngOnInit() {
+    var user = this.userService.isLogedin();
     // updateOn: 'blur submit'
     this.registerUser = this.formBuilder.group({
       'businessname': ['', {updateOn: 'change', validators: [Validators.required]}],

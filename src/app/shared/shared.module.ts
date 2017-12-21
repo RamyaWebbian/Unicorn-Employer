@@ -9,6 +9,7 @@ import { UserService } from '../services/index';
 import { HttpModule} from '@angular/http';
 import { EqualValidator } from '../common/directives/equal-validator.directive';
 import {ShowHideInput} from '../common/directives/show-hide-directive';
+import { CookieService } from 'ngx-cookie-service';
 // import { HeaderRegistrationModule } from './../common/header-registration/header-registration.module';
 
 @NgModule({
@@ -24,7 +25,7 @@ import {ShowHideInput} from '../common/directives/show-hide-directive';
   ],
   exports:[ SimpleNotificationsModule, EqualValidator, ShowHideInput, CommonModule, FormsModule, RouterModule, ReactiveFormsModule, HttpModule],
   declarations: [EqualValidator, ShowHideInput],
-  providers:[UserService, NotificationsService]
+  providers:[UserService, NotificationsService, CookieService]
 })
 
 export class SharedModule { }
