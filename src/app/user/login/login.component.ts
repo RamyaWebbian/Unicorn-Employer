@@ -66,6 +66,9 @@ onSubmitLogin(loginfields){
           
          this._notificationsService.success('success','Login Success', { timeOut: 2500, showProgressBar: true, pauseOnHover: false, clickToClose: true });
          var token = {token:res['jwt_token']};
+
+         this.saveRememberMedata(data);
+
               if (this.userService.isLocalStorage()) {
                 
               localStorage.setItem('userToken', JSON.stringify(token));
@@ -78,10 +81,13 @@ onSubmitLogin(loginfields){
              // if( this.cookieService.check('userToken')) {
                this.cookieService.set('userToken', JSON.stringify(token));
                this.cookieService.set('currentUser', JSON.stringify(user));
-               console.log( JSON.parse(this.cookieService.get('userToken')));
+               this.router.navigate(['./user-profile']);
+              // alert(this.cookieService.check('userToken'));
+              //  alert(JSON.parse(this.cookieService.get('userToken')));
+              // console.log('set cooki', JSON.parse(this.cookieService.get('userToken')));
                //console.log('check', this.cookieService.getAll())
-               this.userService.setLogedIn(true);
-                alert('saved token in cookieService')
+              // this.userService.setLogedIn(true);
+              //  alert('saved token in cookieService')
                 }
              // }
             this.loading = false;
@@ -116,6 +122,20 @@ onSubmitLogin(loginfields){
     } else {
       this.input.changeType('password');
     //  this.inputcnf.changeType('password');
+    }
+  }
+
+  rememberMe(event) {
+    this.rememberme = event.target.checked;
+  }
+
+  saveRememberMedata(data) {
+    if (this.rememberme) {
+      localStorage.setItem('rememberme', data);
+      this.cookieService.set('rememberme', data);
+    } else {
+      localStorage.removeItem('rememberme');
+      this.cookieService.delete('rememberme');
     }
   }
 

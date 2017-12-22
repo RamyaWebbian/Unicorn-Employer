@@ -28,28 +28,28 @@
         <div class="form input-section">
           <div class="form-group filled-form">
             <label for="businessName">Name of Your Business</label>
-            <input type="text" class="myInputStyle" id="enterEmail" [(ngModel)]="busName">
+            <input type="text" class="myInputStyle" id="enterEmail" >
             <div class="inline-error"></div>
           </div>
 
           <div class="form-group filled-form">
             <label for="fname">Your First Name</label>
-            <input type="text" class="myInputStyle"  id="pwd" [(ngModel)] = "fnameVal">
+            <input type="text" class="myInputStyle"  id="pwd" >
             <div class="inline-error">Please enter a valid first name</div>
           </div>
           <div class="form-group filled-form">
             <label for="lname">Your Last Name</label>
-            <input type="text" class="myInputStyle" id="enterEmail" [(ngModel)]="lnameVal">
+            <input type="text" class="myInputStyle" id="enterEmail" >
             <div class="inline-error">Please enter a valid last name</div>
           </div>
           <div class="form-group filled-form">
             <label for="emailid" >Your Email Address</label>
-            <input type="email" class="myInputStyle"  id="pwd" [(ngModel)] = "emailVal" [disabled]>
+            <input type="email" class="myInputStyle"  id="pwd"  [disabled]>
             <div class="inline-error"></div>
           </div>
           <div class="form-group filled-form">
             <label for="contact">Your Phone Number</label>
-            <input type="number" class="myInputStyle"  id="pwd" [(ngModel)]="contactVal">
+            <input type="number" class="myInputStyle"  id="pwd" >
             <div class="inline-error">Phone number must be of 10 digits</div>
           </div>
         </div>
@@ -58,10 +58,9 @@
           <button type="button" class="btn btn-primary" (click)="addLoc()">Confirm User information</button>
         </div>
       </div>
-     
     </section>
   </div>
   </div>
 </div>
 
-<app-help-modal [visible]="helpShow" (closeSection)="helpText()"></app-help-modal>
+ <app-help-modal [visible]="helpShow" (closeSection)="helpText()"></app-help-modal>

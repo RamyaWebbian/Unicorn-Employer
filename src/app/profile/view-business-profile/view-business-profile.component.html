@@ -9,7 +9,7 @@
         </div>
         <div class="deskWidth">
         <div class="inner-page-title">
-          <h2>business profile</h2><a (click)= "helpText()"><img src="../../assets/question.png"/></a>
+          <h2>business profile</h2><a (click)="helpText()"><img src="../../assets/question.png"/></a>
         </div>
         <div class="strips">
           <div class="row">
@@ -40,11 +40,11 @@
           </div>
           <div class="form-group filled-form">
             <label for="topic">Topic</label>
-            <input type="text" class="myInputStyle" id="topic" [(ngModel)]="topic">
+            <input type="text" class="myInputStyle" id="topic">
           </div>
           <div class="form-group filled-form busDesc">
             <label for="busDesc">Description</label>
-            <textarea id="busDesc" [(ngModel)]="busDesc"></textarea>
+            <textarea id="busDesc"></textarea>
           </div>
           <div class="show-more">
             <div class="row">
@@ -64,7 +64,7 @@
           </div>
         </div>
         <div class="goToNextBtn bgGrey">
-          <button type="button" class="btn btn-primary" (click) = "viewProfile()">Save business profile</button>
+          <button type="button" class="btn btn-primary" >Save business profile</button>
         </div>
         </div>
       </div>
@@ -72,4 +72,4 @@
   </div>
   </div>
 </div>
-<app-help-modal [visible]="helpShow" (closeSection)="helpText()"></app-help-modal>
+<!-- <app-help-modal [visible]="helpShow" (closeSection)="helpText()"></app-help-modal>-->

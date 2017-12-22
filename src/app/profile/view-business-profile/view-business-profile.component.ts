@@ -14,4 +14,7 @@ export class ViewBusinessProfileComponent implements OnInit {
   addNewBusiness() {
     this.router.navigate(['/business-profile']);
   }
+  helpText(){
+    
+  }
 }

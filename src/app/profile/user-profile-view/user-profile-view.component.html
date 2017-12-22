@@ -9,7 +9,7 @@
         </div>
         <div class="deskWidth">
         <div class="inner-page-title">
-          <h2>user profile</h2><a (click)= "helpText()"><img src="../../assets/question.png"/></a>
+          <h2>user profile</h2><a (click)="helpText()"><img src="../../assets/question.png"/></a>
         </div>
         <div class="strips">
           <div class="row">
@@ -74,7 +74,7 @@
                 </p>
               </div>
               <div class="col-2">
-                <img src="../../assets/edit.png" class="all-icon" (click) = "addLoc()"/>
+                <img src="../../assets/edit.png" class="all-icon" (click)="addLoc()"/>
               </div>
             </div>
           </div>
@@ -92,7 +92,7 @@
                 </p>
               </div>
               <div class="col-2">
-                <img src="../../assets/menu.png" class="all-icon" (click) = "showActions()"/>
+                <img src="../../assets/menu.png" class="all-icon"/>
               </div>
             </div>
           </div>
@@ -112,7 +112,7 @@
                 </p>
               </div>
               <div class="col-2">
-                <img src="../../assets/menu.png" class="all-icon" (click) = "showActions()"/>
+                <img src="../../assets/menu.png" class="all-icon" />
               </div>
             </div>
           </div>
@@ -144,4 +144,4 @@
   </div>
   </div>
 </div>
-<app-help-modal [visible]="helpShow" (closeSection)="helpText()"></app-help-modal>
+<!-- <app-help-modal [visible]="helpShow" (closeSection)="helpText()"></app-help-modal>-->

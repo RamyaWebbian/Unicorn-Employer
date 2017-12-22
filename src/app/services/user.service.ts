@@ -31,9 +31,9 @@ export class UserService {
   private getHWAtokenUrl =  this.switchUrl + 'jwt/token';
  private  logoutTokenUrl =  this.switchUrl + 'logout.json';
   private headers = new Headers();
-  private _isLogedIn: Boolean;
+  private _isLogedIn: boolean;
 //  @Input()
-  private subjectIsLogin: Subject<Boolean> = new Subject<Boolean>();
+  private subjectIsLogin: Subject<boolean> = new Subject<boolean>();
 
   constructor(private http: Http,
   private cookieService:CookieService,
@@ -94,7 +94,7 @@ export class UserService {
       return user;
     } else {
       this.setLogedIn(false);
-      this.router.navigate(['/login']);
+     // this.router.navigate(['/login']);
       return null;
     }
 
@@ -177,14 +177,14 @@ export class UserService {
   } */
   }
 
-  setLogedIn(isLogedIn: Boolean): void {
+  setLogedIn(isLogedIn: boolean): void {
     
     this._isLogedIn = isLogedIn;
     // alert(this._isLogedIn)
     this.subjectIsLogin.next(this._isLogedIn);
   }
 
-  getLogedIn(): Observable<Boolean> {
+  getLogedIn(): Observable<boolean> {
     return this.subjectIsLogin.asObservable();
   }
   //

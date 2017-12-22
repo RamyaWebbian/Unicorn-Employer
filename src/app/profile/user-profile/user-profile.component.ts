@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HelpModalComponent } from '../../common/help-modal/help-modal.component';
+
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
@@ -11,7 +12,7 @@ export class UserProfileComponent implements OnInit {
   constructor(private router : Router) { }
   
   ngOnInit() {
-   // this.helpShow = true;
+    this.helpShow = true;
   }
   addLoc() {
     this.router.navigate(['/add-location']);

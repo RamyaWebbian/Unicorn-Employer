@@ -27,34 +27,34 @@
         <div class="form input-section">
           <div class="form-group filled-form">
             <label for="address1">Address Line 1</label>
-            <input type="text" class="myInputStyle" id="address1" [(ngModel)]="address1">
+            <input type="text" class="myInputStyle" id="address1" >
             <div class="inline-error"></div>
           </div>
 
           <div class="filled-form">
             <label for="address2">Address Line 2</label>
-            <input type="text" class="myInputStyle"  id="address2" [(ngModel)] = "address2">
+            <input type="text" class="myInputStyle"  id="address2" >
             <div class="inline-error">Please enter a valid first name</div>
           </div>
           <div class="form-group filled-form">
             <label for="zipcode">Zip Code</label>
-            <input type="number" class="myInputStyle" id="zipcode" [(ngModel)]="zipcodel">
+            <input type="number" class="myInputStyle" id="zipcode" >
             <div class="inline-error">Please enter a valid zip code</div>
           </div>
           <div class="form-group filled-form">
             <label for="state" >State</label>
-            <input type="text" class="myInputStyle"  id="state" [(ngModel)] = "state" [disabled]>
+            <input type="text" class="myInputStyle"  id="state"  [disabled]>
             <div class="inline-error"></div>
           </div>
           <div class="form-group filled-form">
             <label for="city">City</label>
-            <input type="text" class="myInputStyle"  id="city" [(ngModel)] = "city">
+            <input type="text" class="myInputStyle"  id="city" >
             <div class="inline-error"></div>
           </div>
         </div>
 
         <div class="goToNextBtn bgGrey">
-          <button type="button" class="btn btn-primary" (click) = "userProfileView()">save business location</button>
+          <button type="button" class="btn btn-primary" (click)="userProfileView()">save business location</button>
         </div>
 
       </div>
@@ -63,4 +63,4 @@
   </div>
   </div>
 </div>
-<app-help-modal [visible]="helpShow" (closeSection)="helpText()"></app-help-modal>
+<!-- <app-help-modal [visible]="helpShow" (closeSection)="helpText()"></app-help-modal> -->
