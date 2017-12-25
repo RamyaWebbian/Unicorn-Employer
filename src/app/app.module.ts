@@ -12,8 +12,8 @@ import { PagenotfoundComponent } from './common/pagenotfound/pagenotfound.compon
 import { SharedModule } from './shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthGuard } from './user/guards/index';
-import { UserService } from './services/index';
-
+import { UserService, ProfileService } from './services/index';
+import { CookieService } from 'ngx-cookie-service';
  //import { HeaderRegistrationModule } from './common/header-registration/header-registration.module';
 // import { HeaderValidUserComponent } from './common/header-valid-user/header-valid-user.component';
 // import { EqualValidator } from './common/directives/equal-validator.directive';
@@ -38,7 +38,7 @@ import { UserService } from './services/index';
     
   ],
     // exports: [RouterModule],
-  providers: [AuthGuard, UserService],
+  providers: [AuthGuard, UserService, CookieService, ProfileService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

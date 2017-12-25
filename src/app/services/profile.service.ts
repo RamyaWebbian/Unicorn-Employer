@@ -9,7 +9,7 @@ import {BehaviorSubject} from 'rxjs/Rx';
 import {UserService} from './user.service';
 
 @Injectable()
-export class DataService {
+export class ProfileService {
   public switchUrl= this.userService.switchUrl;
   private dashboardUrl = this.switchUrl + 'employer_dashboard.json/';
   private postUserProfileUrl = this.switchUrl + 'user_update.json';

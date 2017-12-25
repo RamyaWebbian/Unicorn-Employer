@@ -90,7 +90,7 @@ export class UserService {
  
     if (token) {
       this.setLogedIn(true);
-      this.router.navigate(['/']);
+     // this.router.navigate(['/']);
       return user;
     } else {
       this.setLogedIn(false);
@@ -202,6 +202,7 @@ isLocalStorage():boolean{
 		localStorage.removeItem('test');
 		return true;
 	} catch (exception) {
+   // alert('Your web browser does not support storing settings locally. In Safari, the most common cause of this is using "Private Browsing Mode". Some settings may not save or some features may not work properly for you.');
 		return false;
 	}
 

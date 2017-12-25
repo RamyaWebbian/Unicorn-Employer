@@ -2,7 +2,7 @@ import {ShowHideInput} from '../../common/directives/show-hide-directive';
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UserService, MemoryStorage } from '../../services/index';
+import { UserService } from '../../services/index';
 import {NotificationsService} from 'angular2-notifications';
 import { CookieService } from 'ngx-cookie-service';
 
@@ -45,10 +45,10 @@ public loginform: FormGroup;
 
 
   Register() {
-    this.router.navigate(['./registration']);
+    this.router.navigate(['registration']);
   }
   forgotPass() {
-    this.router.navigate(['./forgot-password']);
+    this.router.navigate(['forgot-password']);
   }
 
 onSubmitLogin(loginfields){
@@ -75,25 +75,20 @@ onSubmitLogin(loginfields){
               localStorage.setItem('currentUser', JSON.stringify(user));
               this.userService.setLogedIn(true);
             }else{
-             // this.memoryStorage.setItem('userToken', res['jwt_token']);
-               // this.memoryStorage.setItem('currentUser', user);
-               
-             // if( this.cookieService.check('userToken')) {
+            
+              // this.cookieService.deleteAll();
+               this.cookieService.delete('currentUser');
+               this.cookieService.delete('userToken');
                this.cookieService.set('userToken', JSON.stringify(token));
                this.cookieService.set('currentUser', JSON.stringify(user));
-               this.router.navigate(['./user-profile']);
-              // alert(this.cookieService.check('userToken'));
-              //  alert(JSON.parse(this.cookieService.get('userToken')));
-              // console.log('set cooki', JSON.parse(this.cookieService.get('userToken')));
+
+               console.log('set cooki', JSON.parse(this.cookieService.get('userToken')));
                //console.log('check', this.cookieService.getAll())
-              // this.userService.setLogedIn(true);
-              //  alert('saved token in cookieService')
+               this.userService.setLogedIn(true);
                 }
              // }
             this.loading = false;
-            this.router.navigate(['./user-profile']);
-
-           // alert('login');
+            this.router.navigate(['user-profile']);
             
     }
       

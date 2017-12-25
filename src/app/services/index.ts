@@ -1,3 +1,3 @@
 export * from './user.service';
 export * from './authentication.service';
-export * from './MemoryStorage';
+export * from './profile.service';

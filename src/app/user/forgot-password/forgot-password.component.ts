@@ -62,10 +62,10 @@ public forgotPasswordForm: FormGroup;
               }
             );
             // this.enableLogin = true;
-            localStorage.setItem('yes', 'true');
+           // localStorage.setItem('yes', 'true');
           } else {
 
-            this.router.navigate(['/login']);
+            this.router.navigate(['forgot-success']);
           }
         } else {
           this.loading = false;
@@ -74,11 +74,11 @@ public forgotPasswordForm: FormGroup;
 
         if (user) {
           //  store user details and jwt token in local storage to keep user logged in between page refreshes
-          localStorage.setItem('userToken', JSON.stringify(res['csrf_token']));
-          localStorage.setItem('currentUser', JSON.stringify(user));
-          this.loading = false;
-          this.userService.setLogedIn(true);
-          this.router.navigate(['/']);
+         // localStorage.setItem('userToken', JSON.stringify(res['csrf_token']));
+         // localStorage.setItem('currentUser', JSON.stringify(user));
+         // this.loading = false;
+        //  this.userService.setLogedIn(true);
+        //  this.router.navigate(['/']);
 
         }
 

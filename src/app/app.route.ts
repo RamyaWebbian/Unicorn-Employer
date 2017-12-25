@@ -26,6 +26,11 @@ export const router: Routes = [
         pathMatch: 'full'
   },
   {
+        path: 'forgot-success',
+        loadChildren: './user/forgot-success/forgot-success.module#ForgotSuccessModule',
+        pathMatch: 'full'
+  },
+  {
         path: 'registration-success',
         loadChildren: './user/registration-success/registration-success.module#RegistrationSuccessModule',
         pathMatch: 'full'

@@ -9,6 +9,9 @@ import { UserProfileComponent } from './user-profile.component';
 import { UserProfileRoutingModule } from './user-profile-routing.module';
 import { SharedModule } from '../../shared/shared.module';
 import { HeaderValidUserModule } from '../../common/header-valid-user/header-valid-user.module';
+import {NgxMaskModule} from 'ngx-mask';
+import {ProfileService, UserService} from '../../services/index';
+import {NotificationsService} from 'angular2-notifications';
 
 @NgModule({
   imports: [
@@ -17,15 +20,12 @@ import { HeaderValidUserModule } from '../../common/header-valid-user/header-val
     UserProfileRoutingModule,
     HeaderValidUserModule,
     HelpModalModule,
-    ReactiveFormsModule
-    //SharedModule,
-    
-   /* RouterModule.forChild([
-      {path:'',component:UserProfileComponent,pathMatch:'full'}
-    ]) */
+    ReactiveFormsModule,
+    NgxMaskModule.forRoot()
+    //SharedModule
      
   ],
- // exports:[UserProfileComponent],
-  declarations: [UserProfileComponent]
+  declarations: [UserProfileComponent],
+  providers:[ProfileService, UserService, NotificationsService]
 })
 export class UserProfileModule {  }

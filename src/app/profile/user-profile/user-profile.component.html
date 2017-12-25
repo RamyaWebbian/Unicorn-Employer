@@ -25,38 +25,54 @@
         <div class="section-title">
           <h5>confirm user information</h5>
         </div>
+  <form [formGroup]="profileForm" (ngSubmit)="onSubmit(profileForm.value, profileForm.valid, $event)"  novalidate>
         <div class="form input-section">
           <div class="form-group filled-form">
             <label for="businessName">Name of Your Business</label>
-            <input type="text" class="myInputStyle" id="enterEmail" >
-            <div class="inline-error"></div>
+            <input type="text" [(ngModel)]="field_name_of_your_business" maxlength="100" formControlName="field_name_of_your_business" class="myInputStyle" id="enterEmail" >
+           
+             <div [hidden]="profileForm.controls['field_name_of_your_business'].valid || profileForm.controls['field_name_of_your_business'].pristine" class="inline-error">
+                  Please enter business name
+                </div>
           </div>
 
           <div class="form-group filled-form">
             <label for="fname">Your First Name</label>
-            <input type="text" class="myInputStyle"  id="pwd" >
-            <div class="inline-error">Please enter a valid first name</div>
+            <input type="text" class="myInputStyle" maxlength="100" [(ngModel)]="field_first_name" id="fName" formControlName="field_first_name" >
+            
+            <div [hidden]="profileForm.controls['field_first_name'].valid || profileForm.controls['field_first_name'].pristine" class="inline-error">
+              Please enter a valid first name
+            </div>
           </div>
           <div class="form-group filled-form">
             <label for="lname">Your Last Name</label>
-            <input type="text" class="myInputStyle" id="enterEmail" >
-            <div class="inline-error">Please enter a valid last name</div>
+            <input type="text" maxlength="100" [(ngModel)]="field_last_name"  formControlName="field_last_name" class="myInputStyle" id="enterEmail" >
+            
+            <div [hidden]="profileForm.controls['field_last_name'].valid || profileForm.controls['field_last_name'].pristine" class="inline-error">
+             Please enter a valid last name
+            </div>
           </div>
           <div class="form-group filled-form">
             <label for="emailid" >Your Email Address</label>
-            <input type="email" class="myInputStyle"  id="pwd"  [disabled]>
-            <div class="inline-error"></div>
+            <input type="email" class="myInputStyle"   maxlength="100" [(ngModel)]="email" [readonly]="true" formControlName="email"  [disabled]>
+            <div [hidden]="profileForm.controls['email'].valid || profileForm.controls['email'].pristine" class="inline-error">
+             Please enter valid email.
+            </div>
           </div>
           <div class="form-group filled-form">
             <label for="contact">Your Phone Number</label>
-            <input type="number" class="myInputStyle"  id="pwd" >
-            <div class="inline-error">Phone number must be of 10 digits</div>
+            <input class="myInputStyle" mask='000-000-0000' [(ngModel)]="myModel"  type="text" id="pNum" formControlName="field_phone_number" >
+            
+            <div [hidden]="profileForm.controls['field_phone_number'].valid || profileForm.controls['field_phone_number'].pristine" class="inline-error">
+             Phone number must be of 10 digits
+            </div>
           </div>
         </div>
 
         <div class="goToNextBtn bgGrey">
-          <button type="button" class="btn btn-primary" (click)="addLoc()">Confirm User information</button>
+          <button type="submit" [disabled]="!profileForm.valid && disabledButton" class="btn btn-primary" >Confirm User information</button>
         </div>
+  </form>
       </div>
     </section>
   </div>

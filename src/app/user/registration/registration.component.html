@@ -66,15 +66,15 @@
           </div>
           <div class="form-group filled-form">
             <label for="contact">Your Phone Number</label>
-            <input type="number" class="myInputStyle" pattern="[0-9]{10}" minlength="10" maxlength="10" name="phone" id="pwd" formControlName="phone" required>
-           <!-- <div class="">Phone number must be of 10 digits</div> mask='000-000-0000' -->
+            <input type="text" dropSpecialCharacters="true"  mask='000-000-0000' class="myInputStyle"  name="phone" formControlName="phone" required>
+           <!-- <div class="">Phone number must be of 10 digits</div>appInputMask pattern="^(\([0-9]{3}\) |[0-9]{3}-)[0-9]{3}-[0-9]{4}$"  [0-9]{12} minlength="10" maxlength="10" -->
              <!--<div class="inline-error" *ngIf="!registerUser.controls['phone'].valid">
                   Please enter a valid phone number(111-111-1111)
                 </div> -->
       <div [hidden]="registerUser.controls['phone'].valid || registerUser.controls['phone'].pristine" class="inline-error">
-      <div [hidden]="!registerUser.controls.phone.hasError('pattern')">Mobile should be 10 digit</div>
-      <div [hidden]="!registerUser.controls.phone.hasError('required')">Mobile is required</div>
-     
+     <!-- <div [hidden]="!registerUser.controls.phone.hasError('pattern')">Mobile should be 10 digit</div>
+      <div [hidden]="!registerUser.controls.phone.hasError('required')">Mobile is required</div> -->
+      Please enter a valid phone number(111-111-1111)
    </div>
 
 

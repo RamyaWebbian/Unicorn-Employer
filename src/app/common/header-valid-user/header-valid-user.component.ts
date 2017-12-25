@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserService, MemoryStorage } from '../../services/index';
+import { UserService } from '../../services/index';
 import { CookieService } from 'ngx-cookie-service';
 
 @Component({
@@ -23,7 +23,7 @@ export class HeaderValidUserComponent implements OnInit {
 
   ngOnInit() {
       this.userService.getLogedIn().subscribe((islogedin: boolean) => {
-         console.log(islogedin)
+       //  console.log(islogedin)
       this.isLogedin = islogedin;
     // alert(islogedin)
       if (islogedin) {
@@ -44,7 +44,7 @@ export class HeaderValidUserComponent implements OnInit {
           }
         } else {
           this.userService.setLogedIn(false);
-          alert('aaaaaaaaaaaaaaaa')
+         // alert('aaaaaaaaaaaaaaaa')
           this.router.navigate(['/login']);
         }
       } else {
@@ -55,15 +55,14 @@ export class HeaderValidUserComponent implements OnInit {
   }
 
 logout() {
-console.log('isLocalStorage ',this.userService.isLocalStorage());
+// console.log('isLocalStorage ',this.userService.isLocalStorage());
 
    if (this.userService.isLocalStorage()) {
       localStorage.removeItem('userToken');
       localStorage.removeItem('currentUser');
       this.userService.setLogedIn(false);
    }else{
-     // this.memoryStorage.removeItem('userToken');
-    //  this.memoryStorage.removeItem('currentUser');
+
     this.cookieService.delete('userToken');
     this.cookieService.delete('currentUser');
     this.userService.setLogedIn(false);
