@@ -5,7 +5,7 @@ import {ProfileService, UserService} from '../../services/index';
 import { FormGroup, FormBuilder, Validators, FormArray} from '@angular/forms';
 // import {DOCUMENT} from '@angular/platform-browser';
 import {NotificationsService} from 'angular2-notifications';
-declare let $: any;
+
 
 @Component({
   selector: 'app-user-profile',
@@ -16,18 +16,22 @@ export class UserProfileComponent implements OnInit {
   public helpShow : boolean;
   public disabledButton: boolean;
   public  profileForm: FormGroup;
-    public businessName: string;
-    public myModel:any;
-    private field_name_of_your_business = '';
-  private field_first_name = '';
-  private field_last_name = '';
-  private field_phone_number = '';
-  private field_your_website_address = '';
-  private field_your_social_media_url = '';
+  public businessName: string;
+  public myModel:any;
+  public field_name_of_your_business = '';
+  public field_first_name = '';
+  public field_last_name = '';
+  public field_phone_number = '';
+  public field_your_website_address = '';
+  public field_your_social_media_url = '';
  // private address: Array<string> = [];
   //private members: Array<string> = [];
-  private email = '';
-
+  public email = '';
+  public options = {
+    position: ['top', 'center'],
+    timeOut: 5000,
+    lastOnBottom: true
+  };
   constructor(private formbuilder: FormBuilder,
              // private el: ElementRef,
               private profileService: ProfileService,
@@ -55,12 +59,13 @@ export class UserProfileComponent implements OnInit {
     });
   }
 
-onSubmit() {
+onSubmit(isValid) {
     const udata = this.profileForm.value;
     const user = this.userService.isLogedin();
     udata.uid = user.uid;
    // udata.address_delete = this.deleteAddress;
    this.disabledButton = true;
+  
     this.profileService.getUserProfile(udata).subscribe(
       res => {
          this.disabledButton = false;
@@ -68,19 +73,19 @@ onSubmit() {
        // this.loadUserFormData(user);
         this._notificationsService.success(
           'Saved!',
-          'Your Profile Saved Successfully',
+          res['message'],
           {
-            timeOut: 2500,
+            timeOut: 1000,
             showProgressBar: true,
             pauseOnHover: false,
             clickToClose: true,
-          }
-        );
-
+          });
+// this.router.navigate(['/add-location']);
         setTimeout(() => {
-         // this.router.navigate(['/dashboard/1']);
-           this.router.navigate(['/add-location']);
-        }, 1000);
+         this.router.navigate(['/add-location']);
+        }, 2000);
+
+
       },
       error => {
 
@@ -96,11 +101,15 @@ onSubmit() {
          console.log(res)
         if (res['status']) {
           const user =  res;
-         
+        /* var obj = {'field_name_of_your_business':user['details'].field_name_of_your_business[0].value,
+        'field_first_name':user['details'].field_first_name[0].value,
+      'field_last_name': user['details'].field_last_name[0].value,
+    'field_phone_number': user['details'].field_last_name[0].value,
+  'name': user['details'].name[0].value};
+this.profileForm.patchValue(obj) */
+          // localStorage.setItem('currentUser', JSON.stringify(res));
 
-          localStorage.setItem('currentUser', JSON.stringify(res));
-
-          this.userService.setLogedIn(true);
+          //this.userService.setLogedIn(true);
           if (user['details'].field_name_of_your_business[0]) {
             this.field_name_of_your_business = user['details'].field_name_of_your_business[0].value;
             this.businessName = user['details'].field_name_of_your_business[0].value;
@@ -122,7 +131,7 @@ onSubmit() {
           }
           if (user['details'].name[0]) {
             this.email =  user['details'].name[0].value;
-          }
+          } 
 
         }
       },

@@ -58,6 +58,12 @@ export const router: Routes = [
         pathMatch: 'full',
         canActivate: [AuthGuard]
    },
+   {
+        path: 'add-location/:lid',
+        loadChildren: './profile/add-location/add-location.module#AddLocationModule',
+        pathMatch: 'full',
+        canActivate: [AuthGuard]
+   },
   
    {
       path: 'add-new-location',

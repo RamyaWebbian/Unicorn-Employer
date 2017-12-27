@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import {UserService} from './user.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable()
 export class HwaCommonService {
@@ -36,7 +37,9 @@ export class HwaCommonService {
 // Ko_listings?hwa_id=918
   //
   private _hwanid: any;
-  constructor(private http: Http,  private userService: UserService) { }
+  constructor(private http: Http,
+  private cookieService:CookieService,
+   private userService: UserService) { }
   // Create Help Wanted Ads
   // this.switchUrl = this.userService.switchSample;
   // getting HWA NID
@@ -189,10 +192,17 @@ export class HwaCommonService {
   }
   // Token Auth here
   private jwt() {
-    // create authorization header with jwt token
-    const userToken = JSON.parse(localStorage.getItem('userToken'));
+        var userToken;
+        if(this.userService.isLocalStorage()){
+        userToken = JSON.parse(localStorage.getItem('userToken'));
+        }else{
+        if( this.cookieService.check('userToken')) {
+        userToken  = JSON.parse(this.cookieService.get('userToken'));
+        }
+        }
+
     if (userToken) {
-      const headers = new Headers({ 'Authorization': 'Bearer ' + userToken });
+      const headers = new Headers({ 'Authorization': 'Bearer ' + userToken.token });
       return new RequestOptions({ headers: headers });
     }
   }

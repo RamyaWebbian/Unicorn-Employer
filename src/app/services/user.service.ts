@@ -8,6 +8,7 @@ import {BehaviorSubject} from 'rxjs/Rx';
 import {Observable} from 'rxjs/Observable';
 // import { MemoryStorage } from './MemoryStorage';
 import { CookieService } from 'ngx-cookie-service';
+//import * as moment from "moment";
 
 @Injectable()
 export class UserService {
@@ -24,7 +25,9 @@ export class UserService {
   private tokenValidateUrl = this.switchUrl + 'user_forgot_password_step_second.json';   // token validate
   private resetPassUrl_fotgot = this.switchUrl + 'user_forgot_password_step_third.json'; // save password
   private userInfoUrl= this.switchUrl + 'user_information.json';
-  private getAddress= this.switchUrl + 'address/api?uid=';
+  //private getAddress= this.switchUrl + 'address/api?uid=';
+   //private getAddressbyidUrl= this.switchUrl + 'address/api?nid=';
+  
   private googeMap = 'https://maps.googleapis.com/maps/api/geocode/json?address=';
   private ifUserExistApi = this.switchUrl + 'user_exist/';
   
@@ -108,11 +111,8 @@ export class UserService {
       .catch((error: any) => error.json());
   }
 
-  getaddress(uid) {
-    return this.http.get(this.getAddress + uid, this.jwt())
-      .map((res: Response) => res.json())
-      .catch((error: any) => error.json());
-  }
+ 
+ 
 
 
   getUserData() {
@@ -202,17 +202,26 @@ isLocalStorage():boolean{
 		localStorage.removeItem('test');
 		return true;
 	} catch (exception) {
-   // alert('Your web browser does not support storing settings locally. In Safari, the most common cause of this is using "Private Browsing Mode". Some settings may not save or some features may not work properly for you.');
 		return false;
 	}
 
-   /*if (typeof localStorage === 'object') {
-    isLocalStoragevar = true;
-   }else{
-     isLocalStoragevar = false;
-   }
-   return isLocalStoragevar; */
+  
 }
+
+ /* checkSession() {
+        return moment().isBefore(this.getExpiration());
+    }
+
+    isLoggedOut() {
+        return !this.checkSession();
+    }
+
+    getExpiration() {
+        const expiration = localStorage.getItem("expires_at");
+        const expiresAt = JSON.parse(expiration);
+        return moment(expiresAt);
+    }    
+*/
   authHeaders() {
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
@@ -238,7 +247,14 @@ isLocalStorage():boolean{
 // Token Auth here
   private jwt() {
     // create authorization header with jwt token
-    const userToken = JSON.parse(localStorage.getItem('userToken'));
+    var userToken;
+     if(this.isLocalStorage()){
+     userToken = JSON.parse(localStorage.getItem('userToken'));
+     }else{
+        if( this.cookieService.check('userToken')) {
+     userToken  = JSON.parse(this.cookieService.get('userToken'));
+        }
+     }
     if (userToken) {
       const headers = new Headers({ 'Authorization': 'Bearer ' + userToken.token });
       return new RequestOptions({ headers: headers });

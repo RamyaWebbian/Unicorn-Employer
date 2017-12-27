@@ -1,12 +1,14 @@
+<simple-notifications [options]="options"></simple-notifications>
 <div class="container-fluid">
     <div class="row">
       <div class="col-12">
        <section id="login">  
       <div class="login-blk">
-        <div class="header">
+       <!-- <div class="header">
           <img src="../../../assets/header-bg.jpg" class="header-bg img-responsive"/>
           <img src="../../../assets/logo-frs.png" class="logo"/>
-        </div>
+        </div> -->
+         <app-header-valid-user></app-header-valid-user>
         <div class="deskWidth">
         <div class="inner-page-title">
           <h2>user profile</h2><a (click)="helpText()"><img src="../../assets/question.png"/></a>
@@ -26,7 +28,7 @@
               <h5>user information</h5>
             </div>
             <div class="col-2">
-              <img src="../../assets/edit.png" class="all-icon" (click) = "userProfile()"/>
+             <a [routerLink]="['/user-profile']">  <img src="../../assets/edit.png" class="all-icon" /></a>
             </div>
           </div>
           
@@ -35,29 +37,29 @@
           <div class="row">
             <div class="col-12">
               <p class="userTitle">Name of Your Business</p>
-              <p class="userInfo">Joe's Restaurant and Delivery</p>
+              <p class="userInfo">{{businessName}}</p>
             </div>
           </div>
 
           <div class="row">
             <div class="col-6">
               <p class="userTitle">Your First Name</p>
-              <p class="userInfo">Samson</p>
+              <p class="userInfo">{{field_first_name}}</p>
             </div>
             <div class="col-6">
               <p class="userTitle">Your Last Name</p>
-              <p class="userInfo">Paul</p>
+              <p class="userInfo">{{field_last_name}}</p>
             </div>
           </div>
 
           <div class="row">
             <div class="col-6">
               <p class="userTitle">Your Email Address</p>
-              <p class="userInfo">spaul@gmail.com</p>
+              <p class="userInfo">{{email}}</p>
             </div>
             <div class="col-6">
               <p class="userTitle">Your Phone Number</p>
-              <p class="userInfo">123-456-789</p>
+              <p class="userInfo">{{myModel}}</p>
             </div>
           </div>
         </div>
@@ -65,64 +67,52 @@
           <h5>default business location</h5>
           <small class="info">A minimum of 1 default business location is mandatory.</small>
         </div>
-        <div class="addedLoc">
+    <ng-container *ngFor="let addrs of addressList">
+
+        <div *ngIf="addrs?.field_make_default == 'Yes'" class="addedLoc">
           <div class="loc">
             <div class="row">
               <div class="col-10">
-                <p>9527 Moore Creek Rd, MeadowView, VA
-                  New York City, 10022
+                <p>{{addrs?.title}}, {{addrs?.field_address_line_2}}, {{addrs?.field_state}}
+                 {{addrs?.field_city}}, {{addrs?.field_z}}
                 </p>
               </div>
               <div class="col-2">
-                <img src="../../assets/edit.png" class="all-icon" (click)="addLoc()"/>
+               <a [routerLink]="['/add-location', addrs?.nid]"> <img src="../../assets/edit.png" class="all-icon" /></a>
               </div>
             </div>
           </div>
         </div>
-
+         
+    </ng-container>
         <div class="locat section-title">
           <h5>additional business location(s)</h5>
         </div>
         <div class="additionalLoc">
+          <ng-container *ngFor="let addr of addressList; let index = index">
+          <div *ngIf="addr?.field_make_default != 'Yes'">
           <div class="loc">
             <div class="row">
               <div class="col-10">
-                <p>9527 Moore Creek Rd, MeadowView, VA
-                  New York City, 10022
+                <p>{{addr?.title}}, {{addr?.field_address_line_2}}, {{addr?.field_state}}
+                 {{addr?.field_city}}, {{addr?.field_z}}
                 </p>
               </div>
               <div class="col-2">
-                <img src="../../assets/menu.png" class="all-icon"/>
+               <a (click)="openMenu(addr?.nid)"> <img src="../../assets/menu.png" class="all-icon"/> </a>
               </div>
             </div>
           </div>
-          <div class="actionItems">
+          <div [id]="addr?.nid" class="actionItems">
             <ul>
-              <li><a href="#">Edit</a></li>
-              <li><a href="#">Delete</a></li>
-              <li><a href="#">Mark Default</a></li>
+              <li><a [routerLink]="['/add-location', addr?.nid]">Edit</a></li>
+              <li><a (click)="deleteAddress(addr?.nid)" href="javascript:void(0)">Delete</a></li>
+              <li><a (click)="markAsDefault(addr?.nid)" href="javascript:void(0)">Mark Default</a></li>
             </ul>
           </div>
-
-          <div class="loc">
-            <div class="row">
-              <div class="col-10">
-                <p>9527 Moore Creek Rd, MeadowView, VA
-                  New York City, 10022
-                </p>
-              </div>
-              <div class="col-2">
-                <img src="../../assets/menu.png" class="all-icon" />
-              </div>
-            </div>
           </div>
-          <div class="actionItems">
-            <ul>
-              <li><a href="#">Edit</a></li>
-              <li><a href="#">Delete</a></li>
-              <li><a href="#">Mark Default</a></li>
-            </ul>
-          </div>
+          </ng-container>
+          
           
         </div>
 
@@ -130,7 +120,7 @@
           <div class="row">
             <div class="col-12">
                 <img src="../../assets/plus.png" class="all-icon"/>
-                <a (click) = "addNewLoc()" class="actionAnchor">Add New Business Location</a>
+                <a  [routerLink]="['/add-location', 'new']" class="actionAnchor">Add New Business Location</a>
             </div>
           </div>
         </div>

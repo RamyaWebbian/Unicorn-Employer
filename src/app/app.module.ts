@@ -14,6 +14,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthGuard } from './user/guards/index';
 import { UserService, ProfileService } from './services/index';
 import { CookieService } from 'ngx-cookie-service';
+ import {SimpleNotificationsModule} from 'angular2-notifications';
+ import {NotificationsService} from 'angular2-notifications';
  //import { HeaderRegistrationModule } from './common/header-registration/header-registration.module';
 // import { HeaderValidUserComponent } from './common/header-valid-user/header-valid-user.component';
 // import { EqualValidator } from './common/directives/equal-validator.directive';
@@ -34,11 +36,13 @@ import { CookieService } from 'ngx-cookie-service';
     BrowserAnimationsModule,
     NgbModule.forRoot(),
     appRouter,
+    SimpleNotificationsModule
     //HeaderRegistrationModule
     
   ],
     // exports: [RouterModule],
-  providers: [AuthGuard, UserService, CookieService, ProfileService],
+  providers: [AuthGuard, UserService, CookieService,
+  NotificationsService, ProfileService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

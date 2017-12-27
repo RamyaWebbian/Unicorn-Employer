@@ -1,12 +1,16 @@
+<simple-notifications [options]="options"></simple-notifications>
 <div class="container-fluid">
     <div class="row">
       <div class="col-12">
        <section id="login">  
-      <div class="login-blk">
-        <div class="header">
+      <!--  <div class="login-blk">
+        
+      <div class="header">
           <img src="../../../assets/header-bg.jpg" class="header-bg img-responsive"/>
           <img src="../../../assets/logo-frs.png" class="logo"/>
-        </div>
+        </div> 
+         </div>-->
+           <app-header-valid-user></app-header-valid-user>
         <div class="deskWidth">
         <div class="inner-page-title">
           <h2>user profile</h2><a (click)= "helpText()"><img src="../../assets/question.png"/></a>
@@ -21,44 +25,58 @@
           </div>
         </div>
         <div class="section-title">
-          <h5>add your business location</h5>
-          <small class="info">This will be the default work location for your employees.</small>
+          <h5>{{titalLbl}}</h5>
+          <small class="info">{{subTitel}}</small>
         </div>
+  <form [formGroup]="businessAddressForm" (ngSubmit)="onSubmit()"  novalidate>
         <div class="form input-section">
           <div class="form-group filled-form">
             <label for="address1">Address Line 1</label>
-            <input type="text" class="myInputStyle" id="address1" >
-            <div class="inline-error"></div>
+            <input type="text"  maxlength="100" formControlName="title" class="myInputStyle" id="address1" >
+            <div [hidden]="businessAddressForm.controls['title'].valid || businessAddressForm.controls['title'].pristine" class="inline-error">
+                  Please enter address Line 1
+                </div>
           </div>
 
-          <div class="filled-form">
+          <div class="form-group filled-form">
             <label for="address2">Address Line 2</label>
-            <input type="text" class="myInputStyle"  id="address2" >
-            <div class="inline-error">Please enter a valid first name</div>
+            <input type="text"  maxlength="100" formControlName="field_address_line_2" class="myInputStyle"  id="address2" >
+            <div [hidden]="businessAddressForm.controls['field_address_line_2'].valid || businessAddressForm.controls['field_address_line_2'].pristine" class="inline-error">
+                  Please enter address Line 2
+                </div>
           </div>
           <div class="form-group filled-form">
             <label for="zipcode">Zip Code</label>
-            <input type="number" class="myInputStyle" id="zipcode" >
-            <div class="inline-error">Please enter a valid zip code</div>
+            <input type="number" (blur)="zipCodeSearch()" mask="00000"  type="text" formControlName="field_z" class="myInputStyle" id="zipcode"  >
+             <div [hidden]="businessAddressForm.controls['field_z'].valid || businessAddressForm.controls['field_z'].pristine" class="inline-error">
+                 Please enter a valid zip code
+               </div>
+              <span class="error">{{validZipStatus}}</span>
           </div>
           <div class="form-group filled-form">
             <label for="state" >State</label>
-            <input type="text" class="myInputStyle"  id="state"  [disabled]>
-            <div class="inline-error"></div>
+            <input type="text" maxlength="100" formControlName="field_state" class="myInputStyle"  id="state"  [disabled]>
+           <div [hidden]="businessAddressForm.controls['field_state'].valid || businessAddressForm.controls['field_state'].pristine" class="inline-error">
+                 Please enter a valid state
+               </div>
           </div>
           <div class="form-group filled-form">
             <label for="city">City</label>
-            <input type="text" class="myInputStyle"  id="city" >
+            <input type="text" *ngIf="!showSelect" class="myInputStyle" maxlength="100" id="city" formControlName="field_city">
+           
+              <select id="city" *ngIf="showSelect" name="field_city" formControlName="field_city" >
+                <option *ngFor="let city of getCityinfoList">{{city}}</option>
+              </select>
             <div class="inline-error"></div>
           </div>
         </div>
 
         <div class="goToNextBtn bgGrey">
-          <button type="button" class="btn btn-primary" (click)="userProfileView()">save business location</button>
+          <button type="submit" [disabled]="!businessAddressForm.valid && disabledButton" class="btn btn-primary" >save business location</button>
         </div>
-
+  </form>
       </div>
-    </div>
+   
   </section>
   </div>
   </div>
