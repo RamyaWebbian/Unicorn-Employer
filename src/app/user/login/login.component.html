@@ -21,7 +21,7 @@
         <div class="form input-section">
           <div class="form-group filled-form">
             <label for="enterEmail">Email Address</label>
-            <input type="email" class="myInputStyle" name="email" maxlength="100" formControlName="email" id="enterEmail">
+            <input type="email" class="myInputStyle" name="email" [(ngModel)]="email" maxlength="100" formControlName="email" id="enterEmail">
             <div [hidden]="loginform.controls['email'].valid || loginform.controls['email'].pristine" class="inline-error">
                  Please enter a valid email.
                 </div> 
@@ -30,10 +30,10 @@
             <img src="../../assets/dark-eye.png" class="pwd-eye" *ngIf="!show" (click)="toggleShow(true)"/>
              <img src="../../assets/visibility.png" class="pwd-eye" *ngIf="show" (click)="toggleShow(false)"/>
             <label for="enterEmail">Password</label>
-            <input show-hide-input type="password" maxlength="30" formControlName="password" name="password" class="myInputStyle passVal" id="pwd" >
+            <input show-hide-input type="password" [(ngModel)]="password" maxlength="30" formControlName="password" name="password" class="myInputStyle passVal" id="pwd" >
               <div [hidden]="loginform.controls['password'].valid || loginform.controls['password'].pristine" class="inline-error">
                  Please enter password.
-                </div> 
+              </div> 
           </div>
         </div>
 
@@ -42,7 +42,7 @@
             <div class="col-6">
              <!-- <a href="#" class="leftAlign">Remember me</a> -->
                 <label class="mdl-checkbox" for="checkbox-1" style="pointer-events: auto;">
-                <input type="checkbox" id="checkbox-1" class="leftAlign" (change)="rememberMe($event)" >
+                <input type="checkbox" id="checkbox-1" formControlName="rememberme" [(ngModel)]="rememberme" name="rememberme"  class="leftAlign" >
                 <span class="mdl-checkbox__label">Remember Me</span> </label>
             </div>
             <div class="col-6">

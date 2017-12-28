@@ -13,18 +13,13 @@ import { CookieService } from 'ngx-cookie-service';
 })
 
 export class LoginComponent implements OnInit {
-constructor(
-    private formBuilder: FormBuilder,
-    private userService: UserService,
-   private cookieService:CookieService,
-    private router: Router,
-    private _notificationsService: NotificationsService
-) { }
-
-public loginform: FormGroup;
+  public loginform: FormGroup;
   public loading: boolean;
   public show = false;
   public rememberme: boolean;
+  public email = '';
+  public password = "";
+
   @ViewChild(ShowHideInput) input: ShowHideInput;
   public emailMask = /^(([^<>()\[\]\\.,;:\s@']+(\.[^<>()\[\]\\.,;:\s@']+)*)|('.+'))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   public options = {
@@ -33,14 +28,29 @@ public loginform: FormGroup;
     lastOnBottom: true
   };
 
-  ngOnInit() { 
+constructor(
+    private formBuilder: FormBuilder,
+    private userService: UserService,
+    private cookieService:CookieService,
+    private router: Router,
+    private _notificationsService: NotificationsService
+) {
+  
+}
+
+  ngOnInit() {
+     if(this.cookieService.get('remember')) {
+     this.email =  this.cookieService.get('username');
+      this.password = this.cookieService.get('password');
+  }
   var user = this.userService.isLogedin();
   //console.log(user);
-
     this.loginform = this.formBuilder.group({
       'password': ['', Validators.required],
-      'email': ['', Validators.compose([Validators.required, Validators.pattern(this.emailMask)])]
+      'email': ['', Validators.compose([Validators.required, Validators.pattern(this.emailMask)])],
+      'rememberme': [false],
     },{updateOn: 'change'});
+
   }
 
 
@@ -53,6 +63,16 @@ public loginform: FormGroup;
 
 onSubmitLogin(loginfields){
  this.loading = true;
+ // console.log(this.rememberme);
+ if(this.rememberme) {
+    this.cookieService.set('username', loginfields.email);
+    this.cookieService.set('password', loginfields.password);
+    this.cookieService.set('remember', loginfields.rememberme); 
+}else{
+   this.cookieService.delete('username');
+   this.cookieService.delete('password');
+   this.cookieService.set('remember', loginfields.rememberme);
+}
     const data = { 'name': loginfields.email, 'pass': loginfields.password };
     this.userService.login(data).subscribe(
       res => {
@@ -67,7 +87,7 @@ onSubmitLogin(loginfields){
          this._notificationsService.success('success','Login Success', { timeOut: 2500, showProgressBar: true, pauseOnHover: false, clickToClose: true });
          var token = {token:res['jwt_token']};
 
-         this.saveRememberMedata(data);
+         //this.saveRememberMedata(data);
 
               if (this.userService.isLocalStorage()) {
                 
@@ -120,11 +140,11 @@ onSubmitLogin(loginfields){
     }
   }
 
-  rememberMe(event) {
-    this.rememberme = event.target.checked;
+  rememberMeFun(event) {
+   // this.rememberme = event.target.checked;
   }
 
-  saveRememberMedata(data) {
+/* saveRememberMedata(data) {
     if (this.rememberme) {
       localStorage.setItem('rememberme', data);
       this.cookieService.set('rememberme', data);
@@ -132,6 +152,6 @@ onSubmitLogin(loginfields){
       localStorage.removeItem('rememberme');
       this.cookieService.delete('rememberme');
     }
-  }
+  } */
 
 }
