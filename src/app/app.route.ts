@@ -89,6 +89,60 @@ export const router: Routes = [
       pathMatch: 'full',
       canActivate: [AuthGuard]
    },
+    {
+      path: 'post-hwa',
+      loadChildren: './posthwa/post-hwa.module#PostHwaModule',
+      pathMatch: 'full',
+      canActivate: [AuthGuard]
+   },
+   {
+      path: 'landing-page',
+      loadChildren: './hwa/landing-page/landing-page.module#LandingPageModule',
+      pathMatch: 'full',
+      canActivate: [AuthGuard]
+   },
+   {
+      path: 'hwa-basic-info',
+      loadChildren: './hwa/create/hwa-basic-info/hwa-basic-info.module#HwaBasicInfoModule',
+      pathMatch: 'full',
+      canActivate: [AuthGuard]
+   },
+   {
+      path: 'all-hwa-list',
+      loadChildren: './hwa/edit/all-hwa-list/all-hwa-list.module#AllHwaListModule',
+      pathMatch: 'full',
+      canActivate: [AuthGuard]
+   },
+   {
+      path: 'search',
+      loadChildren: './hwa/edit/search/search.module#SearchModule',
+      pathMatch: 'full',
+      canActivate: [AuthGuard]
+   },
+   {
+      path: 'copy-hwa',
+      loadChildren: './hwa/copy/copy-hwa.module#CopyHwaModule',
+      pathMatch: 'full',
+      canActivate: [AuthGuard]
+   },
+   {
+      path: 'extend-hwa',
+      loadChildren: './hwa/extend/extend-hwa.module#ExtendHwaModule',
+      pathMatch: 'full',
+      canActivate: [AuthGuard]
+   },
+   {
+      path: 'select-hiring-location',
+      loadChildren: './hwa/create/select-hiring-location/select-hiring-location.module#SelectHiringLocationModule',
+      pathMatch: 'full',
+      canActivate: [AuthGuard]
+   },
+   {
+      path: 'hwa-preview',
+      loadChildren: './hwa/hwa-preview/hwa-preview.module#HwaPreviewModule',
+      pathMatch: 'full',
+      canActivate: [AuthGuard]
+   },
      { path: '**', component: PagenotfoundComponent }
 ];
 
