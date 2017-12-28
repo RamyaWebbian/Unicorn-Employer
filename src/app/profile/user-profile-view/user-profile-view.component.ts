@@ -21,7 +21,8 @@ export class UserProfileViewComponent implements OnInit {
   public field_your_website_address = '';
   public field_your_social_media_url = '';
   public email = '';
-  public addressList = []
+  public addressList = [];
+  public showHideArray = [];
  // public addresses: any;
 private userInfo:any;
   public options = {
@@ -51,6 +52,9 @@ private userInfo:any;
         if (res['status']) {
           const user =  res;
           this.addressList = res['address'];
+          this.addressList.forEach((item, index) => {
+            this.showHideArray[index] = false;
+          });
           
         /* var obj = {'field_name_of_your_business':user['details'].field_name_of_your_business[0].value,
         'field_first_name':user['details'].field_first_name[0].value,
@@ -150,7 +154,16 @@ this.profileService.getaddressById(nid).subscribe(
 
 }
 
-openMenu(nid){
+openMenu(i){
+  this.showHideArray.forEach((item, index) => {
+    if(index == i){
+      this.showHideArray[index] = true
+    }else{
+       this.showHideArray[index] = false;
+    }
+           
+          });
+
 
 }
 
