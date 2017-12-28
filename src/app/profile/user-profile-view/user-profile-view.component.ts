@@ -92,11 +92,12 @@ this.profileForm.patchValue(obj) */
 
 
 
-deleteAddress(nid){
+deleteAddress(nid) {
   const delItem = {"nid":[nid] }
  this.profileService.deleteAddressById(delItem).subscribe(
       res => {
       console.log(res);
+       this.loadUserProfile(this.userInfo);
         this._notificationsService.success(
           'Deleted!',
           res['message'],
@@ -112,8 +113,43 @@ deleteAddress(nid){
 }
 
 markAsDefault(nid){
+const user = this.userService.isLogedin();
+
+this.profileService.getaddressById(nid).subscribe(
+      res => {
+
+        var locObj = res[0]
+        var fobj = {'nid':nid, 'field_make_default': 1};
+          locObj.field_make_default = 1;
+          const locationObj = {
+          'uid': user.uid,
+          'address': [locObj]
+          };
+ this.profileService.createBusinessLocation(locationObj).subscribe(
+      res => {
+        this.loadUserProfile(this.userInfo);
+        this._notificationsService.success(
+          'Success', res['message'],
+          {
+            timeOut: 600,
+            showProgressBar: true,
+            pauseOnHover: false,
+            clickToClose: true,
+          }
+        );
+        //
+       // this.router.navigate(['/user-profile-view']);
+      },
+      error => {
+        
+      });
+
+      },error => {
+
+      }); 
 
 }
+
 openMenu(nid){
 
 }

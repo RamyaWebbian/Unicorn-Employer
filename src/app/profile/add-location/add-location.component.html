@@ -71,9 +71,29 @@
           </div>
         </div>
 
-        <div class="goToNextBtn bgGrey">
+        <div *ngIf="!addNewBusFlag" class="goToNextBtn bgGrey">
           <button type="submit" [disabled]="!businessAddressForm.valid && disabledButton" class="btn btn-primary" >save business location</button>
         </div>
+
+          <div *ngIf="addNewBusFlag">
+            <div class="form-check">
+              <label class="form-check-label">
+                <input type="checkbox" name="field_make_default" value="1" formControlName="field_make_default" class="form-check-input">
+                Mark as default business location?
+              </label>
+            </div>
+          
+          <div class="goToNextBtn bgGrey">
+            <div class="row">
+              <div class="col-6">
+                <button type="submit" [disabled]="!businessAddressForm.valid && disabledButton" class="btn btn-primary">save</button>
+              </div>
+              <div class="col-6">
+                <button type="button" class="btn btn-primary cancel" (click) = "userProfileView()">cancel</button>
+              </div>
+            </div>
+          </div>
+          </div>
   </form>
       </div>
    

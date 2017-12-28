@@ -22,6 +22,10 @@ export class HeaderValidUserComponent implements OnInit {
     ) { }
 
   ngOnInit() {
+     if(this.userService.checkSession()){
+}else{
+//this.userService.logout();
+} 
       this.userService.getLogedIn().subscribe((islogedin: boolean) => {
        //  console.log(islogedin)
       this.isLogedin = islogedin;

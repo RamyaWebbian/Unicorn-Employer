@@ -8,7 +8,8 @@ import {BehaviorSubject} from 'rxjs/Rx';
 import {Observable} from 'rxjs/Observable';
 // import { MemoryStorage } from './MemoryStorage';
 import { CookieService } from 'ngx-cookie-service';
-//import * as moment from "moment";
+import * as moment from "moment";
+import {JwtHelper} from './JwtHelper';
 
 @Injectable()
 export class UserService {
@@ -26,13 +27,13 @@ export class UserService {
   private resetPassUrl_fotgot = this.switchUrl + 'user_forgot_password_step_third.json'; // save password
   private userInfoUrl= this.switchUrl + 'user_information.json';
   //private getAddress= this.switchUrl + 'address/api?uid=';
-   //private getAddressbyidUrl= this.switchUrl + 'address/api?nid=';
+  //private getAddressbyidUrl= this.switchUrl + 'address/api?nid=';
   
   private googeMap = 'https://maps.googleapis.com/maps/api/geocode/json?address=';
   private ifUserExistApi = this.switchUrl + 'user_exist/';
   
   private getHWAtokenUrl =  this.switchUrl + 'jwt/token';
- private  logoutTokenUrl =  this.switchUrl + 'logout.json';
+  private  logoutTokenUrl =  this.switchUrl + 'logout.json';
   private headers = new Headers();
   private _isLogedIn: boolean;
 //  @Input()
@@ -119,7 +120,7 @@ export class UserService {
 
     var user 
      if(this.isLocalStorage()){
-    user = JSON.parse(localStorage.getItem('currentUser'));
+     user = JSON.parse(localStorage.getItem('currentUser'));
      }else{
       user = JSON.parse(this.cookieService.get('userToken'));
      }
@@ -129,7 +130,7 @@ export class UserService {
         this.accesData(userId).subscribe(
           res => {
             if (res) {
-              if(this.isLocalStorage()){
+              if(this.isLocalStorage()) {
               localStorage.setItem('currentUser', JSON.stringify(res));
               this.setLogedIn(true);
               }else{
@@ -167,14 +168,14 @@ export class UserService {
 
   logout() {
     // remove user from local storage to log user out
-     return this.http.get(this.logoutTokenUrl, { headers: this.authHeaders() })
+   /*  return this.http.get(this.logoutTokenUrl, { headers: this.authHeaders() })
       .map((res: Response) => res.json())
-      .catch((error: any) => error.json());
+      .catch((error: any) => error.json()); */
 
-  /*  if(localStorage.getItem('userToken')) {
-   localStorage.removeItem('userToken')
+   localStorage.removeItem('userToken');
+   this.cookieService.delete('userToken');
     this.router.navigate(['/login']);
-  } */
+  
   }
 
   setLogedIn(isLogedIn: boolean): void {
@@ -208,20 +209,33 @@ isLocalStorage():boolean{
   
 }
 
- /* checkSession() {
+  checkSession() {
         return moment().isBefore(this.getExpiration());
     }
 
-    isLoggedOut() {
-        return !this.checkSession();
-    }
+  
 
     getExpiration() {
-        const expiration = localStorage.getItem("expires_at");
-        const expiresAt = JSON.parse(expiration);
-        return moment(expiresAt);
+      var token = null;
+      var parsedToken = 0;
+       if(this.isLocalStorage()) {
+             token = localStorage.getItem('userToken');
+              }else{
+              // JSON.parse(this.cookieService.get('userToken'));
+             token = this.cookieService.get('userToken');
+              }
+ var jwtHelper = new JwtHelper();
+ // console.log(token)
+ if(token) {
+  parsedToken = jwtHelper.decodeToken(token).exp;
+  // parsedToken
+}
+let mm =  moment.duration(parsedToken).asDays();
+       console.log(mm)
+         console.log(parsedToken)
+        return moment(parsedToken);
     }    
-*/
+
   authHeaders() {
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');

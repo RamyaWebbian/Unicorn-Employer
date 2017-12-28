@@ -1,0 +1,96 @@
+.custom-control-indicator {
+    top: 35%;
+    left: 5%;
+}
+.custom-control-description {
+    position: absolute;
+    top: 25%;
+    left: 15%;
+}
+
+.custom-control {
+    display: block;
+    width: 90%;
+    margin: 10px auto 30px;
+    border-radius: 50px;
+    padding: 10px 30px 10px 40px;
+    border: 1px solid #002d40;
+    overflow: hidden;
+}
+.cost-blk label {
+    color: #002d40;
+}
+.cost-blk .btn {
+    float: right;
+    clear: both;
+    color: #002d40;
+    background-color: #fff;
+}
+.cost-blk label .btn {
+    box-shadow: 0px 0px 1px 1px #ddd;
+}
+.cost-blk label.active {
+    color: #fff;
+    background-color: #002d40;
+}
+
+.dotted-btn {
+    border: 1px dashed #ccc;
+}
+.cost-blk .coupon-btn .btn {
+    float: none;
+    display: inline-block;
+    position: relative;
+    padding: 10px 70px;
+}
+.coupon-btn {
+    position: relative;
+    padding: 40px 0;
+}
+.next-icon {
+    position: absolute;
+    width: 44px;
+    margin-left: -25px;
+}
+.cost-total {
+    border-top: 1px solid #ccc;
+}
+.summary-block {
+    border-top: 1px solid #ccc;
+    text-align: center;
+}
+.summary-block .btn {
+    margin-top: -30px;
+}
+.cost-blk {
+    width: 80%;
+    margin: auto;
+}
+.cost-blk p,
+.coupon-btn {
+    text-align: center;
+    margin-bottom: 0.25rem;
+    margin-top: 0.25rem;
+}
+.cost-details,
+.cost-total {
+    width: 80%;
+    margin: auto;
+    padding: 10px 0;
+}
+.cost-details {
+    border-bottom: 1px solid #ccc;
+    padding: 5px 0 10px;
+}
+.summary-block .row {
+    padding: 5px 0 10px;
+}
+h4 {
+    font-size: 21px;
+    padding: 20px;
+    width: 80%;
+    margin: auto;
+}
+.success-msg {
+    font-size: 14px;
+}

@@ -30,6 +30,8 @@ export class AddLocationComponent implements OnInit {
   };
   private defaultNId:any;
   private userInfo:any;
+  public addNewBusFlag:boolean;
+
   constructor(private formbuilder: FormBuilder,
              // private el: ElementRef,
               private profileService: ProfileService,
@@ -43,7 +45,7 @@ export class AddLocationComponent implements OnInit {
   ngOnInit() {
     this.defaultNId = '';
      this.userInfo  = this.userService.isLogedin();
-    this.initAddress('', '', '', '', '', '');
+    this.initAddress('', '', '', '', '', '', 0);
      this.activatedRoute.params.subscribe(
       (param:  any) => {
          console.log(param['lid']);
@@ -51,15 +53,18 @@ export class AddLocationComponent implements OnInit {
           this.titalLbl = 'Add New Business Location';
           this.subTitel = "";
           this.defaultNId = "";
+          this.addNewBusFlag = true;
          // this.locationId = ""
         }else if(param['lid']) {
           this.titalLbl = 'Update Your Business Location';
           this.subTitel = "";
           this.defaultNId = param['lid'];
+          this.addNewBusFlag = false;
           //this.locationId = ;
           this.updateLocation(param['lid']);
          // alert('lid '+ param['lid']);
         }else{
+          this.addNewBusFlag = false;
           this.getAddress(this.userInfo );
         }
       });
@@ -68,15 +73,15 @@ export class AddLocationComponent implements OnInit {
    
   }
 
- initAddress(nid, addr1, addr2, zip, state, city) {
+ initAddress(nid, addr1, addr2, zip, state, city, fmd) {
     this.businessAddressForm = this.formbuilder.group({
       'nid': [nid],
       'title': [addr1, Validators.required],
       'field_address_line_2': [addr2],
       'field_z': [zip, Validators.pattern(/(^\d{5}$)|(^\d{5}-\d{4}$)/)],
       'field_state': [state, Validators.required],
-      'field_city': [city, Validators.required]
-
+      'field_city': [city, Validators.required],
+      'field_make_default': [fmd, Validators.required]
     });
    // return this.businessAddressForm;
   }
@@ -90,18 +95,13 @@ export class AddLocationComponent implements OnInit {
 updateLocation(locationId) {
 this.profileService.getaddressById(locationId).subscribe(
       res => {
-//this.addresses = res
-       //this.addresses
        this.businessAddressForm.patchValue(res[0]);
-//console.log(res);
-/* this.addresses.forEach((item, index) => {
-       this.businessAddressForm.patchValue(item);
-}); */
 
       },error => {
 
       });
 }
+
  onSubmit() {
 
     const user = this.userService.isLogedin();

@@ -7,11 +7,41 @@
     font-style: normal;
 
 }
+@font-face {
+    font-family: "FontAwesome";
+    font-weight: normal;
+    font-style : normal;
+           src : url("https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/fonts/fontawesome-webfont.eot?v=4.3.0");
+           src : url("https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/fonts/fontawesome-webfont.eot?#iefix&v=4.3.0") format("embedded-opentype"),
+                 url("https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/fonts/fontawesome-webfont.woff2?v=4.3.0") format("woff2"),
+                 url("https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/fonts/fontawesome-webfont.woff?v=4.3.0") format("woff"),
+                 url("https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/fonts/fontawesome-webfont.ttf?v=4.3.0") format("truetype"),
+                 url("https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/fonts/fontawesome-webfont.svg?v=4.3.0#fontawesomeregular") format("svg");
+    }
 h1 {
     font-size: 30px !important;
     font-weight: bold;
 }
+h3 {
+  font-size: 24px;  
+}
+h4 {
+    font-size: 21px;
+}
+h6 {
+    font-size: 1rem;
+    display: inline-block;
+}
 /* fonts */
+
+/* color codes */
+.primary-blue {
+    color: #002d40;
+}
+.primary-green {
+    color: #139701;
+}
+/* color codes */
 
 /* You can add global styles to this file, and also import other style files */
 .bgGrey {
@@ -25,9 +55,6 @@ img.all-icon {
     margin: 20px auto;
     text-align: center;
 }
-button {
-    margin: 20px 5px;
-}
 .login-wrapper,
 .signup-wrapper {
     width: 50%;
@@ -40,12 +67,36 @@ body, html {
 h4, h2 {
     text-align: center;
 }
-
+.custom-control-input:active~.custom-control-indicator,
+.custom-control-input:checked~.custom-control-indicator {
+    color: #fff;
+    background-color: #002d40 !important;
+}
 /* login page that will be used everywhere */
 .container-fluid > .row > .col-12 {
     padding: 0;
 }
-input.myInputStyle {
+.w90 {
+    width: 90%;
+    margin: 0 auto;
+}
+.collapse span {
+    width: 90%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: inline-block;
+}
+.collapse span.custom-control-indicator {
+    width: 16px;
+}
+.collapse span.custom-control-description {
+    width: 120px;
+}
+input.myInputStyle,
+select.myInputStyle,
+.select-more-loc,
+.myInputStyle {
     padding: 15px 8px;
     border-radius: 8px;
     border: 1px solid #002d3f;
@@ -53,8 +104,25 @@ input.myInputStyle {
     width: 90%;
     margin: auto;
 }
-input.myInputStyle:focus {
+input.myInputStyle:focus,
+select.myInputStyle:focus,
+select.myInputStyle:active {
     outline: 0;
+    box-shadow: 0 0 0 ;
+    border: 1px solid #002d3f;
+}
+.select-more-loc span {
+    display: inline-block;
+    width: 280px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.locate-icon {
+    vertical-align: super;
+}
+.filled-form select.form-control:not([size]):not([multiple]) {
+    height: inherit;
 }
 .form-group.filled-form label {
     color: #002d3f;
@@ -66,11 +134,16 @@ input.myInputStyle:focus {
     position: absolute;
     background-color: #fff;
     z-index: 1;
+    text-transform: capitalize;
 }
 h2 {
     text-transform: uppercase;
     font-size: 1.2rem !important;
     font-weight: bold !important;
+}
+button:focus {
+    outline: 0;
+    outline: 0 auto -webkit-focus-ring-color !important;
 }
 .header,
 .header-registration {
@@ -79,7 +152,7 @@ h2 {
     text-align: center;
 }
 .logo {
-    width: 65%;
+    width: 40%;
 }
 .rightAlign {
     float: right;
@@ -146,10 +219,6 @@ small {
 .info {
     color: #4a7beb; 
 }
-.section-title h5 {
-    text-transform: capitalize;
-    font-weight: bold;
-}
 .section-title,
 .inner-page-title {
     padding: 10px 0 0 0;
@@ -180,6 +249,23 @@ small {
 }
 .goToNextBtn {
     padding: 20px;
+    text-align: center;
+}
+button.btn {
+    border-radius: 50px;
+    padding: 5px 10px;
+    font-size: 15px;
+    text-transform: capitalize;
+    cursor: pointer;
+}
+button {
+    margin: 20px 5px;
+    cursor: pointer;
+}
+.success-btn {
+    border-color: #139701;
+    color: #fff;
+    background-color: #139701;
 }
 .goToNextBtn .btn,
 .goToNextBtn .btn:hover {
@@ -191,10 +277,16 @@ small {
     font-size: 21px;
     text-transform: capitalize;
     cursor: pointer;
+    color: #fff
 }
 .btn.cancel {
     background-color: #999;
     border: 1px solid #999;
+}
+.goToNextBtn .btn.smallBtn,
+button.btn.smallBtn {
+    width: auto;
+    padding: 5px 15px;
 }
 /* Button CSS */
 
@@ -248,7 +340,9 @@ p {
     border: 1px solid #ccc;
     border-radius: 8px;
     background-color: #fff;
-    margin-top: -30px;
+    top: 60%;
+    z-index: 1;
+    cursor: pointer;
 }
 .cameraActionItems {
     position: absolute;
@@ -273,6 +367,10 @@ p {
 .actionItems li:last-of-type,
 .cameraActionItems li:last-of-type {
     border-bottom: 0;
+}
+a {
+    color: #002d3f !important;
+    font-weight: 600;
 }
 .actionItems li a {
     color: #000;
@@ -355,7 +453,7 @@ p {
     padding: 10px 25px;
 }
 .green-border {
-    border-bottom: 3px solid green;
+    border-bottom: 3px solid #139701;
     width: 20%;
     margin: auto;
 }
@@ -374,6 +472,191 @@ button.close:focus, button.close:hover {
     outline: 0;
 }
 /* why important */
+/* menu */
+.offer {
+    text-decoration: none;
+    padding: 0 30px;
+    background-color: #005d80;
+    color: #fff;
+    margin: 10px auto;
+    border-radius: 60px;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+.disable {
+    pointer-events: none; 
+    cursor: auto; 
+    color: #9ab7c5;
+}
+.offerSection {
+    max-width: 560px; 
+    margin: auto;
+}
+.offer.cursor {
+    cursor: auto;
+}
+.offer p,
+app-dashboard .offer p {
+margin: 0;
+line-height: 20px;
+font-size: 13px; /* changed from 11px to 13px for links being tiny on dashboard */
+color: khaki;
+}
+.disableMode {
+background: #c2ccd1;
+cursor:auto;
+pointer-events: none;
+}
+.offer h3 {
+    font-size: 20px;
+    margin: 0;
+    line-height: 26px;
+}
+.offerDetails {
+    display: inline-block;
+    border-left: 1px solid #ccc;
+    padding: 11px 10px;
+    width: 70%;
+    padding-right: 0;
+    vertical-align: middle;
+}
+.offerDetails p a {
+    color:#139701;
+    text-decoration: none;
+    cursor: pointer;
+}
+.offerDetails p a:hover {
+    text-decoration: underline;
+    color: yellow;
+}
+.offerDetails p a.disable:hover {
+    color: #9ab7c5;
+    text-decoration: none;
+}
+.offerIcon {
+vertical-align: middle;
+padding: 0 10px 0 0;
+width: 40px;
+}
+@media screen and (max-width: 767px) {
+    .offer {
+        width: 90%;
+        padding: 0 15px;
+    }
+    .hideMob {
+        display: none;
+    }
+    .jobadBlock .mdl-cell {
+        text-align: center;
+        margin: 0;
+    }
+    .offer img.offerIcon {
+        width: 24px;
+    }
+    .offer h3 {
+        font-size: 16px;
+        line-height: 21px;
+    }
+}
+/* menu */
+@media screen and (max-width: 767px) and (orientation: portrait) {
+    .collapse span {
+        width: 80%;
+    }
+}
+/* Post HWA */
+.page-head {
+    border-bottom: 1px solid #ddd;
+    overflow: hidden;
+    padding: 15px 10px;
+}
+.page-head h3 {
+    display: inline-block;
+    font-size: 21px;
+    line-height: 30px;
+    vertical-align: text-top;
+    margin-bottom: 0;
+    font-weight: bold;
+}
+.page-head button {
+    float: right;
+    clear: both;
+}
+.hwa-title {
+    border-bottom: 1px solid #ddd;
+    padding: 15px 10px;
+    font-weight: bold;
+}
+
+/* Post HWA */
+
+/* Accordion */
+.card .card-header {
+    background-color: #fff;
+}
+h5,
+.section-title h5,
+.preview-head h5 {
+    text-transform: capitalize;
+    font-weight: bold;
+    display: inline-block;
+}
+.card .card-block {
+    padding: 30px 0;
+}
+.card-header h5 a {
+    color: #000;
+    font-weight: bold;
+}
+.kebab-menu {
+    display: inline-block;
+    vertical-align: baseline;
+    cursor: pointer;
+}
+.kebab-open {
+    padding: 0 10px;
+    margin: 5px auto;
+    min-width: 120px;
+    position: absolute;
+    right: 20px;
+    box-shadow: 1px 1px 10px 2px #ccc;
+    z-index: 2;
+    opacity: 1;
+    text-align: left;
+    background-color: #fff;
+}
+.kebab-open ul {
+    padding-left: 0;
+    margin: 0
+}
+.kebab-open ul li {
+    list-style: none;
+    border-bottom: 1px solid #000;
+    padding: 8px 0;
+}
+.kebab-open ul li:last-child {
+    border: none;
+}
+/* accordion */
+.acc-arrow {
+    width: 20px;
+}
+.preview-head  {
+    padding: 10px 0;
+}
+.preview-head .col-1,
+.preview-head .col-5,
+.card-header .col-1 {
+    padding: 0;
+}
+#accordion .card-header:after {
+    content: "";
+}
+.ques-icon {
+    width: 20px;
+    cursor: pointer;
+}
 /* login page that will be used everywhere */
 @media screen and (min-width: 1024px) {
     .deskWidth  {
@@ -385,8 +668,19 @@ button.close:focus, button.close:hover {
         display: block;
         height: 100px;
     }
-    .logo {
-        width: 15%;
+    .collapse span {
+        width: 85%;
     }
+}
+@media screen and (min-width: 768px) {
+    .preview-head .col-1 {
+        text-align: left;
+    }
+    .preview-head .col-5 {
+      text-align: right;  
+    }
+}
+@media screen and (max-width: 1023px) {
+
 }
 /* width in desktop */
