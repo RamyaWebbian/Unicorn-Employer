@@ -1,5 +1,9 @@
+import { Component, OnInit, Input, ViewChild, TemplateRef } from '@angular/core';
 import { Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import {FormGroup, FormBuilder, Validators, NgForm } from '@angular/forms';
+import { UserService } from '../../services/user.service';
+import {NotificationsService} from 'angular2-notifications';
+
 @Component({
   selector: 'app-view-business-profile',
   templateUrl: './view-business-profile.component.html',
@@ -12,7 +16,7 @@ export class ViewBusinessProfileComponent implements OnInit {
   ngOnInit() {
   }
   addNewBusiness() {
-    this.router.navigate(['/business-profile']);
+    //this.router.navigate(['/business-profile']);
   }
   helpText(){
     

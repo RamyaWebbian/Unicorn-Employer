@@ -2,17 +2,26 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BusinessProfileComponent } from './business-profile.component';
+import { BusinessProfileRoutingModule } from './business-profile-routing.module';
+import { SharedModule } from '../../shared/shared.module';
+import { HeaderValidUserModule } from '../../common/header-valid-user/header-valid-user.module';
+import { CookieService } from 'ngx-cookie-service';
+import { UserService } from '../../services/index';
+import {NgxMaskModule} from 'ngx-mask';
+
 @NgModule({
   imports: [
+    SharedModule,
     CommonModule,
     FormsModule,
-    RouterModule,
-    RouterModule.forChild([
-      {path:'',component:BusinessProfileComponent,pathMatch:'full'}
-    ]),
+    ReactiveFormsModule,
+    BusinessProfileRoutingModule,
+    HeaderValidUserModule,
+    NgxMaskModule.forRoot()
   ],
-  declarations: [BusinessProfileComponent]
+  declarations: [BusinessProfileComponent],
+  providers:[CookieService, UserService]
 })
 export class BusinessProfileModule { }

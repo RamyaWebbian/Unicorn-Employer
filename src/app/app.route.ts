@@ -81,7 +81,7 @@ export const router: Routes = [
       path: 'view-business-profile',
       loadChildren: './profile/view-business-profile/view-business-profile.module#ViewBusinessProfileModule',
       pathMatch: 'full',
-      canActivate: [AuthGuard]
+      //canActivate: [AuthGuard]
    },
    {
       path: 'header-registration',
