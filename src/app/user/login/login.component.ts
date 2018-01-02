@@ -64,15 +64,7 @@ constructor(
 onSubmitLogin(loginfields){
  this.loading = true;
  // console.log(this.rememberme);
- if(this.rememberme) {
-    this.cookieService.set('username', loginfields.email);
-    this.cookieService.set('password', loginfields.password);
-    this.cookieService.set('remember', loginfields.rememberme); 
-}else{
-   this.cookieService.delete('username');
-   this.cookieService.delete('password');
-   this.cookieService.set('remember', loginfields.rememberme);
-}
+ this.rememberMeFun(loginfields)
     const data = { 'name': loginfields.email, 'pass': loginfields.password };
     this.userService.login(data).subscribe(
       res => {
@@ -140,8 +132,16 @@ onSubmitLogin(loginfields){
     }
   }
 
-  rememberMeFun(event) {
-   // this.rememberme = event.target.checked;
+  rememberMeFun(loginfields) {
+   if(this.rememberme) {
+    this.cookieService.set('username', loginfields.email);
+    this.cookieService.set('password', loginfields.password);
+    this.cookieService.set('remember', loginfields.rememberme); 
+}else{
+   this.cookieService.delete('username');
+   this.cookieService.delete('password');
+   this.cookieService.set('remember', loginfields.rememberme);
+}
   }
 
 /* saveRememberMedata(data) {

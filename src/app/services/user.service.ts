@@ -13,7 +13,7 @@ import {JwtHelper} from './JwtHelper';
 
 @Injectable()
 export class UserService {
-  public switchUrl= 'http://dev-hwaredesign.pantheonsite.io/'; //https://test-frslive.pantheonsite.io/
+  public switchUrl= 'https://dev-hwaredesign.pantheonsite.io/'; //https://test-frslive.pantheonsite.io/
   public paypalRedirect = 'https://frs.hurekadev.info'; //'https://frsapp.talentrackr.com/';
   private registerUrl = this.switchUrl + 'user_registration.json';
   private authValidUrl = this.switchUrl + 'user_token_aunthentication.json/';

@@ -131,7 +131,7 @@ conf_toggleShow() {
 // let obj ={ formGroup}
     this.userService.resetPass(formGroup).subscribe(
       res => {
-        console.log(res)
+       // console.log(res)
         if (res['status']) {
           this.loading = false;
           this.router.navigate(['/login']);
