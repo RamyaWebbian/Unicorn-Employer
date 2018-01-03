@@ -37,6 +37,7 @@ export const router: Routes = [
    },
    {
         path: 'pass/reset/:token/:uid/:isonetime',
+        //path: 'set-new-password',
         loadChildren: './user/set-new-password/set-new-password.module#SetNewPasswordModule',
         pathMatch: 'full'
    },

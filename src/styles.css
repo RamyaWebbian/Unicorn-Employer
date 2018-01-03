@@ -211,8 +211,8 @@ small {
 }
 .inner-page-title img {
     width: 20px;
-    vertical-align: baseline;
-    margin: 0 10px;
+    vertical-align: top;
+    margin: -1px 10px;
 }
 small {
     display: inherit;
@@ -221,10 +221,13 @@ small {
 .info {
     color: #4a7beb; 
 }
+.deskWidth sup {
+    top: -.8em;
+    font-size: 50%;
+}
 .section-title,
 .inner-page-title {
     padding: 10px 0 0 0;
-    width: 90%;
 } 
 /* heading inside pages  */
 
@@ -237,8 +240,8 @@ small {
 .inline-error {
     color: red;
     text-align: right;
-    height: 20px;
-    width: 90%;
+    height: auto; /* changed for set new password page */
+    width: 100%; /* changed for registration page error message*/
     margin: 0 auto;
    /* visibility: hidden; */
 }
@@ -403,7 +406,7 @@ a:active, a:focus, a:hover {
     font-size: 18px;
 }
 .form-check input[type="checkbox"] {
-    width: 20px;
+    width: 15px;
     height: 20px;
 }
 
@@ -443,7 +446,7 @@ a:active, a:focus, a:hover {
 }
 .alert-dismissible button.close {
     padding: 0;
-    right: 3%;
+    right: 5%;
 }
 .profile-imp p {
     padding: 40px 50px;

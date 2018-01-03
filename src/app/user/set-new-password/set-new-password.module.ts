@@ -8,7 +8,7 @@ import { SharedModule } from '../../shared/shared.module';
 import { SetnewPasswordRoutingModule } from './set-new-password-routing.module';
 import { UserService } from '../../services/index';
 import {ShowHideCnf} from '../../common/directives/show-hide-cnf';
-
+import { HeaderRegistrationModule } from '../../common/header-registration/header-registration.module';
 
 @NgModule({
   imports: [
@@ -17,7 +17,8 @@ import {ShowHideCnf} from '../../common/directives/show-hide-cnf';
   // BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    SetnewPasswordRoutingModule 
+    SetnewPasswordRoutingModule,
+    HeaderRegistrationModule
   ],
   declarations: [SetNewPasswordComponent, ShowHideCnf],
  // providers:[UserService]

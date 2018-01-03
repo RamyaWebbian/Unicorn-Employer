@@ -2,15 +2,7 @@
     <div class="row">
       <div class="col-12">
        <section id="login">  
-    <!--  <div class="login-blk">
-        <div class="header">
-          <img src="../../../assets/header-bg.jpg" class="header-bg img-responsive"/>
-          <img src="../../../assets/logo-frs.png" class="logo"/>
-        </div>
-		 </div> -->
-
     <app-header-registration ></app-header-registration> 
-    
 		<div class="deskWidth">
  <simple-notifications [options]="options"></simple-notifications>
  <!--  [ngFormOptions]="{ updateOn: 'submit' }"  -->
@@ -74,7 +66,7 @@
       <div [hidden]="registerUser.controls['phone'].valid || registerUser.controls['phone'].pristine" class="inline-error">
      <!-- <div [hidden]="!registerUser.controls.phone.hasError('pattern')">Mobile should be 10 digit</div>
       <div [hidden]="!registerUser.controls.phone.hasError('required')">Mobile is required</div> -->
-      Please enter a valid phone number(111-111-1111)
+      <!-- Please enter a valid phone number(111-111-1111) -->
    </div>
 
 
@@ -86,7 +78,7 @@
             <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
         </div>
         
-        <p class="goToInfo">Already have a Talentracker Account? <a  class="actionAnchor" (click)="gotologin()">Login </a></p>
+        <p class="goToInfo">Already have a talentrackr<sup>TM</sup> Account? <a  class="actionAnchor" (click)="gotologin()">Login</a></p>
       </form>
 	  </div>
      
