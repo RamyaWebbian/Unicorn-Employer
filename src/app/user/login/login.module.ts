@@ -10,15 +10,17 @@ import { SharedModule } from '../../shared/shared.module';
 import { UserService } from '../../services/index';
 // import { AuthGuard } from '../guards/index';
 import { CookieService } from 'ngx-cookie-service';
+import { HeaderRegistrationModule } from '../../common/header-registration/header-registration.module';
 
 @NgModule({
   imports: [
     CommonModule,
-  // BrowserModule,
+    // BrowserModule,
     FormsModule,
     LoginRoutingModule,
-     ReactiveFormsModule,
-  SharedModule
+    ReactiveFormsModule,
+    HeaderRegistrationModule,
+    SharedModule
   ],
   declarations: [LoginComponent],
  providers:[CookieService]

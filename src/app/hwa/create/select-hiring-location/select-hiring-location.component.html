@@ -1,6 +1,51 @@
 <app-header-valid-user></app-header-valid-user>
 
-<p>
-  select-hiring-location works!
-</p>
-<a [routerLink]="['/hwa-preview']">View HWA</a>
+<div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+       <section id="login">
+        <div class="login-blk">
+          <div class="deskWidth">
+          <div class="section-title">
+            <h5>Select Hiring Location</h5>
+          </div>
+
+          <div class="def-address">
+            <h6>Default business Location</h6>
+            <form>
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input type="checkbox" class="form-check-input">
+                  9527 Moore Creek Rd, Meadowview, VA New York City, 10022
+                </label>
+              </div>
+            </form>
+          </div>
+          <div class="additional-address">
+            <h6>Additional Location(s)</h6>
+            <form>
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input type="checkbox" class="form-check-input">
+                  9527 Moore Creek Rd, Meadowview, VA New York City, 10022
+                </label>
+              </div>
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input type="checkbox" class="form-check-input">
+                  9527 Moore Creek Rd, Meadowview, VA New York City, 10022
+                </label>
+              </div>            
+            </form>
+          </div>
+          
+          <div class="goToNextBtn">
+              <button type="submit" class="btn btn-primary" [routerLink]="['/hwa-preview']">Add Selected</button>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </div>
+  </div>
+</div>

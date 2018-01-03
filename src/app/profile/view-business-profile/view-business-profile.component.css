@@ -1,0 +1,10 @@
+.busImg {
+    padding: 0;
+}
+.busImg img {
+    width: 100%;
+}
+.form.input-section {
+    width: 90%;
+    margin: auto;
+}

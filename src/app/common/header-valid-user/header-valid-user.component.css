@@ -11,3 +11,14 @@
 .navbar {
     background: url(../../../assets/header-bg.jpg)
 }
+nav.navbar-light .navbar-toggler-icon {
+    background-image: url(../../../assets/menu-lines.svg);
+}
+
+.navbar-light .navbar-nav .active>.nav-link,
+.navbar-light .navbar-nav .nav-link.active,
+.navbar-light .navbar-nav .nav-link.show,
+.navbar-light .navbar-nav .show>.nav-link,
+.navbar-light .navbar-nav .nav-link {
+    color: #fff !important;
+}

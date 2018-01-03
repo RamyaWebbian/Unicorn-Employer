@@ -101,7 +101,7 @@ select.myInputStyle,
     border-radius: 8px;
     border: 1px solid #002d3f;
     display: block;
-    width: 90%;
+    width: 100%;
     margin: auto;
 }
 input.myInputStyle:focus,
@@ -152,7 +152,7 @@ button:focus {
     text-align: center;
 }
 .logo {
-    width: 40%;
+    width: 60%;
 }
 .rightAlign {
     float: right;
@@ -163,6 +163,8 @@ button:focus {
 }
 .form.input-section {
     padding: 40px 0 20px;
+    width: 90%;
+    margin: auto;
 }
 .myInputStyle:last-child {
     margin-bottom: 0;
@@ -222,6 +224,7 @@ small {
 .section-title,
 .inner-page-title {
     padding: 10px 0 0 0;
+    width: 90%;
 } 
 /* heading inside pages  */
 
@@ -321,7 +324,6 @@ p {
 .additionalLoc,
 .add-new,
 .business-section,
-.form-group.filled-form.busDesc,
 .show-more {
     width: 90%;
     margin: auto;
@@ -372,6 +374,9 @@ a {
     color: #002d3f !important;
     font-weight: 600;
 }
+a:active, a:focus, a:hover {
+    text-decoration: underline !important;
+}
 .actionItems li a {
     color: #000;
     font-weight: 600;
@@ -407,7 +412,6 @@ a {
 .busImg {
     border-radius: 8px;
     border: 1px solid #002d3f;
-    width: 90%;
     margin: auto auto 18px;
     padding: 15% 10%;
 }
@@ -424,9 +428,6 @@ a {
     border: 1.3px solid #002d3f;
     border-radius: 8px;
     padding: 10px;
-}
-.form-group.filled-form.busDesc label {
-    left: 4%;
 }
 
 /* why important */
@@ -482,8 +483,8 @@ button.close:focus, button.close:hover {
     border-radius: 60px;
     cursor: pointer;
     box-sizing: border-box;
+    min-height: 68px;
 }
-
 .disable {
     pointer-events: none; 
     cursor: auto; 
@@ -496,22 +497,19 @@ button.close:focus, button.close:hover {
 .offer.cursor {
     cursor: auto;
 }
-.offer p,
-app-dashboard .offer p {
-margin: 0;
-line-height: 20px;
-font-size: 13px; /* changed from 11px to 13px for links being tiny on dashboard */
-color: khaki;
+.offer p {
+    margin: 0;
+    line-height: 20px;
+    font-size: 11px;
 }
 .disableMode {
-background: #c2ccd1;
-cursor:auto;
-pointer-events: none;
+    background: #c2ccd1;
+    cursor:auto;
+    pointer-events: none;
 }
 .offer h3 {
     font-size: 20px;
     margin: 0;
-    line-height: 26px;
 }
 .offerDetails {
     display: inline-block;
@@ -520,51 +518,21 @@ pointer-events: none;
     width: 70%;
     padding-right: 0;
     vertical-align: middle;
-}
-.offerDetails p a {
-    color:#139701;
-    text-decoration: none;
+    min-height: 68px;
     cursor: pointer;
 }
-.offerDetails p a:hover {
-    text-decoration: underline;
-    color: yellow;
+.offerDetails p {
+    text-transform: uppercase;
 }
-.offerDetails p a.disable:hover {
-    color: #9ab7c5;
-    text-decoration: none;
+.tiny-link {
+    margin-right: 4px;
 }
 .offerIcon {
-vertical-align: middle;
-padding: 0 10px 0 0;
-width: 40px;
+    vertical-align: middle;
+    padding: 0 10px 0 0;
+    width: 40px;
 }
-@media screen and (max-width: 767px) {
-    .offer {
-        width: 90%;
-        padding: 0 15px;
-    }
-    .hideMob {
-        display: none;
-    }
-    .jobadBlock .mdl-cell {
-        text-align: center;
-        margin: 0;
-    }
-    .offer img.offerIcon {
-        width: 24px;
-    }
-    .offer h3 {
-        font-size: 16px;
-        line-height: 21px;
-    }
-}
-/* menu */
-@media screen and (max-width: 767px) and (orientation: portrait) {
-    .collapse span {
-        width: 80%;
-    }
-}
+
 /* Post HWA */
 .page-head {
     border-bottom: 1px solid #ddd;
@@ -600,7 +568,7 @@ h5,
 .preview-head h5 {
     text-transform: capitalize;
     font-weight: bold;
-    display: inline-block;
+    /*display: inline-block;*/ /* commenting for business profile and view business profile page */
 }
 .card .card-block {
     padding: 30px 0;
@@ -616,7 +584,7 @@ h5,
 }
 .kebab-open {
     padding: 0 10px;
-    margin: 5px auto;
+    margin: 7px auto;
     min-width: 120px;
     position: absolute;
     right: 20px;
@@ -657,6 +625,75 @@ h5,
     width: 20px;
     cursor: pointer;
 }
+h3.lineHigh {
+    line-height: 45px;
+}
+/* accordion */
+
+/* all-hwa-list */
+.myTabs ul.nav-tabs {
+    background-color: #002d3f;
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+}
+.myTabs ul.nav-tabs .nav-item {
+    margin-bottom: 0;
+    display: table-cell;
+    width: 33%;
+    text-align: center;
+    border-right: 1px solid #4a7beb;
+}
+.myTabs ul.nav-tabs .nav-item:last-child {
+    border-right: none;
+}
+.myTabs ul.nav-tabs .nav-item.show .nav-link {
+    background-color: #002d3f;
+    border-color: #002d3f;
+    padding: .5rem .52rem;
+}
+.myTabs ul.nav-tabs .nav-link.active {
+    border-bottom: 4px solid #139701;
+    background-color: #002d3f;
+    font-weight: 600;
+}
+.myTabs .nav-tabs a {
+    color: #fff !important;
+}
+.myTabs .nav-tabs a:active,
+.myTabs .nav-tabs a:focus,
+.myTabs .nav-tabs a:hover {
+    text-decoration: none !important;
+}
+.myTabs ul.nav-tabs .nav-link {
+    border: none;
+    font-weight: normal;
+}
+.myTabs .card .card-block {
+    padding: 0;
+}
+.myTabs small {
+    margin: 0;
+    color: red;
+}
+.myTabs .collapse .row {
+    margin: 0 auto;
+    border-bottom: 1px solid #ccc;
+    padding: 15px 0;
+}
+.myTabs .collapse .row:last-child {
+    border-bottom: none;
+}
+.myTabs .collapse .row .col-11,
+.myTabs .collapse .row .col-1 {
+    padding: 0;
+}
+.myTabs .collapse .row .col-11 p {
+    margin-bottom: 0;
+}
+
+/* all-hwa-list */
+
 /* login page that will be used everywhere */
 @media screen and (min-width: 1024px) {
     .deskWidth  {
@@ -682,5 +719,24 @@ h5,
 }
 @media screen and (max-width: 1023px) {
 
+}
+@media screen and (max-width: 767px) {
+    .offer {
+        width: 90%;
+        padding: 0 15px;
+    }
+    .hideMob {
+        display: none;
+    }
+    .jobadBlock .mdl-cell {
+        text-align: center;
+        margin: 0;
+    }
+}
+/* menu */
+@media screen and (max-width: 767px) and (orientation: portrait) {
+   .collapse span {
+        width: 80%;
+    }
 }
 /* width in desktop */

@@ -8,6 +8,8 @@ import { AllHwaListRoutingModule } from './all-hwa-list-routing.module';
 import { SharedModule } from '../../../shared/shared.module';
 import { UserService } from '../../../services/index';
 import {HeaderValidUserModule} from '../../../common/header-valid-user/header-valid-user.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -15,7 +17,8 @@ import {HeaderValidUserModule} from '../../../common/header-valid-user/header-va
     AllHwaListRoutingModule,
     ReactiveFormsModule,
     SharedModule,
-    HeaderValidUserModule
+    NgbModule.forRoot(),
+    HeaderValidUserModule,
   ],
   declarations: [AllHwaListComponent],
   providers:[]

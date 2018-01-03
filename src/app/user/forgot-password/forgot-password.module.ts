@@ -5,18 +5,15 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ForgotPasswordComponent } from './forgot-password.component';
 import { SharedModule } from '../../shared/shared.module';
-// import { HeaderRegistrationModule } from '../../common/header-registration/header-registration.module';
+import { HeaderRegistrationModule } from '../../common/header-registration/header-registration.module';
 
 @NgModule({
   imports: [
     SharedModule,
     CommonModule,
     FormsModule,
-   // HeaderRegistrationModule,
-ReactiveFormsModule,
-    RouterModule.forChild([
-      {path:'',component:ForgotPasswordComponent,pathMatch:'full'}
-    ])
+    HeaderRegistrationModule,
+    ReactiveFormsModule
   ],
   declarations: [ForgotPasswordComponent]
 })

@@ -1,0 +1,10 @@
+.greeting h5 {
+    text-align: center;
+    display: block;
+    padding: 10px 0 0 0;
+}
+.greeting img {
+    vertical-align: bottom;
+    margin: 0 5px;
+    width: 30px;
+}

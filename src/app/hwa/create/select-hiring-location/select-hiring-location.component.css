@@ -1,0 +1,18 @@
+.def-address {
+    border-bottom: 1px solid #ccc;
+}
+.additional-address,
+.def-address {
+    width: 90%;
+    margin: auto;
+}
+.form-check-input {
+    margin-left: -30px;
+}
+.form-check-label {
+    padding-left: 2rem;
+}
+h6 {
+    margin: 1rem 0 0 0;
+    font-weight: bold;
+}
