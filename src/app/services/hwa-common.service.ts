@@ -84,17 +84,18 @@ export class HwaCommonService {
   }
 
   createProfile(profileObj) {
-    const user = this.userService.isLogedin();
+  /*  const user = this.userService.isLogedin();
     const hid = localStorage.getItem('storeHwaNid');
     const prof_nid = localStorage.getItem('profileNid');
     profileObj.uid = user.uid;
     profileObj.nid = prof_nid;
     profileObj.hwa_nid = hid;
-    profileObj.status = '1';
+    profileObj.status = '1'; */
     return this.http.post(this.profilesUrl, profileObj, this.jwt())
       .map((res: Response) => res.json())
       .catch((error: any) => error.json());
   }
+
   uploadProfileImage(profileImgObj) {
     return this.http.post(this.uploadProfilesUrl, profileImgObj, { headers: this.authHeaders() })
       .map((res: Response) => res.json())

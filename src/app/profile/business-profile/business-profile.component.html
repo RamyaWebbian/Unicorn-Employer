@@ -18,33 +18,40 @@
             </div>
           </div>
           <simple-notifications [options]="options"></simple-notifications>
-          <form [formGroup]="registerUser" (ngSubmit)="onSubmit(registerUser, registerUser.valid)" novalidate>
+          <form [formGroup]="businessProfile" (ngSubmit)="onSubmit(businessProfile, businessProfile.valid)" novalidate>
           <div class="form input-section">
             <div class="busImg">
-              <div class="defaultImgText">
-                <img src="../../assets/photo-camera.png" class="all-icon" />
+              <div class="fileUpload defaultImgText">
+                 <img *ngIf="imgLoading" src="../assets/ripple.gif" class="newLoader" style="position:absolute; z-index: 999; left:32%;  top:10px;" />
+                 <img class="profImg" *ngIf="isThereImge" [src]="imgbase64src" style="border: 1px solid #ccc" >
+                <img *ngIf="!isThereImge" src="../../assets/photo-camera.png" class="all-icon" />
+                 <input type="file"  name="profileImagebtn" id="uploadimg" (change)="fileChangeEvent($event)"  class="upload"  />
                 <p>Upload business logo</p>
                 <small>(This will be used as your profile picture)</small>
+              </div>
+               <input type="hidden" class="myInputStyle" id="topic" [(ngModel)]="profileImageId" formControlName="field_business_profile_topic_ima" required>
+               <div [hidden]="businessProfile.controls['field_business_profile_topic_ima'].valid || businessProfile.controls['field_business_profile_topic_ima'].pristine" class="inline-error">
+                Upload your profile picture.
               </div>
             </div>
             <div class="form-group filled-form">
               <label for="topic">Topic</label>
-              <input type="text" class="myInputStyle" id="topic" formControlName="businessname" required>
-              <div [hidden]="registerUser.controls['businessname'].valid || registerUser.controls['businessname'].pristine" class="inline-error">
+              <input type="text" class="myInputStyle" id="topic" formControlName="field_topic" required>
+              <div [hidden]="businessProfile.controls['field_topic'].valid || businessProfile.controls['field_topic'].pristine" class="inline-error">
                 Somethings not right
               </div>
             </div>
             <div class="form-group filled-form busDesc">
               <label for="busDesc">Description</label>
-              <textarea id="busDesc" formControlName="businessdesc" required></textarea>
-              <div [hidden]="registerUser.controls['businessdesc'].valid || registerUser.controls['businessdesc'].pristine" class="inline-error">
+              <textarea id="busDesc" formControlName="field_business_profile_topic_des" required></textarea>
+              <div [hidden]="businessProfile.controls['field_business_profile_topic_des'].valid || businessProfile.controls['field_business_profile_topic_des'].pristine" class="inline-error">
                 Somethings not right
               </div>
             </div>
           </div>
           </form>
           <div class="goToNextBtn bgGrey">
-            <button type="button" class="btn btn-primary" (click)="viewProfile()" [disabled]="registerUser.invalid">Save business profile</button>
+            <button type="button" class="btn btn-primary" (click)="viewProfile()" [disabled]="businessProfile.invalid">Save business profile</button>
           </div>
         </div>
         </div>
