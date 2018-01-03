@@ -323,8 +323,7 @@ p {
 .addedLoc,
 .additionalLoc,
 .add-new,
-.business-section,
-.show-more {
+.business-section {
     width: 90%;
     margin: auto;
 }
