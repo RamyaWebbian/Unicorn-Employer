@@ -132,8 +132,7 @@ this.profileService.getaddressById(locationId).subscribe(
             showProgressBar: true,
             pauseOnHover: false,
             clickToClose: true,
-          }
-        );
+          });
         //
        this.router.navigate(['/user-profile-view']);
       },
@@ -211,10 +210,8 @@ getAddress(user) {
       res => {
         this.addresses = res
        //this.addresses
-console.log(res);
+//console.log(res);
 this.addresses.forEach((item, index) => {
-    console.log('item',item); // 9, 2, 5
-    console.log('index',index); // 0, 1, 2
     if(item.field_make_default == '1') {
       this.defaultNId = item.nid;
        this.businessAddressForm.patchValue(item);

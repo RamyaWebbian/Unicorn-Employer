@@ -23,6 +23,7 @@ export class UserProfileViewComponent implements OnInit {
   public email = '';
   public addressList = [];
   public showHideArray = [];
+  private bisProfileId:string = "";
  // public addresses: any;
 private userInfo:any;
   public options = {
@@ -48,20 +49,17 @@ private userInfo:any;
     const userId = {'uid': userdata.uid };
     this.userService.accesData(userId).subscribe(
       res => {
-         console.log(res)
+        
         if (res['status']) {
           const user =  res;
+          this.bisProfileId = res['business_profile_id'][0].nid;
+ console.log('this.bisProfileId', this.bisProfileId)
           this.addressList = res['address'];
           this.addressList.forEach((item, index) => {
             this.showHideArray[index] = false;
           });
           
-        /* var obj = {'field_name_of_your_business':user['details'].field_name_of_your_business[0].value,
-        'field_first_name':user['details'].field_first_name[0].value,
-      'field_last_name': user['details'].field_last_name[0].value,
-    'field_phone_number': user['details'].field_last_name[0].value,
-  'name': user['details'].name[0].value};
-this.profileForm.patchValue(obj) */
+      
           // localStorage.setItem('currentUser', JSON.stringify(res));
 
           //this.userService.setLogedIn(true);
@@ -131,6 +129,7 @@ this.profileService.getaddressById(nid).subscribe(
           };
  this.profileService.createBusinessLocation(locationObj).subscribe(
       res => {
+        console.log(res);
         this.loadUserProfile(this.userInfo);
         this._notificationsService.success(
           'Success', res['message'],
@@ -168,7 +167,7 @@ openMenu(i){
 }
 
   businessCreate() {
-    this.router.navigate(['/business-profile']);
+    this.router.navigate(['/business-profile',this.bisProfileId, '']);
   }
   userProfile() {
     this.router.navigate(['/user-profile']);

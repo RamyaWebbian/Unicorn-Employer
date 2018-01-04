@@ -6,9 +6,12 @@
           <app-header-valid-user></app-header-valid-user>
           <div class="deskWidth">
           <div class="inner-page-title">
-            <h2>business profile</h2><a (click)= "helpText()"><img src="../../assets/question.png"/></a>
+          <h3 *ngIf="changeUiForNew">Add Business Profile Topic</h3>
+
+          <h2 *ngIf="!changeUiForNew" >business profile</h2><a *ngIf="!changeUiForNew"  href="javascript:void(0)" (click)="helpText()"><img src="../../assets/question.png"/></a>
+ 
           </div>
-          <div class="strips">
+          <div *ngIf="!changeUiForNew" class="strips">
             <div class="row">
               <div class="col-12">
                   <div class="col-4 green-strip"></div>
@@ -17,9 +20,11 @@
               </div>
             </div>
           </div>
+
           <simple-notifications [options]="options"></simple-notifications>
           <form [formGroup]="businessProfile" (ngSubmit)="onSubmit(businessProfile, businessProfile.valid)" novalidate>
           <div class="form input-section">
+            <!--<input type="hidden" [(ngModel)]="item_id" formControlName="item_id"> -->
             <div class="busImg">
               <div class="fileUpload defaultImgText">
                  <img *ngIf="imgLoading" src="../assets/ripple.gif" class="newLoader" style="position:absolute; z-index: 999; left:32%;  top:10px;" />
@@ -49,14 +54,27 @@
               </div>
             </div>
           </div>
-          </form>
-          <div class="goToNextBtn bgGrey">
-            <button type="button" class="btn btn-primary" (click)="viewProfile()" [disabled]="businessProfile.invalid">Save business profile</button>
+         
+          <div *ngIf="!changeUiForNew" class="goToNextBtn bgGrey">
+            <button type="submit" class="btn btn-primary" [disabled]="businessProfile.invalid">Save business profile</button>
           </div>
+
+          <div *ngIf="changeUiForNew" class="goToNextBtn bgGrey">
+            <div class="row">
+              <div class="col-6">
+                <button type="submit" [disabled]="!businessProfile.valid" class="btn btn-primary">save</button>
+              </div>
+              <div class="col-6">
+                <button type="button" class="btn btn-primary cancel" (click)="userProfileView()">cancel</button>
+              </div>
+            </div>
+          </div>
+
+           </form>
         </div>
         </div>
     </section>
   </div>
   </div>
 </div>
- <!-- <app-help-modal [visible]="helpShow" (closeSection)="helpText()"></app-help-modal> -->
+  <app-help-modal [visible]="helpShow" (closeSection)="helpText()"></app-help-modal>

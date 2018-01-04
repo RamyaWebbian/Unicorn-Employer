@@ -20,24 +20,28 @@
 
         <div class="form input-section">
           <div class="busImg">
-            <img src="../../assets/business-logo.png"/>
+            <img [src]="bisProfileImg"/>
           </div>
+       <ng-container *ngFor="let topic of businessTopic"> 
+         
+         <hr>
+         <div style="padding: 10px;" class="form-group filled-form">
+         <a style="padding: 2px;" [routerLink]="['/business-profile', bisProfileId, topic.item_id]" class="">Edit</a>
+         </div>
           <div class="form-group filled-form">
             <span>Topic</span>
-            <p>company history and growth</p>
+            <p>{{topic?.field_topic}}</p>
           </div>
           <div class="form-group filled-form busDesc">
             <span>Description</span>
-            <p>The pioneer years, our history begins in 1866, with the foundation of the Anglo-Swiss 
-              Condensed Milk Company. Henri Nestle develops a breakthrough infant food in 1867, and in 
-              1905 the company he founded merges with Anglo-Swiss, to form what is known as Nestle, the 
-              good food.
-            </p>
+            <p>{{topic?.field_business_profile_topic_des}} </p>
           </div>
+       </ng-container>
+
           <div class="show-more">
             <div class="row">
               <div class="col-12">
-                <a href="#" class="actionAnchor">Show more</a>
+                <a href="Javascript:void(0)" class="actionAnchor">Show more</a>
               </div>
             </div>
           </div>
@@ -47,12 +51,12 @@
           <div class="row">
             <div class="col-12">
                 <img src="../../assets/plus.png" class="all-icon"/>
-                <a (click) = "addNewBusiness()" class="actionAnchor">Add New Topic</a>
+                <a [routerLink]="['/business-profile', bisProfileId, 'new']" class="actionAnchor">Add New Topic</a>
             </div>
           </div>
         </div>
         <div class="goToNextBtn bgGrey">
-          <button type="button" class="btn btn-primary" >Save business profile</button>
+          <button type="button" (click)="createHWA()" class="btn btn-primary" >Create Help Wanted Ad</button>
         </div>
         </div>
       </div>

@@ -18,6 +18,7 @@ export class HwaCommonService {
   private profilesUrl = this.switchUrl + 'build_out_your_business_profile.json';
   private uploadProfilesUrl = this.switchUrl + 'upload_image.json';
   private getProfileDataUrl = this.switchUrl + 'business_profile?nid=';
+  private getBusinessTopicUrl = this.switchUrl + 'business_topic_deatils.json';
   // for  draft data
   private getDraftDataUrl = this.switchUrl + 'hwaedit?hwa_nid=';
   private getDraftSkillUrl = this.switchUrl + 'skils?hwa_id=';
@@ -103,6 +104,12 @@ export class HwaCommonService {
   }
   getProfileDraftData(profId) {
     return this.http.get(this.getProfileDataUrl + profId,  { headers: this.authHeaders() })
+      .map((res: Response) => res.json())
+      .catch((error: any) => error.json());
+  }
+
+getBusinessTopic(bisProfileObj): any {
+    return this.http.post(this.getBusinessTopicUrl, bisProfileObj, this.jwt())
       .map((res: Response) => res.json())
       .catch((error: any) => error.json());
   }

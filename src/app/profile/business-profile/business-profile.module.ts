@@ -10,6 +10,8 @@ import { HeaderValidUserModule } from '../../common/header-valid-user/header-val
 import { CookieService } from 'ngx-cookie-service';
 import { UserService, HwaCommonService } from '../../services/index';
 import {NgxMaskModule} from 'ngx-mask';
+import { HelpModalModule } from '../../common/help-modal/help-modal.module';
+ 
 
 @NgModule({
   imports: [
@@ -19,6 +21,7 @@ import {NgxMaskModule} from 'ngx-mask';
     ReactiveFormsModule,
     BusinessProfileRoutingModule,
     HeaderValidUserModule,
+      HelpModalModule,
     NgxMaskModule.forRoot()
   ],
   declarations: [BusinessProfileComponent],

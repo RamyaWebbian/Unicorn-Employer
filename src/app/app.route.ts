@@ -73,16 +73,16 @@ export const router: Routes = [
       canActivate: [AuthGuard]
    },
    {
-      path: 'business-profile',
+      path: 'business-profile/:bId/:topicId',
       loadChildren: './profile/business-profile/business-profile.module#BusinessProfileModule',
       pathMatch: 'full',
       canActivate: [AuthGuard]
    },
    {
-      path: 'view-business-profile',
+      path: 'view-business-profile/:pId', 
       loadChildren: './profile/view-business-profile/view-business-profile.module#ViewBusinessProfileModule',
       pathMatch: 'full',
-      //canActivate: [AuthGuard]
+      canActivate: [AuthGuard]
    },
    {
       path: 'header-registration',

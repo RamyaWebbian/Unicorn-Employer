@@ -231,8 +231,6 @@ isLocalStorage():boolean{
   // parsedToken
 }
 let mm =  moment.duration(parsedToken).asDays();
-       console.log(mm)
-         console.log(parsedToken)
         return moment(parsedToken);
     }    
 
