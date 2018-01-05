@@ -55,14 +55,14 @@
           </div>
           <div class="form-group filled-form">
             <label for="state" >State</label>
-            <input type="text" maxlength="100" formControlName="field_state" class="myInputStyle"  id="state"  [disabled]>
+            <input type="text" maxlength="100" formControlName="field_state" class="myInputStyle"  id="state" readonly="readonly">
            <div [hidden]="businessAddressForm.controls['field_state'].valid || businessAddressForm.controls['field_state'].pristine" class="inline-error">
                  Please enter a valid state
                </div>
           </div>
           <div class="form-group filled-form">
             <label for="city">City</label>
-            <input type="text" *ngIf="!showSelect" class="myInputStyle" maxlength="100" id="city" formControlName="field_city">
+            <input type="text" *ngIf="!showSelect" class="myInputStyle" maxlength="100" id="city" formControlName="field_city" readonly="readonly">
            
               <select id="city" *ngIf="showSelect" name="field_city" formControlName="field_city" >
                 <option *ngFor="let city of getCityinfoList">{{city}}</option>

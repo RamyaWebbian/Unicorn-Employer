@@ -13,3 +13,6 @@ app-all-hwa-list .myTabs ul {
 h5 {
     text-align: left;
 }
+.page-head img {
+    cursor: pointer;
+}

@@ -4,153 +4,464 @@
       <section id="login">  
         <app-header-valid-user></app-header-valid-user>
           <div class="deskWidth">
-            <ngb-tabset class="myTabs">
-              <ngb-tab title="Active Ads">
-                <ng-template ngbTabContent>
-                  <div id="accordion" role="tablist" aria-multiselectable="true">
-                    <div class="card">
-                      <div class="card-header" role="tab" id="headingOne">
-                        <div class="row">
-                          <div class="col-10">
-                            <h5 class="mb-0">
-                              <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                               Expiring Soon
-                              </a>
-                            </h5>
-                          </div>
-                          <div class="col-1">
-                            <img class="ques-icon" src="../../assets/question.png"/>
-                          </div>
-                          <div class="col-1">
-                            <img class="acc-arrow" src="../../assets/up-arrow.svg"/>
-                          </div>
-                        </div>
-                      </div>
-                      <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne">
-                        <div class="w90 card-block">
-                          
-                          <div class="row">
-                            <div class="col-11">
-                              <p>
-                                <span>Sales Executive Outdoor Marketing</span>
-                                <small>Expiring in 1 day(s)</small>
-                              </p>
-                            </div>
-                            <div class="col-1">
-                              <img class="kebab-menu" src="../../assets/menu.png"/>
-                              <div class="kebab-open">
-                                  <ul>
-                                    <li>Edit</li>
-                                    <li>Delete</li>
-                                  </ul>
-                              </div>
-                            </div> 
-                          </div>
-                        
-                          <div class="row">
-                              <div class="col-11">
-                                <p>
-                                  <span>Sales Executive Outdoor Marketing for a very special product</span>
-                                  <small>Expiring in 2 day(s)</small>
-                                </p>
-                              </div>
-                              <div class="col-1">
-                                <img class="kebab-menu" src="../../assets/menu.png"/>
-                                <!-- <div class="kebab-open">
-                                    <ul>
-                                      <li>Edit</li>
-                                      <li>Delete</li>
-                                    </ul>
-                                </div> -->
-                              </div> 
-                            </div>
-
-                        </div>
-                      </div>
-                    </div> <!-- first accordion -->
-
-                    <div class="card">
-                      <div class="card-header" role="tab" id="headingTwo">
-                        <div class="row">
-                          <div class="col-10">
-                            <h5 class="mb-0">
-                              <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                               Expiring Soon
-                              </a>
-                            </h5>
-                          </div>
-                          <div class="col-1">
-                            <img class="ques-icon" src="../../assets/question.png"/>
-                          </div>
-                          <div class="col-1">
-                            <img class="acc-arrow" src="../../assets/up-arrow.svg"/>
-                          </div>
-                        </div>
-                      </div>
-                      <div id="collapseTwo" class="collapse show" role="tabpanel" aria-labelledby="headingTwo">
-                        <div class="w90 card-block">
-                          
-                          <div class="row">
-                            <div class="col-11">
-                              <p>
-                                <span>Sales Executive Outdoor Marketing</span>
-                                <small>Expiring in 1 day(s)</small>
-                              </p>
-                            </div>
-                            <div class="col-1">
-                              <img class="kebab-menu" src="../../assets/menu.png"/>
-                              <div class="kebab-open">
-                                  <ul>
-                                    <li>Edit</li>
-                                    <li>Delete</li>
-                                  </ul>
-                              </div>
-                            </div> 
-                          </div>
-                        
-                          <div class="row">
-                              <div class="col-11">
-                                <p>
-                                  <span>Sales Executive Outdoor Marketing for a very special product</span>
-                                  <small>Expiring in 2 day(s)</small>
-                                </p>
-                              </div>
-                              <div class="col-1">
-                                <img class="kebab-menu" src="../../assets/menu.png"/>
-                                <!-- <div class="kebab-open">
-                                    <ul>
-                                      <li>Edit</li>
-                                      <li>Delete</li>
-                                    </ul>
-                                </div> -->
-                              </div> 
-                            </div>
-
-                        </div>
-                      </div>
-                    </div> <!-- second accordion -->
-
+              <div class="page-head">
+                <div class="row">
+                  <div class="col-9">
+                    <h3>Post Help Wanted Ad</h3>
                   </div>
-                </ng-template>
-              </ngb-tab><!-- first tab -->
+                  <div class="col-1">
+                    <img class="excel-icon" src="../../../../assets/excelIcon.svg"/>
+                  </div>
+                  <div class="col-1">
+                      <img src="../../../../assets/searchIcon.png"/>
+                  </div>
+                </div>
+              </div>
+              <ngb-tabset class="myTabs">
+                <ngb-tab title="Active Ads">
+                  <ng-template ngbTabContent>
+                    <div id="accordion" role="tablist" aria-multiselectable="true">
+                      <div class="card">
+                        <div class="card-header" role="tab" id="headingOne">
+                          <div class="row">
+                            <div class="col-10">
+                              <h5 class="mb-0">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                Expiring Soon
+                                </a>
+                              </h5>
+                            </div>
+                            <div class="col-1">
+                              <img class="ques-icon" src="../../assets/question.png"/>
+                            </div>
+                            <div class="col-1">
+                              <img class="acc-arrow" src="../../assets/up-arrow.svg"/>
+                            </div>
+                          </div>
+                        </div>
+                        <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne">
+                          <div class="w90 card-block">
+                            
+                            <div class="row">
+                              <div class="col-11">
+                                <p>
+                                  <span>Sales Executive Outdoor Marketing</span>
+                                  <small>Expiring in 1 day(s)</small>
+                                </p>
+                              </div>
+                              <div class="col-1">
+                                <img class="kebab-menu" src="../../assets/menu.png"/>
+                                <div class="kebab-open">
+                                    <ul>
+                                      <li>Edit</li>
+                                      <li>Copy</li>
+                                      <li>Extend</li>
+                                      <li>Stop</li>
+                                    </ul>
+                                </div>
+                              </div> 
+                            </div>
+                          
+                            <div class="row">
+                                <div class="col-11">
+                                  <p>
+                                    <span>Sales Executive Outdoor Marketing for a very special product</span>
+                                    <small>Expiring in 2 day(s)</small>
+                                  </p>
+                                </div>
+                                <div class="col-1">
+                                  <img class="kebab-menu" src="../../assets/menu.png"/>
+                                  <!-- <div class="kebab-open">
+                                      <ul>
+                                        <li>Edit</li>
+                                        <li>Delete</li>
+                                      </ul>
+                                  </div> -->
+                                </div> 
+                              </div>
 
-              <ngb-tab title="Saved Ads">
-                <ng-template ngbTabContent>
-                  Second tab
-                </ng-template>
-              </ngb-tab><!-- second tab -->
+                              <div class="row">
+                                <div class="col-11">
+                                  <p>
+                                    <span>Sales Executive Outdoor Marketing for a very special product</span>
+                                    <small>Expiring in 2 day(s)</small>
+                                  </p>
+                                </div>
+                                <div class="col-1">
+                                  <img class="kebab-menu" src="../../assets/menu.png"/>
+                                  <!-- <div class="kebab-open">
+                                      <ul>
+                                        <li>Edit</li>
+                                        <li>Delete</li>
+                                      </ul>
+                                  </div> -->
+                                </div> 
+                              </div>
 
-              <ngb-tab title="Expired Ads">
-                <ng-template ngbTabContent>
-                  Third tab
-                </ng-template>
-              </ngb-tab><!-- third tab -->
-            </ngb-tabset>
+                          </div>
+                        </div>
+                      </div> <!-- first accordion -->
 
-</div>
-</section>
-</div>
+                      <div class="card">
+                        <div class="card-header" role="tab" id="headingTwo">
+                          <div class="row">
+                            <div class="col-10">
+                              <h5 class="mb-0">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                                Running safe
+                                </a>
+                              </h5>
+                            </div>
+                            <div class="col-1">
+                              <img class="ques-icon" src="../../assets/question.png"/>
+                            </div>
+                            <div class="col-1">
+                              <img class="acc-arrow" src="../../assets/up-arrow.svg"/>
+                            </div>
+                          </div>
+                        </div>
+                        <div id="collapseTwo" class="collapse safeSmall" role="tabpanel" aria-labelledby="headingTwo">
+                          <div class="w90 card-block">
+                            
+                            <div class="row">
+                              <div class="col-11">
+                                <p>
+                                  <span>Sales Executive Outdoor Marketing</span>
+                                  <small>Expiring in 1 day(s)</small>
+                                </p>
+                              </div>
+                              <div class="col-1">
+                                <img class="kebab-menu" src="../../assets/menu.png"/>
+                                <div class="kebab-open">
+                                    <ul>
+                                      <ul>
+                                        <li>Edit</li>
+                                        <li>Copy</li>
+                                        <li>Extend</li>
+                                        <li>Stop</li>
+                                      </ul>
+                                    </ul>
+                                </div>
+                              </div> 
+                            </div>
+                          
+                            <div class="row">
+                                <div class="col-11">
+                                  <p>
+                                    <span>Sales Executive Outdoor Marketing for a very special product</span>
+                                    <small>Expiring in 2 day(s)</small>
+                                  </p>
+                                </div>
+                                <div class="col-1">
+                                  <img class="kebab-menu" src="../../assets/menu.png"/>
+                                  <!-- <div class="kebab-open">
+                                      <ul>
+                                        <li>Edit</li>
+                                        <li>Delete</li>
+                                      </ul>
+                                  </div> -->
+                                </div> 
+                              </div>
+
+                              <div class="row">
+                                <div class="col-11">
+                                  <p>
+                                    <span>Sales Executive Outdoor Marketing for a very special product</span>
+                                    <small>Expiring in 2 day(s)</small>
+                                  </p>
+                                </div>
+                                <div class="col-1">
+                                  <img class="kebab-menu" src="../../assets/menu.png"/>
+                                  <!-- <div class="kebab-open">
+                                      <ul>
+                                        <li>Edit</li>
+                                        <li>Delete</li>
+                                      </ul>
+                                  </div> -->
+                                </div> 
+                              </div>
+
+                              <div class="row">
+                                <div class="col-11">
+                                  <p>
+                                    <span>Sales Executive Outdoor Marketing for a very special product</span>
+                                    <small>Expiring in 2 day(s)</small>
+                                  </p>
+                                </div>
+                                <div class="col-1">
+                                  <img class="kebab-menu" src="../../assets/menu.png"/>
+                                  <!-- <div class="kebab-open">
+                                      <ul>
+                                        <li>Edit</li>
+                                        <li>Delete</li>
+                                      </ul>
+                                  </div> -->
+                                </div> 
+                              </div>
+
+                              <div class="row">
+                                <div class="col-11">
+                                  <p>
+                                    <span>Sales Executive Outdoor Marketing for a very special product</span>
+                                    <small>Expiring in 2 day(s)</small>
+                                  </p>
+                                </div>
+                                <div class="col-1">
+                                  <img class="kebab-menu" src="../../assets/menu.png"/>
+                                  <!-- <div class="kebab-open">
+                                      <ul>
+                                        <li>Edit</li>
+                                        <li>Delete</li>
+                                      </ul>
+                                  </div> -->
+                                </div> 
+                              </div>
+
+                              <div class="row">
+                                <div class="col-11">
+                                  <p>
+                                    <span>Sales Executive Outdoor Marketing for a very special product</span>
+                                    <small>Expiring in 2 day(s)</small>
+                                  </p>
+                                </div>
+                                <div class="col-1">
+                                  <img class="kebab-menu" src="../../assets/menu.png"/>
+                                  <!-- <div class="kebab-open">
+                                      <ul>
+                                        <li>Edit</li>
+                                        <li>Delete</li>
+                                      </ul>
+                                  </div> -->
+                                </div> 
+                              </div>
+
+                          </div>
+                        </div>
+                      </div> <!-- second accordion -->
+
+                      <div class="card">
+                        <div class="card-header" role="tab" id="headingThree">
+                          <div class="row">
+                            <div class="col-10">
+                              <h5 class="mb-0">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                                Scheduled Ads
+                                </a>
+                              </h5>
+                            </div>
+                            <div class="col-1">
+                              <img class="ques-icon" src="../../assets/question.png"/>
+                            </div>
+                            <div class="col-1">
+                              <img class="acc-arrow" src="../../assets/up-arrow.svg"/>
+                            </div>
+                          </div>
+                        </div>
+                        <div id="collapseThree" class="collapse safeSmall" role="tabpanel" aria-labelledby="headingThree">
+                          <div class="w90 card-block">
+                            
+                            <div class="row">
+                              <div class="col-11">
+                                <p>
+                                  <span>Sales Executive Outdoor Marketing</span>
+                                  <small>Expiring in 1 day(s)</small>
+                                </p>
+                              </div>
+                              <div class="col-1">
+                                <img class="kebab-menu" src="../../assets/menu.png"/>
+                                <div class="kebab-open">
+                                    <ul>
+                                      <ul>
+                                        <li>Edit</li>
+                                        <li>Copy</li>
+                                        <li>Extend</li>
+                                        <li>Stop</li>
+                                      </ul>
+                                    </ul>
+                                </div>
+                              </div> 
+                            </div>
+                          
+                            <div class="row">
+                                <div class="col-11">
+                                  <p>
+                                    <span>Sales Executive Outdoor Marketing for a very special product</span>
+                                    <small>Expiring in 2 day(s)</small>
+                                  </p>
+                                </div>
+                                <div class="col-1">
+                                  <img class="kebab-menu" src="../../assets/menu.png"/>
+                                  <!-- <div class="kebab-open">
+                                      <ul>
+                                        <li>Edit</li>
+                                        <li>Delete</li>
+                                      </ul>
+                                  </div> -->
+                                </div> 
+                              </div>
+
+                              <div class="row">
+                                <div class="col-11">
+                                  <p>
+                                    <span>Sales Executive Outdoor Marketing for a very special product</span>
+                                    <small>Expiring in 2 day(s)</small>
+                                  </p>
+                                </div>
+                                <div class="col-1">
+                                  <img class="kebab-menu" src="../../assets/menu.png"/>
+                                  <!-- <div class="kebab-open">
+                                      <ul>
+                                        <li>Edit</li>
+                                        <li>Delete</li>
+                                      </ul>
+                                  </div> -->
+                                </div> 
+                              </div>
+
+                          </div>
+                        </div>
+                      </div> <!-- third accordion -->
+
+                    </div>
+                  </ng-template>
+                </ngb-tab><!-- first tab -->
+
+                <ngb-tab title="Saved Ads">
+                  <ng-template ngbTabContent>
+                    <div class="myTabs">
+                      <div id="collapseThree" class="collapse show safeSmall" role="tabpanel" aria-labelledby="headingThree">
+                          <div class="w90 card-block">
+                            <div class="row">
+                              <div class="col-11">
+                                <p>
+                                  <span>Sales Executive Outdoor Marketing</span>
+                                  <small>Expiring in 1 day(s)</small>
+                                </p>
+                              </div>
+                              <div class="col-1">
+                                <img class="kebab-menu" src="../../assets/menu.png"/>
+                                <div class="kebab-open">
+                                    <ul>
+                                      <ul>
+                                        <li>Edit</li>
+                                        <li>Delete Ad</li>
+                                      </ul>
+                                    </ul>
+                                </div>
+                              </div> 
+                            </div>
+                          
+                            <div class="row">
+                                <div class="col-11">
+                                  <p>
+                                    <span>Sales Executive Outdoor Marketing for a very special product</span>
+                                    <small>Expiring in 2 day(s)</small>
+                                  </p>
+                                </div>
+                                <div class="col-1">
+                                  <img class="kebab-menu" src="../../assets/menu.png"/>
+                                  <!-- <div class="kebab-open">
+                                      <ul>
+                                        <li>Edit</li>
+                                        <li>Delete</li>
+                                      </ul>
+                                  </div> -->
+                                </div> 
+                              </div>
+
+                              <div class="row">
+                                <div class="col-11">
+                                  <p>
+                                    <span>Sales Executive Outdoor Marketing for a very special product</span>
+                                    <small>Expiring in 2 day(s)</small>
+                                  </p>
+                                </div>
+                                <div class="col-1">
+                                  <img class="kebab-menu" src="../../assets/menu.png"/>
+                                  <!-- <div class="kebab-open">
+                                      <ul>
+                                        <li>Edit</li>
+                                        <li>Delete</li>
+                                      </ul>
+                                  </div> -->
+                                </div> 
+                              </div>
+
+                          </div>
+                        </div>
+                      </div> <!-- third accordion -->
+                  
+                  </ng-template>
+                </ngb-tab><!-- saved tab -->
+
+                <ngb-tab title="Expired Ads">
+                  <ng-template ngbTabContent>
+                      <div class="myTabs">
+                          <div id="collapseThree" class="collapse show safeSmall" role="tabpanel" aria-labelledby="headingThree">
+                              <div class="w90 card-block">
+                                <div class="row">
+                                  <div class="col-11">
+                                    <p>
+                                      <span>Sales Executive Outdoor Marketing</span>
+                                      <small>Expiring in 1 day(s)</small>
+                                    </p>
+                                  </div>
+                                  <div class="col-1">
+                                    <img class="kebab-menu" src="../../assets/menu.png"/>
+                                    <div class="kebab-open">
+                                        <ul>
+                                          <ul>
+                                            <li>Copy</li>
+                                          </ul>
+                                        </ul>
+                                    </div>
+                                  </div> 
+                                </div>
+                              
+                                <div class="row">
+                                    <div class="col-11">
+                                      <p>
+                                        <span>Sales Executive Outdoor Marketing for a very special product</span>
+                                        <small>Expiring in 2 day(s)</small>
+                                      </p>
+                                    </div>
+                                    <div class="col-1">
+                                      <img class="kebab-menu" src="../../assets/menu.png"/>
+                                        <!-- <div class="kebab-open">
+                                          <ul>
+                                            <li>Copy</li>
+                                          </ul>
+                                      </div> -->
+                                    </div> 
+                                  </div>
+      
+                                  <div class="row">
+                                    <div class="col-11">
+                                      <p>
+                                        <span>Sales Executive Outdoor Marketing for a very special product</span>
+                                        <small>Expiring in 2 day(s)</small>
+                                      </p>
+                                    </div>
+                                    <div class="col-1">
+                                      <img class="kebab-menu" src="../../assets/menu.png"/>
+                                      <!-- <div class="kebab-open">
+                                          <ul>
+                                            <li>Copy</li>
+                                          </ul>
+                                      </div> -->
+                                    </div> 
+                                  </div>
+      
+                              </div>
+                            </div>
+                          </div> <!-- third accordion -->
+                  </ng-template>
+                </ngb-tab><!-- third tab -->
+              </ngb-tabset>
+          </div>
+      </section>
+    </div>
   </div>
-  </div>
+</div>
 <a [routerLink]="['/hwa-preview']">View HWA</a><br>
 <a [routerLink]="['/search']">Search</a>

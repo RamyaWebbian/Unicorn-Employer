@@ -39,7 +39,7 @@
 
           <div class="form-group filled-form">
             <label for="fname">Your First Name</label>
-            <input type="text" class="myInputStyle" maxlength="100" [(ngModel)]="field_first_name" id="fName" formControlName="field_first_name" >
+            <input type="text" class="myInputStyle" maxlength="100" [(ngModel)]="field_first_name" id="fName" formControlName="field_first_name">
             
             <div [hidden]="profileForm.controls['field_first_name'].valid || profileForm.controls['field_first_name'].pristine" class="inline-error">
               Please enter a valid first name
@@ -47,7 +47,7 @@
           </div>
           <div class="form-group filled-form">
             <label for="lname">Your Last Name</label>
-            <input type="text" maxlength="100" [(ngModel)]="field_last_name"  formControlName="field_last_name" class="myInputStyle" id="enterEmail" >
+            <input type="text" maxlength="100" [(ngModel)]="field_last_name" formControlName="field_last_name" class="myInputStyle" id="enterEmail" >
             
             <div [hidden]="profileForm.controls['field_last_name'].valid || profileForm.controls['field_last_name'].pristine" class="inline-error">
              Please enter a valid last name
@@ -65,7 +65,7 @@
             <input class="myInputStyle" mask='000-000-0000' [(ngModel)]="myModel"  type="text" id="pNum" formControlName="field_phone_number" >
             
             <div [hidden]="profileForm.controls['field_phone_number'].valid || profileForm.controls['field_phone_number'].pristine" class="inline-error">
-             Phone number must be of 10 digits
+             <!-- Phone number must be of 10 digits -->
             </div>
           </div>
         </div>

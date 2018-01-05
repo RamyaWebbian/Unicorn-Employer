@@ -1,5 +1,6 @@
 .busImg {
     padding: 0;
+    position: relative;
 }
 .busImg img {
     width: 100%;
@@ -7,4 +8,21 @@
 .form.input-section {
     width: 90%;
     margin: auto;
+}
+.kebab-open {
+    padding: 0 10px;
+    min-width: 200px;
+    position: absolute;
+    right: auto;
+    top: 50%;
+    left: 50%;
+    margin-left: -100px;
+    box-shadow: 1px 1px 10px 2px #fff;
+    z-index: 2;
+    opacity: 1;
+    background-color: #002d40;
+    color: #fff;
+    text-align: center;
+    border: 1px solid #fff;
+    border-radius: 8px;
 }

@@ -9,7 +9,6 @@ import {NotificationsService} from 'angular2-notifications';
   templateUrl: './view-business-profile.component.html',
   styleUrls: ['./view-business-profile.component.css']
 })
- 
 export class ViewBusinessProfileComponent implements OnInit {
   public businessTopic:Array<any> = [];
   public bisProfileImg:any;
@@ -39,9 +38,7 @@ export class ViewBusinessProfileComponent implements OnInit {
      const user = this.userService.isLogedin();
  
   }
- 
   addNewBusiness() {
- 
     //this.router.navigate(['/business-profile']);
   }
 

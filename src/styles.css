@@ -41,6 +41,10 @@ h6 {
 .primary-green {
     color: #139701;
 }
+.goToNextBtn .btn-primary.disabled, .goToNextBtn .btn-primary:disabled {
+    background-color: #3e7c95;
+    border-color: #3e7c95;
+}
 /* color codes */
 
 /* You can add global styles to this file, and also import other style files */
@@ -230,7 +234,10 @@ small {
     padding: 10px 0 0 0;
 } 
 /* heading inside pages  */
-
+.fileUpload.defaultImgText small {
+    width: 100%;
+    text-align: center;
+}
 /* Error CSS */
 .common-error {
     text-align: center;
@@ -254,7 +261,7 @@ small {
     padding: 20px 0;
 }
 .goToNextBtn {
-    padding: 20px;
+    padding: 20px 0;
     text-align: center;
 }
 button.btn {
@@ -275,7 +282,7 @@ button {
 }
 .goToNextBtn .btn,
 .goToNextBtn .btn:hover {
-    width: 100%;
+    width: 90%;
     border-radius: 50px;
     padding: 10px;
     background-color: #3e7c95;
@@ -397,6 +404,10 @@ a:active, a:focus, a:hover {
 .additionalLoc div.loc:last-of-type {
     border-bottom: 0;
 }
+app-view-business-profile p {
+    font-size: 20px;
+    color: #000;
+}
 /* view section CSS */
 
 .form-check {
@@ -426,7 +437,7 @@ a:active, a:focus, a:hover {
 .busDesc textarea {
     width: 100%;
     height: 220px;
-    margin: auto auto 18px;
+    /*margin: auto auto 18px;*/ /* commenting for view-business-profile */
     border: 1.3px solid #002d3f;
     border-radius: 8px;
     padding: 10px;
@@ -560,10 +571,13 @@ button.close:focus, button.close:hover {
 }
 
 /* Post HWA */
-
+.excel-icon {
+    width: 23px;
+}
 /* Accordion */
 .card .card-header {
     background-color: #fff;
+    padding: .75rem 0.7rem;
 }
 h5,
 .section-title h5,
@@ -578,6 +592,7 @@ h5,
 .card-header h5 a {
     color: #000;
     font-weight: bold;
+    text-decoration: none !important;
 }
 .kebab-menu {
     display: inline-block;
@@ -677,6 +692,9 @@ h3.lineHigh {
 .myTabs small {
     margin: 0;
     color: red;
+}
+.myTabs .safeSmall small {
+    color: #ccc;
 }
 .myTabs .collapse .row {
     margin: 0 auto;

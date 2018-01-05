@@ -16,14 +16,14 @@
             <input type="text" class="myInputStyle" id="enterEmail" formControlName="businessname" required>
            <!--  <div class="inline-error" *ngIf="!registerUser.controls['businessname'].valid">-->
                  <div [hidden]="registerUser.controls['businessname'].valid || registerUser.controls['businessname'].pristine" class="inline-error">
-                 Please enter a Business name!
+                 Please enter a Business name
                 </div>
         
           </div>
 
           <div class="form-group filled-form">
             <label for="fname">Your First Name</label>
-            <input type="text" class="myInputStyle"  id="pwd" formControlName="firstname"  required>
+            <input type="text" class="myInputStyle"  id="pwd" formControlName="firstname" pattern="^(^[^\s]+[A-z][A-Za-z]*\s+[A-Za-z]*)|([A-z][A-Za-z]*)$" required>
              <!-- <div class="inline-error" [hidden]="registerUser.controls['firstname'].valid"> -->
                 <div [hidden]="registerUser.controls['firstname'].valid || registerUser.controls['firstname'].pristine" class="inline-error">
                  Please enter first name
@@ -31,7 +31,7 @@
           </div>
           <div class="form-group filled-form">
             <label for="lname">Your Last Name</label>
-            <input type="text" class="myInputStyle"  formControlName="lastname"  required>
+            <input type="text" class="myInputStyle"  formControlName="lastname" pattern="^(^[^\s]+[A-z][A-Za-z]*\s+[A-Za-z]*)|([A-z][A-Za-z]*)$" required>
 
             <!-- <div class="inline-error" *ngIf="!registerUser.controls['lastname'].valid"> -->
               <div [hidden]="registerUser.controls['lastname'].valid || registerUser.controls['lastname'].pristine" class="inline-error">
