@@ -9,7 +9,8 @@
     border: 0;
 }
 .navbar {
-    background: url(../../../assets/header-bg.jpg)
+    background: url(../../../assets/header-bg.jpg);
+    display: block;
 }
 nav.navbar-light .navbar-toggler-icon {
     background-image: url(../../../assets/menu-lines.svg);
@@ -49,4 +50,13 @@ nav.navbar-light .navbar-toggler-icon {
 }
 .collapse span.closeIcon .close span {
     width: 90%;
+}
+.logo {
+    width: 200px;
+}
+.notification {
+    float: right;
+    display: inline-block;
+    margin: 2px 0;
+    clear: both;
 }
