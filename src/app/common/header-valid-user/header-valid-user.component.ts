@@ -13,6 +13,8 @@ export class HeaderValidUserComponent implements OnInit {
   public user: any;
   public  businessName: string;
   public firstName: string;
+  checkOpen: boolean;
+  openedMenu = true;
 
   constructor(
     private userService:UserService,
@@ -82,5 +84,14 @@ logout() {
    this.userService.setLogedIn(false);
  }); */
 }
+
+  sideBarOpen() {
+    this.checkOpen = true;
+  }
+  
+  closeHelp() {
+   this.checkOpen = false;
+    console.log("closed");
+  }
 
 }

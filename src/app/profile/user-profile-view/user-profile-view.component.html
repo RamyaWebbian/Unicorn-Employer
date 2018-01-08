@@ -100,16 +100,19 @@
               </div>
               <div class="col-2">
                <a (click)="openMenu(index)"> <img src="../../assets/menu.png" class="all-icon"/> </a>
+
+               <div [id]="addr?.nid" *ngIf="showHideArray[index]" class="actionItems">
+                <ul>
+                  <li><a [routerLink]="['/add-location', addr?.nid]">Edit</a></li>
+                  <li><a (click)="deleteAddress(addr?.nid)" href="javascript:void(0)">Delete</a></li>
+                  <li><a (click)="markAsDefault(addr?.nid)" href="javascript:void(0)">Mark Default</a></li>
+                </ul>
+              </div>
+
               </div>
             </div>
           </div>
-          <div [id]="addr?.nid" *ngIf="showHideArray[index]" class="actionItems">
-            <ul>
-              <li><a [routerLink]="['/add-location', addr?.nid]">Edit</a></li>
-              <li><a (click)="deleteAddress(addr?.nid)" href="javascript:void(0)">Delete</a></li>
-              <li><a (click)="markAsDefault(addr?.nid)" href="javascript:void(0)">Mark Default</a></li>
-            </ul>
-          </div>
+          
           </div>
           </ng-container>
           

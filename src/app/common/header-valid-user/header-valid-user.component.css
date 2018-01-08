@@ -22,3 +22,31 @@ nav.navbar-light .navbar-toggler-icon {
 .navbar-light .navbar-nav .nav-link {
     color: #fff !important;
 }
+
+.sidebarOpen .collapse.navbar-collapse {
+    background: url(../../../assets/header-bg.png);
+    z-index: 2;
+    height: 100vh;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 90%;
+}
+.collapse span.closeIcon {
+    width: auto;
+    display: inline;
+    padding: 0;
+}
+.collapse .navbar-brand {
+    padding: 11px 15px;
+}
+.collapse .navbar-brand .logo {
+    width: 75%;
+}
+.navbar-nav {
+    padding: 0 15px;
+}
+.collapse span.closeIcon .close span {
+    width: 90%;
+}

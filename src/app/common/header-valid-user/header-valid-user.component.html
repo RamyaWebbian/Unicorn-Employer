@@ -5,8 +5,8 @@
      <section id="login">  -->
 <div class="login-blk"> 
 
-<nav class="navbar navbar-toggleable-md navbar-light bg-faded">
-  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+<nav class="navbar navbar-toggleable-md navbar-light bg-faded" [ngClass]="{'sidebarOpen':checkOpen}">
+  <button class="navbar-toggler navbar-toggler-right" type="button" (click)="sideBarOpen()">
     <span class="navbar-toggler-icon"></span>
   </button>
   <a class="navbar-brand" [routerLink]="['/login']">
@@ -15,6 +15,22 @@
   <a><img src="../../../assets/notification.png"/></a>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+    <div class="row">
+      <div class="col-9">
+        <a class="navbar-brand" [routerLink]="['/login']">
+          <img src="../../../assets/logo-frs.png" class="logo"/>
+        </a>
+      </div>
+      <div class="col-2">
+        <span class="closeIcon">
+          <button type="button" class="close" data-toggle="modal" (click)="closeHelp()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </span>
+      </div>
+    </div>
+
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
         <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>

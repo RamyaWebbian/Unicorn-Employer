@@ -76,6 +76,15 @@ h4, h2 {
     color: #fff;
     background-color: #002d40 !important;
 }
+.newLoader {
+    position: absolute;
+    width: 35%;
+    left: 70%;
+    margin-left: -35%;
+}
+.profImg {
+    width: 100%;
+}
 /* login page that will be used everywhere */
 .container-fluid > .row > .col-12 {
     padding: 0;
@@ -156,7 +165,7 @@ button:focus {
     text-align: center;
 }
 .logo {
-    width: 60%;
+    width: 25%;
 }
 .rightAlign {
     float: right;
@@ -329,6 +338,7 @@ p {
     font-weight: 600;
     font-size: 19px;
     color: #000;
+    word-break: break-all;
 }
 .addedLoc,
 .additionalLoc,
@@ -347,13 +357,14 @@ p {
 }
 .actionItems {
     position: absolute;
-    right: 9%;
+    right: 25px;
     border: 1px solid #ccc;
-    border-radius: 8px;
+    border-radius: 0;
     background-color: #fff;
-    top: 60%;
+    top: 50%;
     z-index: 1;
     cursor: pointer;
+    width: 110px;
 }
 .cameraActionItems {
     position: absolute;
@@ -368,8 +379,12 @@ p {
     padding: 5px 7px;
     margin: 0;
 }
+.actionItems ul {
+    padding: 0 7px;
+}
 .actionItems li {
     border-bottom: 1px solid #ccc;
+    padding: 10px 0;
 }
 .cameraActionItems li {
     border-bottom: 1px solid #000;
@@ -382,6 +397,9 @@ p {
 a {
     color: #002d3f !important;
     font-weight: 600;
+}
+a:hover {
+    cursor: pointer;
 }
 a:active, a:focus, a:hover {
     text-decoration: underline !important;
@@ -453,7 +471,7 @@ app-view-business-profile p {
     text-align: center;
     position: fixed;
     top: 0;
-    z-index: 1;
+    z-index: 999;
 }
 .alert-dismissible button.close {
     padding: 0;
@@ -737,8 +755,10 @@ h3.lineHigh {
       text-align: right;  
     }
 }
-@media screen and (max-width: 1023px) {
-
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+    .logo {
+        width: 50%;
+    }
 }
 @media screen and (max-width: 767px) {
     .offer {
@@ -751,6 +771,9 @@ h3.lineHigh {
     .jobadBlock .mdl-cell {
         text-align: center;
         margin: 0;
+    }
+    .logo {
+        width: 60%;
     }
 }
 /* menu */

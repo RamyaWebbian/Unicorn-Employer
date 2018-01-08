@@ -23,10 +23,10 @@
           <simple-notifications [options]="options"></simple-notifications>
           <form [formGroup]="businessProfile" (ngSubmit)="onSubmit(businessProfile, businessProfile.valid)" novalidate>
           <div class="form input-section">
-            <!--<input type="hidden" [(ngModel)]="item_id" formControlName="item_id"> -->
+            <!--<input type="hidden" [(ngModel)]="item_id" formControlName="item_id"> *ngIf="imgLoading"-->
             <div class="busImg">
               <div class="fileUpload defaultImgText">
-                 <img *ngIf="imgLoading" src="../assets/ripple.gif" class="newLoader" style="position:absolute; z-index: 999; left:32%;  top:10px;" />
+                 <img *ngIf="imgLoading" src="../assets/ripple.gif" class="newLoader"/>
                  <img class="profImg" *ngIf="isThereImge" [src]="imgbase64src" style="border: 1px solid #ccc" >
                 <img *ngIf="!isThereImge" src="../../assets/photo-camera.png" class="all-icon" />
                  <input type="file"  name="profileImagebtn" id="uploadimg" (change)="fileChangeEvent($event)"  class="upload"  />
@@ -58,7 +58,7 @@
             <button type="submit" class="btn btn-primary" [disabled]="businessProfile.invalid">Save business profile</button>
           </div>
 
-          <div *ngIf="changeUiForNew" class="goToNextBtn bgGrey">
+          <div *ngIf="changeUiForNew" class="goToNextBtn bgGrey" style="padding: 20px;">
             <div class="row">
               <div class="col-6">
                 <button type="submit" [disabled]="!businessProfile.valid" class="btn btn-primary">save</button>
