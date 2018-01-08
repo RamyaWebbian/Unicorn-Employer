@@ -121,14 +121,13 @@ onSubmitLogin(loginfields){
   }
  
    toggleShow(flag:boolean) {
-     console.log(flag)
-      console.log(this.input)
+    console.log(flag)
+    console.log(this.input)
     this.show = flag;
     if (this.show) {
       this.input.changeType('text');
     } else {
       this.input.changeType('password');
-    //  this.inputcnf.changeType('password');
     }
   }
 
