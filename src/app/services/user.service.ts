@@ -78,31 +78,33 @@ export class UserService {
   }
 
   isLogedin() {
-  var token;
-  var user;
-  if(this.isLocalStorage()){
-      token = JSON.parse(localStorage.getItem('userToken'));
-      user = JSON.parse(localStorage.getItem('currentUser'));
-  }else{
-   // console.log('check', this.cookieService.getAll())
-    if( this.cookieService.check('userToken')) {
-      token = JSON.parse(this.cookieService.get('userToken'));
-      user = JSON.parse(this.cookieService.get('currentUser'));
-     // console.log('token', token)
-    }
-}
- 
-    if (token) {
-      this.setLogedIn(true);
-     // this.router.navigate(['/']);
-      return user;
-    } else {
-      this.setLogedIn(false);
-     // this.router.navigate(['/login']);
-      return null;
-    }
 
+  var user = null;
+  if(this.isExpireSession()){
+    user =  null;
+   this.setLogedIn(false);
+  // this.router.navigate(['/login']);
+   
+ }else{
+
+    this.setLogedIn(true);
+    if(this.isLocalStorage()) {
+     // token = JSON.parse(localStorage.getItem('userToken'));
+      user = JSON.parse(localStorage.getItem('currentUser'));
+    
+    }else{
+    // console.log('check', this.cookieService.getAll())
+      if( this.cookieService.check('userToken')) {
+      // token = JSON.parse(this.cookieService.get('userToken'));
+        user = JSON.parse(this.cookieService.get('currentUser'));
+       
+      // console.log('token', token)
+      }
+    }
+ 
   }
+return user;
+}
   //
 
   //
@@ -148,7 +150,7 @@ export class UserService {
       }
   }
   removeHWAstorage() {
-    localStorage.removeItem('storeHwaFormData');
+   /* localStorage.removeItem('storeHwaFormData');
     localStorage.removeItem('storeHwaNid');
     localStorage.removeItem('profileNid');
     localStorage.removeItem('prof1_img_nid');
@@ -156,7 +158,7 @@ export class UserService {
     localStorage.removeItem('prof3_img_nid');
     localStorage.removeItem('prof4_img_nid');
     localStorage.removeItem('pamentData');
-    localStorage.removeItem('copyHwaNid');
+    localStorage.removeItem('copyHwaNid'); */
   }
 
   getHwatoken(user){
@@ -209,8 +211,15 @@ isLocalStorage():boolean{
   
 }
 
-  checkSession() {
-        return moment().isBefore(this.getExpiration());
+  isExpireSession():boolean {
+      var isExp = moment().isBefore(this.getExpiration())
+        console.log('checkSession ', moment().isBefore(this.getExpiration()));
+         console.log('date ', moment(this.getExpiration()).date());
+        if(isExp){
+         // this.router.navigate(['/login']);
+          this.logout();
+        }
+        return isExp;
     }
 
   
@@ -230,8 +239,9 @@ isLocalStorage():boolean{
   parsedToken = jwtHelper.decodeToken(token).exp;
   // parsedToken
 }
-let mm =  moment.duration(parsedToken).asDays();
-        return moment(parsedToken);
+// let mm =  moment.duration(parsedToken).asSeconds();
+// console.log(mm);
+        return parsedToken;
     }    
 
   authHeaders() {

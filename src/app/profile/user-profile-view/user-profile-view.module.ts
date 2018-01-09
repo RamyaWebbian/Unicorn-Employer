@@ -10,6 +10,7 @@ import { SharedModule } from '../../shared/shared.module';
  import {SimpleNotificationsModule, NotificationsService} from 'angular2-notifications';
 import { HeaderValidUserModule } from '../../common/header-valid-user/header-valid-user.module';
 
+
 @NgModule({
   imports: [
     CommonModule,

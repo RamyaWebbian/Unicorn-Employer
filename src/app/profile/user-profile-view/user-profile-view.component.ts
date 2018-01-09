@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { HelpModalComponent } from '../../common/help-modal/help-modal.component';
 import {ProfileService, UserService} from '../../services/index';
@@ -8,7 +8,10 @@ import {NotificationsService} from 'angular2-notifications';
 @Component({
   selector: 'app-user-profile-view',
   templateUrl: './user-profile-view.component.html',
-  styleUrls: ['./user-profile-view.component.css']
+  styleUrls: ['./user-profile-view.component.css'],
+   host: {
+    '(document:click)': 'onClick($event)',
+  },
 })
 export class UserProfileViewComponent implements OnInit {
   public helpShow : boolean;
@@ -34,7 +37,8 @@ private userInfo:any;
   constructor(private router : Router,
               private profileService: ProfileService,
               private userService: UserService,
-              private _notificationsService: NotificationsService
+              private _notificationsService: NotificationsService,
+              private _eref: ElementRef
               ) { }
 
   ngOnInit(  ) {
@@ -161,13 +165,26 @@ openMenu(i){
        this.showHideArray[index] = false;
     }
            
-          });
-
-
+  });
 }
 
+hideAllMenu(){
+  this.showHideArray.forEach((item, index) => {
+       this.showHideArray[index] = false;  
+  });
+}
+
+  onClick(event) {
+    console.log( event)
+    if (!this._eref.nativeElement.contains(event.target)) {// or some similar check
+    // doSomething();
+     this.hideAllMenu();
+  }
+
+  }
+
   businessCreate() {
-    this.router.navigate(['/business-profile',this.bisProfileId, '']);
+    this.router.navigate(['/business-profile', this.bisProfileId, '']);
   }
   userProfile() {
     this.router.navigate(['/user-profile']);

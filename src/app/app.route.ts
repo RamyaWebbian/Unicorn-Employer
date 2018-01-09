@@ -108,9 +108,16 @@ export const router: Routes = [
       pathMatch: 'full',
       canActivate: [AuthGuard]
    },
+    {
+      path: 'hwa-basic-info',
+      loadChildren: './hwa/create/hwa-basic-info/hwa-basic-info.module#HwaBasicInfoModule',
+      pathMatch: 'full',
+      canActivate: [AuthGuard]
+   },
+
    {
-      path: 'all-hwa-list',
-      loadChildren: './hwa/edit/all-hwa-list/all-hwa-list.module#AllHwaListModule',
+      path: 'edit-hwa',
+      loadChildren: './hwa/edit/edit-hwa/edit-hwa.module#EditHwaModule',
       pathMatch: 'full',
       canActivate: [AuthGuard]
    },

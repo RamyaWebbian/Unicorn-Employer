@@ -108,7 +108,7 @@ const pObj = {"bptnid": profileId}
              this.businessProfile.patchValue(bizTopics[0]);
            }
            this.isThereImge = true;
-           this.profileImageId = bizTopics[0].fid;
+           this.profileImageId = bizTopics[0].fid; 
          }
         
         // alert('loaded succsed')

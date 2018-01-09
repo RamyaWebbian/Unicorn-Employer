@@ -107,6 +107,9 @@ onSubmit(isValid) {
       res => {
          console.log(res)
  this.addressList = res['address'];
+ if(this.addressList.length){
+   this.helpShow = false;
+ }
         if (res['status']) {
           const user =  res;
         /* var obj = {'field_name_of_your_business':user['details'].field_name_of_your_business[0].value,

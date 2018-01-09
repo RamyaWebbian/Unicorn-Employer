@@ -19,12 +19,14 @@
         </div>
 
         <div class="form input-section">
-          <div class="busImg">
-            <img [src]="bisProfileImg"/>
-          </div>
+         
        <ng-container *ngFor="let topic of businessTopic"> 
          
          <hr>
+          <div class="busImg">
+            <img [src]="topic?.field_business_profile_topic_ima"/>
+          </div>
+
          <div style="padding: 10px;" class="form-group filled-form">
          <a style="padding: 2px;" [routerLink]="['/business-profile', bisProfileId, topic.item_id]" class="">Edit</a>
          </div>

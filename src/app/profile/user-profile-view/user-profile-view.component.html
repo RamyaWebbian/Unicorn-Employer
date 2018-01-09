@@ -98,10 +98,10 @@
                  {{addr?.field_city}}, {{addr?.field_z}}
                 </p>
               </div>
-              <div class="col-2">
+              <div class="col-2" (click)="onClick($event)" >
                <a (click)="openMenu(index)"> <img src="../../assets/menu.png" class="all-icon"/> </a>
 
-               <div [id]="addr?.nid" *ngIf="showHideArray[index]" class="actionItems">
+               <div  [id]="addr?.nid" *ngIf="showHideArray[index]" class="actionItems">
                 <ul>
                   <li><a [routerLink]="['/add-location', addr?.nid]">Edit</a></li>
                   <li><a (click)="deleteAddress(addr?.nid)" href="javascript:void(0)">Delete</a></li>

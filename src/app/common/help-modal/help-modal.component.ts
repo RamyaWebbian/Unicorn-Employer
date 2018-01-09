@@ -21,7 +21,7 @@ export class HelpModalComponent implements OnInit {
   ngOnInit() {
     //alert('help modal')
    // this.hideHelp = true;
-    console.log(this.visible)
+   // console.log(this.visible)
    // this.vis = this.visible; 
   }
   

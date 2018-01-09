@@ -8,9 +8,9 @@ import { EditHwaRoutingModule } from './edit-hwa-routing.module';
 @NgModule({
   imports: [
     CommonModule,
-    HeaderValidUserModule,
     EditHwaRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HeaderValidUserModule
   ],
   declarations: [EditHwaComponent]
 })
