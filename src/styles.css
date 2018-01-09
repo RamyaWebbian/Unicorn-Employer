@@ -160,7 +160,11 @@ button:focus {
 }
 .header,
 .header-registration {
+<<<<<<< Updated upstream
     background: url(./assets/header-bg.png) repeat-x;
+=======
+    background: url(./assets/headerbg.png) repeat-x;
+>>>>>>> Stashed changes
     line-height: 150px;
     text-align: center;
 }

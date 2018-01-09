@@ -50,8 +50,8 @@ export class UserProfileComponent implements OnInit {
     initFields() {
     this.profileForm = this.formbuilder.group({
       'field_name_of_your_business': ['', Validators.required],
-      'field_first_name': ['', Validators.required],
-      'field_last_name': [''],
+      'field_first_name': ['', Validators.required], //Validators.pattern('^(^[^\s]+[A-z][A-Za-z]*\s+[A-Za-z]*)|([A-z][A-Za-z]*)$')],
+      'field_last_name': ['', ], // Validators.pattern('^(^[^\s]+[A-z][A-Za-z]*\s+[A-Za-z]*)|([A-z][A-Za-z]*)$')],
       'email': ['', Validators.required],
       'field_phone_number': ['', Validators.required]
      
