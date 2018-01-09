@@ -32,6 +32,8 @@ export class UserProfileComponent implements OnInit {
     timeOut: 5000,
     lastOnBottom: true
   };
+  private  addressList = [];
+
   constructor(private formbuilder: FormBuilder,
              // private el: ElementRef,
               private profileService: ProfileService,
@@ -82,7 +84,12 @@ onSubmit(isValid) {
           });
 // this.router.navigate(['/add-location']);
         setTimeout(() => {
-         this.router.navigate(['/add-location']);
+          if(this.addressList.length){
+             this.router.navigate(['/user-profile-view']);
+          }else{
+             this.router.navigate(['/add-location']);
+          }
+        
         }, 2000);
 
 
@@ -99,6 +106,7 @@ onSubmit(isValid) {
     this.userService.accesData(userId).subscribe(
       res => {
          console.log(res)
+ this.addressList = res['address'];
         if (res['status']) {
           const user =  res;
         /* var obj = {'field_name_of_your_business':user['details'].field_name_of_your_business[0].value,

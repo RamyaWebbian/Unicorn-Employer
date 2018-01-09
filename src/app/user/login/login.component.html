@@ -24,15 +24,8 @@
                 </div> 
           </div>
           <div class="form-group filled-form pwd-wrapper">
-<<<<<<< Updated upstream
             <span class="pwd-eye" *ngIf="!show" (click)="toggleShow(true)"></span>
              <span class="pwd-eye hidepwd" *ngIf="show" (click)="toggleShow(false)"></span>
-=======
-           <!--   <a *ngIf="!show" (click)="toggleShow(true)" class="pwd-eye"> <i class="glyphicon glyphicon-eye-open"></i></a> 
-            <a *ngIf="show" (click)="toggleShow(false)" class="pwd-eye"> <i class="glyphicon glyphicon-eye-close"></i></a> -->
-          <img src="../../assets/dark-eye.png" class="pwd-eye" *ngIf="!show" (click)="toggleShow(true)"/>
-             <img src="../../assets/visibility.png" class="pwd-eye" *ngIf="show" (click)="toggleShow(false)"/> 
->>>>>>> Stashed changes
             <label for="enterEmail">Password</label>
             <input show-hide-input type="password" [(ngModel)]="password" maxlength="30" formControlName="password" name="password" class="myInputStyle passVal" id="pwd" >
               <div [hidden]="loginform.controls['password'].valid || loginform.controls['password'].pristine" class="inline-error">

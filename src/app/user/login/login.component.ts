@@ -44,6 +44,9 @@ constructor(
       this.password = this.cookieService.get('password');
   }
   var user = this.userService.isLogedin();
+  if(user){
+     this.router.navigate(['user-profile']);
+  }
   //console.log(user);
     this.loginform = this.formBuilder.group({
       'password': ['', Validators.required],
