@@ -1,7 +1,7 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { HelpModalComponent } from '../../common/help-modal/help-modal.component';
-import {ProfileService, UserService} from '../../services/index';
+import {ProfileService, UserService, HwaCommonService} from '../../services/index';
 import { FormGroup, FormBuilder, Validators, FormArray} from '@angular/forms';
 import {NotificationsService} from 'angular2-notifications';
 
@@ -27,6 +27,7 @@ export class UserProfileViewComponent implements OnInit {
   public addressList = [];
   public showHideArray = [];
   private bisProfileId:string = "";
+  public isFirstTime:boolean = false;
  // public addresses: any;
 private userInfo:any;
   public options = {
@@ -34,11 +35,17 @@ private userInfo:any;
     timeOut: 5000,
     lastOnBottom: true
   };
+
+  public businessTopic:Array<any> = [];
+  public bisProfileImg:any;
+ // public bisProfileId = '';
+
   constructor(private router : Router,
               private profileService: ProfileService,
               private userService: UserService,
               private _notificationsService: NotificationsService,
-              private _eref: ElementRef
+              private _eref: ElementRef,
+              private hwaCommonService:HwaCommonService,
               ) { }
 
   ngOnInit(  ) {
@@ -57,8 +64,14 @@ private userInfo:any;
         if (res['status']) {
           const user =  res;
           this.bisProfileId = res['business_profile_id'][0].nid;
+           this.loadbusProfile(this.bisProfileId);
  console.log('this.bisProfileId', this.bisProfileId)
           this.addressList = res['address'];
+          if(this.addressList.length == 0){
+            this.isFirstTime = true;
+          }else{
+             this.isFirstTime = false;
+          }
           this.addressList.forEach((item, index) => {
             this.showHideArray[index] = false;
           });
@@ -175,8 +188,8 @@ hideAllMenu(){
 }
 
   onClick(event) {
-    console.log( event)
-    if (!this._eref.nativeElement.contains(event.target)) {// or some similar check
+    console.log( event.target);
+    if (!this._eref.nativeElement.contains(event.target)) { // or some similar check
     // doSomething();
      this.hideAllMenu();
   }
@@ -198,5 +211,22 @@ hideAllMenu(){
   helpText() {
     this.helpShow = !this.helpShow;
    // alert(this.helpShow)
-   }
+  }
+ // --------------------------------business profile ---------------- 
+  loadbusProfile(profileId) {
+const pObj = {"bptnid": profileId}
+   this.hwaCommonService.getBusinessTopic(pObj).subscribe(
+         res => {
+          console.log(res['business_topic']);
+          this.bisProfileImg = res['business_topic'][0].field_business_profile_topic_ima;
+          this.businessTopic = res['business_topic'];
+
+        },error => {
+ 
+ console.log(error);
+ 
+      });
+ 
+  }
+
 }

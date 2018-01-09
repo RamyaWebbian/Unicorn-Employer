@@ -9,7 +9,7 @@ import { UserProfileViewRoutingModule } from './user-profile-view-routing.module
 import { SharedModule } from '../../shared/shared.module';
  import {SimpleNotificationsModule, NotificationsService} from 'angular2-notifications';
 import { HeaderValidUserModule } from '../../common/header-valid-user/header-valid-user.module';
-
+import { UserService, HwaCommonService } from '../../services/index';
 
 @NgModule({
   imports: [
@@ -22,6 +22,6 @@ import { HeaderValidUserModule } from '../../common/header-valid-user/header-val
     HeaderValidUserModule
   ],
   declarations: [UserProfileViewComponent],
-  providers:[NotificationsService]
+  providers:[NotificationsService, HwaCommonService, UserService ]
 })
 export class UserProfileViewModule { }
