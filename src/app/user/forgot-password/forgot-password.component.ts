@@ -15,6 +15,8 @@ export class ForgotPasswordComponent implements OnInit {
 
 public forgotPasswordForm: FormGroup;
   public loading: boolean;
+  public disabledButton:boolean;
+
   public options = {
     position: ['top', 'center'],
     timeOut: 5000,
@@ -41,19 +43,20 @@ public forgotPasswordForm: FormGroup;
   }
 
   onSubmit(fields) {
-
+this.disabledButton = true;
     this.loading = true;
     const data = JSON.stringify({'mail': fields.email, 'action': 'forget-password'});
     this.userService.forgotPassword(data).subscribe(
       res => {
         console.log(res);
+        this.disabledButton = false;
         if (res) {
           this.loading = false;
           if (res['error_message']) {
 
             this._notificationsService.error(
               'Error!',
-              'This Email Id does not exist in our system.',
+              res['error_message'],
               {
                 timeOut: 2500,
                 showProgressBar: true,

@@ -22,6 +22,8 @@ public submitted: boolean = false;
     timeOut: 5000,
     lastOnBottom: true
   };
+  public disabledButton:boolean;
+
   constructor(
     private formBuilder: FormBuilder, 
     private router: Router,
@@ -60,8 +62,9 @@ isEqualEmail(control: FormGroup ): {[s: string]: boolean} {
 
  onSubmit(fvalue:any , valid: boolean) {
    this.submitted = true;
+   this.disabledButton = true;
    console.log(fvalue.controls['confirmemail'].valid)
-    this.loading = true;
+   // this.loading = true;
     const userObj = {
       'field_name_of_your_business': fvalue.controls['businessname'].value,
       'mail': fvalue.controls['email'].value,
@@ -74,9 +77,10 @@ isEqualEmail(control: FormGroup ): {[s: string]: boolean} {
       this.userService.create(userObj).subscribe(
         res => {
           if (res) {
-            this.loading = false;
+          //  this.loading = false;
+             this.disabledButton = false;
             if (res.user_status === 'existing') {
-              this.loading = false;
+
               this._notificationsService.error(
                 'An account with this email already exists!',
                 'Please use the LOGIN button below to access Talentrackr.',
@@ -94,10 +98,10 @@ isEqualEmail(control: FormGroup ): {[s: string]: boolean} {
           }
         },
         error => {
-          this.loading = false;
+          //this.loading = false;
         });
     } else {
-      this.loading = false;
+     // this.loading = false;
     }
   }
 

@@ -9,9 +9,7 @@ import {NotificationsService} from 'angular2-notifications';
   selector: 'app-user-profile-view',
   templateUrl: './user-profile-view.component.html',
   styleUrls: ['./user-profile-view.component.css'],
-   host: {
-    '(document:click)': 'onClick($event)',
-  },
+  
 })
 export class UserProfileViewComponent implements OnInit {
   public helpShow : boolean;
@@ -187,14 +185,14 @@ hideAllMenu(){
   });
 }
 
-  onClick(event) {
+ /*  onClick(event) {
     console.log( event.target);
     if (!this._eref.nativeElement.contains(event.target)) { // or some similar check
     // doSomething();
      this.hideAllMenu();
-  }
+    } 
 
-  }
+  }*/
 
   businessCreate() {
     this.router.navigate(['/business-profile', this.bisProfileId, '']);

@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit {
   public rememberme: boolean;
   public email = '';
   public password = "";
+  public disabledButton:boolean;
 
   @ViewChild(ShowHideInput) input: ShowHideInput;
   public emailMask = /^(([^<>()\[\]\\.,;:\s@']+(\.[^<>()\[\]\\.,;:\s@']+)*)|('.+'))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -65,6 +66,7 @@ constructor(
   }
 
 onSubmitLogin(loginfields){
+  this.disabledButton = true;
  this.loading = true;
  // console.log(this.rememberme);
  this.rememberMeFun(loginfields)
@@ -72,6 +74,7 @@ onSubmitLogin(loginfields){
     this.userService.login(data).subscribe(
       res => {
         console.log(res);
+        this.disabledButton = false;
         if(res['status']){
          this._notificationsService.error('Sorry',res['status'].message, { timeOut: 2500, showProgressBar: true, pauseOnHover: false, clickToClose: true });
       }else{

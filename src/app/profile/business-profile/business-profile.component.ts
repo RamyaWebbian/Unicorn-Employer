@@ -12,6 +12,7 @@ import { HelpModalComponent } from '../../common/help-modal/help-modal.component
 })
 export class BusinessProfileComponent implements OnInit {
   public businessProfile:FormGroup;
+  public disableButton:boolean;
   public submitted: boolean = false;
   public loading: boolean;
   public helpShow:boolean = true;
@@ -121,6 +122,7 @@ const pObj = {"bptnid": profileId}
   }
 
   onSubmit(fvalue:any , valid: boolean) {
+    this.disableButton = true;
     const user = this.userService.isLogedin();
     this.submitted = true;
     this.loading = true;
@@ -141,6 +143,7 @@ const pObj = {"bptnid": profileId}
      if (valid) {
       this.hwaCommonService.createProfile(bisObj).subscribe(
       res => {
+         this.disableButton = false;
         console.log(res);
          this._notificationsService.success(
           'Success',

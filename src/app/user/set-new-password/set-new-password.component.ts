@@ -23,6 +23,7 @@ export class SetNewPasswordComponent implements OnInit {
   public conf_show = false;
   public displayForm: boolean;
   public titalname = 'Set Your Password';
+  public disabledButton:boolean;
   public options = {
     position: ['top', 'center'],
     timeOut: 5000,
@@ -125,12 +126,14 @@ conf_toggleShow() {
   }
   onSubmit(formGroup) {
 // console.log(formGroup);
+this.disabledButton = true;
     formGroup.uid = this.uid;
     formGroup.token = this.tokenid;
     this.loading = true;
 // let obj ={ formGroup}
     this.userService.resetPass(formGroup).subscribe(
       res => {
+        this.disabledButton = false;
        // console.log(res)
         if (res['status']) {
           this.loading = false;

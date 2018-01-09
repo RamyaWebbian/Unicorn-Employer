@@ -55,13 +55,13 @@
           </div>
          
           <div *ngIf="!changeUiForNew" class="goToNextBtn bgGrey">
-            <button type="submit" class="btn btn-primary" [disabled]="businessProfile.invalid">Save business profile</button>
+            <button type="submit" class="btn btn-primary" [disabled]="businessProfile.invalid || disableButton">{{disableButton?'Save..': 'Save business profile'}} </button>
           </div>
 
           <div *ngIf="changeUiForNew" class="goToNextBtn bgGrey" style="padding: 20px;">
             <div class="row">
               <div class="col-6">
-                <button type="submit" [disabled]="!businessProfile.valid" class="btn btn-primary">save</button>
+                <button type="submit" [disabled]="businessProfile.invalid || disableButton" class="btn btn-primary">{{disableButton?'Save..': 'Save'}}</button>
               </div>
               <div class="col-6">
                 <button type="button" class="btn btn-primary cancel" (click)="userProfileView()">cancel</button>
