@@ -80,7 +80,7 @@ export class UserService {
   isLogedin() {
 
   var user = null;
-  if(this.isExpireSession()){
+  if(!this.isInSession()){
     user =  null;
    this.setLogedIn(false);
   // this.router.navigate(['/login']);
@@ -211,11 +211,13 @@ isLocalStorage():boolean{
   
 }
 
-  isExpireSession():boolean {
-      var isExp = moment().isBefore(this.getExpiration())
-        console.log('checkSession ', moment().isBefore(this.getExpiration()));
-         console.log('date ', moment(this.getExpiration()).date());
-        if(isExp){
+  isInSession():boolean {
+      var isExp = moment().isBefore(moment.unix(this.getExpiration()))
+      //  console.log('checkSession ', this.getExpiration());
+      //  console.log('utc', moment.unix(this.getExpiration()).utc())
+     //    console.log('date ', moment.unix(this.getExpiration()));
+      //    console.log('isExp ', isExp);
+        if(!isExp){
          // this.router.navigate(['/login']);
           this.logout();
         }
@@ -242,7 +244,7 @@ isLocalStorage():boolean{
 // let mm =  moment.duration(parsedToken).asSeconds();
 // console.log(mm);
         return parsedToken;
-    }    
+    }
 
   authHeaders() {
     const headers = new Headers();

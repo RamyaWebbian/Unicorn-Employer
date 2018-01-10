@@ -24,14 +24,9 @@ export class HeaderValidUserComponent implements OnInit {
     ) { }
 
   ngOnInit() {
-   // alert('checked')
-   // this.userService.isExpireSession();
-   // console.log(this.userService.isExpireSession())
-    if(this.userService.isExpireSession()){
-      this.userService.logout();
-    }else{
-    //
-    } 
+
+    this.userService.isInSession();
+    
       this.userService.getLogedIn().subscribe((islogedin: boolean) => {
        //  console.log(islogedin)
       this.isLogedin = islogedin;

@@ -73,7 +73,7 @@ onSubmitLogin(loginfields){
     const data = { 'name': loginfields.email, 'pass': loginfields.password };
     this.userService.login(data).subscribe(
       res => {
-        console.log(res);
+     //   console.log(res);
         this.disabledButton = false;
         if(res['status']){
          this._notificationsService.error('Sorry',res['status'].message, { timeOut: 2500, showProgressBar: true, pauseOnHover: false, clickToClose: true });
@@ -106,7 +106,7 @@ onSubmitLogin(loginfields){
                 }
              // }
             this.loading = false;
-            console.log(res['current_user'].business_profile_created)
+           // console.log(res['current_user'].business_profile_created)
             if(res['current_user'].business_profile_created == 'yes'){
               this.router.navigate(['/user-profile-view']);
             }else{
