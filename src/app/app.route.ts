@@ -31,7 +31,7 @@ export const router: Routes = [
         pathMatch: 'full'
   },
   {
-        path: 'registration-success',
+        path: 'registration-success/:name',
         loadChildren: './user/registration-success/registration-success.module#RegistrationSuccessModule',
         pathMatch: 'full'
    },

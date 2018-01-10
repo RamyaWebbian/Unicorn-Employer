@@ -33,7 +33,7 @@ public submitted: boolean = false;
   
 
   ngOnInit() {
-    var user = this.userService.isLogedin();
+   // var user = this.userService.isLogedin();
     // updateOn: 'blur submit'
     this.registerUser = this.formBuilder.group({
       'businessname': ['', {updateOn: 'change', validators: [Validators.required]}],
@@ -63,7 +63,7 @@ isEqualEmail(control: FormGroup ): {[s: string]: boolean} {
  onSubmit(fvalue:any , valid: boolean) {
    this.submitted = true;
    this.disabledButton = true;
-   console.log(fvalue.controls['confirmemail'].valid)
+  // console.log(fvalue.controls['confirmemail'].valid)
    // this.loading = true;
     const userObj = {
       'field_name_of_your_business': fvalue.controls['businessname'].value,
@@ -72,7 +72,7 @@ isEqualEmail(control: FormGroup ): {[s: string]: boolean} {
       'field_last_name': fvalue.controls['lastname'].value,
       'field_phone_number': fvalue.controls['phone'].value
     };
- console.log(valid)
+// console.log(valid)
     if (valid) {
       this.userService.create(userObj).subscribe(
         res => {
@@ -93,7 +93,7 @@ isEqualEmail(control: FormGroup ): {[s: string]: boolean} {
               );
              // this.router.navigate(['/']);
             } else {
-              this.router.navigate(['/registration-success']);
+              this.router.navigate(['/registration-success', fvalue.controls['firstname'].value]);
             }
           }
         },

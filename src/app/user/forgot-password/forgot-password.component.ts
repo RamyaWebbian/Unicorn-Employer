@@ -33,7 +33,7 @@ public forgotPasswordForm: FormGroup;
   ) { }
 
   ngOnInit() {
-    var user = this.userService.isLogedin();
+   // var user = this.userService.isLogedin();
     //this.document.body.classList.remove('buildresume1');
 
     this.forgotPasswordForm = this.formBuilder.group(

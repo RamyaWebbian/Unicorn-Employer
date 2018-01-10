@@ -78,11 +78,11 @@ export class AddLocationComponent implements OnInit {
       'nid': [nid],
       'title': [addr1, Validators.required],
       'field_address_line_2': [addr2],
-      'field_z': [zip, Validators.pattern(/(^\d{5}$)|(^\d{5}-\d{4}$)/)],
+      'field_z': [zip, {updateOn: 'change', validators: [Validators.required, Validators.pattern(/(^\d{5}$)|(^\d{5}-\d{4}$)/)]}],
       'field_state': [state, Validators.required],
       'field_city': [city, Validators.required],
       'field_make_default': [fmd, Validators.required]
-    });
+    },{updateOn: 'change'});
    // return this.businessAddressForm;
   }
 
