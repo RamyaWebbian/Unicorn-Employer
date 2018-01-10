@@ -45,8 +45,13 @@ constructor(
       this.password = this.cookieService.get('password');
   }
   var user = this.userService.isLogedin();
+  console.log(user)
   if(user){
-     this.router.navigate(['user-profile']);
+    if(user.business_profile_created == 'yes'){
+      this.router.navigate(['/user-profile-view']);
+    }else{
+       this.router.navigate(['user-profile']);
+    }
   }
   //console.log(user);
     this.loginform = this.formBuilder.group({

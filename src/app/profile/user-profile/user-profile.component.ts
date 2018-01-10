@@ -109,18 +109,10 @@ onSubmit(isValid) {
  this.addressList = res['address'];
  if(this.addressList.length){
    this.helpShow = false;
+  // this.router.navigate(['/user-profile-view']);
  }
         if (res['status']) {
           const user =  res;
-        /* var obj = {'field_name_of_your_business':user['details'].field_name_of_your_business[0].value,
-        'field_first_name':user['details'].field_first_name[0].value,
-      'field_last_name': user['details'].field_last_name[0].value,
-    'field_phone_number': user['details'].field_last_name[0].value,
-  'name': user['details'].name[0].value};
-this.profileForm.patchValue(obj) */
-          // localStorage.setItem('currentUser', JSON.stringify(res));
-
-          //this.userService.setLogedIn(true);
           if (user['details'].field_name_of_your_business[0]) {
             this.field_name_of_your_business = user['details'].field_name_of_your_business[0].value;
             this.businessName = user['details'].field_name_of_your_business[0].value;
