@@ -106,7 +106,13 @@ onSubmitLogin(loginfields){
                 }
              // }
             this.loading = false;
-            this.router.navigate(['user-profile']);
+            console.log(res['current_user'].business_profile_created)
+            if(res['current_user'].business_profile_created == 'yes'){
+              this.router.navigate(['/user-profile-view']);
+            }else{
+              this.router.navigate(['user-profile']);
+            }
+            
             
     }
       
