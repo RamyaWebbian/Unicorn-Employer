@@ -41,7 +41,7 @@ public submitted: boolean = false;
       'lastname': ['', {updateOn: 'change', validators:[Validators.required]}],
       'email': ['',{updateOn: 'change',validators:[ Validators.compose([Validators.required, Validators.pattern(this.emailMask)])]}],
       'confirmemail': ['',{updateOn: 'change',validators: [ Validators.compose([Validators.required, Validators.pattern(this.emailMask)])]}],
-      'phone': ['', {updateOn: 'change',validators: [Validators.required]}]
+      'phone': ['', {updateOn: 'change', validators: [Validators.required]}]
      // 'phone': ['', {updateOn: 'change',validators:[Validators.required, Validators.pattern('^(\([0-9]{3}\) |[0-9]{3}-)[0-9]{3}-[0-9]{4}$')]}]
     }, {updateOn: 'change', asyncValidators: [this.isEqualEmail]});
 
