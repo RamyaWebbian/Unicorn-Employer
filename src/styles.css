@@ -76,12 +76,15 @@ h4, h2 {
     color: #fff;
     background-color: #002d40 !important;
 }
+
 .newLoader {
     position: absolute;
-    width: 35%;
-    left: 70%;
+    width: 10%;
+    left: 80%;
     margin-left: -35%;
+    display: block;
 }
+
 .profImg {
     width: 100%;
 }
@@ -347,8 +350,8 @@ p {
     color: #555;
 }
 .userInfo {
-    font-weight: 600;
-    font-size: 19px;
+    font-weight: normal;
+    font-size: 15px;
     color: #000;
     word-break: break-all;
 }
@@ -799,6 +802,9 @@ h3.lineHigh {
     .goToNextBtn {
         border-top: 0.8px solid #ccc;
     }
+    .form.input-section .busImg {
+        padding: 25px;
+    }
     .deskFullWidth {
         width: 100%;
     }
@@ -809,7 +815,9 @@ h3.lineHigh {
     .page-title {
         padding: 20px 0 15px;
     }
-    .myTabs ul.nav-tabs {
+    .myTabs ul.nav-tabs,
+    .myTabs .tab-content,
+    .page-head {
         width: 700px;
         margin: auto;
     }
@@ -818,7 +826,7 @@ h3.lineHigh {
         background-color: transparent;
     }
     .profileTabs ul.nav-tabs .nav-item,
-    .myTabs ul.nav-tabs .nav-item:last-child  {
+    .profileTabs ul.nav-tabs .nav-item:last-child  {
         border-radius: 10px 10px 0 0;
         box-shadow: -2px 2px 10px #002d40;
     }
@@ -832,9 +840,14 @@ h3.lineHigh {
     .profileTabs .nav-tabs a {
         color: #002d40 !important;
     }
-    .myTabs ul.nav-tabs .nav-item {
+    .profileTabs ul.nav-tabs .nav-item {
         border-right: 0;
     }
+    .additionalLoc {
+        width: 700px;
+        margin: auto;
+    }
+
 }
 @media screen and (min-width: 768px) {
     .preview-head .col-1 {
@@ -862,6 +875,13 @@ h3.lineHigh {
     .jobadBlock .mdl-cell {
         text-align: center;
         margin: 0;
+    }
+    .newLoader {
+        position: absolute;
+        width: 35%;
+        left: 70%;
+        margin-left: -35%;
+        display: block;
     }
 }
 /* menu */

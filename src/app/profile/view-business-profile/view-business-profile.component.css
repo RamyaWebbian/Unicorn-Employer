@@ -26,3 +26,9 @@
     border: 1px solid #fff;
     border-radius: 8px;
 }
+@media screen and (min-width: 1024px) {
+    .form.input-section {
+        width: 700px;
+        margin: auto;
+    }
+}

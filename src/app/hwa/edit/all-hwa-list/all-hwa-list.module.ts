@@ -7,7 +7,7 @@ import { AllHwaListComponent } from './all-hwa-list.component';
 import { AllHwaListRoutingModule } from './all-hwa-list-routing.module';
 import { SharedModule } from '../../../shared/shared.module';
 import { UserService } from '../../../services/index';
-import {HeaderValidUserModule} from '../../../common/header-valid-user/header-valid-user.module';
+import { HeaderValidUserModule } from '../../../common/header-valid-user/header-valid-user.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({

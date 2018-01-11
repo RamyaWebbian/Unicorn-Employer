@@ -3,3 +3,25 @@ input[type=checkbox] {
     vertical-align: text-top;
     margin: 0.21em 0 0;
 }
+@media screen and (min-width: 1024px) {
+    .form.input-section {
+        padding: 10px 0 20px;
+        width: 500px;
+        margin: auto;
+    }
+    .action-buttons {
+        width: 500px;
+        margin: auto;
+    }
+    .goToNextBtn {
+        border-top: 0;
+    }
+    .deskWidth {
+        width: 500px;
+        margin: auto;
+    }
+    .goToNextBtn .btn, .goToNextBtn .btn:hover {
+        width: 90%;
+        
+    }
+}

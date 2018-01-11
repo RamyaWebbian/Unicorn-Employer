@@ -73,13 +73,7 @@ export const router: Routes = [
       canActivate: [AuthGuard]
    },
    {
-      path: 'business-profile/:bId/:topicId',
-      //path: 'business-profile',
-      loadChildren: './profile/business-profile/business-profile.module#BusinessProfileModule',
-      pathMatch: 'full',
-      canActivate: [AuthGuard]
-   },
-    {
+      //path: 'business-profile/:bId/:topicId',
       path: 'business-profile',
       loadChildren: './profile/business-profile/business-profile.module#BusinessProfileModule',
       pathMatch: 'full',
@@ -107,7 +101,7 @@ export const router: Routes = [
       path: 'landing-page',
       loadChildren: './hwa/landing-page/landing-page.module#LandingPageModule',
       pathMatch: 'full',
-      canActivate: [AuthGuard]
+      //canActivate: [AuthGuard]
    },
    {
       path: 'hwa-basic-info',
@@ -116,8 +110,8 @@ export const router: Routes = [
       canActivate: [AuthGuard]
    },
     {
-      path: 'hwa-basic-info',
-      loadChildren: './hwa/create/hwa-basic-info/hwa-basic-info.module#HwaBasicInfoModule',
+      path: 'all-hwa-list',
+      loadChildren: './hwa/edit/all-hwa-list/all-hwa-list.module#AllHwaListModule',
       pathMatch: 'full',
       canActivate: [AuthGuard]
    },

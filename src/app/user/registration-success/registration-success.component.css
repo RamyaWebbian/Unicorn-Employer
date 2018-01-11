@@ -20,3 +20,9 @@
     text-transform: capitalize;
     color: #000;
 }
+@media screen and (min-width: 1024px) {
+    .deskWidth {
+        width: 500px;
+        margin: auto;
+    }
+}
