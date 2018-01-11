@@ -813,6 +813,28 @@ h3.lineHigh {
         width: 700px;
         margin: auto;
     }
+    .profileTabs ul.nav-tabs {
+        margin: 15px auto 0;
+        background-color: transparent;
+    }
+    .profileTabs ul.nav-tabs .nav-item,
+    .myTabs ul.nav-tabs .nav-item:last-child  {
+        border-radius: 10px 10px 0 0;
+        box-shadow: -2px 2px 10px #002d40;
+    }
+    
+    .profileTabs ul.nav-tabs .nav-link.active {
+        border-bottom: 4px solid #002d40;
+        background-color: #4a777a;
+        font-weight: 600;
+        border-radius: 10px 10px 0 0
+    }
+    .profileTabs .nav-tabs a {
+        color: #002d40 !important;
+    }
+    .myTabs ul.nav-tabs .nav-item {
+        border-right: 0;
+    }
 }
 @media screen and (min-width: 768px) {
     .preview-head .col-1 {

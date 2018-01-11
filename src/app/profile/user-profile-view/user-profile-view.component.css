@@ -11,4 +11,14 @@
         width: 700px;
         padding: 10px 0 50px;
     }
+    .section-title .col-2 {
+        text-align: right;
+    }
+    .myTabs ul.nav-tabs .nav-item {
+        background-color: #ccc;
+        border-radius: 10px 10px 0 0;
+    }
+    img.all-icon {
+        width: 18px;
+    }
 }

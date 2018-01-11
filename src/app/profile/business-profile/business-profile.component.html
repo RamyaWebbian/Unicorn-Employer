@@ -6,21 +6,19 @@
           <app-header-valid-user></app-header-valid-user>
           <div class="deskWidth">
             <div class="deskFullWidth">
-          <div class="inner-page-title">
-          <h3 *ngIf="changeUiForNew">Add Business Profile Topic</h3>
-
-          <h2 *ngIf="!changeUiForNew" >business profile</h2><a *ngIf="!changeUiForNew"  href="javascript:void(0)" (click)="helpText()"><img src="../../assets/question.png"/></a>
- 
-          </div>
-          <div *ngIf="!changeUiForNew" class="strips">
-            <div class="row">
-              <div class="col-12">
-                  <div class="col-4 green-strip"></div>
-                  <div class="col-4 green-strip"></div>
-                  <div class="col-4 grey-strip"></div>
+              <div class="inner-page-title">
+                <h3 *ngIf="changeUiForNew">Add Business Profile Topic</h3>
+                <h2 *ngIf="!changeUiForNew" >business profile</h2><a *ngIf="!changeUiForNew" href="javascript:void(0)" (click)="helpText()"><img src="../../assets/question.png"/></a>
               </div>
-            </div>
-          </div>
+              <div *ngIf="!changeUiForNew" class="strips">
+                <div class="row">
+                  <div class="col-12">
+                      <div class="col-4 green-strip"></div>
+                      <div class="col-4 green-strip"></div>
+                      <div class="col-4 grey-strip"></div>
+                  </div>
+                </div>
+              </div>
           </div>
 
           <simple-notifications [options]="options"></simple-notifications>

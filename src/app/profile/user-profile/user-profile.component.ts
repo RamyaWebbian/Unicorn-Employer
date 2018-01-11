@@ -46,10 +46,13 @@ export class UserProfileComponent implements OnInit {
     
     this.initFields();
      const user  = this.userService.isLogedin();
+     if(user){
      if(user['business_address_created'] == 'yes'){
       this.helpShow = false;
      }
+
     this.loadUserProfile(user);
+  }
   }
 
     initFields() {
