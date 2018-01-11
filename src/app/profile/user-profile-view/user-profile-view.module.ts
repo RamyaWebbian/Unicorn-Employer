@@ -10,7 +10,7 @@ import { SharedModule } from '../../shared/shared.module';
  import {SimpleNotificationsModule, NotificationsService} from 'angular2-notifications';
 import { HeaderValidUserModule } from '../../common/header-valid-user/header-valid-user.module';
 import { UserService, HwaCommonService } from '../../services/index';
-
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
   imports: [
     CommonModule,
@@ -19,7 +19,8 @@ import { UserService, HwaCommonService } from '../../services/index';
     HelpModalModule,
     SharedModule,
     SimpleNotificationsModule,
-    HeaderValidUserModule
+    HeaderValidUserModule,
+    NgbModule.forRoot(),
   ],
   declarations: [UserProfileViewComponent],
   providers:[NotificationsService, HwaCommonService, UserService ]

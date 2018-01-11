@@ -5,6 +5,7 @@
         <div class="login-blk">
           <app-header-valid-user></app-header-valid-user>
           <div class="deskWidth">
+            <div class="deskFullWidth">
           <div class="inner-page-title">
           <h3 *ngIf="changeUiForNew">Add Business Profile Topic</h3>
 
@@ -20,6 +21,8 @@
               </div>
             </div>
           </div>
+          </div>
+
           <simple-notifications [options]="options"></simple-notifications>
           <form [formGroup]="businessProfile" (ngSubmit)="onSubmit(businessProfile, businessProfile.valid)" novalidate>
           <div class="form input-section">

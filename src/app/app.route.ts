@@ -74,6 +74,13 @@ export const router: Routes = [
    },
    {
       path: 'business-profile/:bId/:topicId',
+      //path: 'business-profile',
+      loadChildren: './profile/business-profile/business-profile.module#BusinessProfileModule',
+      pathMatch: 'full',
+      canActivate: [AuthGuard]
+   },
+    {
+      path: 'business-profile',
       loadChildren: './profile/business-profile/business-profile.module#BusinessProfileModule',
       pathMatch: 'full',
       canActivate: [AuthGuard]

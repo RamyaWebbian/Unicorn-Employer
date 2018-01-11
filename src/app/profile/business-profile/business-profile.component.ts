@@ -46,24 +46,26 @@ public  changeUiForNew:boolean = false;
       (param:  any) => {
          console.log(param['bId']);
          if(param['bId']){
+           this.helpShow = false;
            if(param['topicId'] == 'new'){
            this.topicItemId = '';
+            this.imgbase64src = '';
           this.changeUiForNew = true; 
          // this.bisProfileId = "";
          }else if(param['topicId'] != ''){
           this.topicItemId = param['topicId'];
-
+           this.loadbusProfile(param['bId']);
          }else {
           this.changeUiForNew = false; 
          }
             
         this.bisProfileId = param['bId'];
-        this.loadbusProfile(param['bId']);
+       
          }else{
             this.topicItemId = '';
             this.changeUiForNew = false; 
            this.bisProfileId = "";
-            alert('busness profile id is empty')
+           // alert('busness profile id is empty')
          }
  
       });

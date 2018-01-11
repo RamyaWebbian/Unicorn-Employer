@@ -61,14 +61,15 @@ private userInfo:any;
         
         if (res['status']) {
           const user =  res;
-          this.bisProfileId = res['business_profile_id'][0].nid;
+        
+          this.addressList = res['address'];
+          if(this.addressList.length && res['business_profile_id'].length){
+            this.isFirstTime = false;
+              this.bisProfileId = res['business_profile_id'][0].nid;
            this.loadbusProfile(this.bisProfileId);
  console.log('this.bisProfileId', this.bisProfileId)
-          this.addressList = res['address'];
-          if(this.addressList.length == 0){
-            this.isFirstTime = true;
           }else{
-             this.isFirstTime = false;
+             this.isFirstTime = true;
           }
           this.addressList.forEach((item, index) => {
             this.showHideArray[index] = false;
@@ -195,7 +196,12 @@ hideAllMenu(){
   }*/
 
   businessCreate() {
-    this.router.navigate(['/business-profile', this.bisProfileId, '']);
+    if( this.bisProfileId ){
+      this.router.navigate(['/business-profile', this.bisProfileId, '']);
+    }else{
+      this.router.navigate(['/business-profile']);
+    }
+    
   }
   userProfile() {
     this.router.navigate(['/user-profile']);

@@ -112,7 +112,7 @@ select.myInputStyle,
 .myInputStyle {
     padding: 15px 20px;
     border-radius: 5px;
-    border: 1px solid #002d3f;
+    border: 1px solid #002d40;
     display: block;
     width: 100%;
     margin: auto;
@@ -122,7 +122,7 @@ select.myInputStyle:focus,
 select.myInputStyle:active {
     outline: 0;
     box-shadow: 0 0 0 ;
-    border: 1px solid #002d3f;
+    border: 1px solid #002d40;
 }
 .select-more-loc span {
     display: inline-block;
@@ -251,6 +251,9 @@ small {
 .inner-page-title {
     padding: 10px 0 0 0;
 } 
+.section-title {
+    padding: 10px 0 20px;
+}
 /* heading inside pages  */
 .fileUpload.defaultImgText small {
     width: 100%;
@@ -745,9 +748,12 @@ h3.lineHigh {
 
 /* login page that will be used everywhere */
 @media screen and (min-width: 1024px) {
-    .deskWidth  {
-        max-width: 500px;
+    /*.deskWidth  {
+        max-width: 700px;
         margin: auto;
+    }*/
+    .form-group.filled-form {
+        margin-bottom: 35px;
     }
     .header-bg {
         width: 100%;
@@ -757,6 +763,56 @@ h3.lineHigh {
     .collapse span {
         width: 85%;
     }
+    .section-title, .inner-page-title {
+        padding: 20px 0 2px 0;
+        width: 700px;
+        margin: auto;
+    }
+    .section-title {
+        padding: 20px 0 35px 0;
+    }
+    .section-title h5, small {
+        width: 100%;
+    }
+    .form.input-section {
+        width: 700px;
+        padding: 10px 0 50px; /* user profile page*/
+    }
+    .strips {
+        width: 700px;
+        margin: auto;
+    }
+    .deskFullWidth,
+    .goToNextBtn {
+        position: relative;
+    }
+    .deskFullWidth::after{
+        content: "";
+        position: absolute;
+        bottom: 5.9px;
+        left: 0;
+        right: 0;
+        display: block;
+        border: 0.8px solid #ccc;
+        z-index: 0;
+    }
+    .goToNextBtn {
+        border-top: 0.8px solid #ccc;
+    }
+    .deskFullWidth {
+        width: 100%;
+    }
+    .action-buttons,
+    .add-new {
+        width: 700px;
+    }
+    .page-title {
+        padding: 20px 0 15px;
+    }
+    .myTabs ul.nav-tabs {
+        width: 700px;
+        margin: auto;
+    }
 }
 @media screen and (min-width: 768px) {
     .preview-head .col-1 {
@@ -764,6 +820,10 @@ h3.lineHigh {
     }
     .preview-head .col-5 {
       text-align: right;  
+    }
+    .goToNextBtn .btn, .goToNextBtn .btn:hover {
+        width: auto;
+        padding: 10px 20px;
     }
 }
 @media screen and (min-width: 768px) and (max-width: 1023px) {

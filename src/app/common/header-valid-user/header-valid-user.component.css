@@ -1,8 +1,8 @@
 .navbar-brand {
     width: 250px;
     display: inline-block;
-    padding: 0;
-    margin: 0;
+    margin: 0 0 0 50px;
+
 }
 .navbar-toggler {
     padding: 0;
@@ -14,6 +14,7 @@
 }
 nav.navbar-light .navbar-toggler-icon {
     background-image: url(../../../assets/menu-lines.svg);
+    margin: 8px 0;
 }
 
 .navbar-light .navbar-nav .active>.nav-link,
@@ -28,11 +29,18 @@ nav.navbar-light .navbar-toggler-icon {
     background: url(../../../assets/header-bg.png);
     z-index: 2;
     height: 100vh;
-    display: block;
+    display: block !important;
     position: absolute;
     top: 0;
     left: 0;
     width: 330px;
+}
+.navbar-toggleable-md .navbar-collapse {
+    display: none !important;
+}
+.navbar-toggleable-md .navbar-toggler {
+    display: block;
+    left: 20px;
 }
 .collapse span.closeIcon {
     width: auto;
@@ -40,10 +48,8 @@ nav.navbar-light .navbar-toggler-icon {
     padding: 0;
 }
 .collapse .navbar-brand {
-    padding: 11px 15px;
-}
-.collapse .navbar-brand .logo {
-    width: 75%;
+    padding: 1rem 0 0 0;
+    margin: 0 0 0 20px;
 }
 .navbar-nav {
     padding: 0 15px;
@@ -57,6 +63,9 @@ nav.navbar-light .navbar-toggler-icon {
 .notification {
     float: right;
     display: inline-block;
-    margin: 2px 0;
+    margin: 5px 0;
     clear: both;
+}
+.collapse.navbar-collapse .navbar-nav {
+    display: block;
 }
