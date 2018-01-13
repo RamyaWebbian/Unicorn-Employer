@@ -6,7 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HwaBasicInfoComponent } from './hwa-basic-info.component';
 import { HwaBasicInfoRoutingModule } from './hwa-basic-info-routing.module';
 import { SharedModule } from '../../../shared/shared.module';
-import { UserService } from '../../../services/index';
+import { UserService, HwaCommonService } from '../../../services/index';
 import {HeaderValidUserModule} from '../../../common/header-valid-user/header-valid-user.module';
 @NgModule({
   imports: [
@@ -18,7 +18,7 @@ import {HeaderValidUserModule} from '../../../common/header-valid-user/header-va
     HeaderValidUserModule
   ],
   declarations: [HwaBasicInfoComponent],
-  providers:[]
+  providers:[HwaCommonService]
 })
 
 export class HwaBasicInfoModule { }

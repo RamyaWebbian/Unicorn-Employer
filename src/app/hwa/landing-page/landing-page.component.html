@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-12">
             <div class="mdl-cell mdl-cell--12-col greeting">
-                <h5><img src="../../assets/sunny.png">Good Afternoon Samson,</h5>
+                <h5><img src="../../assets/sunny.png">{{greeting}},</h5>
                 <h2>What Would You Like To Do Today?</h2>
             </div>
             <section id="login">  
@@ -16,7 +16,7 @@
                         <div class="offerDetails">
                             <h3>Help Wanted Ad</h3>
                             <p>
-                                <span class="tiny-link">Create</span><span>|</span>
+                                <span class="tiny-link"><a [routerLink]="['/hwa-basic-info']">Create</a></span><span>|</span>
                                 <span class="tiny-link">draft</span><span>|</span>
                                 <span class="tiny-link">view</span><span>|</span>
                                 <span class="tiny-link">edit</span><span>|</span>
@@ -71,7 +71,7 @@
     </div>
 </div>
 
-<a [routerLink]="['/hwa-basic-info']">Create</a><br>
+<!-- <a [routerLink]="['/hwa-basic-info']">Create</a><br>
 <a [routerLink]="['/all-hwa-list']">Edit</a><br>
 <a [routerLink]="['/copy-hwa']">Copy</a><br>
-<a [routerLink]="['/extend-hwa']">Extend</a><br>
+<a [routerLink]="['/extend-hwa']">Extend</a><br> -->

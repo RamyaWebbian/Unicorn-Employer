@@ -106,7 +106,7 @@ export const router: Routes = [
       path: 'landing-page',
       loadChildren: './hwa/landing-page/landing-page.module#LandingPageModule',
       pathMatch: 'full',
-      //canActivate: [AuthGuard]
+      canActivate: [AuthGuard]
    },
    {
       path: 'hwa-basic-info',

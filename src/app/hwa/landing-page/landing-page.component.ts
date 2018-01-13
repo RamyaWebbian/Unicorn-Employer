@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UserService } from '../../services/index';
-//import {NotificationsService} from 'angular2-notifications';
+import { UserService, HwaCommonService } from '../../services/index';
+import {NotificationsService} from 'angular2-notifications';
 
 @Component({
   selector: 'app-landing-page',
@@ -10,10 +10,36 @@ import { UserService } from '../../services/index';
   styleUrls: ['./landing-page.component.css']
 })
 export class LandingPageComponent implements OnInit {
-
-  constructor(private router: Router) { }
+public greeting = '';
+  constructor(
+    private router: Router,
+    private userService:UserService,
+    private hwaCommonService:HwaCommonService,
+    ) { }
 
   ngOnInit() {
+     const user = this.userService.isLogedin();
+   this.getGreetingInfo(user);
+   // this.getCountOfHWA(user.uid);
+  }
+
+getGreetingInfo(user) {
+    if (user) {
+      const d = new Date();
+      const hrs = d.getHours();
+      let msg = '';
+      if (hrs < 12) {
+        msg = 'Good Morning';
+      } else if (hrs >= 12 && hrs < 16) {
+        msg = 'Good Afternoon';
+      } else if (hrs >= 16 && hrs <= 24) {
+        msg = 'Good Evening';
+      }
+      console.log(user.full_name)
+      this.greeting = msg + ' ' + user.full_name; //user['details'].field_first_name[0]['value'];
+    } else {
+     // this.router.navigate(['/login']);
+    }
   }
 
 }

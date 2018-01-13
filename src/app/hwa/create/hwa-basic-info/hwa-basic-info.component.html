@@ -1,6 +1,296 @@
-<app-header-valid-user></app-header-valid-user>
-<p>
-  hwa-basic-info works!
-</p>
+ <simple-notifications [options]="options"></simple-notifications>
+<div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <section id="login">  
+          <app-header-valid-user></app-header-valid-user>
+            <div class="deskWidth">
+              <div class="preview-head w90">
+                <div class="row">
+                  <div class="col-6"> 
+                      <h5>Create HWA</h5>
+                  </div>
+                  <div class="col-5">
+                      <button class="btn success-btn">Preview & Post ad</button>
+                  </div>
+                 <!-- <div class="col-1">
+                      <img class="kebab-menu" src="../../assets/menu.png"/>
+                      <div class="kebab-open">
+                        <ul>
+                          <li>Save as Draft</li> 
+                          <li>Discard Ad</li>
+                        </ul>
+                      </div>
+                  </div> -->
+          <div class="col-1 dropdown">
+              <a data-toggle="dropdown"> <img src="../../assets/menu.png" class="all-icon"/> </a>
+              <ul class="dropdown-menu">
+                <!-- <li><a [routerLink]="['/add-location', addr?.nid]">Edit</a></li> -->
+                <li><a (click)="saveAsDraft()" href="javascript:void(0)">Save as Draft</a></li>
+                <li><a (click)="discardAd()" href="javascript:void(0)">Discard Ad</a></li>
+              </ul>
+            </div>
 
-<a [routerLink]="['/select-hiring-location']">Select hiring location</a>
+
+
+                </div>
+              </div>
+  <div id="accordion" role="tablist" aria-multiselectable="true">
+    <div class="card">
+      <div class="card-header" role="tab" id="headingOne">
+        <div class="row">
+            <div class="col-10">
+              <h6 class="mb-0">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                  Add Basic Information for Your Ad
+                </a>
+              </h6>
+            </div>
+            <div class="col-1">
+              <img class="ques-icon" src="../../assets/question.png"/>
+            </div>
+            <div class="col-1">
+              <img class="acc-arrow" src="../../assets/up-arrow.svg"/>
+            </div>
+          </div>
+      </div>
+      <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne">
+        <div class="card-block">
+            <form [formGroup]="creatHWAForm" (ngSubmit)="onSubmit()" novalidate>
+                <div class="input-section">
+                  <div class="form-group filled-form">
+                    <label for="position">What positions are you hiring for?</label>
+                    <input class="form-control myInputStyle" name="position" type="text" formControlName="position">
+                    <div [hidden]="creatHWAForm.controls['position'].valid || creatHWAForm.controls['position'].pristine" class="inline-error">
+                      Please enter a position.
+                      </div>
+                  </div>
+                  <div class="form-group filled-form">
+                    <label for="businessName">Number of openings</label>
+                    <input class="form-control myInputStyle" type="text" id="numberOfPosition" formControlName="numberOfPosition" required>
+                     <div [hidden]="creatHWAForm.controls['numberOfPosition'].valid || creatHWAForm.controls['numberOfPosition'].pristine" class="inline-error">
+                      Please enter Number of openings.
+                    </div>
+                  </div>
+                  <div class="form-group filled-form">
+                    <label for="exampleSelect1">type of hire</label>
+                    <select class="form-control myInputStyle" formControlName="position_type" required id="exampleSelect1">
+                      <option selected="selected" value="Full-Time">Full-Time</option>
+                          <option value="Part-Time">Part-Time</option>
+                    </select>
+                     <div [hidden]="creatHWAForm.controls['position_type'].valid || creatHWAForm.controls['position_type'].pristine" class="inline-error">
+                      Please Select one type of hire.
+                    </div> 
+                  </div>
+                  <div class="form-group filled-form">
+                    <label for="businessName">required work experience (in years)</label>
+                    <input class="form-control myInputStyle" type="number" name="exp" formControlName="exp" required>
+                    <div [hidden]="creatHWAForm.controls['exp'].valid || creatHWAForm.controls['exp'].pristine" class="inline-error">
+                      Please enter a experience
+                    </div>
+                  </div>
+                  <div class="form-group filled-form">
+                    <label for="businessName">which locations are you hiring for?</label>
+                    <div class="select-more-loc">
+                       <ng-container *ngFor="let addrs of addressList">
+                      <div class="row" >
+                        <div class="col-12" >
+                            <img src="../../assets/locate.png" class="locate-icon"/>
+                                  <input type="hidden" [value]="" formControlName="nid">
+                            <span>9527 Moore Creek Rd, Meadowview, Eitl Clear, Just to check ellipse</span>
+                        </div>
+                      </div>
+                       </ng-container>
+                      <div class="row">
+                        <div class="col-12">
+                            <img src="../../assets/plus.png" class="all-icon add-icon"/>
+                            <a [routerLink]="['/select-hiring-location']">select hiring location</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </form>
+        </div>
+      </div>
+    </div> <!-- first -->
+    <div class="card">
+      <div class="card-header" role="tab" id="headingTwo">
+        <div class="row">
+            <div class="col-10">
+              <h6 class="mb-0">
+                <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                  Add Knock Out Questions
+                </a>
+              </h6>
+            </div>
+            <div class="col-1">
+              <img class="ques-icon" src="../../assets/question.png"/>
+            </div>
+            <div class="col-1">
+                <img class="acc-arrow" src="../../assets/down-arrow.svg"/>
+              </div>
+          </div>
+      </div>
+      <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo">     
+        <div class="w90 card-block">
+          <h6>mandatory questions</h6>
+          <div class="row">
+            <div class="col-12">
+                <span>Q</span>
+                <span>Are you over the age of 18?</span>
+            </div>
+          </div>
+          <div class="row">
+              <div class="col-12">
+                  <span>Q</span>
+                  <span>Are you authorized to work in the USA?</span>
+              </div>
+            </div>
+  
+            <h6>Custom Question</h6>
+            <div class="row">
+              <div class="col-12">
+                <span>Q</span>
+                <span>Are you over the age of 18?</span>
+                <img class="kebab-menu" src="../../assets/menu.png"/>
+                <div class="kebab-open">
+                  <ul>
+                    <li>Edit</li>
+                    <li>Delete</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+  
+          <div class="row">
+            <div class="col-12">
+                <img src="../../assets/plus.png" class="all-icon add-icon"/>
+                <a [routerLink]="['/select-hiring-location']">add new custom knockout question</a>
+            </div>
+          </div>
+          <h6>custom question</h6>
+          <div class="custom-ko">
+            <div class="row">
+              <div class="col-12">
+                  <form  novalidate>
+                    <div class="input-section">
+                      <div class="form-group filled-form">
+                        <label for="businessName">Type your question here</label>
+                        <input class="form-control myInputStyle" type="text" id="enterEmail">
+                        <!-- <div [hidden]="creatHWAForm.controls['businessname'].valid || creatHWAForm.controls['businessname'].pristine" class="inline-error">
+                          Please enter a Business name
+                          </div> -->
+                      </div>
+                      <button class="btn smallBtn">Add</button>
+                      <button class="btn smallBtn">Cancel</button>
+                    </div>
+                  </form>
+              </div>
+            </div>
+          </div>
+  
+  
+  
+        </div>
+      </div>
+      </div> <!-- second -->
+    <div class="card">
+      <div class="card-header" role="tab" id="headingThree">
+          <div class="row">
+          <div class="col-10">
+            <h6 class="mb-0">
+              <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                Add Skill Or Experience Questions
+              </a>
+            </h6>
+          </div>
+          <div class="col-1">
+            <img class="ques-icon" src="../../assets/question.png"/>
+          </div>
+          <div class="col-1">
+             <img class="acc-arrow" src="../../assets/down-arrow.svg"/>
+            </div>
+        </div>
+      </div>
+      <div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree">
+        <small>Minimum one Skill or Experience Question is required to post HWA</small>
+        <div class="w90">
+          <h6>Custom Skill Question</h6>
+          <div class="row">
+            <div class="col-12">
+              <span>Q</span>
+              <span>Willing to relocate?</span>
+              <img class="kebab-menu" src="../../assets/menu.png"/>
+              <div class="kebab-open">
+                <ul>
+                  <li>Edit</li>
+                  <li>Delete</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-wrapper">
+        <div class="card-block">
+          <form  novalidate> <!-- [formGroup]="userInfo" (ngSubmit)="onSubmit()" -->
+            <div class="input-section">
+              <div class="form-group filled-form">
+                <label for="businessName">Skill or Experience Question</label>
+                <input class="form-control myInputStyle" type="text" id="enterEmail"  required>
+                <!-- <div [hidden]="userInfo.controls['businessname'].valid || userInfo.controls['businessname'].pristine" class="inline-error">
+                  Please enter a Business name
+                </div> -->
+              </div>
+  
+              <div class="radio-class">
+                <label class="custom-control custom-radio">
+                  <input id="radio1" name="radio" type="radio" class="custom-control-input">
+                  <span class="custom-control-indicator"></span>
+                  <span class="custom-control-description">Experience (Yrs)</span>
+                </label>
+                <label class="custom-control custom-radio active">
+                  <input id="radio2" name="radio" type="radio" class="custom-control-input">
+                  <span class="custom-control-indicator"></span>
+                  <span class="custom-control-description">Expertise level</span>
+                </label>
+              </div>
+  
+              <div class="form-group filled-form">
+                <label for="exampleSelect1">select value</label>
+                <select class="form-control myInputStyle" id="exampleSelect1">
+                  <option>Beginner</option>
+                  <option>Intermediate</option>
+                  <option>Expert</option>
+                </select>
+                <!-- <div [hidden]="userInfo.controls['businessname'].valid || userInfo.controls['businessname'].pristine" class="inline-error">
+                  Please enter a Business name
+                </div> -->
+              </div>
+  
+              <div class="goToNextBtn">
+                <button class="btn smallBtn">Add</button>
+              </div>
+              
+            </div>
+  
+            
+          </form>
+          </div>
+        </div>
+  
+        
+  
+      </div>
+    </div> <!-- third -->
+  </div> <!-- accordion -->
+  </div> <!-- deskWidth -->
+  </section>
+  </div>
+  </div>
+  </div>
+  
+  <!--<a [routerLink]="['/hwa-basic-info']">Create</a><br>
+  <a [routerLink]="['/all-hwa-list']">Edit</a><br>
+  <a [routerLink]="['/copy-hwa']">Copy</a><br>
+  <a [routerLink]="['/extend-hwa']">Extend</a><br> -->

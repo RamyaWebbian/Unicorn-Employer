@@ -78,15 +78,16 @@ onSubmitLogin(loginfields){
     const data = { 'name': loginfields.email, 'pass': loginfields.password };
     this.userService.login(data).subscribe(
       res => {
-     //   console.log(res);
+       
         this.disabledButton = false;
         if(res['status']){
          this._notificationsService.error('Sorry',res['status'].message, { timeOut: 2500, showProgressBar: true, pauseOnHover: false, clickToClose: true });
       }else{
         this.loading = false;
           const user = res['current_user'];
+          user.full_name = res['full_name']
          // console.log(typeof localStorage)
-          
+           console.log(user);
          this._notificationsService.success('success','Login Success', { timeOut: 2500, showProgressBar: true, pauseOnHover: false, clickToClose: true });
          var token = {token:res['jwt_token']};
 
