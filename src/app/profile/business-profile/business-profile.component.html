@@ -1,16 +1,16 @@
 <div class="container-fluid">
     <div class="row">
       <div class="col-12">
-       <section id="login">  
+       <section id="login">
         <div class="login-blk">
           <app-header-valid-user></app-header-valid-user>
           <div class="deskWidth">
             <div class="deskFullWidth">
-              <div class="inner-page-title">
-                <h3 *ngIf="changeUiForNew">Add Business Profile Topic</h3>
+              <div class="inner-page-title container">
+                <h3 *ngIf="changeUiForNew" class="text-center" style="padding-bottom: 30px">Add Business Profile Topic</h3>
                 <h2 *ngIf="!changeUiForNew" >business profile</h2><a *ngIf="!changeUiForNew" href="javascript:void(0)" (click)="helpText()"><img src="../../assets/question.png"/></a>
               </div>
-              <div *ngIf="!changeUiForNew" class="strips">
+              <div *ngIf="!changeUiForNew" class="strips container">
                 <div class="row">
                   <div class="col-12">
                       <div class="col-4 green-strip"></div>
@@ -54,17 +54,17 @@
               </div>
             </div>
           </div>
-         
+
           <div *ngIf="!changeUiForNew" class="goToNextBtn bgGrey">
             <button type="submit" class="btn btn-primary" [disabled]="businessProfile.invalid || disableButton">{{disableButton?'Save..': 'Save business profile'}} </button>
           </div>
 
-          <div *ngIf="changeUiForNew" class="goToNextBtn bgGrey" style="padding: 20px;">
+          <div *ngIf="changeUiForNew" class="goToNextBtn bgGrey" >
             <div class="row">
-              <div class="col-6">
+              <div class="col-6 text-right">
                 <button type="submit" [disabled]="businessProfile.invalid || disableButton" class="btn btn-primary">{{disableButton?'Save..': 'Save'}}</button>
               </div>
-              <div class="col-6">
+              <div class="col-6 text-left">
                 <button type="button" class="btn btn-primary cancel" (click)="userProfileView()">cancel</button>
               </div>
             </div>

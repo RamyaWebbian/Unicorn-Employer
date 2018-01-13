@@ -2,20 +2,15 @@
 <div class="container-fluid">
     <div class="row">
       <div class="col-12">
-       <section id="login">  
-     <!-- <div class="login-blk">
-        <div class="header">
-          <img src="../../../assets/header-bg.jpg" class="header-bg img-responsive"/>
-          <img src="../../../assets/logo-frs.png" class="logo"/>
-        </div>  </div>-->
+       <section id="login">
         <app-header-valid-user></app-header-valid-user>
         <div class="deskWidth">
           <div class="deskFullWidth">
-            <div class="inner-page-title">
+            <div class="inner-page-title container">
               <h2>user profile</h2>
               <a (click)="helpText()"><img src="../../assets/question.png"/></a>
             </div>
-            <div class="strips">
+            <div class="strips container">
               <div class="row">
                 <div class="col-12">
                     <div class="col-4 green-strip"></div>
@@ -25,53 +20,57 @@
               </div>
             </div>
           </div>
-        <div class="section-title">
-          <h5>confirm user information</h5>
+        <div class="container">
+          <div class="section-title">
+            <h5>confirm user information</h5>
+          </div>
         </div>
   <form [formGroup]="profileForm" (ngSubmit)="onSubmit(profileForm.valid)"  novalidate>
-        <div class="form input-section">
-          <div class="form-group filled-form">
-            <label for="businessName">Name of Your Business</label>
-            <input type="text" [(ngModel)]="field_name_of_your_business" maxlength="100" formControlName="field_name_of_your_business" class="myInputStyle" id="enterEmail" >
-           
-             <div [hidden]="profileForm.controls['field_name_of_your_business'].valid || profileForm.controls['field_name_of_your_business'].pristine" class="inline-error">
-                  Please enter business name
-                </div>
-          </div>
+        <div class="container">
+          <div class="form input-section">
+            <div class="form-group filled-form">
+              <label for="businessName">Name of Your Business</label>
+              <input type="text" [(ngModel)]="field_name_of_your_business" maxlength="100" formControlName="field_name_of_your_business" class="myInputStyle" id="enterEmail" >
 
-          <div class="form-group filled-form">
-            <label for="fname">Your First Name</label>
-            <input type="text" class="myInputStyle" maxlength="100" [(ngModel)]="field_first_name" id="fName" formControlName="field_first_name" pattern="^(^[^\s]+[A-z][A-Za-z]*\s+[A-Za-z]*)|([A-z][A-Za-z]*)$">
-            
-            <div [hidden]="profileForm.controls['field_first_name'].valid || profileForm.controls['field_first_name'].pristine" class="inline-error">
-              Please enter a valid first name
+              <div [hidden]="profileForm.controls['field_name_of_your_business'].valid || profileForm.controls['field_name_of_your_business'].pristine" class="inline-error">
+                Please enter business name
+              </div>
             </div>
-          </div>
-          <div class="form-group filled-form">
-            <label for="lname">Your Last Name</label>
-            <input type="text" maxlength="100" [(ngModel)]="field_last_name" formControlName="field_last_name" class="myInputStyle" id="enterEmail" pattern="^(^[^\s]+[A-z][A-Za-z]*\s+[A-Za-z]*)|([A-z][A-Za-z]*)$">
-            
-            <div [hidden]="profileForm.controls['field_last_name'].valid || profileForm.controls['field_last_name'].pristine" class="inline-error">
-             Please enter a valid last name
+
+            <div class="form-group filled-form">
+              <label for="fname">Your First Name</label>
+              <input type="text" class="myInputStyle" maxlength="100" [(ngModel)]="field_first_name" id="fName" formControlName="field_first_name" pattern="^(^[^\s]+[A-z][A-Za-z]*\s+[A-Za-z]*)|([A-z][A-Za-z]*)$">
+
+              <div [hidden]="profileForm.controls['field_first_name'].valid || profileForm.controls['field_first_name'].pristine" class="inline-error">
+                Please enter a valid first name
+              </div>
             </div>
-          </div>
-          <div class="form-group filled-form">
-            <label for="emailid" >Your Email Address</label>
-            <input type="email" class="myInputStyle"   maxlength="100" [(ngModel)]="email" [readonly]="true" formControlName="email"  [disabled]>
-            <div [hidden]="profileForm.controls['email'].valid || profileForm.controls['email'].pristine" class="inline-error">
-             Please enter valid email.
+            <div class="form-group filled-form">
+              <label for="lname">Your Last Name</label>
+              <input type="text" maxlength="100" [(ngModel)]="field_last_name" formControlName="field_last_name" class="myInputStyle" id="enterEmail" pattern="^(^[^\s]+[A-z][A-Za-z]*\s+[A-Za-z]*)|([A-z][A-Za-z]*)$">
+
+              <div [hidden]="profileForm.controls['field_last_name'].valid || profileForm.controls['field_last_name'].pristine" class="inline-error">
+                Please enter a valid last name
+              </div>
             </div>
-          </div>
-          <div class="form-group filled-form">
-            <label for="contact">Your Phone Number</label>
-            <input class="myInputStyle" mask='000-000-0000' [(ngModel)]="myModel"  type="text" id="pNum" formControlName="field_phone_number" >
-            
-            <div [hidden]="profileForm.controls['field_phone_number'].valid || profileForm.controls['field_phone_number'].pristine" class="inline-error">
-             <!-- Phone number must be of 10 digits -->
+            <div class="form-group filled-form">
+              <label for="emailid" >Your Email Address</label>
+              <input type="email" class="myInputStyle"   maxlength="100" [(ngModel)]="email" [readonly]="true" formControlName="email"  [disabled]>
+              <div [hidden]="profileForm.controls['email'].valid || profileForm.controls['email'].pristine" class="inline-error">
+                Please enter valid email.
+              </div>
+            </div>
+            <div class="form-group filled-form">
+              <label for="contact">Your Phone Number</label>
+              <input class="myInputStyle" mask='000-000-0000' [(ngModel)]="myModel"  type="text" id="pNum" formControlName="field_phone_number" >
+
+              <div [hidden]="profileForm.controls['field_phone_number'].valid || profileForm.controls['field_phone_number'].pristine" class="inline-error">
+                <!-- Phone number must be of 10 digits -->
+              </div>
             </div>
           </div>
         </div>
-
+<br>
         <div class="goToNextBtn bgGrey">
           <button type="submit" [disabled]="!profileForm.valid && disabledButton" class="btn btn-primary" >Confirm User information</button>
         </div>

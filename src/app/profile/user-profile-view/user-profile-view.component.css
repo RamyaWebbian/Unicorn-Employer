@@ -1,16 +1,12 @@
 .input-section {
-    width: 90%;
-    margin: auto;
     border-bottom: 1px solid #ddd;
 }
+.container-fluid{padding: 0}
+.width-700{max-width: 700px; margin: auto}
 .locat.section-title {
     padding: 20px 0;
 }
 @media screen and (min-width: 1024px) {
-    .form.input-section {
-        width: 700px;
-        padding: 10px 0 50px;
-    }
     .col-2 {
         text-align: center;
     }

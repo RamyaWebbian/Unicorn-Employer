@@ -39,7 +39,6 @@ nav.navbar-light .navbar-toggler-icon {
     display: none !important;
 }
 .navbar-toggleable-md .navbar-toggler {
-    display: block;
     left: 20px;
 }
 .collapse span.closeIcon {

@@ -1,5 +1,5 @@
 .logo {
-    max-width: 900px;
+    max-width: 300px;
 }
 @media screen and (max-width: 767px) {
     .logo {

@@ -1,40 +1,35 @@
 <simple-notifications [options]="options"></simple-notifications>
 <div class="container-fluid">
-    <div class="row">
-      <div class="col-12">
-       <section id="login">  
-      <div class="login-blk">
-       <!-- <div class="header">
-          <img src="../../../assets/header-bg.jpg" class="header-bg img-responsive"/>
-          <img src="../../../assets/logo-frs.png" class="logo"/>
-        </div> -->
-         <app-header-valid-user></app-header-valid-user>
-            <div *ngIf="!isFirstTime" class="deskWidth">
-              <ngb-tabset class="myTabs profileTabs">
-                <ngb-tab title="User Profile">
-                  <ng-template ngbTabContent>
-                                           <div class="">
-
-
-                    <div  class="section-title">
+  <section id="login">
+    <div class="login-blk">
+      <app-header-valid-user></app-header-valid-user>
+      <div *ngIf="!isFirstTime" class="deskWidth ">
+        <div class="deskFullWidth">
+          <ngb-tabset class="myTabs profileTabs">
+            <div class="deskFullWidth">
+            <ngb-tab title="User Profile">
+              <ng-template ngbTabContent>
+                <div class="">
+                  <div  class="section-title">
+                    <div class="container">
                       <div class="row">
-                        <div class="col-10">
+                        <div class="col-11">
                           <h5>user information</h5>
                         </div>
-                        <div class="col-2">
-                         <a [routerLink]="['/user-profile']">  <img src="../../assets/edit.png" class="all-icon" /></a>
-                        </div>
+                        <div class="col-1 text-right"> <a [routerLink]="['/user-profile']"> <img src="../../assets/edit.png" class="all-icon" /></a> </div>
                       </div>
                     </div>
-
-                    <div class="form input-section">
+                  </div>
+                  <div class="form input-section">
+                    <div class="container">
                       <div class="row">
                         <div class="col-12">
                           <p class="userTitle">Name of Your Business</p>
                           <p class="userInfo">{{businessName}}</p>
                         </div>
                       </div>
-
+                    </div>
+                    <div class="container">
                       <div class="row">
                         <div class="col-6">
                           <p class="userTitle">Your First Name</p>
@@ -45,7 +40,8 @@
                           <p class="userInfo">{{field_last_name}}</p>
                         </div>
                       </div>
-
+                    </div>
+                    <div class="container">
                       <div class="row">
                         <div class="col-6">
                           <p class="userTitle">Your Email Address</p>
@@ -57,279 +53,228 @@
                         </div>
                       </div>
                     </div>
+                  </div>
+                  <div class="container">
                     <div class="locat section-title">
                       <h5>default business location</h5>
-                      <small class="info">A minimum of 1 default business location is mandatory.</small>
-                    </div>
-                <ng-container *ngFor="let addrs of addressList">
-
+                      <small class="info">A minimum of 1 default business location is mandatory.</small> </div>
+                  </div>
+                  <ng-container *ngFor="let addrs of addressList">
                     <div *ngIf="addrs?.field_make_default == 'Yes'" class="addedLoc">
                       <div class="loc">
-                        <div class="row">
-                          <div class="col-10">
-                            <p>{{addrs?.title}}, {{addrs?.field_address_line_2}}, {{addrs?.field_state}}
-                             {{addrs?.field_city}}, {{addrs?.field_z}}
-                            </p>
-                          </div>
-                          <div class="col-2">
-                           <a [routerLink]="['/add-location', addrs?.nid]"> <img src="../../assets/edit.png" class="all-icon" /></a>
+                        <div class="container">
+                          <div class="row">
+                            <div class="col-11">
+                              <p>{{addrs?.title}}, {{addrs?.field_address_line_2}}, {{addrs?.field_state}}
+                                {{addrs?.field_city}}, {{addrs?.field_z}} </p>
+                            </div>
+                            <div class="col-1 text-right"> <a [routerLink]="['/add-location', addrs?.nid]"> <img src="../../assets/edit.png" class="all-icon" /></a> </div>
                           </div>
                         </div>
                       </div>
                     </div>
-
-                </ng-container>
+                  </ng-container>
+                  <div class="container">
                     <div class="locat section-title">
                       <h5>additional business location(s)</h5>
                     </div>
-                    <div class="additionalLoc">
-                      <ng-container *ngFor="let addr of addressList; let index = index">
+                  </div>
+                  <div class="additionalLoc">
+                    <ng-container *ngFor="let addr of addressList; let index = index">
                       <div *ngIf="addr?.field_make_default != 'Yes'">
-                      <div class="loc">
-                        <div class="row">
-                          <div class="col-10">
-                            <p>{{addr?.title}}, {{addr?.field_address_line_2}}, {{addr?.field_state}}
-                             {{addr?.field_city}}, {{addr?.field_z}}
-                            </p>
-                          </div>
-                          <div class="col-2"  >
-                         <!--  <a (click)="openMenu(index)"> <img src="../../assets/menu.png" class="all-icon"/> </a>
-                           <div  [id]="addr?.nid" *ngIf="showHideArray[index]" class="actionItems">
-                            <ul>
-                              <li><a [routerLink]="['/add-location', addr?.nid]">Edit</a></li>
-                              <li><a (click)="deleteAddress(addr?.nid)" href="javascript:void(0)">Delete</a></li>
-                              <li><a (click)="markAsDefault(addr?.nid)" href="javascript:void(0)">Mark Default</a></li>
-                            </ul>
-                          </div> -->
-
-            <div class="dropdown">
-               <a (click)="openMenu(index)"  data-toggle="dropdown"> <img src="../../assets/menu.png" class="all-icon"/> </a>
-              <ul class="dropdown-menu">
-                <li><a [routerLink]="['/add-location', addr?.nid]">Edit</a></li>
-                <li><a (click)="deleteAddress(addr?.nid)" href="javascript:void(0)">Delete</a></li>
-                <li><a (click)="markAsDefault(addr?.nid)" href="javascript:void(0)">Mark Default</a></li>
-              </ul>
-            </div>
-
+                        <div class="loc">
+                          <div class="container">
+                            <div class="row">
+                              <div class="col-11">
+                                <p>{{addr?.title}}, {{addr?.field_address_line_2}}, {{addr?.field_state}}
+                                  {{addr?.field_city}}, {{addr?.field_z}} </p>
+                              </div>
+                              <div class="col-1 text-right"  >
+                                <div class="dropdown"> <a (click)="openMenu(index)"  data-toggle="dropdown"> <img src="../../assets/menu.png" class="all-icon"/> </a>
+                                  <ul class="dropdown-menu">
+                                    <li><a [routerLink]="['/add-location', addr?.nid]">Edit</a></li>
+                                    <li><a (click)="deleteAddress(addr?.nid)" href="javascript:void(0)">Delete</a></li>
+                                    <li><a (click)="markAsDefault(addr?.nid)" href="javascript:void(0)">Mark Default</a></li>
+                                  </ul>
+                                </div>
+                              </div>
+                            </div>
                           </div>
                         </div>
                       </div>
-
-                      </div>
-                      </ng-container>
-
-
-                    </div>
-
-                    <div class="add-new">
+                    </ng-container>
+                  </div>
+                  <div class="add-new">
+                    <div class="container">
                       <div class="row">
-                        <div class="col-12">
-                            <img src="../../assets/plus.png" class="all-icon"/>
-                            <a  [routerLink]="['/add-location', 'new']" class="actionAnchor">Add New Business Location</a>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="goToNextBtn bgGrey">
-                      <button type="button" class="btn btn-primary" (click)="businessCreate()">build business profile</button>
-                    </div>
-                  </div>
-                  </ng-template>  
-                </ngb-tab>
-
-                <ngb-tab title="Business Profile">
-                  <ng-template ngbTabContent>
-                    
-                <div class="">
-                <div class="inner-page-title">
-                  <h2>business profile</h2><a (click)="helpText()"><img src="../../assets/question.png"/></a>
-                </div>
-
-
-                <div class="form input-section">
-
-               <ng-container *ngFor="let topic of businessTopic"> 
-
-                 <hr>
-                  <div class="busImg">
-                    <img [src]="topic?.field_business_profile_topic_ima"/>
-                  </div>
-
-                 <div style="padding: 10px;" class="form-group filled-form">
-                 <a style="padding: 2px;" [routerLink]="['/business-profile', bisProfileId, topic.item_id]" class="">Edit</a>
-                 </div>
-                  <div class="form-group filled-form">
-                    <span>Topic</span>
-                    <p>{{topic?.field_topic}}</p>
-                  </div>
-                  <div class="form-group filled-form busDesc">
-                    <span>Description</span>
-                    <p>{{topic?.field_business_profile_topic_des}} </p>
-                  </div>
-               </ng-container>
-
-                  <div class="show-more">
-                    <div class="row">
-                      <div class="col-12">
-                        <a href="Javascript:void(0)" class="actionAnchor">Show more</a>
+                        <div class="col-12"> <img src="../../assets/plus.png" class="all-icon"/> <a  [routerLink]="['/add-location', 'new']" class="actionAnchor">Add New Business Location</a> </div>
                       </div>
                     </div>
                   </div>
+                  <div class="goToNextBtn bgGrey">
+                    <button type="button" (click)="createHWA()" class="btn btn-primary" >Create Help Wanted Ad</button>
+                  </div>
                 </div>
+              </ng-template>
+            </ngb-tab>
+            <ngb-tab title="Business Profile">
+              <ng-template ngbTabContent>
+                <div class="container width-700">
 
-                <div class="add-new">
-                  <div class="row">
-                    <div class="col-12">
-                        <img src="../../assets/plus.png" class="all-icon"/>
-                        <a [routerLink]="['/business-profile', bisProfileId, 'new']" class="actionAnchor">Add New Topic</a>
-                    </div>
+                  <div class="form input-section">
+                    <ng-container *ngFor="let topic of businessTopic">
+                      <br>
+                      <div class="busImg"> <img [src]="topic?.field_business_profile_topic_ima"/> </div>
+                      <div  class="form-group filled-form"> <a [routerLink]="['/business-profile', bisProfileId, topic.item_id]" class="">Edit</a> </div>
+                      <div class="form-group filled-form"> <span>Topic</span>
+                        <p>{{topic?.field_topic}}</p>
+                      </div>
+                      <div class="form-group filled-form busDesc"> <span>Description</span>
+                        <p>{{topic?.field_business_profile_topic_des}} </p>
+                      </div>
+                    </ng-container>
+
+                  </div>
+                  <div class="add-new">
+                    <img src="../../assets/plus.png" class="all-icon"/> <a [routerLink]="['/business-profile', bisProfileId, 'new']" class="actionAnchor">Add New Topic</a>
                   </div>
                 </div>
                 <div class="goToNextBtn bgGrey">
                   <button type="button" (click)="createHWA()" class="btn btn-primary" >Create Help Wanted Ad</button>
                 </div>
-                </div>
-        <!-- End view business profile -->
-                  </ng-template>  
-                </ngb-tab>
-                </ngb-tabset>
-            </div>
-<!-- ---------------- this is open first time ---------------------------- -->
 
-        <div *ngIf="isFirstTime" class="deskWidth">
-        <div class="inner-page-title">
-          <h2>user profile</h2><a (click)="helpText()"><img src="../../assets/question.png"/></a>
+                <!-- End view business profile -->
+              </ng-template>
+            </ngb-tab>
+            </div>
+          </ngb-tabset>
         </div>
 
+      </div>
+      <!-- ---------------- this is open first time ---------------------------- -->
+      <div *ngIf="isFirstTime" class="deskWidth">
+        <div class="deskFullWidth">
+        <div class="inner-page-title container">
+          <h2>user profile</h2>
+          <a (click)="helpText()"><img src="../../assets/question.png"/></a> </div>
         <div  class="strips">
-          <div class="row">
-            <div class="col-12">
+          <div class="container">
+            <div class="row">
+              <div class="col-12">
                 <div class="col-4 green-strip"></div>
                 <div class="col-4 green-strip"></div>
                 <div class="col-4 grey-strip"></div>
+              </div>
             </div>
           </div>
+        </div>
         </div>
         <div  class="section-title">
-          <div class="row">
-            <div class="col-10">
-              <h5>user information</h5>
-            </div>
-            <div class="col-2">
-             <a [routerLink]="['/user-profile']">  <img src="../../assets/edit.png" class="all-icon" /></a>
+          <div class="container">
+            <div class="row">
+              <div class="col-11">
+                <h5>user information</h5>
+              </div>
+              <div class="col-1 text-right"> <a [routerLink]="['/user-profile']"> <img src="../../assets/edit.png" class="all-icon" /></a> </div>
             </div>
           </div>
-          
         </div>
         <div class="form input-section">
-          <div class="row">
-            <div class="col-12">
-              <p class="userTitle">Name of Your Business</p>
-              <p class="userInfo">{{businessName}}</p>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-6">
-              <p class="userTitle">Your First Name</p>
-              <p class="userInfo">{{field_first_name}}</p>
-            </div>
-            <div class="col-6">
-              <p class="userTitle">Your Last Name</p>
-              <p class="userInfo">{{field_last_name}}</p>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-6">
-              <p class="userTitle">Your Email Address</p>
-              <p class="userInfo">{{email}}</p>
-            </div>
-            <div class="col-6">
-              <p class="userTitle">Your Phone Number</p>
-              <p class="userInfo">{{myModel}}</p>
-            </div>
-          </div>
-        </div>
-        <div class="locat section-title">
-          <h5>default business location</h5>
-          <small class="info">A minimum of 1 default business location is mandatory.</small>
-        </div>
-    <ng-container *ngFor="let addrs of addressList">
-
-        <div *ngIf="addrs?.field_make_default == 'Yes'" class="addedLoc">
-          <div class="loc">
+          <div class="container">
             <div class="row">
-              <div class="col-10">
-                <p>{{addrs?.title}}, {{addrs?.field_address_line_2}}, {{addrs?.field_state}}
-                 {{addrs?.field_city}}, {{addrs?.field_z}}
-                </p>
+              <div class="col-12">
+                <p class="userTitle">Name of Your Business</p>
+                <p class="userInfo">{{businessName}}</p>
               </div>
-              <div class="col-2">
-               <a [routerLink]="['/add-location', addrs?.nid]"> <img src="../../assets/edit.png" class="all-icon" /></a>
+            </div>
+          </div>
+          <div class="container">
+            <div class="row">
+              <div class="col-6">
+                <p class="userTitle">Your First Name</p>
+                <p class="userInfo">{{field_first_name}}</p>
+              </div>
+              <div class="col-6">
+                <p class="userTitle">Your Last Name</p>
+                <p class="userInfo">{{field_last_name}}</p>
+              </div>
+            </div>
+          </div>
+          <div class="container">
+            <div class="row">
+              <div class="col-6">
+                <p class="userTitle">Your Email Address</p>
+                <p class="userInfo">{{email}}</p>
+              </div>
+              <div class="col-6">
+                <p class="userTitle">Your Phone Number</p>
+                <p class="userInfo">{{myModel}}</p>
               </div>
             </div>
           </div>
         </div>
-         
-    </ng-container>
+        <div class="container">
+          <div class="locat section-title">
+            <h5>default business location</h5>
+            <small class="info">A minimum of 1 default business location is mandatory.</small> </div>
+          <ng-container *ngFor="let addrs of addressList">
+            <div *ngIf="addrs?.field_make_default == 'Yes'" class="addedLoc">
+              <div class="loc">
+                <div class="container">
+                  <div class="row">
+                    <div class="col-11">
+                      <p>{{addrs?.title}}, {{addrs?.field_address_line_2}}, {{addrs?.field_state}}
+                        {{addrs?.field_city}}, {{addrs?.field_z}} </p>
+                    </div>
+                    <div class="col-1 text-right"> <a [routerLink]="['/add-location', addrs?.nid]"> <img src="../../assets/edit.png" class="all-icon" /></a> </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+        </div>
         <div class="locat section-title">
-          <h5>additional business location(s)</h5>
+          <div class="container">
+            <h5>additional business location(s)</h5>
+          </div>
         </div>
         <div class="additionalLoc">
           <ng-container *ngFor="let addr of addressList; let index = index">
-          <div *ngIf="addr?.field_make_default != 'Yes'">
-          <div class="loc">
-            <div class="row">
-              <div class="col-10">
-                <p>{{addr?.title}}, {{addr?.field_address_line_2}}, {{addr?.field_state}}
-                 {{addr?.field_city}}, {{addr?.field_z}}
-                </p>
-              </div>
-              <div class="col-2"  >
-             <!--  <a (click)="openMenu(index)"> <img src="../../assets/menu.png" class="all-icon"/> </a>
-               <div  [id]="addr?.nid" *ngIf="showHideArray[index]" class="actionItems">
-                <ul>
-                  <li><a [routerLink]="['/add-location', addr?.nid]">Edit</a></li>
-                  <li><a (click)="deleteAddress(addr?.nid)" href="javascript:void(0)">Delete</a></li>
-                  <li><a (click)="markAsDefault(addr?.nid)" href="javascript:void(0)">Mark Default</a></li>
-                </ul>
-              </div> -->
-              <div class="dropdown">
-              <a (click)="openMenu(index)"  data-toggle="dropdown"> <img src="../../assets/menu.png" class="all-icon"/> </a>
-              <ul class="dropdown-menu">
-                <li><a [routerLink]="['/add-location', addr?.nid]">Edit</a></li>
-                <li><a (click)="deleteAddress(addr?.nid)" href="javascript:void(0)">Delete</a></li>
-                <li><a (click)="markAsDefault(addr?.nid)" href="javascript:void(0)">Mark Default</a></li>
-              </ul>
-            </div>
-            
+            <div *ngIf="addr?.field_make_default != 'Yes'">
+              <div class="loc">
+                <div class="container">
+                  <div class="row">
+                    <div class="col-11">
+                      <p>{{addr?.title}}, {{addr?.field_address_line_2}}, {{addr?.field_state}}
+                        {{addr?.field_city}}, {{addr?.field_z}} </p>
+                    </div>
+                    <div class="col-1 text-right">
+                      <div class="dropdown"> <a (click)="openMenu(index)"  data-toggle="dropdown"> <img src="../../assets/menu.png" class="all-icon"/> </a>
+                        <ul class="dropdown-menu">
+                          <li><a [routerLink]="['/add-location', addr?.nid]">Edit</a></li>
+                          <li><a (click)="deleteAddress(addr?.nid)" href="javascript:void(0)">Delete</a></li>
+                          <li><a (click)="markAsDefault(addr?.nid)" href="javascript:void(0)">Mark Default</a></li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-          
-          </div>
           </ng-container>
-          
-          
         </div>
-
         <div class="add-new">
-          <div class="row">
-            <div class="col-12">
-                <img src="../../assets/plus.png" class="all-icon"/>
-                <a  [routerLink]="['/add-location', 'new']" class="actionAnchor">Add New Business Location</a>
+          <div class="container">
+            <div class="row">
+              <div class="col-12"> <img src="../../assets/plus.png" class="all-icon"/> <a  [routerLink]="['/add-location', 'new']" class="actionAnchor">Add New Business Location</a> </div>
             </div>
           </div>
         </div>
-
         <div class="goToNextBtn bgGrey">
           <button type="button" class="btn btn-primary" (click)="businessCreate()">build business profile</button>
         </div>
       </div>
-      </div>
-    </section>
-  </div>
-  </div>
+    </div>
+  </section>
 </div>
 <!-- <app-help-modal [visible]="helpShow" (closeSection)="helpText()"></app-help-modal>-->

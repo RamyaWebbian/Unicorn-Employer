@@ -65,7 +65,7 @@ export const router: Routes = [
         pathMatch: 'full',
         canActivate: [AuthGuard]
    },
-  
+
    {
       path: 'add-new-location',
       loadChildren: './profile/add-new-location/add-new-location.module#AddNewLocationModule',
@@ -85,7 +85,7 @@ export const router: Routes = [
       canActivate: [AuthGuard]
    },
    {
-      path: 'view-business-profile/:pId', 
+      path: 'view-business-profile/:pId',
       loadChildren: './profile/view-business-profile/view-business-profile.module#ViewBusinessProfileModule',
       pathMatch: 'full',
       canActivate: [AuthGuard]

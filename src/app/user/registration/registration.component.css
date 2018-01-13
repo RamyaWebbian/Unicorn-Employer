@@ -16,7 +16,7 @@
         margin: auto;
     }
     .goToNextBtn .btn, .goToNextBtn .btn:hover {
-        width: 90%;
-        
+        width: 100%;
+
     }
 }

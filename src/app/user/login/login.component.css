@@ -3,6 +3,56 @@ input[type=checkbox] {
     vertical-align: text-top;
     margin: 0.21em 0 0;
 }
+.switch {
+  position: relative;
+  width: 65px;
+  height: 26px;
+  pointer-events: all;
+  top: 0;
+}
+.switch input {
+  display: none;
+}
+.switch input:checked + .slider {
+  background-color: #37981d;
+}
+.switch .slider.round {
+ border-radius: 34px;
+ }
+.remember em, .switch {
+  display: inline-block;
+  vertical-align: middle;
+  font-style: normal;
+  line-height: 24px;
+}
+.switch .slider {
+ position: absolute;
+ cursor: pointer;
+ top: 0;
+ left: 0;
+ right: 0;
+ bottom: 0;
+ background-color: #ccc;
+ transition: .4s;box-shadow: 1px 1px 1px #6666 inset;
+ }
+.switch input:checked + .slider:before {
+  -webkit-transform: translateX(37px);
+  transform: translateX(37px);
+}
+.switch .slider.round:before {
+  border-radius: 50%;
+}
+.switch .slider:before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 2px;
+  bottom: 3px;
+  left: 4px;
+  background-color: #fff;
+  transition: .4s;
+}
 @media screen and (min-width: 1024px) {
     .form.input-section {
         padding: 10px 0 20px;
@@ -21,7 +71,7 @@ input[type=checkbox] {
         margin: auto;
     }
     .goToNextBtn .btn, .goToNextBtn .btn:hover {
-        width: 90%;
-        
+        width: 100%;
+
     }
 }

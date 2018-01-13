@@ -9,6 +9,7 @@
   margin: 10px;
   cursor: pointer;
 }
+.goToNextBtn{padding: 20px;}
 .fileUpload input.upload {
   position: absolute;
   top: 0;
