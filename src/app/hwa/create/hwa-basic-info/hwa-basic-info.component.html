@@ -5,23 +5,15 @@
         <section id="login">  
           <app-header-valid-user></app-header-valid-user>
             <div class="deskWidth">
-              <div class="preview-head w90">
+              <div class="preview-head">
+                <div class="container-fluid">
                 <div class="row">
-                  <div class="col-6"> 
+                  <div class="col-6">
                       <h5>Create HWA</h5>
                   </div>
                   <div class="col-5">
                       <button class="btn success-btn">Preview & Post ad</button>
                   </div>
-                 <!-- <div class="col-1">
-                      <img class="kebab-menu" src="../../assets/menu.png"/>
-                      <div class="kebab-open">
-                        <ul>
-                          <li>Save as Draft</li> 
-                          <li>Discard Ad</li>
-                        </ul>
-                      </div>
-                  </div> -->
           <div class="col-1 dropdown">
               <a data-toggle="dropdown"> <img src="../../assets/menu.png" class="all-icon"/> </a>
               <ul class="dropdown-menu">
@@ -34,32 +26,32 @@
 
 
                 </div>
-              </div>
+              </div></div>
   <div id="accordion" role="tablist" aria-multiselectable="true">
     <div class="card">
       <div class="card-header" role="tab" id="headingOne">
-        <div class="row">
-            <div class="col-10">
+
+            <div class="head-blk">
               <h6 class="mb-0">
                 <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                   Add Basic Information for Your Ad
                 </a>
               </h6>
             </div>
-            <div class="col-1">
+            <div class="help-blk">
               <img class="ques-icon" src="../../assets/question.png"/>
             </div>
-            <div class="col-1">
+            <div class="arrow-blk">
               <img class="acc-arrow" src="../../assets/up-arrow.svg"/>
             </div>
-          </div>
+
       </div>
       <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne">
         <div class="card-block">
             <form [formGroup]="creatHWAForm" (ngSubmit)="onSubmit()" novalidate>
                 <div class="input-section">
                   <div class="form-group filled-form">
-                    <label for="position">What positions are you hiring for?</label>
+                    <label for="position">positions you are hiring for?</label>
                     <input class="form-control myInputStyle" name="position" type="text" formControlName="position">
                     <div [hidden]="creatHWAForm.controls['position'].valid || creatHWAForm.controls['position'].pristine" class="inline-error">
                       Please enter a position.
@@ -90,7 +82,7 @@
                     </div>
                   </div>
                   <div class="form-group filled-form">
-                    <label for="businessName">which locations are you hiring for?</label>
+                    <label for="businessName">location(s) you are hiring for?</label>
                     <div class="select-more-loc">
                        <ng-container *ngFor="let addrs of addressList">
                       <div class="row" >
@@ -116,21 +108,20 @@
     </div> <!-- first -->
     <div class="card">
       <div class="card-header" role="tab" id="headingTwo">
-        <div class="row">
-            <div class="col-10">
+            <div class="head-blk">
               <h6 class="mb-0">
                 <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                  Add Knock Out Questions
+                  Add Qualifying Questions
                 </a>
               </h6>
             </div>
-            <div class="col-1">
+            <div class="help-blk">
               <img class="ques-icon" src="../../assets/question.png"/>
             </div>
-            <div class="col-1">
+            <div class="arrow-blk">
                 <img class="acc-arrow" src="../../assets/down-arrow.svg"/>
               </div>
-          </div>
+
       </div>
       <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo">     
         <div class="w90 card-block">
@@ -151,6 +142,7 @@
             <h6>Custom Question</h6>
             <div class="row">
               <div class="col-12">
+                <div class="custom-ques-edit">
                 <span>Q</span>
                 <span>Are you over the age of 18?</span>
                 <img class="kebab-menu" src="../../assets/menu.png"/>
@@ -160,13 +152,16 @@
                     <li>Delete</li>
                   </ul>
                 </div>
+                </div>
               </div>
             </div>
   
           <div class="row">
             <div class="col-12">
+              <div class="add-new-cus">
                 <img src="../../assets/plus.png" class="all-icon add-icon"/>
-                <a [routerLink]="['/select-hiring-location']">add new custom knockout question</a>
+                <a [routerLink]="['/select-hiring-location']">add new custom qualifying question</a>
+              </div>
             </div>
           </div>
           <h6>custom question</h6>
@@ -189,29 +184,29 @@
               </div>
             </div>
           </div>
-  
-  
-  
         </div>
       </div>
       </div> <!-- second -->
     <div class="card">
       <div class="card-header" role="tab" id="headingThree">
-          <div class="row">
-          <div class="col-10">
+
+
+          <div class="head-blk">
             <h6 class="mb-0">
               <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                 Add Skill Or Experience Questions
               </a>
             </h6>
           </div>
-          <div class="col-1">
+          <div class="help-blk">
             <img class="ques-icon" src="../../assets/question.png"/>
           </div>
-          <div class="col-1">
+          <div class="arrow-blk">
              <img class="acc-arrow" src="../../assets/down-arrow.svg"/>
             </div>
-        </div>
+
+
+
       </div>
       <div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree">
         <small>Minimum one Skill or Experience Question is required to post HWA</small>
@@ -219,6 +214,7 @@
           <h6>Custom Skill Question</h6>
           <div class="row">
             <div class="col-12">
+              <div class="custom-ques-edit">
               <span>Q</span>
               <span>Willing to relocate?</span>
               <img class="kebab-menu" src="../../assets/menu.png"/>
@@ -228,9 +224,20 @@
                   <li>Delete</li>
                 </ul>
               </div>
+              </div>
             </div>
           </div>
+
+          <div class="row">
+              <div class="col-12">
+                <div class="add-new-cus">
+                  <img src="../../assets/plus.png" class="all-icon add-icon"/>
+                  <a [routerLink]="['/select-hiring-location']">add new custom qualifying question</a>
+                </div>
+              </div>
+            </div>
         </div>
+
         <div class="card-wrapper">
         <div class="card-block">
           <form  novalidate> <!-- [formGroup]="userInfo" (ngSubmit)="onSubmit()" -->
@@ -288,9 +295,4 @@
   </section>
   </div>
   </div>
-  </div>
-  
-  <!--<a [routerLink]="['/hwa-basic-info']">Create</a><br>
-  <a [routerLink]="['/all-hwa-list']">Edit</a><br>
-  <a [routerLink]="['/copy-hwa']">Copy</a><br>
-  <a [routerLink]="['/extend-hwa']">Extend</a><br> -->
+</div>

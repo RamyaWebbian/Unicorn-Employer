@@ -48,7 +48,10 @@ private userInfo:any;
 
   ngOnInit(  ) {
      this.userInfo  = this.userService.isLogedin();
-    this.loadUserProfile(this.userInfo);
+     if( this.userInfo){
+       this.loadUserProfile(this.userInfo);
+     }
+   
    // this.getAddress(this.userInfo)
   }
 
@@ -202,6 +205,9 @@ hideAllMenu(){
       this.router.navigate(['/business-profile']);
     }
     
+  }
+  createHWA(){
+     this.router.navigate(['/hwa-basic-info']);
   }
   userProfile() {
     this.router.navigate(['/user-profile']);

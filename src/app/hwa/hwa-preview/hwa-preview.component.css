@@ -1,51 +1,23 @@
-.w90 label {
-    margin-bottom: 18px;
-}
-.add-icon {
-    margin: 0 5px 0 0;
-}
-.card-wrapper {
+.hwa-details {
     width: 90%;
-    margin: 10px auto;
-    border: 1px solid #002d3f;
-    border-radius: 7px;
-}
-#collapseThree .goToNextBtn {
-    padding: 10px 0; 
-}
-.radio-class {
-    padding: 0 0 10px 15px;
-}
-.custom-control {
-    margin-right: 0.5rem
-}
-small {
-    padding: 10px 0;
-    color: #2a63e7;
-}
-.custom-control-description {
-    color: #002d3f;
-    font-weight: 600;
-}
-.custom-ko {
+    margin: auto;
     padding: 15px 0;
 }
-.custom-ko .input.myInputStyle,
-.custom-ko .myInputStyle {
-    width: 100%;
+.hwa-details h5 {
+    /*raheel's color code color: #3e7c95;*/
+    color: #002d40;
+    font-weight: bold;
 }
-button.btn.smallBtn {
-    min-width: 80px;
+.preview-head {
+    border-bottom: 1px solid #ccc;
 }
-#collapseTwo span:first-child,
-#collapseThree span:first-child {
-    width: auto;
-    color: #2a63e7;
-    font-size: 23px;
-    vertical-align: sub;
-    margin: 0 10px 0 0;
+.busImg {
+    min-height: 250px;
+    padding: 0;
 }
-h6 {
-    font-weight: 600;
-    text-transform: capitalize;
+ul.custom-list-style {
+    list-style-type: none;
+}
+ul.custom-list-style li::before {
+    content: '- ';
 }

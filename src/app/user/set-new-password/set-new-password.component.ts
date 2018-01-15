@@ -75,7 +75,7 @@ export class SetNewPasswordComponent implements OnInit {
     this.subscription.unsubscribe();
   }
 
-toggleShow() {
+/*toggleShow() {
     this.show = !this.show;
     if (this.show) {
       this.input.changeType('text');
@@ -84,16 +84,18 @@ toggleShow() {
       this.input.changeType('password');
 
     }
-  }
+  }*/
 conf_toggleShow() {
     this.conf_show = !this.conf_show;
-    if (this.conf_show) {
-      //this.input.changeType('text');
+    this.show = !this.show;
+    if (this.conf_show && this.show) {
+      this.input.changeType('text');
       this.inputcnf.changeType('text');
     } else {
-      //this.input.changeType('password');
+      this.input.changeType('password');
       this.inputcnf.changeType('password');
     }
+
   }
 
 

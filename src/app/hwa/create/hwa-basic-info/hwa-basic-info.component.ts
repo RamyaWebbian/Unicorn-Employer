@@ -7,13 +7,13 @@ import {NotificationsService} from 'angular2-notifications';
 @Component({
   selector: 'app-hwa-basic-info',
   templateUrl: './hwa-basic-info.component.html',
-  styleUrls: ['./hwa-basic-info.component.css']
+  styleUrls: ['./hwa-basic-info.component.css','../../only-hwa.css']
 })
 export class HwaBasicInfoComponent implements OnInit {
   public creatHWAForm: FormGroup;
   public addressList:Array<string> = [];
-   public disabledButton:boolean;
-   public addLocationForm: FormGroup;
+  public disabledButton:boolean;
+  public addLocationForm: FormGroup;
 
   public options = {
     position: ['top', 'center'],

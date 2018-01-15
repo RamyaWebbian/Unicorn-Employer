@@ -1,0 +1,75 @@
+.head-blk,.help-blk, .arrow-blk {
+    display: inline-block;
+}
+.card .card-header {
+    padding: 0.75rem 1rem;
+}
+.select-more-loc .row {
+    padding: 15px 0;
+}
+.add-new-cus {
+    padding: 15px 0;
+}
+#accordion .goToNextBtn {
+    border-top: 0;
+}
+@media screen and (min-width: 1025px) {
+    #accordion,
+    .preview-head {
+        width: 1210px;
+        margin: auto;
+    }
+
+    .preview-head .col-1 {
+        text-align: right;
+    }
+    .preview-head .col-6 {
+        padding: 0;
+        text-align: left;
+    }
+    .head-blk {
+        width: 95%;
+    }
+    .help-blk {
+        width: 3%;
+    }
+    .arrow-blk {
+        width: 1%;
+    }
+    #collapseTwo.collapse .custom-ques-edit .kebab-menu,
+    #collapseThree.collapse .custom-ques-edit .kebab-menu {
+        float: right;
+        clear: both;
+    }
+    #collapseThree small {
+        width: 90%;
+    }
+}
+@media screen and (max-width: 1024px) {
+    .head-blk {
+        width: 91%;
+    }
+    .help-blk {
+        width: 5%;
+    }
+    .arrow-blk {
+        width: 2%;
+    }
+    .preview-head .col-1 {
+        text-align: center;
+    }
+    .preview-head .col-5 {
+        text-align: right;
+    }
+}
+@media screen and (max-width: 767px) and (orientation:portrait) {
+    .head-blk {
+        width: 85%;
+    }
+    .help-blk {
+        width: 8%;
+    }
+    .arrow-blk {
+        width: 3%;
+    }
+}

@@ -7,7 +7,7 @@ import {NotificationsService} from 'angular2-notifications';
 @Component({
   selector: 'app-hwa-preview',
   templateUrl: './hwa-preview.component.html',
-  styleUrls: ['./hwa-preview.component.css']
+  styleUrls: ['./hwa-preview.component.css','../only-hwa.css']
 })
 export class HwaPreviewComponent implements OnInit {
   public userInfo:FormGroup;
