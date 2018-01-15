@@ -64,7 +64,6 @@ const pObj = {"bptnid": profileId}
   }
 
  createHWA() {
-   
 this.router.navigate(['/hwa-basic-info']);
  }
 
