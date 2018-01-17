@@ -14,7 +14,7 @@ export class HwaBasicInfoComponent implements OnInit {
   public addressList:Array<string> = [];
   public disabledButton:boolean;
   public addLocationForm: FormGroup;
-
+public selectedNid = [];
   public options = {
     position: ['top', 'center'],
     timeOut: 5000,
@@ -53,12 +53,13 @@ export class HwaBasicInfoComponent implements OnInit {
     ) { }
 
   ngOnInit() {
+    this.selectedNid = [];
       this.creatHWAForm = this.formbuilder.group({
       'position': ['', {updateOn: 'change', validators: [Validators.required]}],
       'numberOfPosition': ['', {updateOn: 'change', validators:[Validators.required]}],
       'position_type': ['', {updateOn: 'change', validators:[Validators.required]}],
       'exp': ['', {updateOn: 'change', validators:[Validators.required]}],
-      'locations': this.formbuilder.array([this.initLocation('')]),
+      //'locations': this.formbuilder.array([]),
       'describeSkill': ['', {updateOn: 'change', validators:[Validators.required]}],
       //'email': ['',{updateOn: 'change',validators:[ Validators.compose([Validators.required, Validators.pattern(this.emailMask)])]}],
     //  'confirmemail': ['',{updateOn: 'change',validators: [ Validators.compose([Validators.required, Validators.pattern(this.emailMask)])]}],
@@ -83,6 +84,7 @@ export class HwaBasicInfoComponent implements OnInit {
     // add address to the list
     const control = <FormArray>this.creatHWAForm.controls['locations'];
     control.push(this.initLocation(val));
+   // console.log(this.creatHWAForm.controls['locations'].value)
   }
 
 getAddress(user) {
@@ -92,13 +94,14 @@ getAddress(user) {
         console.log(res);
         this.addressList = res;
         this.addressList.forEach((item, index) => {
+          this.selectedNid[index]=item['nid']
    // if(item.field_make_default == '1') {
      // this.defaultNId = item.nid;
       // this.businessAddressForm.patchValue(item);
-     //  this.addLocation(item['nid'])
+      // this.addLocation(item['nid'])
    // }
 });
-       
+    console.log(' this.selectedNid',  this.selectedNid);    
       },error=>{
 
       });
@@ -110,7 +113,7 @@ onSubmit() {
     if (this.creatHWAForm.valid) {
       const user = this.userService.isLogedin();
 
-      const selectedNid = [];
+      
     
       const CreteObj = {
         'hwa_nid': '',
@@ -120,7 +123,7 @@ onSubmit() {
         'field_will_they_be_full_time_par': this.creatHWAForm.value.position_type,
         //'field_how_would_you_describe_thi': this.creatHWAForm.value.describePosition,
         'field_describe_the_skills_and_ex': this.creatHWAForm.value.describeSkill,
-        'nid': selectedNid
+        'nid': this.selectedNid
       };
 
 

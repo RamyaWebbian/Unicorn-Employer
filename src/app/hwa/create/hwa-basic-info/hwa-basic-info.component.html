@@ -87,11 +87,12 @@
                   <div class="form-group filled-form">
                     <label for="businessName">location(s) you are hiring for?</label>
                     <div class="select-more-loc">
-                       <ng-container formArrayName="locations" *ngFor="let addrs of addressList; let i=index">
+                       <ng-container *ngFor="let addrs of addressList; let i=index">
                       <div class="row"  >
-                        <div class="col-12" [formGroupName]="i" >
+                        <div class="col-12" >
                             <img src="../../assets/locate.png" class="locate-icon"/>
-                                  <input type="hidden" [value]="addrs?.nid" formControlName="nid">
+                                 <!-- <input type="hidden" [value]="addrs?.nid" name="nid[]"> -->
+                                 
                             <span>{{addrs?.title}}, {{addrs?.field_address_line_2}}, {{addrs?.field_state}}, {{addrs?.field_city}}</span>
                         </div>
                       </div>
@@ -107,12 +108,12 @@
                 
                   <div class="form-group filled-form">
                     <label for="businessName">Job Description</label>
-<!--<quill-editor formControlName="describeSkill" 
+<quill-editor formControlName="describeSkill" 
               [options]="editorOptions"
               (blur)="onEditorBlured($event)"
               (focus)="onEditorFocused($event)"
               (ready)="onEditorCreated($event)"
-              (change)="onContentChanged($event)"></quill-editor> -->
+              (change)="onContentChanged($event)"></quill-editor> 
 <!-- [(ngModel)]="describeSkill"  -->
                  <!--  <div [hidden]="creatHWAForm.controls['describeSkill'].valid || creatHWAForm.controls['describeSkill'].pristine" class="inline-error">
                       Please Enter Job Description.

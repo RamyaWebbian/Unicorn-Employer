@@ -6,7 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SelectHiringLocationComponent } from './select-hiring-location.component';
 import { SelectHiringLocationRoutingModule } from './select-hiring-location-routing.module';
 import { SharedModule } from '../../../shared/shared.module';
-import { UserService } from '../../../services/index';
+import { UserService, ProfileService } from '../../../services/index';
 import {HeaderValidUserModule} from '../../../common/header-valid-user/header-valid-user.module';
 @NgModule({
   imports: [
@@ -18,6 +18,6 @@ import {HeaderValidUserModule} from '../../../common/header-valid-user/header-va
     HeaderValidUserModule
   ],
   declarations: [SelectHiringLocationComponent],
-  providers:[]
+  providers:[ProfileService]
 })
 export class SelectHiringLocationModule { }

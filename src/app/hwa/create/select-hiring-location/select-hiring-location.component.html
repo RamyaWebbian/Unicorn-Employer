@@ -13,29 +13,27 @@
           <div class="def-address">
             <h6>Default business Location</h6>
             <form>
-              <div class="form-check">
+                <ng-container *ngFor="let de of addressList; let i=index">
+              <div *ngIf="de.field_make_default == '1'" class="form-check">
                 <label class="form-check-label">
-                  <input type="checkbox" class="form-check-input">
-                  9527 Moore Creek Rd, Meadowview, VA New York City, 10022
+                  <input type="checkbox"  class="form-check-input" value="de?.nid">
+                  {{de?.title}}, {{de?.field_address_line_2}}, {{de?.field_state}}, {{de?.field_city}}
                 </label>
               </div>
+                </ng-container>
             </form>
           </div>
           <div class="additional-address">
             <h6>Additional Location(s)</h6>
             <form>
-              <div class="form-check">
+               <ng-container *ngFor="let addrs of addressList; let i=index">
+              <div *ngIf="addrs.field_make_default != '1'" class="form-check">
                 <label class="form-check-label">
-                  <input type="checkbox" class="form-check-input">
-                  9527 Moore Creek Rd, Meadowview, VA New York City, 10022
+                  <input type="checkbox" class="form-check-input" value="addrs?.nid">
+                {{addrs?.title}}, {{addrs?.field_address_line_2}}, {{addrs?.field_state}}, {{addrs?.field_city}}
                 </label>
               </div>
-              <div class="form-check">
-                <label class="form-check-label">
-                  <input type="checkbox" class="form-check-input">
-                  9527 Moore Creek Rd, Meadowview, VA New York City, 10022
-                </label>
-              </div>            
+               </ng-container>          
             </form>
           </div>
           
