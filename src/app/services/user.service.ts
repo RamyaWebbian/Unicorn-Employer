@@ -223,7 +223,15 @@ isLocalStorage():boolean{
         }
         return isExp;
     }
-
+    
+resetUserInfo(user) {
+          if (this.isLocalStorage()) {
+              localStorage.setItem('currentUser', JSON.stringify(user));
+            }else{
+               this.cookieService.delete('userToken');
+               this.cookieService.set('currentUser', JSON.stringify(user));
+                }
+}
   
 
     getExpiration() {

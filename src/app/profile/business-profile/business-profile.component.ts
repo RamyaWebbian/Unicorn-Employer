@@ -11,6 +11,7 @@ import { HelpModalComponent } from '../../common/help-modal/help-modal.component
   styleUrls: ['./business-profile.component.css']
 })
 export class BusinessProfileComponent implements OnInit {
+  public isFirstBisProfile:boolean;
   public businessProfile:FormGroup;
   public disableButton:boolean;
   public submitted: boolean = false;
@@ -41,41 +42,54 @@ public  changeUiForNew:boolean = false;
   
 
   ngOnInit() {
+
+      this.businessProfile = this.formBuilder.group({
+      'field_business_profile_topic_ima':[''],
+      'field_topic': ['', {updateOn: 'change', validators: [Validators.required]}],
+      'field_business_profile_topic_des': ['', {updateOn: 'change', validators:[Validators.required]}],
+    })
+    var user = this.userService.isLogedin();
+    console.log(user)
+    if(user.business_profile_created == 'yes') {
+      this.isFirstBisProfile = false;
+    this.businessProfile.controls["field_business_profile_topic_ima"].setValidators([Validators.nullValidator]);
+  }else {
+    this.isFirstBisProfile = true;
+    this.businessProfile.controls["field_business_profile_topic_ima"].setValidators([Validators.required]);
+    }
+    
      this.isThereImge = false;
      this.activatedRoute.params.subscribe(
       (param:  any) => {
          console.log(param['bId']);
          if(param['bId']){
+           this.isFirstBisProfile = false;
+           this.bisProfileId = param['bId'];
            this.helpShow = false;
            if(param['topicId'] == 'new'){
            this.topicItemId = '';
             this.imgbase64src = '';
           this.changeUiForNew = true; 
-         // this.bisProfileId = "";
+          // this.bisProfileId = "";
          }else if(param['topicId'] != ''){
           this.topicItemId = param['topicId'];
            this.loadbusProfile(param['bId']);
          }else {
           this.changeUiForNew = false; 
          }
-            
-        this.bisProfileId = param['bId'];
        
          }else{
             this.topicItemId = '';
             this.changeUiForNew = false; 
            this.bisProfileId = "";
+          
            // alert('busness profile id is empty')
          }
  
       });
 
-    var user = this.userService.isLogedin();
-    this.businessProfile = this.formBuilder.group({
-      'field_business_profile_topic_ima':['', {updateOn: 'change', validators: [Validators.required]}],
-      'field_topic': ['', {updateOn: 'change', validators: [Validators.required]}],
-      'field_business_profile_topic_des': ['', {updateOn: 'change', validators:[Validators.required]}],
-    })
+     // {updateOn: 'change', validators: [Validators.required]}
+  
   }
 
   
@@ -147,6 +161,11 @@ const pObj = {"bptnid": profileId}
       res => {
          this.disableButton = false;
         console.log(res);
+        if(this.isFirstBisProfile) {
+        const user = this.userService.isLogedin();
+        user.business_profile_created = 'yes'
+        this.userService.resetUserInfo(user);
+        }
          this._notificationsService.success(
           'Success',
           res['Message'],

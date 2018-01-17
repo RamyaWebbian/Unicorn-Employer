@@ -8,6 +8,8 @@ import { HwaBasicInfoRoutingModule } from './hwa-basic-info-routing.module';
 import { SharedModule } from '../../../shared/shared.module';
 import { UserService, HwaCommonService } from '../../../services/index';
 import {HeaderValidUserModule} from '../../../common/header-valid-user/header-valid-user.module';
+import { QuillEditorModule } from 'ng2-quill-editor';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -15,7 +17,8 @@ import {HeaderValidUserModule} from '../../../common/header-valid-user/header-va
     HwaBasicInfoRoutingModule,
     ReactiveFormsModule,
     SharedModule,
-    HeaderValidUserModule
+    HeaderValidUserModule,
+    QuillEditorModule
   ],
   declarations: [HwaBasicInfoComponent],
   providers:[HwaCommonService]

@@ -20,6 +20,29 @@ export class HwaBasicInfoComponent implements OnInit {
     timeOut: 5000,
     lastOnBottom: true
   };
+    private toolbarOptions = [
+    'bold',
+    'italic',
+    'underline',
+    { 'align': '' },
+    { 'align': 'center' },
+    { 'align': 'right' },
+    { 'list': 'ordered' },
+    { 'list': 'bullet' },
+    { 'indent': '-1' },
+    { 'indent': '+1' }
+  ];
+  public editor;
+  public editorContent = `<h3>I am Example content</h3>`;
+  public editorOptions = {
+    modules: {
+      toolbar: this.toolbarOptions
+    },
+    placeholder: `•   Explain Job Responsibilities.
+•   Add your work culture.
+•   Add specific requirements like shifts, days etc.
+`};
+
   constructor(
     private router: Router,
     private formbuilder: FormBuilder,
@@ -36,7 +59,7 @@ export class HwaBasicInfoComponent implements OnInit {
       'position_type': ['', {updateOn: 'change', validators:[Validators.required]}],
       'exp': ['', {updateOn: 'change', validators:[Validators.required]}],
       'locations': this.formbuilder.array([this.initLocation('')]),
-      
+      'describeSkill': ['', {updateOn: 'change', validators:[Validators.required]}],
       //'email': ['',{updateOn: 'change',validators:[ Validators.compose([Validators.required, Validators.pattern(this.emailMask)])]}],
     //  'confirmemail': ['',{updateOn: 'change',validators: [ Validators.compose([Validators.required, Validators.pattern(this.emailMask)])]}],
      // 'phone': ['', {updateOn: 'change', validators: [Validators.required]}]
@@ -45,7 +68,7 @@ export class HwaBasicInfoComponent implements OnInit {
    
     const user = this.userService.isLogedin();
     if(user) {
-    this.loadLocations(user);
+    this.getAddress(user);
     }
     
   }
@@ -58,19 +81,29 @@ export class HwaBasicInfoComponent implements OnInit {
 
  addLocation(val) {
     // add address to the list
-    const control = <FormArray>this.addLocationForm.controls['locations'];
+    const control = <FormArray>this.creatHWAForm.controls['locations'];
     control.push(this.initLocation(val));
   }
 
-loadLocations(user) {
+getAddress(user) {
    
     this.profileService.getaddress(user.uid).subscribe(
       res => {
-        console.log(res)
+        console.log(res);
+        this.addressList = res;
+        this.addressList.forEach((item, index) => {
+   // if(item.field_make_default == '1') {
+     // this.defaultNId = item.nid;
+      // this.businessAddressForm.patchValue(item);
+     //  this.addLocation(item['nid'])
+   // }
+});
+       
       },error=>{
 
       });
 }
+
 onSubmit() {
     this.disabledButton = true; //'Processing...';
 
@@ -85,7 +118,7 @@ onSubmit() {
         'title': this.creatHWAForm.value.position,
         'field_how_many_people_do_you_nee': this.creatHWAForm.value.numberOfPosition,
         'field_will_they_be_full_time_par': this.creatHWAForm.value.position_type,
-        'field_how_would_you_describe_thi': this.creatHWAForm.value.describePosition,
+        //'field_how_would_you_describe_thi': this.creatHWAForm.value.describePosition,
         'field_describe_the_skills_and_ex': this.creatHWAForm.value.describeSkill,
         'nid': selectedNid
       };
@@ -115,6 +148,24 @@ onSubmit() {
 
   discardAd() {
 
+  }
+//---------------------------------------------------
+
+onEditorBlured(quill) {
+    console.log('editor blur!', quill);
+  }
+ 
+  onEditorFocused(quill) {
+    console.log('editor focus!', quill);
+  }
+ 
+  onEditorCreated(quill) {
+    this.editor = quill;
+    console.log('quill is ready! this is current quill instance object', quill);
+  }
+ 
+  onContentChanged({ quill, html, text }) {
+    console.log('quill content is changed!', quill, html, text);
   }
 
 }

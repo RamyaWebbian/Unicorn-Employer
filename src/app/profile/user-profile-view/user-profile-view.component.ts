@@ -61,16 +61,16 @@ private userInfo:any;
     const userId = {'uid': userdata.uid };
     this.userService.accesData(userId).subscribe(
       res => {
-        
+       // console.log(res)
         if (res['status']) {
           const user =  res;
         
-          this.addressList = res['address'];
+            this.addressList = res['address'];
           if(this.addressList.length && res['business_profile_id'].length){
             this.isFirstTime = false;
-              this.bisProfileId = res['business_profile_id'][0].nid;
+            this.bisProfileId = res['business_profile_id'][0].nid;
            this.loadbusProfile(this.bisProfileId);
- console.log('this.bisProfileId', this.bisProfileId)
+ // console.log('this.bisProfileId', this.bisProfileId)
           }else{
              this.isFirstTime = true;
           }

@@ -34,7 +34,7 @@
                 <p>Upload business logo</p>
                 <small>(This will be used as your profile picture)</small>
               </div>
-               <input type="hidden" class="myInputStyle" id="topic" [(ngModel)]="profileImageId" formControlName="field_business_profile_topic_ima" required>
+               <input type="hidden" class="myInputStyle" id="topic" [(ngModel)]="profileImageId" formControlName="field_business_profile_topic_ima" >
                <div [hidden]="businessProfile.controls['field_business_profile_topic_ima'].valid || businessProfile.controls['field_business_profile_topic_ima'].pristine" class="inline-error">
                 Upload your profile picture.
               </div>

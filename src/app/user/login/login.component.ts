@@ -78,7 +78,7 @@ onSubmitLogin(loginfields){
     const data = { 'name': loginfields.email, 'pass': loginfields.password };
     this.userService.login(data).subscribe(
       res => {
-       
+
         this.disabledButton = false;
         if(res['status']){
          this._notificationsService.error('Sorry',res['status'].message, { timeOut: 2500, showProgressBar: true, pauseOnHover: false, clickToClose: true });
@@ -92,25 +92,19 @@ onSubmitLogin(loginfields){
          var token = {token:res['jwt_token']};
 
          //this.saveRememberMedata(data);
-
-              if (this.userService.isLocalStorage()) {
-                
+            if (this.userService.isLocalStorage()) {
               localStorage.setItem('userToken', JSON.stringify(token));
               localStorage.setItem('currentUser', JSON.stringify(user));
               this.userService.setLogedIn(true);
             }else{
-            
               // this.cookieService.deleteAll();
                this.cookieService.delete('currentUser');
                this.cookieService.delete('userToken');
                this.cookieService.set('userToken', JSON.stringify(token));
                this.cookieService.set('currentUser', JSON.stringify(user));
-
-               console.log('set cooki', JSON.parse(this.cookieService.get('userToken')));
-               //console.log('check', this.cookieService.getAll())
                this.userService.setLogedIn(true);
                 }
-             // }
+  
             this.loading = false;
            // console.log(res['current_user'].business_profile_created)
             if(res['current_user'].business_profile_created == 'yes'){
