@@ -85,6 +85,25 @@ export class AddLocationComponent implements OnInit {
     },{updateOn: 'change'});
    // return this.businessAddressForm;
   }
+  iScheckedLocation(control: FormGroup): { [s: string]: boolean } {
+    let isSelectedLocation = false;
+    if (!control) {
+      return { emailNotMatch: true };
+    }
+
+    //  const control = control;
+   // for (let i = 0; i < control.controls['locations'].value.length; i++) {
+      if (control.controls['field_z']) {
+        isSelectedLocation = true;
+      }
+      console.log(control)
+ //   }
+    if (isSelectedLocation) {
+      return null;
+    } else {
+      return { 'locationNotMatch': true };
+    }
+  }
 
   userProfileView() {
     this.router.navigate(['/user-profile-view']);
@@ -144,13 +163,21 @@ this.profileService.getaddressById(locationId).subscribe(
   }
 
 
-   zipCodeSearch() {
+   zipCodeSearch(validNumber) {
+     if(!validNumber) {
+        this.validZipStatus = 'Zip code should be a 5 digit numeric value';
+            this.showSelect = false;
+            const arryobj = {field_state: '', field_city: ''};
+            this.businessAddressForm.patchValue(arryobj);
+      return false;
+     }
     const zipc = this.businessAddressForm.controls['field_z'].value;
    // console.log(zipc)
     if (!isNaN(zipc)) {
 
       this.userService.searchZip(zipc).subscribe(
         res => {
+
           if (this.validUsCountry(res)) {
             if (res['results'][0].postcode_localities) {
               this.showSelect = true;
@@ -175,16 +202,18 @@ this.profileService.getaddressById(locationId).subscribe(
             }
             
           } else {
+          //  alert('dddddddddd')
             this.validZipStatus = 'Please enter valid US zip code';
             this.showSelect = false;
             const arryobj = {field_state: '', field_city: ''};
             this.businessAddressForm.patchValue(arryobj);
+            //return false;
            // this.businessAddressForm.controls['field_state'].setValue('');
            // this.businessAddressForm.controls['field_city'].patchValue('')
           }
         });
     } else {
-      this.validZipStatus = 'Please enter valid US zip code';
+      this.validZipStatus = 'Zip code should be a 5 digit numeric value';
       this.showSelect = false;
       const arryobj = {field_state: '', field_city: ''};
       this.businessAddressForm.patchValue(arryobj);
@@ -194,9 +223,11 @@ this.profileService.getaddressById(locationId).subscribe(
   }
   validUsCountry(res): boolean {
     let isUs = false;
+     console.log(res)
     if (res['status'] === 'OK') {
       for (let i = 0; i <= res['results'][0].address_components.length - 1; i++) {
         if (res['results'][0].address_components[i].short_name === 'US') {
+           console.log(res['results'][0].address_components[i].short_name)
           isUs = true;
           break;
         }
