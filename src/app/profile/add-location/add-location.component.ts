@@ -44,6 +44,7 @@ export class AddLocationComponent implements OnInit {
 
   ngOnInit() {
     this.defaultNId = '';
+    this.disabledButton = false;
      this.userInfo  = this.userService.isLogedin();
     this.initAddress('', '', '', '', '', '', 0);
      this.activatedRoute.params.subscribe(

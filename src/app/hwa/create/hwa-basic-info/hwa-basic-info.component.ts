@@ -1,8 +1,10 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, NgZone } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators, FormArray } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UserService, HwaCommonService, ProfileService } from '../../../services/index';
+import { UserService, HwaCommonService, ProfileService, HoldDataService } from '../../../services/index';
 import {NotificationsService} from 'angular2-notifications';
+import {Subject} from 'rxjs/Subject';
+import {Observable} from 'rxjs/Observable';
 
 @Component({
   selector: 'app-hwa-basic-info',
@@ -45,12 +47,16 @@ public selectedNid = [];
 
   constructor(
     private router: Router,
+    private zone:NgZone,
     private formbuilder: FormBuilder,
     private userService: UserService,
     private profileService: ProfileService,
      private hwaCommonService: HwaCommonService,
+     private holdDataService:HoldDataService,
     private _notificationsService: NotificationsService,
     ) { }
+ 
+   
 
   ngOnInit() {
     this.selectedNid = [];
@@ -69,12 +75,29 @@ public selectedNid = [];
    
     const user = this.userService.isLogedin();
     if(user) {
-    this.getAddress(user);
+   // this.getAddress(user);
     }
     
+    
+    this.addressList =  this.holdDataService.selectedAddres;
+    console.log( this.addressList  );
+     this.addressList.forEach((item, index) => {
+          this.selectedNid[index]=item['nid']
+      });
+   this.holdDataService.getSelectedAddress().subscribe(data =>{
+      console.log('data', data);
+   })   
+ this.holdDataService.getSelectedAddress().subscribe(data => this.zone.run(() => {
+      // event handler code here
+      this.addressList = data;
+       console.log( data  );
+      alert(data)
+    }));
+   // .subscribe((islogedin: boolean) => {
+   
   }
 
- initLocation(val) {
+/* initLocation(val) {
     return this.formbuilder.group({
       'nid': [val]
     });
@@ -85,23 +108,18 @@ public selectedNid = [];
     const control = <FormArray>this.creatHWAForm.controls['locations'];
     control.push(this.initLocation(val));
    // console.log(this.creatHWAForm.controls['locations'].value)
-  }
+ } */
 
 getAddress(user) {
    
     this.profileService.getaddress(user.uid).subscribe(
       res => {
-        console.log(res);
+       // console.log(res);
         this.addressList = res;
         this.addressList.forEach((item, index) => {
           this.selectedNid[index]=item['nid']
-   // if(item.field_make_default == '1') {
-     // this.defaultNId = item.nid;
-      // this.businessAddressForm.patchValue(item);
-      // this.addLocation(item['nid'])
-   // }
 });
-    console.log(' this.selectedNid',  this.selectedNid);    
+   // console.log(' this.selectedNid',  this.selectedNid);    
       },error=>{
 
       });
@@ -113,8 +131,9 @@ onSubmit() {
     if (this.creatHWAForm.valid) {
       const user = this.userService.isLogedin();
 
-      
-    
+     var sd =  this.holdDataService.selectedAddres;
+    console.log(sd);
+   
       const CreteObj = {
         'hwa_nid': '',
         'uid': user.uid,
@@ -155,20 +174,20 @@ onSubmit() {
 //---------------------------------------------------
 
 onEditorBlured(quill) {
-    console.log('editor blur!', quill);
+ //   console.log('editor blur!', quill);
   }
  
   onEditorFocused(quill) {
-    console.log('editor focus!', quill);
+  //  console.log('editor focus!', quill);
   }
  
   onEditorCreated(quill) {
     this.editor = quill;
-    console.log('quill is ready! this is current quill instance object', quill);
+   // console.log('quill is ready! this is current quill instance object', quill);
   }
  
   onContentChanged({ quill, html, text }) {
-    console.log('quill content is changed!', quill, html, text);
+   // console.log('quill content is changed!', quill, html, text);
   }
 
 }

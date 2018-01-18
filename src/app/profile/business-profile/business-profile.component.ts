@@ -30,6 +30,7 @@ public isThereImge:boolean;
 private bisProfileId:string = '';
 private topicItemId:string = '';
 public  changeUiForNew:boolean = false;
+public lbl:string = '(Optional)';
 
   constructor(
     private formBuilder: FormBuilder, 
@@ -52,8 +53,10 @@ public  changeUiForNew:boolean = false;
     console.log(user)
     if(user.business_profile_created == 'yes') {
       this.isFirstBisProfile = false;
+      this.lbl = '(Optional)';
     this.businessProfile.controls["field_business_profile_topic_ima"].setValidators([Validators.nullValidator]);
   }else {
+    this.lbl = '(This will be used as your profile picture)';
     this.isFirstBisProfile = true;
     this.businessProfile.controls["field_business_profile_topic_ima"].setValidators([Validators.required]);
     }
@@ -61,7 +64,7 @@ public  changeUiForNew:boolean = false;
      this.isThereImge = false;
      this.activatedRoute.params.subscribe(
       (param:  any) => {
-         console.log(param['bId']);
+       //  console.log(param['bId']);
          if(param['bId']){
            this.isFirstBisProfile = false;
            this.bisProfileId = param['bId'];
@@ -103,7 +106,7 @@ loadbusProfile(profileId){
 const pObj = {"bptnid": profileId}
    this.hwaCommonService.getBusinessTopic(pObj).subscribe(
          res => {
-         console.log(res);
+      //   console.log(res);
          var bizTopics = res['business_topic'];
        //  console.log(this.topicItemId);
          if(this.topicItemId) {
@@ -155,7 +158,7 @@ const pObj = {"bptnid": profileId}
     "field_hwa_refrence":"",
     "business_topic":[userObj]
     }
-    console.log(bisObj)
+   // console.log(bisObj)
      if (valid) {
       this.hwaCommonService.createProfile(bisObj).subscribe(
       res => {
@@ -176,7 +179,7 @@ const pObj = {"bptnid": profileId}
             clickToClose: true,
           });
           let pid = res['details'][0].nid[0].value
-          console.log(pid);
+        //  console.log(pid);
         this.router.navigate(['/view-business-profile', pid]);
       },error => {
 
@@ -220,6 +223,7 @@ fileChangeEvent (fileInput: any) {
   }
 
 userProfileView(){
-
+ this.router.navigate(['/user-profile-view']);
+//  this.router.navigate(['/view-business-profile']);
 }
     }

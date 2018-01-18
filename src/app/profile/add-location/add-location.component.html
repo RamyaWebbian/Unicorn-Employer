@@ -79,7 +79,7 @@
         </div>
     <br>
           <div *ngIf="!addNewBusFlag" class="goToNextBtn bgGrey">
-            <button type="submit" [disabled]="!businessAddressForm.valid || disabledButton" class="btn btn-primary" >{{disabledButton?'Save..': 'Save business location'}}</button>
+            <button type="submit" [disabled]="!businessAddressForm.valid || disabledButton" class="btn btn-primary" >{{disabledButton?'Saving..': 'Save business location'}}</button>
           </div>
 
 
@@ -100,7 +100,7 @@
           <div class="goToNextBtn bgGrey">
             <div class="row">
               <div class="col-6 text-right">
-                <button type="submit" [disabled]="!businessAddressForm.valid || disabledButton" class="btn btn-primary">{{disabledButton?'Save..': 'Save'}}</button>
+                <button type="submit" [disabled]="!businessAddressForm.valid || disabledButton" class="btn btn-primary">{{disabledButton?'Saving..': 'Save'}}</button>
               </div>
               <div class="col-6 text-left">
                 <button type="button" class="btn btn-primary cancel" (click) = "userProfileView()">cancel</button>

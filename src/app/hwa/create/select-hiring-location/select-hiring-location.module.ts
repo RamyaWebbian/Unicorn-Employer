@@ -8,6 +8,9 @@ import { SelectHiringLocationRoutingModule } from './select-hiring-location-rout
 import { SharedModule } from '../../../shared/shared.module';
 import { UserService, ProfileService, HwaCommonService } from '../../../services/index';
 import {HeaderValidUserModule} from '../../../common/header-valid-user/header-valid-user.module';
+//declare var window:any
+ // window.holdDataService = new HoldDataService();
+
 @NgModule({
   imports: [
     CommonModule,
@@ -19,5 +22,5 @@ import {HeaderValidUserModule} from '../../../common/header-valid-user/header-va
   ],
   declarations: [SelectHiringLocationComponent],
   providers:[ProfileService, HwaCommonService]
-})
+}) //   {provide: HoldDataService, useValue: window.holdDataService}
 export class SelectHiringLocationModule { }

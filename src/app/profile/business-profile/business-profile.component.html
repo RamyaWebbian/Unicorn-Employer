@@ -32,7 +32,7 @@
                 <img *ngIf="!isThereImge" src="../../assets/photo-camera.png" class="all-icon" />
                  <input type="file"  name="profileImagebtn" id="uploadimg" (change)="fileChangeEvent($event)"  class="upload"  />
                 <p>Upload business logo</p>
-                <small>(This will be used as your profile picture)</small>
+                <small>{{lbl}}</small>
               </div>
                <input type="hidden" class="myInputStyle" id="topic" [(ngModel)]="profileImageId" formControlName="field_business_profile_topic_ima" >
                <div [hidden]="businessProfile.controls['field_business_profile_topic_ima'].valid || businessProfile.controls['field_business_profile_topic_ima'].pristine" class="inline-error">
@@ -43,14 +43,14 @@
               <label for="topic">Topic</label>
               <input type="text" class="myInputStyle" id="topic" formControlName="field_topic" required>
               <div [hidden]="businessProfile.controls['field_topic'].valid || businessProfile.controls['field_topic'].pristine" class="inline-error">
-                Somethings not right
+               Please enter a topic
               </div>
             </div>
             <div class="form-group filled-form busDesc">
               <label for="busDesc">Description</label>
               <textarea id="busDesc" formControlName="field_business_profile_topic_des" required></textarea>
               <div [hidden]="businessProfile.controls['field_business_profile_topic_des'].valid || businessProfile.controls['field_business_profile_topic_des'].pristine" class="inline-error">
-                Somethings not right
+                 Please enter a description
               </div>
             </div>
           </div>

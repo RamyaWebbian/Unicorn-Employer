@@ -3,8 +3,8 @@ import {Subject} from 'rxjs/Subject';
 import {Observable} from 'rxjs/Observable';
 
 @Injectable()
-export class OverlayDataService {
-  private _hwaData: Array<any> = [];
+export class HoldDataService {
+  /* private _hwaData: Array<any> = [];
   private _koData: Array<any> = [];
   private _skilldata: Array<any> = [];
   private _profiledata: Array<any> = [];
@@ -13,11 +13,31 @@ export class OverlayDataService {
   private asynskillData: Subject<any> = new Subject<any>();
   private asynprofileData: Subject<any> = new Subject<any>();
   private finalOverlayData: Subject<any> = new Subject<any>();
-  private _allStapesData: Array<any> = [];
+  private _allStapesData: Array<any> = []; */
+  private _selectedAddr = [];
+
+   private selectedAddress: Subject<any> = new Subject<any>();
+
   constructor() { }
 
+ setSelectedAddress(addressList: any): void {
+ //  console.log('addressList', addressList)
+    this.selectedAddress.next(addressList);
+  }
 
- hwaData(hwaData: any): void {
+ getSelectedAddress(): Observable<any> {
+    return this.selectedAddress.asObservable();
+  }
+
+get selectedAddres(): any {
+   return this._selectedAddr;
+ }
+
+ set selectedAddres(value: any) {
+    // console.log('value ', value)
+   this._selectedAddr = value;
+ } 
+ /* hwaData(hwaData: any): void {
     this._hwaData = hwaData;
     this.asynData.next(hwaData);
   }
@@ -68,6 +88,6 @@ export class OverlayDataService {
 
  set allStapesData(value: Array<any>) {
    this._allStapesData = value;
- }
+ } */
 
 }

@@ -8,6 +8,7 @@ import { CookieService } from 'ngx-cookie-service';
 
 @Injectable()
 export class HwaCommonService {
+  
   public switchUrl= this.userService.switchUrl;
   private create_hwa = this.switchUrl + 'create_hwa.json';
   private popupAddress= this.switchUrl + 'create_business_address.json';

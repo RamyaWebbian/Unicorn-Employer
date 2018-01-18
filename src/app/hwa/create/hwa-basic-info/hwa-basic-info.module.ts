@@ -9,6 +9,8 @@ import { SharedModule } from '../../../shared/shared.module';
 import { UserService, HwaCommonService } from '../../../services/index';
 import {HeaderValidUserModule} from '../../../common/header-valid-user/header-valid-user.module';
 import { QuillEditorModule } from 'ng2-quill-editor';
+// declare var window:any
+ // window.holdDataService = new HoldDataService();
 
 @NgModule({
   imports: [
@@ -23,5 +25,5 @@ import { QuillEditorModule } from 'ng2-quill-editor';
   declarations: [HwaBasicInfoComponent],
   providers:[HwaCommonService]
 })
-
+//  {provide: HoldDataService, useValue: window.holdDataService}
 export class HwaBasicInfoModule { }

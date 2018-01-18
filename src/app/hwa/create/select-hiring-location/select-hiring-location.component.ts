@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UserService, ProfileService, HwaCommonService } from '../../../services/index';
+import { UserService, ProfileService, HoldDataService } from '../../../services/index';
 import {NotificationsService} from 'angular2-notifications';
 
 @Component({
@@ -15,7 +15,7 @@ export class SelectHiringLocationComponent implements OnInit {
   constructor(private router: Router,
     private userService: UserService,
     private profileService: ProfileService,
-    private hwaCommonService: HwaCommonService,
+    private holdDataService: HoldDataService,
     private _notificationsService: NotificationsService) { }
 
   ngOnInit() {
@@ -28,7 +28,7 @@ export class SelectHiringLocationComponent implements OnInit {
  get selectedOptions() { // right now: ['1','3']
     return this.addressList
               .filter(opt => opt.checked)
-              .map(opt => opt.nid)
+              .map(opt => opt)
   }
 getSelectedAddress(){
   console.log(this.selectedOptions);
@@ -37,7 +37,7 @@ getAddress(user) {
    
     this.profileService.getaddress(user.uid).subscribe(
       res => {
-        console.log(res);
+       // console.log(res);
         this.addressList = res;
         this.addressList.forEach((item, index) => {
           //this.selectedNid[index]=item['nid']
@@ -53,28 +53,13 @@ getAddress(user) {
 }
 
 onSubmit() {
-  console.log(this.selectedOptions);
-   const user = this.userService.isLogedin();
-    const locationObj = {
-      'uid': user.uid,
-      'address': this.selectedOptions
-    };
-    
-    this.hwaCommonService.popUpAddLocation(locationObj).subscribe(
-      res => {
-       console.log(res)
-       // this.addLocationForm.reset();
-         this._notificationsService.success(
-          'Success',
-          'Location Added Successfully',
-          {
-            timeOut: 600,
-            showProgressBar: true,
-            pauseOnHover: false,
-            clickToClose: true,
-          }
-        );
-      });
+
+ // console.log(this.selectedOptions);
+  // const user = this.userService.isLogedin();
+  this.holdDataService.selectedAddres = this.selectedOptions;
+  this.holdDataService.setSelectedAddress(this.selectedOptions);
+  this.router.navigate(['/hwa-basic-info']);
+
 }
 
 }
