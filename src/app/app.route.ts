@@ -66,12 +66,12 @@ export const router: Routes = [
         canActivate: [AuthGuard]
    },
 
-   {
+ /* {
       path: 'add-new-location',
       loadChildren: './profile/add-new-location/add-new-location.module#AddNewLocationModule',
       pathMatch: 'full',
       canActivate: [AuthGuard]
-   },
+   }, */
    {
       path: 'business-profile/:bId/:topicId',
       loadChildren: './profile/business-profile/business-profile.module#BusinessProfileModule',

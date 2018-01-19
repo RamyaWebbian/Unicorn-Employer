@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import {ProfileService, UserService} from '../../services/index';
+import {ProfileService, UserService, HoldDataService} from '../../services/index';
 import { FormGroup, FormBuilder, Validators, FormArray} from '@angular/forms';
 // import {DOCUMENT} from '@angular/platform-browser';
-import {NotificationsService} from 'angular2-notifications';
+//import {NotificationsService} from 'angular2-notifications';
 // import {Subscription} from 'rxjs/Subscription';
 
 @Component({
@@ -31,13 +31,14 @@ export class AddLocationComponent implements OnInit {
   private defaultNId:any;
   private userInfo:any;
   public addNewBusFlag:boolean;
+public isFirstTime:boolean;
 
   constructor(private formbuilder: FormBuilder,
              // private el: ElementRef,
               private profileService: ProfileService,
               private userService: UserService,
               private router: Router,
-              private _notificationsService: NotificationsService,
+              private holdDataService: HoldDataService,
               private activatedRoute: ActivatedRoute,
             //  private subscription:Subscription
               ) { }
@@ -112,11 +113,12 @@ export class AddLocationComponent implements OnInit {
   helpText() {
     this.helpShow = !this.helpShow;
   }
+
 updateLocation(locationId) {
 this.profileService.getaddressById(locationId).subscribe(
       res => {
        this.businessAddressForm.patchValue(res[0]);
-
+      // this.holdDataService.setMessage({msg:'', sucsess: true})
       },error => {
 
       });
@@ -124,10 +126,14 @@ this.profileService.getaddressById(locationId).subscribe(
 
  onSubmit() {
 
-    const user = this.userService.isLogedin();
+  var user = this.userService.isLogedin();
      
      var fobj = this.businessAddressForm.value;
      fobj.nid = this.defaultNId;
+      if(user.business_address_created == 'no') {
+      fobj.field_make_default = 1;
+      }
+
     const locationObj = {
       'uid': user.uid,
       'address': [fobj]
@@ -144,16 +150,13 @@ this.profileService.getaddressById(locationId).subscribe(
         this.businessAddressForm.reset();
 
         this.getCityinfoList = [];
-        this._notificationsService.success(
-          'Success',
-          res['message'],
-          {
-            timeOut: 600,
-            showProgressBar: true,
-            pauseOnHover: false,
-            clickToClose: true,
-          });
-        //
+        this.holdDataService.setMessage({msg:res['message'], sucsess: true});
+
+         const user = this.userService.isLogedin();
+        if(user.business_address_created == 'no') {
+        user.business_address_created = 'yes'
+        this.userService.resetUserInfo(user);
+        }
        this.router.navigate(['/user-profile-view']);
       },
       error => {

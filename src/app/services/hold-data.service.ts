@@ -16,10 +16,10 @@ export class HoldDataService {
   private finalOverlayData: Subject<any> = new Subject<any>();
   private _allStapesData: Array<any> = []; */
   private _selectedAddr = [];
-private _isTest: boolean;
+  private _message: string = '';
 
-   private selectedAddress: BehaviorSubject<Array<any>> = new BehaviorSubject<Array<any>>([]);
-     private subjectTest: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  private selectedAddress: BehaviorSubject<Array<any>> = new BehaviorSubject<Array<any>>([]);
+  private messageSource: BehaviorSubject<any> = new BehaviorSubject<any>('');
 
   constructor() { }
 
@@ -37,20 +37,17 @@ get selectedAddres(): any {
    return this._selectedAddr;
  }
 
- set selectedAddres(value: any) {
-    // console.log('value ', value)
+set selectedAddres(value: any) {
    this._selectedAddr = value;
- }
+}
 
-   setTest(isLogedIn: boolean): void {
-    
-    this._isTest = isLogedIn;
-    // alert(this._isLogedIn)
-    this.subjectTest.next(this._isTest);
+  setMessage(message: any): void {
+    this._message = message;
+    this.messageSource.next(this._message);
   }
 
-  getTest(): Observable<boolean> {
-    return this.subjectTest.asObservable();
+  getMessage(): Observable<any> {
+    return this.messageSource.asObservable();
   }
 
  /* hwaData(hwaData: any): void {

@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HelpModalComponent } from '../../common/help-modal/help-modal.component';
-import {ProfileService, UserService} from '../../services/index';
+import {ProfileService, UserService, HoldDataService} from '../../services/index';
 import { FormGroup, FormBuilder, Validators, FormArray} from '@angular/forms';
 // import {DOCUMENT} from '@angular/platform-browser';
-import {NotificationsService} from 'angular2-notifications';
+// import {NotificationsService} from 'angular2-notifications';
 
 
 @Component({
@@ -13,6 +13,7 @@ import {NotificationsService} from 'angular2-notifications';
   styleUrls: ['./user-profile.component.css']
 })
 export class UserProfileComponent implements OnInit {
+  public contentmsg = 'user'
   public helpShow : boolean;
   public disabledButton: boolean;
   public  profileForm: FormGroup;
@@ -39,7 +40,7 @@ export class UserProfileComponent implements OnInit {
               private profileService: ProfileService,
               private userService: UserService,
               private router: Router,
-              private _notificationsService: NotificationsService,
+              private holdDataService: HoldDataService,
               ) { }
   
   ngOnInit() {
@@ -47,8 +48,8 @@ export class UserProfileComponent implements OnInit {
     this.initFields();
      const user  = this.userService.isLogedin();
      if(user){
-     if(user['business_address_created'] == 'yes'){
-      this.helpShow = false;
+     if(user['business_address_created'] == 'no'){
+      this.helpShow = true;
      }
 
     this.loadUserProfile(user);
@@ -78,16 +79,8 @@ onSubmit(isValid) {
       res => {
          this.disabledButton = false;
         console.log(res)
-       // this.loadUserFormData(user);
-        this._notificationsService.success(
-          'Saved!',
-          res['message'],
-          {
-            timeOut: 1000,
-            showProgressBar: true,
-            pauseOnHover: false,
-            clickToClose: true,
-          });
+       this.holdDataService.setMessage({msg:res['message'], sucsess: true});
+       
 // this.router.navigate(['/add-location']);
         setTimeout(() => {
           if(this.addressList.length){
@@ -111,7 +104,7 @@ onSubmit(isValid) {
     const userId = {'uid': userdata.uid };
     this.userService.accesData(userId).subscribe(
       res => {
-         console.log(res)
+        // console.log(res)
  this.addressList = res['address'];
  if(this.addressList.length){
    this.helpShow = false;

@@ -17,7 +17,6 @@ import {NgxMaskModule} from 'ngx-mask';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    
     ViewBusinessProfileRoutingModule,
     HeaderValidUserModule,
     NgxMaskModule.forRoot(),

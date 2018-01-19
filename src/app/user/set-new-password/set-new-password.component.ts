@@ -2,11 +2,11 @@ import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { EqualValidator } from '../../common/directives/equal-validator.directive'; 
-import { UserService } from '../../services/index';
+import { UserService, HoldDataService } from '../../services/index';
 import {ShowHideInput} from '../../common/directives/show-hide-directive';
 import {ShowHideCnf} from '../../common/directives/show-hide-cnf';
 import {Subscription} from 'rxjs/Subscription';
-import {NotificationsService} from 'angular2-notifications';
+// import {NotificationsService} from 'angular2-notifications';
 
 @Component({
   selector: 'app-set-new-password',
@@ -24,6 +24,7 @@ export class SetNewPasswordComponent implements OnInit {
   public displayForm: boolean;
   public titalname = 'Set Your Password';
   public disabledButton:boolean;
+  public setmessage='';
   public options = {
     position: ['top', 'center'],
     timeOut: 5000,
@@ -40,7 +41,7 @@ export class SetNewPasswordComponent implements OnInit {
     //  private authenticationService: AuthService,
     private userService: UserService,
     private activatedRoute: ActivatedRoute,
-    private _notificationsService:NotificationsService
+    private holdDataService:HoldDataService
   ) {
 
   }
@@ -59,8 +60,10 @@ export class SetNewPasswordComponent implements OnInit {
         if (param['token'] && param['uid']) {
           if (param['isonetime'].toString() === '1') {
             this.titalname = 'Reset Your Password';
+              this.setmessage = 'Your password has been reset successfully';
           } else {
             this.titalname = 'Set Your Password';
+              this.setmessage = 'Your password has been set successfully';
           }
           //  this.router.navigate(['/']);
           this.tokenid = param['token'];
@@ -115,8 +118,8 @@ conf_toggleShow() {
           this.uid = '';
           this.tokenid = '';
         //  if (res['message']) {
-          this._notificationsService.error('Sorry', "The provided access token is invalid or has expired",
-          { timeOut: 7500, showProgressBar: true, pauseOnHover: false, clickToClose: true });
+           this.holdDataService.setMessage({msg:'The provided access token is invalid or has expired', sucsess: false});
+         
          // } else {
           //  this.invalidToken = true;
          // }
@@ -136,8 +139,10 @@ this.disabledButton = true;
     this.userService.resetPass(formGroup).subscribe(
       res => {
         this.disabledButton = false;
-       // console.log(res)
+        console.log(res)
         if (res['status']) {
+        
+          this.holdDataService.setMessage({msg: this.setmessage, sucsess: true});
           this.loading = false;
           this.router.navigate(['/login']);
          } else {

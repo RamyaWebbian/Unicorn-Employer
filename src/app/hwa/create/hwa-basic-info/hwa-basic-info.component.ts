@@ -113,7 +113,7 @@ getAddress(user) {
         this.addressList = res;
         this.addressList.forEach((item, index) => {
           this.selectedNid[index]=item['nid']
-});
+      });
    // console.log(' this.selectedNid',  this.selectedNid);    
       },error=>{
 
@@ -166,15 +166,7 @@ console.log(CreteObj);
         res => {
           this.disabledButton = false;
           console.log(res)
-          this._notificationsService.success(
-            'Success',
-            'Your have created Help Wanted Ad Successfully',
-            {
-              timeOut: 600,
-              showProgressBar: true,
-              pauseOnHover: false,
-              clickToClose: true,
-            });
+           this.holdDataService.setMessage({msg:'Your have created Help Wanted Ad Successfully', sucsess: true});
 
              localStorage.removeItem('hwaData');
              this.cookieService.delete('hwaData');

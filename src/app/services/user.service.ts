@@ -228,7 +228,7 @@ resetUserInfo(user) {
           if (this.isLocalStorage()) {
               localStorage.setItem('currentUser', JSON.stringify(user));
             }else{
-               this.cookieService.delete('userToken');
+               this.cookieService.delete('currentUser');
                this.cookieService.set('currentUser', JSON.stringify(user));
                 }
 }

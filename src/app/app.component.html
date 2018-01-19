@@ -1,2 +1,2 @@
- <simple-notifications [options]="options"></simple-notifications>
+<div [ngClass]="className" *ngIf="message"><h4>{{message}}</h4><a (click)="closeMeg()">Close</a></div>
 <router-outlet></router-outlet>

@@ -2,8 +2,8 @@ import {ShowHideInput} from '../../common/directives/show-hide-directive';
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UserService } from '../../services/index';
-import {NotificationsService} from 'angular2-notifications';
+import { UserService, HoldDataService } from '../../services/index';
+// import {NotificationsService} from 'angular2-notifications';
 import { CookieService } from 'ngx-cookie-service';
 
 @Component({
@@ -32,9 +32,10 @@ export class LoginComponent implements OnInit {
 constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
+    private holdDataService: HoldDataService,
     private cookieService:CookieService,
     private router: Router,
-    private _notificationsService: NotificationsService
+   // private _notificationsService: NotificationsService
 ) {
   
 }
@@ -42,10 +43,10 @@ constructor(
   ngOnInit() {
      if(this.cookieService.get('remember')) {
      this.email =  this.cookieService.get('username');
-      this.password = this.cookieService.get('password');
+     this.password = this.cookieService.get('password');
   }
   var user = this.userService.isLogedin();
-  console.log(user)
+  // console.log(user)
   if(user){
     if(user.business_profile_created == 'yes'){
       this.router.navigate(['/user-profile-view']);
@@ -72,23 +73,22 @@ constructor(
 
 onSubmitLogin(loginfields){
   this.disabledButton = true;
- this.loading = true;
- // console.log(this.rememberme);
+  this.loading = true;
+ 
  this.rememberMeFun(loginfields)
     const data = { 'name': loginfields.email, 'pass': loginfields.password };
     this.userService.login(data).subscribe(
       res => {
-
+console.log(res);
         this.disabledButton = false;
         if(res['status']){
-         this._notificationsService.error('Sorry',res['status'].message, { timeOut: 2500, showProgressBar: true, pauseOnHover: false, clickToClose: true });
-      }else{
-        this.loading = false;
+          this.holdDataService.setMessage({msg:res['status'].message, sucsess: false});
+        }else{
+          this.loading = false;
           const user = res['current_user'];
           user.full_name = res['full_name']
-         // console.log(typeof localStorage)
-           console.log(user);
-         this._notificationsService.success('success','Login Success', { timeOut: 2500, showProgressBar: true, pauseOnHover: false, clickToClose: true });
+    
+           this.holdDataService.setMessage({msg:'You are successfully logged in', sucsess: true});
          var token = {token:res['jwt_token']};
 
          //this.saveRememberMedata(data);
@@ -106,8 +106,7 @@ onSubmitLogin(loginfields){
                 }
   
             this.loading = false;
-           // console.log(res['current_user'].business_profile_created)
-            if(res['current_user'].business_profile_created == 'yes'){
+            if(res['current_user'].business_profile_created == 'yes') {
               this.router.navigate(['/user-profile-view']);
             }else{
               this.router.navigate(['user-profile']);
@@ -118,23 +117,12 @@ onSubmitLogin(loginfields){
       
       },
       error => {
-        this._notificationsService.error(
-          'Sorry',
-          error,
-          {
-            timeOut: 2500,
-            showProgressBar: true,
-            pauseOnHover: false,
-            clickToClose: true,
-          }
-        );
-        this.loading = false;
+       this.holdDataService.setMessage({msg:error, sucsess:false});
+       this.loading = false;
       });
   }
  
    toggleShow(flag:boolean) {
-    console.log(flag)
-    console.log(this.input)
     this.show = flag;
     if (this.show) {
       this.input.changeType('text');

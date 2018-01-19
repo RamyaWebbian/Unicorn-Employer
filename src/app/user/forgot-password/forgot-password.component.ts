@@ -1,9 +1,9 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {FormGroup, FormBuilder, Validators} from '@angular/forms';
-import {UserService} from '../../services/user.service';
+import {UserService, HoldDataService } from '../../services/index';
 import {Router} from '@angular/router';
 import {DOCUMENT} from '@angular/platform-browser';
-import {NotificationsService} from 'angular2-notifications';
+// import {NotificationsService} from 'angular2-notifications';
 
 
 @Component({
@@ -29,7 +29,7 @@ public forgotPasswordForm: FormGroup;
     private formBuilder: FormBuilder,
     private userService: UserService,
     private router: Router,
-    private _notificationsService: NotificationsService
+    private holdDataService: HoldDataService
   ) { }
 
   ngOnInit() {
@@ -53,21 +53,9 @@ this.disabledButton = true;
         if (res) {
           this.loading = false;
           if (res['error_message']) {
-
-            this._notificationsService.error(
-              'Error!',
-              res['error_message'],
-              {
-                timeOut: 2500,
-                showProgressBar: true,
-                pauseOnHover: false,
-                clickToClose: true,
-              }
-            );
-            // this.enableLogin = true;
-           // localStorage.setItem('yes', 'true');
+             this.holdDataService.setMessage({msg:res['error_message'], sucsess: false});
           } else {
-
+            // this.holdDataService.setMessage({msg: '', sucsess: true});
             this.router.navigate(['forgot-success']);
           }
         } else {
@@ -75,19 +63,11 @@ this.disabledButton = true;
         }
         const user = res['current_user'];
 
-        if (user) {
-          //  store user details and jwt token in local storage to keep user logged in between page refreshes
-         // localStorage.setItem('userToken', JSON.stringify(res['csrf_token']));
-         // localStorage.setItem('currentUser', JSON.stringify(user));
-         // this.loading = false;
-        //  this.userService.setLogedIn(true);
-        //  this.router.navigate(['/']);
-
-        }
-
       },
       error => {
+        this.disabledButton = false;
         this.loading = false;
+        this.holdDataService.setMessage({msg:error, sucsess: false});
       });
   }
 

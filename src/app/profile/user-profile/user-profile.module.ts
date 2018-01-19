@@ -11,7 +11,6 @@ import { SharedModule } from '../../shared/shared.module';
 import { HeaderValidUserModule } from '../../common/header-valid-user/header-valid-user.module';
 import {NgxMaskModule} from 'ngx-mask';
 import {ProfileService, UserService} from '../../services/index';
-import {SimpleNotificationsModule, NotificationsService} from 'angular2-notifications';
 
 @NgModule({
   imports: [
@@ -22,11 +21,10 @@ import {SimpleNotificationsModule, NotificationsService} from 'angular2-notifica
     HelpModalModule,
     ReactiveFormsModule,
     NgxMaskModule.forRoot(),
-    SimpleNotificationsModule
     //SharedModule
      
   ],
   declarations: [UserProfileComponent],
-  providers:[ProfileService, UserService, NotificationsService]
+  providers:[ProfileService, UserService]
 })
 export class UserProfileModule {  }

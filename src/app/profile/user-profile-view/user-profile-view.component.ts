@@ -1,9 +1,9 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { HelpModalComponent } from '../../common/help-modal/help-modal.component';
-import {ProfileService, UserService, HwaCommonService} from '../../services/index';
+import {ProfileService, UserService, HwaCommonService, HoldDataService} from '../../services/index';
 import { FormGroup, FormBuilder, Validators, FormArray} from '@angular/forms';
-import {NotificationsService} from 'angular2-notifications';
+// import {NotificationsService} from 'angular2-notifications';
 
 @Component({
   selector: 'app-user-profile-view',
@@ -41,7 +41,7 @@ private userInfo:any;
   constructor(private router : Router,
               private profileService: ProfileService,
               private userService: UserService,
-              private _notificationsService: NotificationsService,
+              private holdDataService: HoldDataService,
               private _eref: ElementRef,
               private hwaCommonService:HwaCommonService,
               ) { }
@@ -61,7 +61,7 @@ private userInfo:any;
     const userId = {'uid': userdata.uid };
     this.userService.accesData(userId).subscribe(
       res => {
-       // console.log(res)
+        console.log(res)
         if (res['status']) {
           const user =  res;
         
@@ -117,17 +117,10 @@ deleteAddress(nid) {
   const delItem = {"nid":[nid] }
  this.profileService.deleteAddressById(delItem).subscribe(
       res => {
-      console.log(res);
+     // console.log(res);
        this.loadUserProfile(this.userInfo);
-        this._notificationsService.success(
-          'Deleted!',
-          res['message'],
-          {
-            timeOut: 4000,
-            showProgressBar: true,
-            pauseOnHover: false,
-            clickToClose: true,
-          });
+       this.holdDataService.setMessage({msg:res['message'], sucsess: true});
+       
       },error => {
         console.log(error);
       });
@@ -148,17 +141,10 @@ this.profileService.getaddressById(nid).subscribe(
           };
  this.profileService.createBusinessLocation(locationObj).subscribe(
       res => {
-        console.log(res);
+        //console.log(res);
         this.loadUserProfile(this.userInfo);
-        this._notificationsService.success(
-          'Success', res['message'],
-          {
-            timeOut: 600,
-            showProgressBar: true,
-            pauseOnHover: false,
-            clickToClose: true,
-          }
-        );
+         this.holdDataService.setMessage({msg:res['message'], sucsess: true});
+       
         //
        // this.router.navigate(['/user-profile-view']);
       },

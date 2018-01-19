@@ -4,7 +4,6 @@
        <section id="login">  
     <app-header-registration ></app-header-registration> 
 		<div class="deskWidth">
- <simple-notifications [options]="options"></simple-notifications>
  <!--  [ngFormOptions]="{ updateOn: 'submit' }"  -->
   <form [formGroup]="registerUser" (ngSubmit)="onSubmit(registerUser, registerUser.valid)" novalidate >
         <div class="page-title">

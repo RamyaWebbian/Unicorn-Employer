@@ -11,6 +11,7 @@ import { HelpModalComponent } from '../../common/help-modal/help-modal.component
   styleUrls: ['./business-profile.component.css']
 })
 export class BusinessProfileComponent implements OnInit {
+  public contentmsg = "busi"
   public isFirstBisProfile:boolean;
   public businessProfile:FormGroup;
   public disableButton:boolean;
@@ -50,6 +51,9 @@ public lbl:string = '(Optional)';
       'field_business_profile_topic_des': ['', {updateOn: 'change', validators:[Validators.required]}],
     })
     var user = this.userService.isLogedin();
+    if(user.business_profile_created == 'no') {
+      this.helpShow = true;
+    }
     console.log(user)
     if(user.business_profile_created == 'yes') {
       this.isFirstBisProfile = false;

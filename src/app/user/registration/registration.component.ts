@@ -2,8 +2,8 @@ import { Component, OnInit, Input, ViewChild, TemplateRef, } from '@angular/core
 import { Router } from '@angular/router';
 import {FormGroup, FormBuilder, Validators, NgForm } from '@angular/forms';
 
-import { UserService } from '../../services/user.service';
-import {NotificationsService} from 'angular2-notifications';
+import { UserService, HoldDataService } from '../../services/index';
+// import {NotificationsService} from 'angular2-notifications';
 
 @Component({
   selector: 'app-registration',
@@ -28,7 +28,7 @@ public submitted: boolean = false;
     private formBuilder: FormBuilder, 
     private router: Router,
     private userService: UserService,
-    private _notificationsService: NotificationsService
+    private holdDataService: HoldDataService
    ) { }
   
 
@@ -80,17 +80,8 @@ isEqualEmail(control: FormGroup ): {[s: string]: boolean} {
           //  this.loading = false;
              this.disabledButton = false;
             if (res.user_status === 'existing') {
-
-              this._notificationsService.error(
-                'An account with this email already exists!',
-                'Please use the LOGIN button below to access Talentrackr.',
-                {
-                  timeOut: 3500,
-                  showProgressBar: true,
-                  pauseOnHover: false,
-                  clickToClose: true,
-                }
-              );
+ this.holdDataService.setMessage({msg:'An account with this email already exists! Please use the LOGIN button below to access Talentrackr', sucsess: false});
+             
              // this.router.navigate(['/']);
             } else {
               this.router.navigate(['/registration-success', fvalue.controls['firstname'].value]);

@@ -2,7 +2,7 @@ import { Component, OnInit, Input, ViewChild, TemplateRef } from '@angular/core'
 import { Router, ActivatedRoute } from '@angular/router';
 import {FormGroup, FormBuilder, Validators, NgForm } from '@angular/forms';
  import { UserService, HwaCommonService} from '../../services/index';
-import {NotificationsService} from 'angular2-notifications';
+
  
 @Component({
   selector: 'app-view-business-profile',

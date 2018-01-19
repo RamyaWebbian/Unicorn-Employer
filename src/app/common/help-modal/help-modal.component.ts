@@ -13,16 +13,25 @@ export class HelpModalComponent implements OnInit {
   @Output() closeSection: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Input()
   visible: boolean = true;
+  @Input() content:string;
 
+public isBusiness:boolean;
   public vis:boolean;
   public hideHelp : boolean;
+
   constructor() { }
 
   ngOnInit() {
     //alert('help modal')
    // this.hideHelp = true;
    // console.log(this.visible)
-   // this.vis = this.visible; 
+   // this.vis = this.visible;
+   if(this.content == 'busi') {
+alert('busiiiiiiiiiiiii');
+  this.isBusiness = true;
+   }else{
+ this.isBusiness = false;
+   }
   }
   
   closeHelp() {
