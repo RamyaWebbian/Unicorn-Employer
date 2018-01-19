@@ -28,6 +28,7 @@ export class HeaderValidUserComponent implements OnInit {
     this.userService.isInSession();
     
       this.userService.getLogedIn().subscribe((islogedin: boolean) => {
+       // alert('loged in..I am in header')
        //  console.log(islogedin)
       this.isLogedin = islogedin;
     // alert(islogedin)

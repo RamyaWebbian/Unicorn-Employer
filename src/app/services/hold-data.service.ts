@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {Subject} from 'rxjs/Subject';
 import {Observable} from 'rxjs/Observable';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Injectable()
 export class HoldDataService {
@@ -15,17 +16,20 @@ export class HoldDataService {
   private finalOverlayData: Subject<any> = new Subject<any>();
   private _allStapesData: Array<any> = []; */
   private _selectedAddr = [];
+private _isTest: boolean;
 
-   private selectedAddress: Subject<any> = new Subject<any>();
+   private selectedAddress: BehaviorSubject<Array<any>> = new BehaviorSubject<Array<any>>([]);
+     private subjectTest: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor() { }
 
- setSelectedAddress(addressList: any): void {
+ setSelectedAddress(addressList: Array<any>): void {
  //  console.log('addressList', addressList)
-    this.selectedAddress.next(addressList);
+ this._selectedAddr = addressList
+    this.selectedAddress.next(this._selectedAddr);
   }
 
- getSelectedAddress(): Observable<any> {
+ getSelectedAddress(): Observable<Array<any>> {
     return this.selectedAddress.asObservable();
   }
 
@@ -36,7 +40,19 @@ get selectedAddres(): any {
  set selectedAddres(value: any) {
     // console.log('value ', value)
    this._selectedAddr = value;
- } 
+ }
+
+   setTest(isLogedIn: boolean): void {
+    
+    this._isTest = isLogedIn;
+    // alert(this._isLogedIn)
+    this.subjectTest.next(this._isTest);
+  }
+
+  getTest(): Observable<boolean> {
+    return this.subjectTest.asObservable();
+  }
+
  /* hwaData(hwaData: any): void {
     this._hwaData = hwaData;
     this.asynData.next(hwaData);

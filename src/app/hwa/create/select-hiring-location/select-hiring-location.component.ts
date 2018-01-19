@@ -56,8 +56,10 @@ onSubmit() {
 
  // console.log(this.selectedOptions);
   // const user = this.userService.isLogedin();
-  this.holdDataService.selectedAddres = this.selectedOptions;
+ // this.holdDataService.selectedAddres = this.selectedOptions;
   this.holdDataService.setSelectedAddress(this.selectedOptions);
+  //var abc = true;
+  // this.holdDataService.setTest(abc);
   this.router.navigate(['/hwa-basic-info']);
 
 }

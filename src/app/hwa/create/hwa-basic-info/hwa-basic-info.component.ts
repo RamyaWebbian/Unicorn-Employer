@@ -5,6 +5,7 @@ import { UserService, HwaCommonService, ProfileService, HoldDataService } from '
 import {NotificationsService} from 'angular2-notifications';
 import {Subject} from 'rxjs/Subject';
 import {Observable} from 'rxjs/Observable';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-hwa-basic-info',
@@ -54,61 +55,55 @@ public selectedNid = [];
      private hwaCommonService: HwaCommonService,
      private holdDataService:HoldDataService,
     private _notificationsService: NotificationsService,
+    private cookieService:CookieService
     ) { }
  
    
 
   ngOnInit() {
+   
+
     this.selectedNid = [];
       this.creatHWAForm = this.formbuilder.group({
-      'position': ['', {updateOn: 'change', validators: [Validators.required]}],
-      'numberOfPosition': ['', {updateOn: 'change', validators:[Validators.required]}],
-      'position_type': ['', {updateOn: 'change', validators:[Validators.required]}],
-      'exp': ['', {updateOn: 'change', validators:[Validators.required]}],
+      'title': ['', {updateOn: 'change', validators: [Validators.required]}],
+      'field_how_many_people_do_you_nee': ['', {updateOn: 'change', validators:[Validators.required]}],
+      'field_will_they_be_full_time_par': ['', {updateOn: 'change', validators:[Validators.required]}],
+      'field_describe_the_skills_and_ex': ['', {updateOn: 'change', validators:[Validators.required]}],
       //'locations': this.formbuilder.array([]),
-      'describeSkill': ['', {updateOn: 'change', validators:[Validators.required]}],
+      'field_how_would_you_describe_thi': ['', {updateOn: 'change', validators:[Validators.required]}],
       //'email': ['',{updateOn: 'change',validators:[ Validators.compose([Validators.required, Validators.pattern(this.emailMask)])]}],
     //  'confirmemail': ['',{updateOn: 'change',validators: [ Validators.compose([Validators.required, Validators.pattern(this.emailMask)])]}],
      // 'phone': ['', {updateOn: 'change', validators: [Validators.required]}]
     }, {updateOn: 'change'}); //asyncValidators: [this.isEqualEmail]
    
-   
-    const user = this.userService.isLogedin();
-    if(user) {
-   // this.getAddress(user);
-    }
+ var oldHwaData = null;  
+ if (this.userService.isLocalStorage()) {
+  oldHwaData =  JSON.parse(localStorage.getItem('hwaData'));
+  }else{
+  oldHwaData =  JSON.parse(this.cookieService.get('hwaData'));
+}
+if(oldHwaData){
+this.creatHWAForm.patchValue(oldHwaData);
+}
+  
     
-    
-    this.addressList =  this.holdDataService.selectedAddres;
-    console.log( this.addressList  );
-     this.addressList.forEach((item, index) => {
+    // this.addressList =  this.holdDataService.selectedAddres;
+     //console.log( this.addressList  );
+  this.holdDataService.getSelectedAddress().subscribe((data: Array<any>) => {
+      console.log('data', data);
+       this.addressList = data
+       this.addressList.forEach((item, index) => {
           this.selectedNid[index]=item['nid']
       });
-   this.holdDataService.getSelectedAddress().subscribe(data =>{
-      console.log('data', data);
-   })   
- this.holdDataService.getSelectedAddress().subscribe(data => this.zone.run(() => {
-      // event handler code here
-      this.addressList = data;
-       console.log( data  );
-      alert(data)
-    }));
-   // .subscribe((islogedin: boolean) => {
+
+   });
+   
+ /* this.holdDataService.getSelectedAddress().subscribe(data => this.zone.run(() => {;
+       console.log('zzzzzzzzzzzzzzz', data  );
+    }));*/
    
   }
 
-/* initLocation(val) {
-    return this.formbuilder.group({
-      'nid': [val]
-    });
-  }
-
- addLocation(val) {
-    // add address to the list
-    const control = <FormArray>this.creatHWAForm.controls['locations'];
-    control.push(this.initLocation(val));
-   // console.log(this.creatHWAForm.controls['locations'].value)
- } */
 
 getAddress(user) {
    
@@ -124,27 +119,48 @@ getAddress(user) {
 
       });
 }
+selectLocation() {
+  // [routerLink]="['/select-hiring-location']
+        const creteObj = {
+        //'hwa_nid': '',
+        'title': this.creatHWAForm.value.title,
+        'field_how_many_people_do_you_nee': this.creatHWAForm.value.field_how_many_people_do_you_nee,
+        'field_will_they_be_full_time_par': this.creatHWAForm.value.field_will_they_be_full_time_par,
+        'field_how_would_you_describe_thi': this.creatHWAForm.value.field_how_would_you_describe_thi,
+        'field_describe_the_skills_and_ex': this.creatHWAForm.value.field_describe_the_skills_and_ex,
+       // 'nid': this.selectedNid
+      };
 
+    if (this.userService.isLocalStorage()) {
+
+      localStorage.setItem('hwaData', JSON.stringify(creteObj));
+    
+    }else{
+        this.cookieService.delete('hwaData');
+        this.cookieService.set('hwaData', JSON.stringify(creteObj));
+      
+        }
+
+this.router.navigate(['/select-hiring-location']);
+}
 onSubmit() {
     this.disabledButton = true; //'Processing...';
 
     if (this.creatHWAForm.valid) {
       const user = this.userService.isLogedin();
-
-     var sd =  this.holdDataService.selectedAddres;
-    console.log(sd);
    
       const CreteObj = {
         'hwa_nid': '',
         'uid': user.uid,
-        'title': this.creatHWAForm.value.position,
-        'field_how_many_people_do_you_nee': this.creatHWAForm.value.numberOfPosition,
-        'field_will_they_be_full_time_par': this.creatHWAForm.value.position_type,
-        //'field_how_would_you_describe_thi': this.creatHWAForm.value.describePosition,
-        'field_describe_the_skills_and_ex': this.creatHWAForm.value.describeSkill,
+        'title': this.creatHWAForm.value.title,
+        'field_how_many_people_do_you_nee': this.creatHWAForm.value.field_how_many_people_do_you_nee,
+        'field_will_they_be_full_time_par': this.creatHWAForm.value.field_will_they_be_full_time_par,
+        'field_how_would_you_describe_thi': this.creatHWAForm.value.field_how_would_you_describe_thi,
+        'field_describe_the_skills_and_ex': this.creatHWAForm.value.field_describe_the_skills_and_ex,
         'nid': this.selectedNid
       };
 
+console.log(CreteObj);
 
       this.hwaCommonService.createHWA(CreteObj).subscribe(
         res => {
@@ -159,6 +175,9 @@ onSubmit() {
               pauseOnHover: false,
               clickToClose: true,
             });
+
+             localStorage.removeItem('hwaData');
+             this.cookieService.delete('hwaData');
     });
     }
   }

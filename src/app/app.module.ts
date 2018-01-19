@@ -12,10 +12,11 @@ import { PagenotfoundComponent } from './common/pagenotfound/pagenotfound.compon
 import { SharedModule } from './shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthGuard } from './user/guards/index';
-import { UserService, ProfileService } from './services/index';
+import { UserService, ProfileService, HoldDataService } from './services/index';
 import { CookieService } from 'ngx-cookie-service';
  import {SimpleNotificationsModule} from 'angular2-notifications';
  import {NotificationsService} from 'angular2-notifications';
+ import { SharedServiceModule } from './shared/sharedService.module';
  //import { HeaderRegistrationModule } from './common/header-registration/header-registration.module';
 // import { HeaderValidUserComponent } from './common/header-valid-user/header-valid-user.component';
 // import { EqualValidator } from './common/directives/equal-validator.directive';
@@ -36,13 +37,12 @@ import { CookieService } from 'ngx-cookie-service';
     BrowserAnimationsModule,
     NgbModule.forRoot(),
     appRouter,
-    SimpleNotificationsModule
-    //HeaderRegistrationModule
-    
+    SimpleNotificationsModule,
+    SharedServiceModule.forRoot()
   ],
     // exports: [RouterModule],
   providers: [AuthGuard, UserService, CookieService,
-  NotificationsService, ProfileService],
+  NotificationsService, ProfileService, HoldDataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
