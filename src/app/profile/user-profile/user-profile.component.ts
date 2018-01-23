@@ -4,7 +4,6 @@ import { HelpModalComponent } from '../../common/help-modal/help-modal.component
 import {ProfileService, UserService, HoldDataService} from '../../services/index';
 import { FormGroup, FormBuilder, Validators, FormArray} from '@angular/forms';
 // import {DOCUMENT} from '@angular/platform-browser';
-// import {NotificationsService} from 'angular2-notifications';
 
 
 @Component({
@@ -71,6 +70,11 @@ export class UserProfileComponent implements OnInit {
 onSubmit(isValid) {
     const udata = this.profileForm.value;
     const user = this.userService.isLogedin();
+    if(user){
+
+    }else{
+      return false;
+    }
     udata.uid = user.uid;
    // udata.address_delete = this.deleteAddress;
    this.disabledButton = true;

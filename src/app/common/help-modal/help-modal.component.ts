@@ -27,7 +27,7 @@ public isBusiness:boolean;
    // console.log(this.visible)
    // this.vis = this.visible;
    if(this.content == 'busi') {
-alert('busiiiiiiiiiiiii');
+//alert('busiiiiiiiiiiiii');
   this.isBusiness = true;
    }else{
  this.isBusiness = false;
