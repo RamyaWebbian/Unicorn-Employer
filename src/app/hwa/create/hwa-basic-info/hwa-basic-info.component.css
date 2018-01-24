@@ -50,3 +50,113 @@ h6 {
     text-transform: capitalize;
 }
 .selectvisiblity{ display: none}
+
+/* overlay */
+/* .overlay {
+    height: 100%;
+    width: 100%;
+    display: none;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0, 0.9);
+}
+
+.overlay-content {
+    position: relative;
+    top: 25%;
+    width: 100%;
+    text-align: center;
+    margin-top: 30px;
+}
+
+.overlay a {
+    padding: 8px;
+    text-decoration: none;
+    font-size: 36px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.overlay a:hover, .overlay a:focus {
+    color: #f1f1f1;
+}
+
+.overlay .closebtn {
+    position: absolute;
+    top: 20px;
+    right: 45px;
+    font-size: 60px;
+}
+
+@media screen and (max-height: 450px) {
+  .overlay a {font-size: 20px}
+  .overlay .closebtn {
+    font-size: 40px;
+    top: 15px;
+    right: 35px;
+  }
+} */
+
+.modal.modal-fullscreen {
+  /* Maximize the main wrappers on the screen */
+  /* Make the parent wrapper of the modal box a full-width block */
+  /* Remove borders and effects on the content */
+  /**
+	 * /!\ By using this feature, you force the header and footer to be placed
+	 * in an absolute position. You must handle by yourself the margin of the
+	 * content.
+	 */
+}
+.modal.modal-fullscreen .modal-dialog,
+.modal.modal-fullscreen .modal-content {
+  bottom: 0!important;
+  left: 0!important;
+  position: absolute !important;
+  right: 0!important;
+  top: 0!important;
+}
+.modal.modal-fullscreen .modal-dialog {
+  margin: 0;
+  width: 100% !important;
+  height: auto;
+  animation-duration:0.6s;
+}
+.modal.modal-fullscreen .modal-content {
+  border: none;
+  -moz-border-radius: 0;
+  border-radius: 0;
+  -webkit-box-shadow: inherit;
+  -moz-box-shadow: inherit;
+  -o-box-shadow: inherit;
+  box-shadow: inherit;
+  /* change bg color below */
+ /* background:#1abc9c; */
+}
+.modal.modal-fullscreen.force-fullscreen {
+  /* Remove the padding inside the body */
+}
+.modal.modal-fullscreen.force-fullscreen .modal-body {
+  padding: 0;
+}
+.modal.modal-fullscreen.force-fullscreen .modal-header,
+.modal.modal-fullscreen.force-fullscreen .modal-footer {
+  left: 0!important;
+  position: absolute;
+  right: 0!important;
+}
+.modal.modal-fullscreen.force-fullscreen .modal-header {
+  top: 0;
+}
+.modal.modal-fullscreen.force-fullscreen .modal-footer {
+  bottom: 0!important;
+}
+@media (min-width: 576px){
+.modal-dialog {
+    max-width: 100%!important;
+}
+}
+

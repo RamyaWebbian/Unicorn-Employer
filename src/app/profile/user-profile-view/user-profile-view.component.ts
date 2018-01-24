@@ -69,6 +69,11 @@ private userInfo:any;
           if(this.addressList.length && res['business_profile_id'].length){
             this.isFirstTime = false;
             this.bisProfileId = res['business_profile_id'][0].nid;
+             const user = this.userService.isLogedin();
+        // user.business_profile_created = 'yes';
+        user.businessProfileId = this.bisProfileId 
+        this.userService.resetUserInfo(user);
+
            this.loadbusProfile(this.bisProfileId);
  // console.log('this.bisProfileId', this.bisProfileId)
           }else{

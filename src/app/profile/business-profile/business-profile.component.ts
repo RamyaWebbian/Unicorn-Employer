@@ -1,8 +1,8 @@
 import { Component, OnInit, } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import {FormGroup, FormBuilder, Validators, NgForm } from '@angular/forms';
-import { UserService, HwaCommonService } from '../../services/index';
-import {NotificationsService} from 'angular2-notifications';
+import { UserService, HwaCommonService, HoldDataService } from '../../services/index';
+// import {NotificationsService} from 'angular2-notifications';
 import { HelpModalComponent } from '../../common/help-modal/help-modal.component';
 
 @Component({
@@ -38,7 +38,7 @@ public lbl:string = '(Optional)';
     private router: Router,
     private userService: UserService,
     private hwaCommonService:HwaCommonService,
-    private _notificationsService: NotificationsService,
+   private holdDataService: HoldDataService,
     private activatedRoute:ActivatedRoute
    ) { }
   
@@ -54,7 +54,7 @@ public lbl:string = '(Optional)';
     if(user.business_profile_created == 'no') {
       this.helpShow = true;
     }
-    console.log(user)
+   // console.log(user)
     if(user.business_profile_created == 'yes') {
       this.isFirstBisProfile = false;
       this.lbl = '(Optional)';
@@ -170,18 +170,12 @@ const pObj = {"bptnid": profileId}
         console.log(res);
         if(this.isFirstBisProfile) {
         const user = this.userService.isLogedin();
-        user.business_profile_created = 'yes'
+        user.business_profile_created = 'yes';
+        user.businessProfileId = res['details'][0].nid[0].value;
         this.userService.resetUserInfo(user);
-        }
-         this._notificationsService.success(
-          'Success',
-          res['Message'],
-          {
-            timeOut: 600,
-            showProgressBar: true,
-            pauseOnHover: false,
-            clickToClose: true,
-          });
+      }
+       this.holdDataService.setMessage({msg:res['Message'], sucsess: true});
+       
           let pid = res['details'][0].nid[0].value
         //  console.log(pid);
         this.router.navigate(['/view-business-profile', pid]);

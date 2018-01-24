@@ -8,7 +8,7 @@ import { BusinessProfileRoutingModule } from './business-profile-routing.module'
 import { SharedModule } from '../../shared/shared.module';
 import { HeaderValidUserModule } from '../../common/header-valid-user/header-valid-user.module';
 import { CookieService } from 'ngx-cookie-service';
-import { UserService, HwaCommonService } from '../../services/index';
+import { UserService, HwaCommonService, HoldDataService } from '../../services/index';
 import {NgxMaskModule} from 'ngx-mask';
 import { HelpModalModule } from '../../common/help-modal/help-modal.module';
  
@@ -25,6 +25,6 @@ import { HelpModalModule } from '../../common/help-modal/help-modal.module';
     NgxMaskModule.forRoot()
   ],
   declarations: [BusinessProfileComponent],
-  providers:[CookieService, UserService, HwaCommonService]
+  providers:[CookieService, UserService, HwaCommonService, HoldDataService]
 })
 export class BusinessProfileModule { }

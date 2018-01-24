@@ -11,7 +11,8 @@
                       <h5>Create HWA</h5>
                   </div>
                   <div class="col-5">
-                      <button (click)="onSubmit()" class="btn success-btn">Preview & Post ad</button>
+                    <button class="btn success-btn" data-toggle="modal" data-target="#myModalFullscreen" contenteditable="false">Preview & Post Ad</button>
+                    <!--  <button (click)="onSubmit()" class="btn success-btn">Preview & Post Ad</button> -->
                   </div>
           <div class="col-1 dropdown">
               <a data-toggle="dropdown"> <img src="../../assets/menu.png" class="all-icon"/> </a>
@@ -129,7 +130,7 @@
       <div class="card-header" role="tab" id="headingTwo">
             <div class="head-blk">
               <h6 class="mb-0">
-                <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                <a class="collapsed" (click)="storeData()" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                   Add Qualifying Questions
                 </a>
               </h6>
@@ -206,7 +207,7 @@
             <div class="col-12">
               <div class="add-new-cus">
                 <img src="../../assets/plus.png" class="all-icon add-icon"/>
-                <button (click)="addCustomQuestion()" [disabled]="btndisabled">add new custom qualifying question</button>
+                <button (click)="addCustomQuestion()" [disabled]="btndisabled">Add new custom qualifying question</button>
               </div>
             </div>
           </div>
@@ -241,7 +242,7 @@
 
           <div class="head-blk">
             <h6 class="mb-0">
-              <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+              <a class="collapsed" (click)="storeData()" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                 Add Skill Or Experience Questions
               </a>
             </h6>
@@ -276,14 +277,6 @@
                    <li><a (click)="deleteSkill(i)" href="javascript:void(0)">Delete</a></li>
                   </ul>
                 </div>
-              </div>
-
-              <img class="kebab-menu" src="../../assets/menu.png"/>
-              <div class="kebab-open">
-                <ul>
-                  <li>Edit</li>
-                  <li>Delete</li>
-                </ul>
               </div>
               </div>
                </ng-container>
@@ -384,3 +377,111 @@
   </div>
   </div>
 </div>
+
+
+<!-- /.container -->
+<div class="modal fade modal-fullscreen  footer-to-bottom" id="myModalFullscreen" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog animated zoomInLeft">
+        <div class="modal-content">
+            <div class="modal-header"> 
+
+                       	<h4 class="modal-title">HWA Preview</h4>
+                    
+
+                    <div class=" kebab-menu col-md-1"  >
+                      <div class="dropdown"> <a  data-toggle="dropdown"> <img src="../../assets/menu.png" class="all-icon"/> </a>
+                      <ul class="dropdown-menu">
+                      <li><a (click)="onSubmit('draft')" > Save as Draft</a></li>
+                        <li><a (click)="discardAd()" >Discard Ad</a></li>
+                      </ul>
+                      </div>
+                    </div>
+                     <button (click)="onSubmit('post')" class="btn success-btn">Post Ad</button>
+                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+                  
+                  
+
+            </div>
+            <div class="modal-body">
+               
+
+                <div class="deskWidth">
+          
+              <div class="hwa-details">
+                <p>
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+                    Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+                    when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+                    It has survived not only five centuries, 
+                    but also the leap into electronic typesetting, remaining essentially unchanged.
+                </p>
+                <h5>Job Description</h5>
+               <div innerHTML="{{creatHWAForm.controls['field_how_would_you_describe_thi'].value}}"> </div>
+                <h5>Responsibilities</h5>
+                <ul>
+                  <li>Ipsum is simply dummy text of the printing</li>
+                  <li>Ipsum is simply dummy text of the printing, simply dummy text of the printing</li>
+                </ul>
+                <h5>Knock Out Questions</h5>
+                <ul class="custom-list-style">
+                  <ng-container *ngFor="let qlistview of customQList let i=index">
+                    <li *ngIf="qlistview != ''">{{qlistview}}</li>
+                  </ng-container>
+                </ul>
+                <h5>Skill or Experience Questions</h5>
+                <ul class="custom-list-style">
+             <ng-container *ngFor="let sqlist of skillQuestionList let i=index">
+                    <li> <span>Q</span>
+              <span>{{sqlist?.skill_exp_ques}}</span>
+               <div *ngIf="sqlist?.field_experience_needed != 'N/A'" >Experience: {{sqlist?.field_experience_needed}}</div>
+               <div *ngIf="sqlist?.field_expertise_needed != 'N/A'">Expertise: {{sqlist?.field_expertise_needed}}</div>
+              </li>
+                    </ng-container>
+                </ul>
+                <h5>Business Profile</h5>
+                 <ng-container *ngFor="let busTopic of businessTopic let j=index">
+                <div class="business-blk">
+                    <div class="busImg">
+                        <img [src]="busTopic?.field_business_profile_topic_ima"/>
+                      </div>
+
+                      <div class="form-group filled-form">
+                        <span>Topic</span>
+                        <p>{{busTopic?.field_topic}}</p>
+                      </div>
+                      <div class="form-group filled-form busDesc">
+                        <span>Description</span>
+                        <p innerHTML="{{busTopic?.field_business_profile_topic_des}}"></p>
+                      </div>
+                </div>
+                 </ng-container>
+              </div>
+              </div> <!-- deskWidth -->
+
+
+
+
+
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button (click)="onSubmit('post')" type="button" class="btn success-btn">Post Ad</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+<!--<div id="myNav" class="overlay">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <div class="overlay-content">
+    <a href="#">About</a>
+    <a href="#">Services</a>
+    <a href="#">Clients</a>
+    <a href="#">Contact</a>
+  </div>
+</div>
+<span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; open</span> -->

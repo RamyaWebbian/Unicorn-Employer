@@ -82,6 +82,8 @@ public skillQuestionList = [];
 public showForm:boolean;
 public  deleteskills = [];
 
+public businessTopic =[];
+
   constructor(
     private router: Router,
     private zone:NgZone,
@@ -119,41 +121,75 @@ public  deleteskills = [];
       'customQlist': this.formbuilder.array([])
     });
     this.skillExpForm = this.formbuilder.group({
-      // 'questionList': this.formbuilder.array([ ])
       'nid': [''],
       'skill_exp_ques': ['', Validators.required],
       'field_expertise_needed': ['N/A' , Validators.required],
       'field_experience_needed': ['N/A' , Validators.required],
-      'exp':['experience']
-  
+      'exp':['experience'],
+      'status': '0'
     });
 
    
 
  var oldHwaData = null;
+ var koData = null;
+ var skillData = null;
  var hwaId = null;  
- if (this.userService.isLocalStorage()) {
-  oldHwaData =  JSON.parse(localStorage.getItem('hwaData'));
+if (this.userService.isLocalStorage()) {
   hwaId = localStorage.getItem('storeHwaNid');
-  }else{
-  oldHwaData =  JSON.parse(this.cookieService.get('hwaData'));
+  oldHwaData =  JSON.parse(localStorage.getItem('hwaData'));
+   this.addressList =  JSON.parse(localStorage.getItem('address'));
+    this.holdDataService.setSelectedAddress(this.addressList);
+  koData =  JSON.parse(localStorage.getItem('koData'));
+  skillData =  JSON.parse(localStorage.getItem('skillData'));
+}else{
   hwaId = this.cookieService.get('storeHwaNid');
-}
-if(hwaId){
-  this.hwaNid = hwaId;
-  oldHwaData.hwa_nid = hwaId;
-  this.getKoQuestion(hwaId);
-   this. loadSkillDraftData(hwaId);
-}
-if(oldHwaData){
-this.creatHWAForm.patchValue(oldHwaData);
+  oldHwaData =  JSON.parse(this.cookieService.get('hwaData'));
+  this.addressList =  JSON.parse(this.cookieService.get('address'));
+   this.holdDataService.setSelectedAddress(this.addressList);
+  koData = this.cookieService.get('koData')
+  skillData = this.cookieService.get('skillData')
 }
   
+//hwaId = null;
+// console.log(hwaId);
+//localStorage.removeItem('storeHwaNid');
+var abc =false
+
+if(abc){
+   //hwaId
+
+  this.hwaNid = hwaId;
+  oldHwaData.hwa_nid = hwaId;
+  this.loadHwaDraftData(hwaId);
+  this.getKoQuestion(hwaId);
+  this. loadSkillDraftData(hwaId);
+}else {
+    if(oldHwaData){
+    this.creatHWAForm.patchValue(oldHwaData);
+    }
+    if(koData){
+     // this.koForm.controls['customQlist'].patchValue(koData);
+
+       koData.forEach((item, index)=>{
+       //  console.log(item)
+          const todo = { 'value':item.inputval };
+              todo.value = item.inputval;
+        this.addQuestion(todo, item.nid, item.costomQus);
+       })
+    // console.log(koData)
+   //  this.koForm.patchValue(koData);
+    }
+    if(skillData){
+      this.skillQuestionList = skillData
+    // this.creatHWAForm.patchValue(oldHwaData);
+    }
+}
     
     // this.addressList =  this.holdDataService.selectedAddres;
      //console.log( this.addressList  );
   this.holdDataService.getSelectedAddress().subscribe((data: Array<any>) => {
-      console.log('data', data);
+     // console.log('data', data);
        this.addressList = data
        this.addressList.forEach((item, index) => {
           this.selectedNid[index]=item['nid']
@@ -166,9 +202,41 @@ this.creatHWAForm.patchValue(oldHwaData);
     }));*/
 
  
-
+ const user = this.userService.isLogedin();
+if(user){
+  console.log(user)
+//this.loadbusProfile(pid)
+this.loaduserData(user.uid)
+}
   }
 
+  loadHwaDraftData(hwaId) {
+    const user = this.userService.isLogedin();
+    console.log(hwaId, user.uid)
+    this.hwaCommonService.loadDraftData(hwaId, user.uid).subscribe(
+      res => {
+        if (res) {
+          console.log('loaded HWA data', res)
+          console.log('loaded HWA data', res.title)
+          console.log('loaded HWA data', res['title'])
+         
+        var hwaObj = { 'title' : res['title'][0].value,
+          'field_how_many_people_do_you_nee': res['field_how_many_people_do_you_nee'][0].value,
+          'field_will_they_be_full_time_par': res['field_will_they_be_full_time_par'][0].value,
+          'field_how_would_you_describe_thi': res['field_how_would_you_describe_thi'][0].value,
+          'field_describe_the_skills_and_ex': res['field_describe_the_skills_and_ex'][0].value
+        }
+       // this.addressList = 
+          // this.creatHWAForm.patchValue([hwaObj]);
+        //  this.checkAddress(res[0].nid);
+
+         // localStorage.setItem('storeHwaNid', res['nid']);
+        }
+
+      },
+      error => {
+      });
+  }
 
 /* getAddress(user) {
    
@@ -185,8 +253,12 @@ this.creatHWAForm.patchValue(oldHwaData);
       });
 } */
 selectLocation() {
-  // [routerLink]="['/select-hiring-location']
-        const creteObj = {
+this.storeData();
+this.router.navigate(['/select-hiring-location']);
+}
+
+storeData(){
+   const creteObj = {
         'hwa_nid': this.creatHWAForm.value.hwa_nid,
         'title': this.creatHWAForm.value.title,
         'field_how_many_people_do_you_nee': this.creatHWAForm.value.field_how_many_people_do_you_nee,
@@ -195,20 +267,29 @@ selectLocation() {
         'field_describe_the_skills_and_ex': this.creatHWAForm.value.field_describe_the_skills_and_ex,
        // 'nid': this.selectedNid
       };
-
+var kodata = this.koForm.controls['customQlist'].value;
     if (this.userService.isLocalStorage()) {
 
       localStorage.setItem('hwaData', JSON.stringify(creteObj));
+       localStorage.setItem('address', JSON.stringify(this.addressList));
+      localStorage.setItem('koData', JSON.stringify(kodata));
+      localStorage.setItem('skillData', JSON.stringify( this.skillQuestionList));
     
     }else{
         this.cookieService.delete('hwaData');
         this.cookieService.set('hwaData', JSON.stringify(creteObj));
+         this.cookieService.delete('address');
+        this.cookieService.set('address', JSON.stringify(this.addressList));
+
+        this.cookieService.delete('koData');
+        this.cookieService.set('koData', JSON.stringify(kodata));
+        this.cookieService.delete('skillData');
+        this.cookieService.set('skillData', JSON.stringify(this.skillQuestionList));
       
         }
-
-this.router.navigate(['/select-hiring-location']);
 }
-onSubmit() {
+
+onSubmit(saveType) {
     this.disabledButton = true; //'Processing...';
 
     if (this.creatHWAForm.valid) {
@@ -229,13 +310,13 @@ console.log(CreteObj);
       this.hwaCommonService.createHWA(CreteObj).subscribe(
         res => {
           this.disabledButton = false;
-          console.log(res['got_it']);
-           this.onSubmitko(res['got_it']);
-if (this.userService.isLocalStorage()) {
-localStorage.setItem('storeHwaNid', res['got_it']);
-}else{
- this.cookieService.set('storeHwaNid', res['got_it']);
-}
+          console.log(res);
+           this.onSubmitko(res['got_it'], saveType);
+          if (this.userService.isLocalStorage()) {
+          localStorage.setItem('storeHwaNid', res['got_it']);
+          }else{
+          this.cookieService.set('storeHwaNid', res['got_it']);
+          }
 
     this.holdDataService.setMessage({msg:'Your have created Help Wanted Ad Successfully', sucsess: true});
 
@@ -270,7 +351,8 @@ onEditorBlured(quill) {
   onContentChanged({ quill, html, text }) {
    // console.log('quill content is changed!', quill, html, text);
   }
-// -----------------knout coustom question ---------------------------------------
+
+// -----------------ko coustom question ---------------------------------------
 
 loadkoDraftData(hwaId) {
     const user = this.userService.isLogedin();
@@ -460,7 +542,7 @@ loadkoDraftData(hwaId) {
     return customArray;
   }
 
-  onSubmitko(hwaId) {
+  onSubmitko(hwaId, saveType) {
     this.disableUntil = true;
   //  this.btntext = 'Processing...';
     if  (hwaId) { //localStorage.getItem('storeHwaNid')
@@ -505,11 +587,10 @@ loadkoDraftData(hwaId) {
 
       this.hwaCommonService.customQuestion(objTemplate).subscribe(
         res => {
-         
 console.log('complated costom question', res);
           this.holdDataService.setMessage({msg:res['Message'], sucsess: true});
-          this.onSubmitSkill(hwaId)
-          
+          this.onSubmitSkill(hwaId, saveType);
+
         },
         error => {
         }
@@ -719,17 +800,17 @@ loadSkillDraftData(hwaId) {
     // this.skillQuestionList = this.skillQuestionList.filter(item => item !== data_item);
  }
 
-  onSubmitSkill(hwaId) {
+  onSubmitSkill(hwaId, saveType) {
     this.disableUntil = true;
     this.btntext = 'Processing...';
     if (hwaId) {
       const user = this.userService.isLogedin();
      
       const pushSkillSet = [];
-    /*  for (let i = 0; i <= this.skillExpForm.value.questionList.length - 1; i++) {
+     /* for (let i = 0; i <= this.skillQuestionList.length - 1; i++) {
         if ((this.skillExpForm.value.questionList[i].experenceLevel === 'N/A') && (this.skillExpForm.value.questionList[i].expertiseLevel === 'N/A')){
           if (this.skillExpForm.value.questionList[i].nid) {
-            deleteskills.push(this.skillExpForm.value.questionList[i].nid);
+            this.deleteskills.push(this.skillExpForm.value.questionList[i].nid);
           }
         } else {
           const skillQ = {
@@ -741,26 +822,58 @@ loadSkillDraftData(hwaId) {
           };
           pushSkillSet.push(skillQ);
         }
-      } */
-
+      }*/
+     //
+this.skillQuestionList.forEach((item,index)=>{
+ const skillQ = {
+            'nid': item.nid,
+            'skill_exp_ques': item.skill_exp_ques,
+            'field_experience_needed': item.field_experience_needed,
+            'field_expertise_needed': item.field_expertise_needed,
+            'status': '0'
+          };
+          pushSkillSet.push(skillQ);
+});
       const skillObj = {
         'uid': user.uid,
         'hwa_nid': hwaId, //localStorage.getItem('storeHwaNid'),
-        'seq': this.skillQuestionList, //pushSkillSet,
+        'seq': pushSkillSet,
         'delete_nid': this.deleteskills
       };
+       console.log(pushSkillSet);
+       console.log(skillObj);
       this.hwaCommonService.skillQusestion(skillObj).subscribe(
         res => {
-
+this.deleteskills = [];
          console.log(res)
 
              localStorage.removeItem('hwaData');
              this.cookieService.delete('hwaData');
+
+             localStorage.removeItem('koData');
+             this.cookieService.delete('koData');
+              localStorage.removeItem('skillData');
+             this.cookieService.delete('skillData');
+
              localStorage.removeItem('storeHwaNid');
              this.cookieService.delete('storeHwaNid');
 
+             localStorage.removeItem('address');
+             this.cookieService.delete('address');
+             
+             this.skillQuestionList = [];
+             this.addressList = [];
+             this.customQList = [];
+             this.creatHWAForm.reset();
+            // this.defaultQlists = [];
+
              this.holdDataService.setMessage({msg:'You have created Skills Or Experience Questions Successfully', sucsess: true});
-            // this.router.navigate(['/postmyad']);
+            if(saveType == 'post'){
+               this.router.navigate(['/postmyad']);
+            }else{
+              this.router.navigate(['/landing-page']);
+            }
+            
         
           //this.btntext = 'Save & Continue';
 
@@ -773,5 +886,41 @@ loadSkillDraftData(hwaId) {
        this.holdDataService.setMessage({msg:'You must have to create and save first step of \'Help Wanted Ad', sucsess: false});
 
     }
+  }
+
+  // load business profile 
+  loaduserData(uid){
+ const userId = {'uid': uid };
+    this.userService.accesData(userId).subscribe(
+      res => {
+        console.log(res)
+        if (res['status']) {
+          const user =  res;
+        
+           // this.addressList = res['address'];
+
+          if(res['business_profile_id'].length){
+           
+  this.loadbusProfile( res['business_profile_id'][0].nid) 
+            
+          }
+        }
+      });
+}
+
+  loadbusProfile(profileId) {
+const pObj = {"bptnid": profileId}
+   this.hwaCommonService.getBusinessTopic(pObj).subscribe(
+         res => {
+          console.log(res);
+         // this.bisProfileImg = res['business_topic'][0].field_business_profile_topic_ima;
+          this.businessTopic = res['business_topic'];
+
+        },error => {
+ 
+ console.log(error);
+ 
+      });
+ 
   }
 }

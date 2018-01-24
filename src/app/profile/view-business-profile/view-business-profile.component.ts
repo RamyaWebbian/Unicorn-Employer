@@ -24,13 +24,13 @@ export class ViewBusinessProfileComponent implements OnInit {
   ngOnInit() {
     this.activatedRoute.params.subscribe(
       (param:  any) => {
-         console.log(param['pId']);
+       //  console.log(param['pId']);
          if(param['pId']){
            this.bisProfileId = param['pId'];
           this.loadbusProfile(param['pId']);
          }else{
            this.bisProfileId ="";
-          alert('busness profile id is empty')
+         // alert('busness profile id is empty')
          }  
  
       });
