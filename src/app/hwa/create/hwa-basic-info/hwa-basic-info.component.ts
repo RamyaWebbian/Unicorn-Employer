@@ -6,6 +6,7 @@ import {NotificationsService} from 'angular2-notifications';
 import {Subject} from 'rxjs/Subject';
 import {Observable} from 'rxjs/Observable';
 import { CookieService } from 'ngx-cookie-service';
+declare var $:any;
 
 @Component({
   selector: 'app-hwa-basic-info',
@@ -46,30 +47,30 @@ public selectedNid = [];
   public isEditable = [];
   public showTextfield: boolean;
   public enb: boolean;
-  public showDialog: boolean;
-  public showKo: boolean;
+ // public showDialog: boolean;
+//  public showKo: boolean;
   public koForm: FormGroup;
-  public nodeId: any;
+ // public nodeId: any;
   public hwaId: number;
   public customlist: any;
-  public displayQuestionn: boolean;
+ // public displayQuestionn: boolean;
   public changeText = []; // 'Edit';
  // @ViewChild(EditableQuestions) input: EditableQuestions;
   public koData: any = 'koData';
   public show = false;
-  public koDataStr = 'koData';
-  public qusInpitValue: any;
-  public level2: boolean;
+//  public koDataStr = 'koData';
+ // public qusInpitValue: any;
+ // public level2: boolean;
   public btndisabled: boolean;
-  public disableUntil: boolean;
-  public btntext = 'Save & Continue';
+ // public disableUntil: boolean;
+ // public btntext = 'Save & Continue';
 public hwaNid = null;
 // skill ---------------
 
 public skillExpForm: FormGroup;
-  public skillDataStr = 'skillData';
+ //public skillDataStr = 'skillData';
  // public showDialog: boolean;
-  public showskill: boolean;
+////  public showskill: boolean;
   public fromSkill: any = 'fromSkill';
   public hideExpArray:boolean = true;
   public hideExpertiseArray:boolean = true;
@@ -138,15 +139,15 @@ public businessTopic =[];
 if (this.userService.isLocalStorage()) {
   hwaId = localStorage.getItem('storeHwaNid');
   oldHwaData =  JSON.parse(localStorage.getItem('hwaData'));
-   this.addressList =  JSON.parse(localStorage.getItem('address'));
-    this.holdDataService.setSelectedAddress(this.addressList);
+  // this.addressList =  JSON.parse(localStorage.getItem('address'));
+  //  this.holdDataService.setSelectedAddress(this.addressList);
   koData =  JSON.parse(localStorage.getItem('koData'));
   skillData =  JSON.parse(localStorage.getItem('skillData'));
 }else{
   hwaId = this.cookieService.get('storeHwaNid');
   oldHwaData =  JSON.parse(this.cookieService.get('hwaData'));
-  this.addressList =  JSON.parse(this.cookieService.get('address'));
-   this.holdDataService.setSelectedAddress(this.addressList);
+ // this.addressList =  JSON.parse(this.cookieService.get('address'));
+ //  this.holdDataService.setSelectedAddress(this.addressList);
   koData = this.cookieService.get('koData')
   skillData = this.cookieService.get('skillData')
 }
@@ -381,7 +382,7 @@ loadkoDraftData(hwaId) {
             }
           }
         }
-        this.displayQuestionn = true;
+       // this.displayQuestionn = true;
       },
       error => {
       });
@@ -506,20 +507,7 @@ loadkoDraftData(hwaId) {
       'nid': [qnid]
     });
   }
-  onPreiview() {
-
-    if  (this.showDialog) {
-      this.showDialog = false;
-    } else {
-      this.showDialog = true;
-    }
-
-  /*  const koPreive = { 'showKo': this.showKo = true,
-      'bottomText': this.HelpText,
-      'defaultQ': this.getSelectedDfaultQus(),
-      'customQ': this.getSelectedQuestion() };
-    this.hwaOverlayService.koData(koPreive); */
-  }
+  
 
   getSelectedQuestion(): Array<any> {
     const customArray = [];
@@ -545,7 +533,7 @@ loadkoDraftData(hwaId) {
   }
 
   onSubmitko(hwaId, saveType) {
-    this.disableUntil = true;
+   // this.disableUntil = true;
   //  this.btntext = 'Processing...';
     if  (hwaId) { //localStorage.getItem('storeHwaNid')
       const user = this.userService.isLogedin();
@@ -610,13 +598,7 @@ console.log('complated costom question', res);
   //  this.router.navigate(['/AddSkillsAndExpertiseQuestions']);
 
   }
-  Close2() {
-    if (this.level2) {
-      this.level2 = false;
-    } else {
-      this.level2 = true;
-    }
-  }
+ 
   // ------------------------ skill -----------------------
 
 
@@ -678,7 +660,7 @@ loadSkillDraftData(hwaId) {
             }
           }
         }
-        this.displayQuestionn = true;
+       // this.displayQuestionn = true;
       },
       error => {
       });
@@ -770,9 +752,9 @@ hideExperenceLevel(i) {
  }
 
   onSubmitSkill(hwaId, saveType) {
-    this.disableUntil = true;
-    this.btntext = 'Processing...';
-    if (hwaId) {
+   // this.disableUntil = true;
+   // this.btntext = 'Processing...';
+    if(hwaId) {
       const user = this.userService.isLogedin();
       const pushSkillSet = [];
      /* for (let i = 0; i <= this.skillQuestionList.length - 1; i++) {
@@ -836,6 +818,9 @@ this.deleteskills = [];
             // this.defaultQlists = [];
 
              this.holdDataService.setMessage({msg:'You have created Skills Or Experience Questions Successfully', sucsess: true});
+  
+   $('#myModalFullscreen').modal('hide');
+
             if(saveType == 'post'){
                this.router.navigate(['/post-hwa']);
             }else{
