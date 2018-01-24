@@ -72,5 +72,7 @@ export class HwaListingComponent implements OnInit {
   editHwa() {
   this.router.navigate(['edit-hwa']);
   }
-
+helpText(){
+  
+}
 }
