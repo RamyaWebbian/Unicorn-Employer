@@ -71,8 +71,8 @@ public skillExpForm: FormGroup;
  // public showDialog: boolean;
   public showskill: boolean;
   public fromSkill: any = 'fromSkill';
-  public hideExpArray:boolean;
-  public hideExpertiseArray:boolean;
+  public hideExpArray:boolean = true;
+  public hideExpertiseArray:boolean = true;
   public displayQuestionskill: boolean;
   public showActiveBtn: boolean;
 public expertiseValue='N/A';
@@ -125,7 +125,7 @@ public businessTopic =[];
       'skill_exp_ques': ['', Validators.required],
       'field_expertise_needed': ['N/A' , Validators.required],
       'field_experience_needed': ['N/A' , Validators.required],
-      'exp':['experience'],
+      'exp':[''],
       'status': '0'
     });
 
@@ -191,9 +191,11 @@ if(abc){
   this.holdDataService.getSelectedAddress().subscribe((data: Array<any>) => {
      // console.log('data', data);
        this.addressList = data
+       if(this.addressList) {
        this.addressList.forEach((item, index) => {
           this.selectedNid[index]=item['nid']
       });
+    }
 
    });
    
@@ -654,11 +656,17 @@ loadSkillDraftData(hwaId) {
           const qarray: Array<any> = res as Array<any>;
           if (qarray.length > 0) {
             for (let i = 0; i < qarray.length; i++) {
+              var experi = '';
+              if(qarray[i].field_expertise_needed == 'N/A'){
+                experi = 'experience';
+              }else{
+                experi = 'expertise';
+              }
              var Obj = { 'nid': qarray[i].nid,
                         'skill_exp_ques': qarray[i].title,
                         'field_expertise_needed': qarray[i].field_expertise_needed,
                         'field_experience_needed': qarray[i].field_experience_needed,
-                        'exp':['']};
+                        'exp':[experi]};
 
               this.skillQuestionList.push(Obj);
              // this.addUser(qarray[i].nid, qarray[i].title, qarray[i].field_expertise_needed, qarray[i].field_experience_needed);
@@ -676,20 +684,8 @@ loadSkillDraftData(hwaId) {
       });
   }
 
- /* onPreiview() {
-    if (this.showDialog) {
-      this.showDialog = false;
-    } else {
-      this.showDialog = true;
-    }
-
-    const skillData = {'showskill': this.showskill = true,
-      'bottomText': this.HelpText,
-      'skillQusetion': this.skillExpForm.value.questionList};
-    this.hwaOverlayService.skillData(skillData);
-  } */
-
-  initQuestion_skill(nid: any, tital: string, expertis: any, experen: any, expertisDisabled: boolean, experenDisabled: boolean ){
+ 
+  /* initQuestion_skill(nid: any, tital: string, expertis: any, experen: any, expertisDisabled: boolean, experenDisabled: boolean ){
     return this.formbuilder.group({
       'nid': [nid],
       'skill_exp_ques': [tital, Validators.required],
@@ -697,9 +693,9 @@ loadSkillDraftData(hwaId) {
       'field_experience_needed': [experen , Validators.required],
       'exp':['']
     });
-  }
+  } 
 
-/*hideExperenceLevel(i) {
+hideExperenceLevel(i) {
     const control = <FormArray>this.skillExpForm.controls['questionList'];
     if (control.controls[i]['controls'].expertiseLevel.value === 'N/A') {
       this.hideExpArray = false;
@@ -726,34 +722,7 @@ loadSkillDraftData(hwaId) {
     }
 
   } 
-  addUser(nid: any, tital: string, expertis: any, experen: any ) {
-    const control = <FormArray>this.skillExpForm.controls['questionList'];
-    let experenDisabled = false;
-    let expertisDisabled = false;
-     this.expertiseValue.push("N/A");
-       this.experenceValue.push("N/A");
-    if ((experen === 'N/A') && (expertis === 'N/A')) {
-      experenDisabled = false;
-      expertisDisabled  = false;
-    }else {
-      if (experen === 'N/A') {
-        this.hideExpArray.push(false);
-        
-        experenDisabled = false;
-      }else {
-        this.hideExpArray.push(true);
-        experenDisabled = true;
-      }
-      if (expertis === 'N/A') {
-        this.hideExpertiseArray.push(false);
-        expertisDisabled = false;
-      }else {
-        this.hideExpertiseArray.push(true);
-        expertisDisabled = true;
-      }
-    }
-    control.push(this.initQuestion_skill(nid, tital, expertis, experen, expertisDisabled, experenDisabled));
-  }
+ 
 */
 
    showHideFrom() {
@@ -766,7 +735,7 @@ loadSkillDraftData(hwaId) {
       this.skillQuestionList.push(this.skillExpForm.value)
       this.skillExpForm.reset();
       this.showForm = false;
-      console.log(this.skillQuestionList);
+      //console.log(this.skillQuestionList);
     }
     
   }
@@ -774,7 +743,7 @@ loadSkillDraftData(hwaId) {
    this.showForm = true;
   // this.skillQuestionList[i];
   this.skillExpForm.patchValue(this.skillQuestionList[i]);
-  console.log(this.skillQuestionList[i].exp);
+  // console.log(this.skillQuestionList[i].exp);
    if(this.skillQuestionList[i].exp == 'experience'){
       this.hideExpArray = true;
       this.hideExpertiseArray = false;
@@ -805,7 +774,6 @@ loadSkillDraftData(hwaId) {
     this.btntext = 'Processing...';
     if (hwaId) {
       const user = this.userService.isLogedin();
-     
       const pushSkillSet = [];
      /* for (let i = 0; i <= this.skillQuestionList.length - 1; i++) {
         if ((this.skillExpForm.value.questionList[i].experenceLevel === 'N/A') && (this.skillExpForm.value.questionList[i].expertiseLevel === 'N/A')){
@@ -840,7 +808,7 @@ this.skillQuestionList.forEach((item,index)=>{
         'seq': pushSkillSet,
         'delete_nid': this.deleteskills
       };
-       console.log(pushSkillSet);
+      // console.log(pushSkillSet);
        console.log(skillObj);
       this.hwaCommonService.skillQusestion(skillObj).subscribe(
         res => {
@@ -869,7 +837,7 @@ this.deleteskills = [];
 
              this.holdDataService.setMessage({msg:'You have created Skills Or Experience Questions Successfully', sucsess: true});
             if(saveType == 'post'){
-               this.router.navigate(['/postmyad']);
+               this.router.navigate(['/post-hwa']);
             }else{
               this.router.navigate(['/landing-page']);
             }
@@ -889,8 +857,8 @@ this.deleteskills = [];
   }
 
   // load business profile 
-  loaduserData(uid){
- const userId = {'uid': uid };
+loaduserData(uid){
+  const userId = {'uid': uid };
     this.userService.accesData(userId).subscribe(
       res => {
         console.log(res)
@@ -908,8 +876,8 @@ this.deleteskills = [];
       });
 }
 
-  loadbusProfile(profileId) {
-const pObj = {"bptnid": profileId}
+loadbusProfile(profileId) {
+  const pObj = {"bptnid": profileId}
    this.hwaCommonService.getBusinessTopic(pObj).subscribe(
          res => {
           console.log(res);
@@ -918,7 +886,7 @@ const pObj = {"bptnid": profileId}
 
         },error => {
  
- console.log(error);
+        console.log(error);
  
       });
  
