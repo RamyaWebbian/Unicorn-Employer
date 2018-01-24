@@ -1,0 +1,140 @@
+.form-group.filled-form:last-child {
+  margin-bottom: 35px;
+}
+.head-blk,.help-blk, .arrow-blk {
+  display: inline-block;
+}
+.page-head{margin-bottom: 25px;}
+.card .card-header {
+  padding: 0.75rem 1rem;
+}
+.card-block{width: auto; padding: 15px;}
+.card-block .row{border-bottom: 1px solid #eee; padding: 15px 0}
+.select-more-loc .row {
+  padding: 15px 0;
+}
+.card-block .row p{margin-bottom: 0!important;}
+
+.add-new-cus {
+  padding: 15px 0;
+}
+#accordion .goToNextBtn {
+  border-top: 0;
+}
+.card-header[aria-expanded='true'] .acc-arrow{transform: rotate(180deg); }
+button.btn {
+  margin: 0;
+}
+.preview-head .col-5 {
+  text-align: right;
+}
+.w90 {
+  width: 90%;
+  margin: auto;
+}
+.listing-icon img{margin-left: 10px;}
+.deskWidth{
+  padding: 0 0 40px 0;
+}
+.section-title {
+  width: 90%;
+  margin: auto;
+}
+.col-1 .dropdown.show {
+  position: relative;
+}
+.dropdown-menu li {
+  border-bottom: 1px solid #ccc;
+}
+.dropdown-menu li:last-child {
+  border-bottom: 0;
+}
+.custom-ques-edit .dropdown {
+  display: inline-block;
+  float: right;
+  clear: right;
+}
+/* custom radio buttons */
+.maxl{
+  margin: 25px 5px;
+}
+.inline{
+  display: inline-block;
+}
+.inline + .inline{
+  margin-left:10px;
+}
+.radio{
+  color:#ccc;
+  font-size:15px;
+  position:relative;
+}
+.radio span{
+  position:relative;
+  padding-left:20px;
+}
+.radio span:after{
+  content:'';
+  width:15px;
+  height:15px;
+  border:3px solid;
+  position:absolute;
+  left:0;
+  top:1px;
+  border-radius:100%;
+  -ms-border-radius:100%;
+  -moz-border-radius:100%;
+  -webkit-border-radius:100%;
+  box-sizing:border-box;
+  -ms-box-sizing:border-box;
+  -moz-box-sizing:border-box;
+  -webkit-box-sizing:border-box;
+}
+.radio input[type="radio"]{
+  cursor: pointer;
+  position:absolute;
+  width:100%;
+  height:100%;
+  z-index: 1;
+  opacity: 0;
+  filter: alpha(opacity=0);
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"
+}
+.radio input[type="radio"]:checked + span{
+  color:#002d40;
+}
+.radio input[type="radio"]:checked + span:before{
+  content:'';
+  width:5px;
+  height:5px;
+  position:absolute;
+  background:#002d40;
+  left:5px;
+  top:6px;
+  border-radius:100%;
+  -ms-border-radius:100%;
+  -moz-border-radius:100%;
+  -webkit-border-radius:100%;
+}
+.collapse span {
+  width: 90%;
+  overflow: visible;
+  text-overflow: unset;
+  white-space: nowrap;
+  display: initial;
+}
+/* custom radio buttons */
+.kebab-menu {
+  float: right;
+  clear: both;
+}
+
+
+.text-wrap{white-space: normal!important; }
+
+@media screen and (max-width: 767px) {
+
+}
+@media screen and (max-width: 767px) and (orientation:portrait) {
+
+}

@@ -1,29 +1,44 @@
 <app-header-valid-user></app-header-valid-user>
-<div class="container-fluid">
+<div class="container">
   <div class="row">
     <div class="col-12">
-      <section id="login">  
+      <section id="posy-my-ad">  
         <div class="login-blk">
           <div class="deskWidth">
             <div class="page-head">
               <h3>Post Help Wanted Ad</h3>
               <button class="btn success-btn">Pay & Post HWA</button>
             </div>
+
+            <div class="hwa-info-blk text-center">
+              <h6>
+                <span>Help Wanted Ad Posting Details</span>
+                <span class="post-info-text">(Talentrackr Help Wanted Ads Run for 60 Days)</span>
+              </h6>
+              <div class="row start-end-date">
+                <div class="col-6 start">
+                  <label>Ad will start from</label><br>
+                  <input placeHolder="mm/dd/yyyy" class="date"/>
+                </div>
+                <div class="col-6 end">
+                  <label>Ad will run till</label><br>
+                  <strong>MM/dd/yyyy</strong>
+                </div>
+              </div>
+            </div>
+
             <h5 class="hwa-title">Sales Executive Outdoor Marketing</h5>
-            <div class="cost-blk">
-              <h4>How long you want to publish your ad ?</h4>
-                <label class="custom-control custom-radio">
-                  <input id="radio1" name="radio" type="radio" class="custom-control-input">
-                  <span class="custom-control-indicator"></span>
-                  <span class="custom-control-description">Post for <b>7 </b>days</span>
+            <div class="cost-blk text-center">
+              <h2>How long you want to publish your ad ?</h2>
+                <label class="radio"> 
+                  <input type="radio" name="exp" value="seven-cost" checked>
+                  <span>Post for <b>7 </b>days</span>
                   <button class="btn">$ 12.50</button>
                 </label>
               
-              
-                <label class="custom-control custom-radio active">
-                  <input id="radio2" name="radio" type="radio" class="custom-control-input">
-                  <span class="custom-control-indicator"></span>
-                  <span class="custom-control-description">Post for <b>14 </b>days</span>
+                <label class="radio"> 
+                  <input type="radio" name="exp" value="fourteen-cost">
+                  <span>Post for <b>14 </b>days</span>
                   <button class="btn">$ 25.00</button>
                 </label>
               
@@ -37,7 +52,7 @@
                 </div>
             </div>
 
-            <div class="summary-block">
+            <div class="summary-block text-center">
               <button class="btn">summary of charges</button>
                 <div class="cost-details">
                   <div class="row">

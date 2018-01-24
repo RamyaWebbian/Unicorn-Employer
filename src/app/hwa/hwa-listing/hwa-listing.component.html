@@ -1,0 +1,212 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <section id="login">
+        <app-header-valid-user></app-header-valid-user>
+        <div class="page-head container">
+          <div class="row">
+            <div class="col-8">
+              <h3>Post Help Wanted Ad</h3>
+            </div>
+            <div class="col-4  text-right listing-icon"> <img class="excel-icon" src="../../../../assets/excelIcon.svg"/> <a [routerLink]="['/search']"><img src="../../../../assets/searchIcon.png"/></a> </div>
+          </div>
+        </div>
+        <div class="deskWidth container myTabs">
+          <!-- Nav tabs -->
+          <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#activeAd" role="tab">Active Ads</a> </li>
+            <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#savedAd" role="tab">Saved Ads</a> </li>
+            <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#expiredAd" role="tab">Expired Ads</a> </li>
+          </ul>
+          <!-- Tab panes -->
+          <div class="tab-content">
+            <div class="tab-pane active" id="activeAd" role="tabpanel">
+              <div id="accordion" role="tablist" aria-multiselectable="true">
+                <div class="card">
+                  <div class="card-header" role="tab" id="headingOne" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    <div class="row">
+                      <div class="head-blk col-9" >
+                        <h6 class="mb-0"> <a> Expiring Soon </a> </h6>
+                      </div>
+                      <div class="col-3 text-right">
+                        <div class="help-blk"> <a (click)="helpText()"><img class="ques-icon" src="../../assets/question.png"/></a> </div>
+                        <div class="arrow-blk"> <img class="acc-arrow act" src="../../assets/down-arrow.svg"/> </div>
+                      </div>
+                    </div>
+
+                  </div>
+                  <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne">
+                    <div class="card-block">
+                      <div *ngIf="noData === 'No'; else noExp">
+                        <div *ngFor="let list of allListofHwa">
+                          <div class="row" *ngIf="getDiffrencedays(list.field_extend_from_date,list.field_extend_to_date) < 4">
+                          <div class="col-10">
+
+                            <p> <span class="text-wrap">{{list.field_hwa_post}}</span>
+                              <small  style="color: red">
+                                Expiring in {{getDiffrencedays(list.field_extend_from_date,list.field_extend_to_date)}} day(s)
+                              </small>
+                            </p>
+                          </div>
+                          <div class="col-2  text-right">
+                            <div class="dropdown"> <a data-toggle="dropdown"> <img src="../../assets/menu.png" class="all-icon"/> </a>
+                              <ul class="dropdown-menu dropdown-menu-right">
+                                <li><a (click)="saveAsDraft()" href="javascript:void(0)">Edit</a></li>
+                                <li><a (click)="discardAd()" href="javascript:void(0)">Copy</a></li>
+                                <li><a (click)="discardAd()" href="javascript:void(0)">Extend</a></li>
+                                <li><a (click)="discardAd()" href="javascript:void(0)">Stop</a></li>
+                              </ul>
+                            </div>
+                          </div>
+                          </div>
+                        </div>
+                      </div>
+                      <ng-template #noExp>
+                        <div class="alternatemessage">
+                          No Data
+                        </div>
+                      </ng-template>
+                    </div>
+                  </div>
+                </div>
+                <!-- first accordion -->
+                <div class="card">
+                  <div class="card-header" role="tab" id="headingTwo"  data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    <div class="row">
+                      <div class="head-blk col-9">
+                        <h6 class="mb-0"> <a  class="collapsed"> Running Safe </a> </h6>
+                      </div>
+                      <div class="col-3 text-right">
+                        <div class="help-blk"> <a (click)="helpText()"><img class="ques-icon" src="../../assets/question.png"/></a> </div>
+                        <div class="arrow-blk"> <img class="acc-arrow" src="../../assets/down-arrow.svg"/> </div>
+                      </div>
+                    </div>
+
+
+                  </div>
+                  <div id="collapseTwo" class="collapse safeSmall" role="tabpanel" aria-labelledby="headingTwo">
+                    <div class="card-block">
+                      <div *ngIf="activeData === 'Yes'; else noActive">
+                      <div *ngFor="let list of allListofHwa">
+                        <div class="row" *ngIf="getDiffrencedays(list.field_extend_from_date,list.field_extend_to_date) > 3">
+                        <div class="col-10">
+                          <p> <span class="text-wrap">{{list.field_hwa_post}}</span> <small>Expiring in {{getDiffrencedays(list.field_extend_from_date,list.field_extend_to_date)}} day(s)</small> </p>
+                        </div>
+                        <div class="col-2  text-right">
+                          <div class="dropdown"> <a data-toggle="dropdown"> <img src="../../assets/menu.png" class="all-icon"/> </a>
+                            <ul class="dropdown-menu dropdown-menu-right">
+                              <li><a (click)="editHwa()" href="javascript:void(0)">Edit</a></li>
+                              <li><a (click)="discardAd()" href="javascript:void(0)">Copy</a></li>
+                              <li><a (click)="discardAd()" href="javascript:void(0)">Extend</a></li>
+                              <li><a (click)="discardAd()" href="javascript:void(0)">Stop</a></li>
+                            </ul>
+                          </div>
+                        </div>
+                        </div>
+                      </div>
+                      </div>
+                      <ng-template #noActive>
+                        <div class="alternatemessage">
+                          No Data
+                        </div>
+                      </ng-template>
+
+                    </div>
+                  </div>
+                </div>
+                <!-- second accordion -->
+                <div class="card">
+                  <div class="card-header" role="tab" id="headingThree"  data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                    <div class="row">
+                      <div class="head-blk col-9">
+                        <h6 class="mb-0"> <a  class="collapsed"> Scheduled Ads </a> </h6>
+                      </div>
+                      <div class="col-3 text-right">
+                        <div class="help-blk"> <a (click)="helpText()"><img class="ques-icon" src="../../assets/question.png"/></a> </div>
+                        <div class="arrow-blk"> <img class="acc-arrow" src="../../assets/down-arrow.svg"/> </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div id="collapseThree" class="collapse safeSmall" role="tabpanel" aria-labelledby="headingThree">
+                    <div class="card-block">
+                      <div>
+
+
+                        <div class="row" *ngFor="let list of allListofHwa">
+
+                          <div class="col-10">
+                            <p> <span class="text-wrap">{{list.field_hwa_post}}</span> <small>Expiring in {{getDiffrencedays(list.field_extend_from_date,list.field_extend_to_date)}} day(s)</small> </p>
+                          </div>
+                          <div class="col-2  text-right">
+                            <div class="dropdown"> <a data-toggle="dropdown"> <img src="../../assets/menu.png" class="all-icon"/> </a>
+                              <ul class="dropdown-menu dropdown-menu-right">
+                                <li><a (click)="saveAsDraft()" href="javascript:void(0)">Edit</a></li>
+                                <li><a (click)="discardAd()" href="javascript:void(0)">Copy</a></li>
+                                <li><a (click)="discardAd()" href="javascript:void(0)">Extend</a></li>
+                                <li><a (click)="discardAd()" href="javascript:void(0)">Stop</a></li>
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+
+                <!-- third accordion -->
+              </div>
+            </div>
+            <div class="tab-pane" id="savedAd" role="tabpanel">
+              <div class="myTabs">
+                <div class="collapse show safeSmall" >
+                  <div class="card-block">
+                    <div class="row" *ngFor="let list of draftHwa">
+                      <div class="col-10">
+                        <p> <span class="text-wrap">{{list.field_hwa_post}}</span> <small>Saved On {{list.created |  date:'shortDate' }}</small> </p>
+                      </div>
+                      <div class="col-2  text-right">
+                        <div class="dropdown"> <a data-toggle="dropdown"> <img src="../../assets/menu.png" class="all-icon"/> </a>
+                          <ul class="dropdown-menu dropdown-menu-right">
+                            <li><a (click)="saveAsDraft()" href="javascript:void(0)">Edit</a></li>
+                            <li><a (click)="discardAd()" href="javascript:void(0)">Copy</a></li>
+                            <li><a (click)="discardAd()" href="javascript:void(0)">Extend</a></li>
+                            <li><a (click)="discardAd()" href="javascript:void(0)">Stop</a></li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane" id="expiredAd" role="tabpanel">
+              <div class="myTabs">
+                <div  class="collapse show safeSmall" role="tabpanel" >
+                  <div class="card-block">
+                    <div class="row" *ngFor="let list of expiredHwa">
+                      <div class="col-10">
+                        <p> <span class="text-wrap">{{list.field_hwa_post}}</span> <small>Expired on {{list.field_extend_to_date |  date:'shortDate' }}</small> </p>
+                      </div>
+                      <div class="col-2  text-right">
+                        <div class="dropdown"> <a data-toggle="dropdown"> <img src="../../assets/menu.png" class="all-icon"/> </a>
+                          <ul class="dropdown-menu dropdown-menu-right">
+                            <li><a (click)="saveAsDraft()" href="javascript:void(0)">Edit</a></li>
+                            <li><a (click)="discardAd()" href="javascript:void(0)">Copy</a></li>
+                            <li><a (click)="discardAd()" href="javascript:void(0)">Extend</a></li>
+                            <li><a (click)="discardAd()" href="javascript:void(0)">Stop</a></li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
+
