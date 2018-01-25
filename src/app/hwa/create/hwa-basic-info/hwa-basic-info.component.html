@@ -1,487 +1,347 @@
- <div class="container-fluid">
+<app-header-valid-user></app-header-valid-user>
+<section id="hwaContainer">
+  <div class="heading">
     <div class="row">
-      <div class="col-12">
-        <section id="login">  
-          <app-header-valid-user></app-header-valid-user>
-            <div class="deskWidth">
-              <div class="preview-head">
-                <div class="container-fluid">
-                <div class="row">
-                  <div class="col-6">
-                      <h5>Create HWA</h5>
-                  </div>
-                  <div class="col-5">
-                    <button class="btn success-btn" data-toggle="modal" data-target="#myModalFullscreen" contenteditable="false">Preview & Post Ad</button>
-                    <!--  <button (click)="onSubmit()" class="btn success-btn">Preview & Post Ad</button> -->
-                  </div>
-          <div class="col-1 dropdown">
-              <a data-toggle="dropdown"> <img src="../../assets/menu.png" class="all-icon"/> </a>
-              <ul class="dropdown-menu">
-                <!-- <li><a [routerLink]="['/add-location', addr?.nid]">Edit</a></li> -->
-                <li><a (click)="saveAsDraft()" href="javascript:void(0)">Save as Draft</a></li>
-                <li><a (click)="discardAd()" href="javascript:void(0)">Discard Ad</a></li>
-              </ul>
-            </div>
-
-
-
-                </div>
-              </div></div>
-  <div id="accordion" role="tablist" aria-multiselectable="true">
-    <div class="card">
-      <div class="card-header" role="tab" id="headingOne">
-
-            <div class="head-blk">
-              <h6 class="mb-0">
-                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                  Add Basic Information for Your Ad
-                </a>
-              </h6>
-            </div>
-            <div class="help-blk">
-              <img class="ques-icon" src="../../assets/question.png"/>
-            </div>
-            <div class="arrow-blk">
-              <img class="acc-arrow" src="../../assets/up-arrow.svg"/>
-            </div>
-
+      <div class="col-8">
+        <h5>Create HWA</h5>
       </div>
-      <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne">
-        <div class="card-block">
+      <div class="col-4 text-right dropdown">
+        <button class="btn success-btn" data-toggle="modal" data-target="#myModalFullscreen" contenteditable="false">Preview & Post Ad</button>
+        <a data-toggle="dropdown"> <img src="../../assets/menu.png" class="all-icon"/> </a>
+        <ul class="dropdown-menu dropdown-menu-right">
+          <li><a (click)="saveAsDraft()" href="javascript:void(0)">Save as Draft</a></li>
+          <li><a (click)="discardAd()" href="javascript:void(0)">Discard Ad</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="mainBlocks">
+
+    <div id="accordion" role="tablist" aria-multiselectable="true">
+      <div class="card">
+        <div class="card-header" role="tab" id="headingOne">
+          <div class="row">
+            <div class="head-blk col-8">
+              <h6 class="mb-0 "> <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne"> Add Basic Information for Your Ad </a> </h6>
+            </div>
+            <div class="help-blk col-4 text-right"> <img class="ques-icon" src="../../assets/question.png"/> <img class="acc-arrow" src="../../assets/up-arrow.svg"/></div>
+          </div>
+        </div>
+        <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne">
+          <div class="card-block">
             <form [formGroup]="creatHWAForm" novalidate>
-                <div class="input-section">
-                  <div class="form-group filled-form">
-                    <label for="position">positions you are hiring for?</label>
-                    <input type="hidden" formControlName="hwa_nid" [(ngModel)]="hwaNid"/>
-                    <input class="form-control myInputStyle" name="title" type="text" formControlName="title">
-                    <div [hidden]="creatHWAForm.controls['title'].valid || creatHWAForm.controls['title'].pristine" class="inline-error">
-                      Please enter a position.
-                      </div>
-                  </div>
-                  <div class="form-group filled-form">
-                    <label for="businessName">Number of openings</label>
-                    <input class="form-control myInputStyle" type="text" id="field_how_many_people_do_you_nee" formControlName="field_how_many_people_do_you_nee" required>
-                     <div [hidden]="creatHWAForm.controls['field_how_many_people_do_you_nee'].valid || creatHWAForm.controls['field_how_many_people_do_you_nee'].pristine" class="inline-error">
-                      Please enter Number of openings.
-                    </div>
-                  </div>
-                  <div class="form-group filled-form">
-                    <label for="exampleSelect1">type of hire</label>
-                    <select class="form-control myInputStyle" formControlName="field_will_they_be_full_time_par" required id="exampleSelect1">
-                      <option selected="selected" value="Full-Time">Full-Time</option>
-                          <option value="Part-Time">Part-Time</option>
-                    </select>
-                     <div [hidden]="creatHWAForm.controls['field_will_they_be_full_time_par'].valid || creatHWAForm.controls['field_will_they_be_full_time_par'].pristine" class="inline-error">
-                      Please Select one type of hire.
-                    </div> 
-                  </div>
-                  <div class="form-group filled-form">
-                    <label for="businessName">required work experience (in years)</label>
-                    <input class="form-control myInputStyle" type="number" name="field_describe_the_skills_and_ex" formControlName="field_describe_the_skills_and_ex" required>
-                    <div [hidden]="creatHWAForm.controls['field_describe_the_skills_and_ex'].valid || creatHWAForm.controls['field_describe_the_skills_and_ex'].pristine" class="inline-error">
-                      Please enter a experience
-                    </div>
-                  </div>
-
-                 
-
-                  <div class="form-group filled-form">
-                    <label for="businessName">location(s) you are hiring for?</label>
-                    <div class="select-more-loc">
-                       <ng-container *ngFor="let addrs of addressList; let i=index">
-                      <div class="row"  >
-                        <div class="col-12" >
-                            <img src="../../assets/locate.png" class="locate-icon"/>
-                                 <!-- <input type="hidden" [value]="addrs?.nid" name="nid[]"> -->
-                                 
-                            <span>{{addrs?.title}}, {{addrs?.field_address_line_2}}, {{addrs?.field_state}}, {{addrs?.field_city}}</span>
-                        </div>
-                      </div>
-                       </ng-container>
-                      <div class="row">
-                        <div class="col-12">
-                            <img src="../../assets/plus.png" class="all-icon add-icon"/>
-                            <a (click)="selectLocation()" >select hiring location</a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                
-                  <div class="form-group filled-form">
-                    <label for="businessName">Job Description</label>
-<quill-editor formControlName="field_how_would_you_describe_thi" 
-              [options]="editorOptions"
-              (blur)="onEditorBlured($event)"
-              (focus)="onEditorFocused($event)"
-              (ready)="onEditorCreated($event)"
-              (change)="onContentChanged($event)"></quill-editor> 
-<!-- [(ngModel)]="describeSkill"  -->
-                 <!--  <div [hidden]="creatHWAForm.controls['describeSkill'].valid || creatHWAForm.controls['describeSkill'].pristine" class="inline-error">
-                      Please Enter Job Description.
-                    </div> -->
-                   </div>
-
+              <div class="input-section">
+                <div class="form-group filled-form">
+                  <label for="position">positions you are hiring for?</label>
+                  <input type="hidden" formControlName="hwa_nid" [(ngModel)]="hwaNid"/>
+                  <input class="form-control myInputStyle" name="title" type="text" formControlName="title">
+                  <div [hidden]="creatHWAForm.controls['title'].valid || creatHWAForm.controls['title'].pristine" class="inline-error"> Please enter a position. </div>
                 </div>
+                <div class="form-group filled-form">
+                  <label for="businessName">Number of openings</label>
+                  <input class="form-control myInputStyle" type="text" id="field_how_many_people_do_you_nee" formControlName="field_how_many_people_do_you_nee" required>
+                  <div [hidden]="creatHWAForm.controls['field_how_many_people_do_you_nee'].valid || creatHWAForm.controls['field_how_many_people_do_you_nee'].pristine" class="inline-error"> Please enter Number of openings. </div>
+                </div>
+                <div class="form-group filled-form">
+                  <label for="exampleSelect1">type of hire</label>
+                  <select class="form-control myInputStyle" formControlName="field_will_they_be_full_time_par" required id="exampleSelect1">
+                    <option selected="selected" value="Full-Time">Full-Time</option>
+                    <option value="Part-Time">Part-Time</option>
+                  </select>
+                  <div [hidden]="creatHWAForm.controls['field_will_they_be_full_time_par'].valid || creatHWAForm.controls['field_will_they_be_full_time_par'].pristine" class="inline-error"> Please Select one type of hire. </div>
+                </div>
+                <div class="form-group filled-form">
+                  <label for="businessName">required work experience (in years)</label>
+                  <input class="form-control myInputStyle" type="number" name="field_describe_the_skills_and_ex" formControlName="field_describe_the_skills_and_ex" required>
+                  <div [hidden]="creatHWAForm.controls['field_describe_the_skills_and_ex'].valid || creatHWAForm.controls['field_describe_the_skills_and_ex'].pristine" class="inline-error"> Please enter a experience </div>
+                </div>
+                <div class="form-group filled-form">
+                  <label for="businessName">location(s) you are hiring for?</label>
+                  <div class="select-more-loc">
+                    <ng-container *ngFor="let addrs of addressList; let i=index">
+                      <div class="row"  >
+                        <div class="col-12" > <img src="../../assets/locate.png" class="locate-icon"/>
+                          <!-- <input type="hidden" [value]="addrs?.nid" name="nid[]"> -->
+                          <span>{{addrs?.title}}, {{addrs?.field_address_line_2}}, {{addrs?.field_state}}, {{addrs?.field_city}}</span> </div>
+                      </div>
+                    </ng-container>
+                    <div class="row">
+                      <div class="col-12"> <img src="../../assets/plus.png" class="all-icon add-icon"/> <a (click)="selectLocation()" >select hiring location</a> </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group filled-form">
+                  <label for="businessName">Job Description</label>
+                   <div formControlName="field_how_would_you_describe_thi" [froalaEditor]>Hello, FRS!</div>
+                  <!-- [(ngModel)]="describeSkill"  -->
+                  <!--  <div [hidden]="creatHWAForm.controls['describeSkill'].valid || creatHWAForm.controls['describeSkill'].pristine" class="inline-error">
+                Please Enter Job Description.
+              </div> --> 
+                </div>
+              </div>
             </form>
+          </div>
         </div>
       </div>
-    </div> <!-- first -->
-    <div class="card">
-      <div class="card-header" role="tab" id="headingTwo">
-            <div class="head-blk">
-              <h6 class="mb-0">
-                <a class="collapsed" (click)="storeData()" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                  Add Qualifying Questions
-                </a>
-              </h6>
-            </div>
-            <div class="help-blk">
-              <img class="ques-icon" src="../../assets/question.png"/>
-            </div>
-            <div class="arrow-blk">
-                <img class="acc-arrow" src="../../assets/down-arrow.svg"/>
-              </div>
-
-      </div>
-      <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo">     
-        <form [formGroup]="koForm" novalidate>
-        <div class="w90 card-block">
-          <h6>Mandatory questions</h6>
-          
-        <!--  <div formArrayName="defaultQlists" class="row">
-            <div *ngFor="let question of defaultQLists; let i=index"  class="col-12">
-               <div [formGroupName]="i" style="width: 100%; margin: 0" class="">
-                <input class="" formControlName="inputval" type="hidden" [value]="question">
-                        <input class=" " disabled="true" style="margin-left: 0;" [value]="question" checked="checked" id="{{'default'+i}}" type="checkbox" formControlName="defaultQlist">
-                        <label class="" for="{{'default'+i}}">{{question.name}}</label>
-               </div>
-            </div>
-          </div> -->
-
-            <div class="row">
-              <div class="col-12">
-                  <span>Q</span>
-                <span>Are you over the age of 18?</span>
-              </div>
-            </div>
+      <!-- first -->
+      <div class="card">
+        <div class="card-header" role="tab" id="headingTwo">
           <div class="row">
-              <div class="col-12">
-                  <span>Q</span>
-                  <span>Are you authorized to work in the USA?</span>
-              </div>
+            <div class="head-blk col-8">
+              <h6 class="mb-0  "> <a class="collapsed" (click)="storeData()" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"> Add Qualifying Questions </a> </h6>
             </div>
-  
-            <h6>Custom Question</h6>
-            <div class="row">
-              <div class="col-12">
-                <div formArrayName="customQlist" class="custom-ques-edit">
-                  <ng-container *ngFor="let qlist of customQList let i=index">
-                    <div *ngIf="qlist != ''" >
- <div [formGroupName]="i"  >
-                <span>Q</span>
-                <!-- <span>Are you over the age of 18?</span> -->
- <input class="" #inputval formControlName="inputval" type="text" (change)="editText($event, i)" [value]="qlist" id="inpchk" maxlength="110" *ngIf="isEditable[i]" style="border: 0; font-size: 16px; width: 100%; letter-spacing: 1px; height: 30px;">
-                        <input class="" formControlName='costomQus' type="checkbox" [value]="qlist" id="{{'costom'+i}}" *ngIf="!isEditable[i]" checked="checked">
-                        <label class="static" *ngIf="!isEditable[i]">{{qlist}}</label>
-
-                        <!-- <button type="button" (click)="toggleShow(i)" class="mdl-but">{{ changeText[i] }}</button> -->
-
-             <div class=" kebab-menu col-1 text-right"  >
-                <div class="dropdown"> <a  data-toggle="dropdown"> <img src="../../assets/menu.png" class="all-icon"/> </a>
-                  <ul class="dropdown-menu">
-                    <li><a (click)="toggleShow(i)" >{{ changeText[i] }}</a></li>
-                  <!--  <li><a (click)="deleteAddress(addr?.nid)" href="javascript:void(0)">Delete</a></li>
-                    <li><a (click)="markAsDefault(addr?.nid)" href="javascript:void(0)">Mark Default</a></li>-->
-                  </ul>
-                </div>
-              </div>
- </div>
-            </div>
-          </ng-container>
- 
-                </div>
-              </div>
-            </div>
-  
-          <div class="row">
-            <div class="col-12">
-              <div class="add-new-cus">
-                <img src="../../assets/plus.png" class="all-icon add-icon"/>
-                <button (click)="addCustomQuestion()" [disabled]="btndisabled">Add new custom qualifying question</button>
-              </div>
-            </div>
+            <div class="help-blk col-4 text-right"> <img class="ques-icon" src="../../assets/question.png"/> <img class="acc-arrow" src="../../assets/down-arrow.svg"/></div>
           </div>
-          <h6>custom question</h6>
-          <div class="custom-ko">
-            <div class="row">
-              <div class="col-12">
-                
+        </div>
+        <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo">
+          <form [formGroup]="koForm" novalidate>
+            <div class="w90 card-block">
+              <h6>Mandatory questions</h6>
+              <!--  <div formArrayName="defaultQlists" class="row">
+      <div *ngFor="let question of defaultQLists; let i=index"  class="col-12">
+         <div [formGroupName]="i" style="width: 100%; margin: 0" class="">
+          <input class="" formControlName="inputval" type="hidden" [value]="question">
+                  <input class=" " disabled="true" style="margin-left: 0;" [value]="question" checked="checked" id="{{'default'+i}}" type="checkbox" formControlName="defaultQlist">
+                  <label class="" for="{{'default'+i}}">{{question.name}}</label>
+         </div>
+      </div>
+    </div> -->
+              <div class="row">
+                <div class="col-12"> <span>Q</span> <span>Are you over the age of 18?</span> </div>
+              </div>
+              <div class="row">
+                <div class="col-12"> <span>Q</span> <span>Are you authorized to work in the USA?</span> </div>
+              </div>
+              <h6>Custom Question</h6>
+              <div class="row">
+                <div class="col-12">
+                  <div formArrayName="customQlist" class="custom-ques-edit">
+                    <ng-container *ngFor="let qlist of customQList let i=index">
+                      <div *ngIf="qlist != ''" >
+                        <div [formGroupName]="i"  > <span>Q</span>
+                          <!-- <span>Are you over the age of 18?</span> -->
+                          <input class="" #inputval formControlName="inputval" type="text" (change)="editText($event, i)" [value]="qlist" id="inpchk" maxlength="110" *ngIf="isEditable[i]" style="border: 0; font-size: 16px; width: 100%; letter-spacing: 1px; height: 30px;">
+                          <input class="" formControlName='costomQus' type="checkbox" [value]="qlist" id="{{'costom'+i}}" *ngIf="!isEditable[i]" checked="checked">
+                          <label class="static" *ngIf="!isEditable[i]">{{qlist}}</label>
+                          <!-- <button type="button" (click)="toggleShow(i)" class="mdl-but">{{ changeText[i] }}</button> -->
+                          <div class=" kebab-menu col-1 text-right"  >
+                            <div class="dropdown"> <a  data-toggle="dropdown"> <img src="../../assets/menu.png" class="all-icon"/> </a>
+                              <ul class="dropdown-menu">
+                                <li><a (click)="toggleShow(i)" >{{ changeText[i] }}</a></li>
+                                 <li><a (click)="deleteQuestion(i)" href="javascript:void(0)">Delete</a></li>
+               <!--<li><a (click)="markAsDefault(addr?.nid)" href="javascript:void(0)">Mark Default</a></li>-->
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </ng-container>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <div class="add-new-cus"> <img src="../../assets/plus.png" class="all-icon add-icon"/>
+                    <button (click)="addCustomQuestion()" [disabled]="btndisabled">Add new custom qualifying question</button>
+                  </div>
+                </div>
+              </div>
+              <h6>custom question</h6>
+              <div class="custom-ko">
+                <div class="row">
+                  <div class="col-12">
                     <div *ngIf="showTextfield" class="input-section">
                       <div class="form-group filled-form">
                         <label for="businessName">Type your question here</label>
-                        <input type="text" id="inputqus" (keyup)="checkEmpty(customlist)" maxlength="120" class="form-control myInputStyle"  (change)="addQuestion(customlist, '', true)" #customlist>
-                        
+                        <input type="text" id="inputqus" (keyup)="checkEmpty(customlist)" maxlength="120" class="form-control myInputStyle"  (change)="addQuestion(customlist, '', 1)" #customlist>
                         <!-- <div [hidden]="creatHWAForm.controls['businessname'].valid || creatHWAForm.controls['businessname'].pristine" class="inline-error">
-                          Please enter a Business name
-                          </div> -->
+                    Please enter a Business name
+                    </div> -->
                       </div>
                       <button (click)="addCustomQuestion()" [disabled]="btndisabled" class="btn smallBtn">Add</button>
                       <button class="btn smallBtn">Cancel</button>
                     </div>
-                  
-              </div>
-            </div>
-          </div>
-        </div>
-        </form>
-      </div>
-      </div> <!-- second -->
-    <div class="card">
-      <div class="card-header" role="tab" id="headingThree">
-
-
-          <div class="head-blk">
-            <h6 class="mb-0">
-              <a class="collapsed" (click)="storeData()" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                Add Skill Or Experience Questions
-              </a>
-            </h6>
-          </div>
-          <div class="help-blk">
-            <img class="ques-icon" src="../../assets/question.png"/>
-          </div>
-          <div class="arrow-blk">
-             <img class="acc-arrow" src="../../assets/down-arrow.svg"/>
-          </div>
-
-
-
-      </div>
-      <div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree">
-        <small>Minimum one Skill or Experience Question is required to post HWA</small>
-        <div class="w90">
-          <h6>Custom Skill Question</h6>
-          <div class="row">
-            <div class="col-12">
-              
-               <ng-container *ngFor="let sqlist of skillQuestionList let i=index">
-              <div class="custom-ques-edit">
-              <span>Q</span>
-              <span>{{sqlist?.skill_exp_ques}}</span>
-               <div *ngIf="sqlist?.field_experience_needed != 'N/A'" >Experience: {{sqlist?.field_experience_needed}}</div>
-               <div *ngIf="sqlist?.field_expertise_needed != 'N/A'">Expertise: {{sqlist?.field_expertise_needed}}</div>
-              <div class=" kebab-menu col-1 text-right"  >
-                <div class="dropdown"> <a  data-toggle="dropdown"> <img src="../../assets/menu.png" class="all-icon"/> </a>
-                  <ul class="dropdown-menu">
-                    <li><a (click)="editSkillQue(i)" >Edit</a></li>
-                   <li><a (click)="deleteSkill(i)" href="javascript:void(0)">Delete</a></li>
-                  </ul>
-                </div>
-              </div>
-              </div>
-               </ng-container>
-
-            </div>
-          </div>
-
-          <div class="row">
-              <div class="col-12">
-                <div class="add-new-cus">
-                  <img src="../../assets/plus.png" class="all-icon add-icon"/>
-                  <a  (click)="showHideFrom()">Add new custom qualifying question</a>
+                  </div>
                 </div>
               </div>
             </div>
-        </div>
-
-        <div class="card-wrapper">
-        <div class="card-block">
-          <form [formGroup]="skillExpForm" novalidate>
-            <div  class="input-section">
-             
-              <div *ngIf="showForm" class="">
-              <div class="form-group filled-form">
-                <label for="businessName">Skill or Experience Question</label>
-                <input type="hidden" name="nid" formControlName="nid" />
-                <input maxlength="200" type="text" name="skill_exp_ques" formControlName="skill_exp_ques" class="form-control myInputStyle"  required>
-                 <div [hidden]="skillExpForm.controls['skill_exp_ques'].valid || skillExpForm.controls['skill_exp_ques'].pristine" class="inline-error">
-                  Please enter a question
-                </div> 
-              </div>
-  
-              <div class="radio-class">
-                <label class="custom-control custom-radio">
-                  <input id="radio1" (change)='selectExpType($event)' type="radio"  [value]="'experience'" formControlName="exp" class="custom-control-input">
-                  <span class="custom-control-indicator"></span>
-                  <span class="custom-control-description">Experience (Yrs)</span>
-                </label>
-                <label class="custom-control custom-radio active">
-                  <input id="radio2" (change)='selectExpType($event)' type="radio" [value]="'expertise'" formControlName="exp"  class="custom-control-input">
-                  <span class="custom-control-indicator"></span>
-                  <span class="custom-control-description">Expertise level</span>
-                </label>
-              </div>
-  
-              <div [ngClass]="hideExpArray ? 'selectvisiblity' : ''" class="form-group filled-form">
-                <label for="exampleSelect1">Select Expertise level</label>
-                <select class="form-control myInputStyle" [(ngModel)]="expertiseValue" formControlName="field_expertise_needed" name="field_expertise_needed" required id="exampleSelect1">
-                  <option>N/A</option>
-                  <option value="Beginner">Beginner</option>
-                  <option value="Intermediate">Intermediate</option>
-                  <option value="Expert">Expert</option>
-                </select>
-                 <div [hidden]="skillExpForm.controls['field_expertise_needed'].valid || skillExpForm.controls['field_expertise_needed'].pristine" class="inline-error">
-                  Please Select a Expertise level
-                </div>
-              </div>
-
-              <div [ngClass]="hideExpertiseArray ? 'selectvisiblity' : ''" class="form-group filled-form">
-                <label for="exampleSelect1">Select Experience (Yrs)</label><!-- (change)="hideExpertiseLevel()" -->
-                <select class="form-control myInputStyle"  [(ngModel)]="experenceValue" formControlName="field_experience_needed" name="field_experience_needed" required>
-                  <option>N/A</option>
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                  <option value="6">6</option>
-                  <option value="7">7</option>
-                  <option value="8">8</option>
-                  <option value="9">9</option>
-                  <option value="10">10</option>
-                  <option value="more than 10">more than 10</option>
-                </select>
-                  <div [hidden]="skillExpForm.controls['field_experience_needed'].valid || skillExpForm.controls['field_experience_needed'].pristine" class="inline-error">
-                  Please Select a Expertise level
-                </div> 
-              </div>
-
- <div class="goToNextBtn">
-                <button (click)="addInList()" class="btn smallBtn">Add</button>
-              </div>
-
-              </div>
-              
-            </div>
-            
-            
           </form>
+        </div>
+      </div>
+      <!-- second -->
+      <div class="card">
+        <div class="card-header" role="tab" id="headingThree">
+          <div class="row">
+            <div class="head-blk col-8">
+              <h6 class="mb-0"> <a class="collapsed" (click)="storeData()" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree"> Add Skill Or Experience Questions </a> </h6>
+            </div>
+            <div class="help-blk col-4 text-right"> <img class="ques-icon" src="../../assets/question.png"/> <img class="acc-arrow" src="../../assets/down-arrow.svg"/> </div>
           </div>
         </div>
-  
-      </div>
-    </div> <!-- third -->
-  </div> <!-- accordion -->
-  </div> <!-- deskWidth -->
-  </section>
-  </div>
-  </div>
-</div>
-
-
-<!-- /.container -->
-<div class="modal fade modal-fullscreen  footer-to-bottom" id="myModalFullscreen" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog animated zoomInLeft">
-        <div class="modal-content">
-            <div class="modal-header"> 
-
-                       	<h4 class="modal-title">HWA Preview</h4>
-                    
-
-                    <div class=" kebab-menu col-md-1"  >
+        <div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree"> <small>Minimum one Skill or Experience Question is required to post HWA</small>
+          <div class="w90">
+            <h6>Custom Skill Question</h6>
+            <div class="row">
+              <div class="col-12">
+                <ng-container *ngFor="let sqlist of skillQuestionList let i=index">
+                  <div class="custom-ques-edit"> <span>Q</span> <span>{{sqlist?.skill_exp_ques}}</span>
+                    <div *ngIf="sqlist?.field_experience_needed != 'N/A'" >Experience: {{sqlist?.field_experience_needed}}</div>
+                    <div *ngIf="sqlist?.field_expertise_needed != 'N/A'">Expertise: {{sqlist?.field_expertise_needed}}</div>
+                    <div class=" kebab-menu col-1 text-right"  >
                       <div class="dropdown"> <a  data-toggle="dropdown"> <img src="../../assets/menu.png" class="all-icon"/> </a>
-                      <ul class="dropdown-menu">
-                      <li><a (click)="onSubmit('draft')" > Save as Draft</a></li>
-                        <li><a (click)="discardAd()" >Discard Ad</a></li>
-                      </ul>
+                        <ul class="dropdown-menu">
+                          <li><a (click)="editSkillQue(i)" >Edit</a></li>
+                          <li><a (click)="deleteSkill(i)" href="javascript:void(0)">Delete</a></li>
+                        </ul>
                       </div>
                     </div>
-                     <button (click)="onSubmit('post')" class="btn success-btn">Post Ad</button>
-                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
-                  
-                  
-
-            </div>
-            <div class="modal-body">
-               
-
-                <div class="deskWidth">
-          
-              <div class="hwa-details">
-                <p>
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-                    Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-                    when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
-                    It has survived not only five centuries, 
-                    but also the leap into electronic typesetting, remaining essentially unchanged.
-                </p>
-                <h5>Job Description</h5>
-               <div innerHTML="{{creatHWAForm.controls['field_how_would_you_describe_thi'].value}}"> </div>
-                <h5>Responsibilities</h5>
-                <ul>
-                  <li>Ipsum is simply dummy text of the printing</li>
-                  <li>Ipsum is simply dummy text of the printing, simply dummy text of the printing</li>
-                </ul>
-                <h5>Knock Out Questions</h5>
-                <ul class="custom-list-style">
-                  <ng-container *ngFor="let qlistview of customQList let i=index">
-                    <li *ngIf="qlistview != ''">{{qlistview}}</li>
-                  </ng-container>
-                </ul>
-                <h5>Skill or Experience Questions</h5>
-                <ul class="custom-list-style">
-             <ng-container *ngFor="let sqlist of skillQuestionList let i=index">
-                    <li> <span>Q</span>
-              <span>{{sqlist?.skill_exp_ques}}</span>
-               <div *ngIf="sqlist?.field_experience_needed != 'N/A'" >Experience: {{sqlist?.field_experience_needed}}</div>
-               <div *ngIf="sqlist?.field_expertise_needed != 'N/A'">Expertise: {{sqlist?.field_expertise_needed}}</div>
-              </li>
-                    </ng-container>
-                </ul>
-                <h5>Business Profile</h5>
-                 <ng-container *ngFor="let busTopic of businessTopic let j=index">
-                <div class="business-blk">
-                    <div class="busImg">
-                        <img [src]="busTopic?.field_business_profile_topic_ima"/>
-                      </div>
-
-                      <div class="form-group filled-form">
-                        <span>Topic</span>
-                        <p>{{busTopic?.field_topic}}</p>
-                      </div>
-                      <div class="form-group filled-form busDesc">
-                        <span>Description</span>
-                        <p innerHTML="{{busTopic?.field_business_profile_topic_des}}"></p>
-                      </div>
-                </div>
-                 </ng-container>
+                  </div>
+                </ng-container>
               </div>
-              </div> <!-- deskWidth -->
-
-
-
-
-
-
-
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button (click)="onSubmit('post')" type="button" class="btn success-btn">Post Ad</button>
+            <div class="row">
+              <div class="col-12">
+                <div class="add-new-cus"> <img src="../../assets/plus.png" class="all-icon add-icon"/> <a  (click)="showHideFrom()">Add new custom qualifying question</a> </div>
+              </div>
             </div>
+          </div>
+          <div *ngIf="showForm" class="card-wrapper">
+             <form [formGroup]="skillExpForm" novalidate>
+            <div  class="card-block">
+             
+                <div  class="input-section">
+                  <div  class="">
+                    <div class="form-group filled-form">
+                      <label for="businessName">Skill or Experience Question</label>
+                      <input type="hidden" name="nid" formControlName="nid" />
+                      <input maxlength="200" type="text" name="skill_exp_ques" formControlName="skill_exp_ques" class="form-control myInputStyle"  required>
+                      <div [hidden]="skillExpForm.controls['skill_exp_ques'].valid || skillExpForm.controls['skill_exp_ques'].pristine" class="inline-error"> Please enter a question </div>
+                    </div>
+                    <div class="radio-class">
+                      <label class="custom-control custom-radio">
+                        <input id="radio1" (change)='selectExpType($event)' type="radio"  [value]="'experience'" formControlName="exp" class="custom-control-input">
+                        <span class="custom-control-indicator"></span> <span class="custom-control-description">Experience (Yrs)</span> </label>
+                      <label class="custom-control custom-radio active">
+                        <input id="radio2" (change)='selectExpType($event)' type="radio" [value]="'expertise'" formControlName="exp"  class="custom-control-input">
+                        <span class="custom-control-indicator"></span> <span class="custom-control-description">Expertise level</span> </label>
+                    </div>
+                    <div [ngClass]="hideExpArray ? 'selectvisiblity' : ''" class="form-group filled-form">
+                      <label for="exampleSelect1">Select Expertise level</label>
+                      <select class="form-control myInputStyle" [(ngModel)]="expertiseValue" formControlName="field_expertise_needed" name="field_expertise_needed" required id="exampleSelect1">
+                        <option>N/A</option>
+                        <option value="Beginner">Beginner</option>
+                        <option value="Intermediate">Intermediate</option>
+                        <option value="Expert">Expert</option>
+                      </select>
+                      <div [hidden]="skillExpForm.controls['field_expertise_needed'].valid || skillExpForm.controls['field_expertise_needed'].pristine" class="inline-error"> Please Select a Expertise level </div>
+                    </div>
+                    <div [ngClass]="hideExpertiseArray ? 'selectvisiblity' : ''" class="form-group filled-form">
+                      <label for="exampleSelect1">Select Experience (Yrs)</label>
+                      <!-- (change)="hideExpertiseLevel()" -->
+                      <select class="form-control myInputStyle"  [(ngModel)]="experenceValue" formControlName="field_experience_needed" name="field_experience_needed" required>
+                        <option>N/A</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="more than 10">more than 10</option>
+                      </select>
+                      <div [hidden]="skillExpForm.controls['field_experience_needed'].valid || skillExpForm.controls['field_experience_needed'].pristine" class="inline-error"> Please Select a Expertise level </div>
+                    </div>
+                    <div class="goToNextBtn">
+                      <button (click)="addInList()" class="btn smallBtn">Add</button>
+                    </div>
+                  </div>
+                </div>
+             
+            </div>
+             </form>
+          </div>
         </div>
-        <!-- /.modal-content -->
+      </div>
+      <!-- third -->
     </div>
-    <!-- /.modal-dialog -->
+    <!-- accordion -->
+  </div>
+  <!-- deskWidth -->
+</section>
+
+
+<div class="modal fade modal-fullscreen  footer-to-bottom" id="myModalFullscreen" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog animated zoomInLeft">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">HWA Preview</h4>
+        <div class=" kebab-menu col-md-1"  >
+          <div class="dropdown"> <a  data-toggle="dropdown"> <img src="../../assets/menu.png" class="all-icon"/> </a>
+            <ul class="dropdown-menu">
+              <li><a (click)="onSubmit('draft')" > Save as Draft</a></li>
+              <li><a (click)="discardAd()" >Discard Ad</a></li>
+            </ul>
+          </div>
+        </div>
+        <button (click)="onSubmit('post')" class="btn success-btn">Post Ad</button>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+      </div>
+      <div class="modal-body">
+        <div class="deskWidth">
+          <div class="hwa-details">
+            <p> Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+              Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+              when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+              It has survived not only five centuries,
+              but also the leap into electronic typesetting, remaining essentially unchanged. </p>
+            <h5>Job Description</h5>
+            <div innerHTML="{{creatHWAForm.controls['field_how_would_you_describe_thi'].value}}"> </div>
+            <h5>Responsibilities</h5>
+            <ul>
+              <li>Ipsum is simply dummy text of the printing</li>
+              <li>Ipsum is simply dummy text of the printing, simply dummy text of the printing</li>
+            </ul>
+            <h5>Knock Out Questions</h5>
+            <ul class="custom-list-style">
+              <ng-container *ngFor="let qlistview of customQList let i=index">
+                <li *ngIf="qlistview != ''">{{qlistview}}</li>
+              </ng-container>
+            </ul>
+            <h5>Skill or Experience Questions</h5>
+            <ul class="custom-list-style">
+              <ng-container *ngFor="let sqlist of skillQuestionList let i=index">
+                <li> <span>Q</span> <span>{{sqlist?.skill_exp_ques}}</span>
+                  <div *ngIf="sqlist?.field_experience_needed != 'N/A'" >Experience: {{sqlist?.field_experience_needed}}</div>
+                  <div *ngIf="sqlist?.field_expertise_needed != 'N/A'">Expertise: {{sqlist?.field_expertise_needed}}</div>
+                </li>
+              </ng-container>
+            </ul>
+            <h5>Business Profile</h5>
+            <ng-container *ngFor="let busTopic of businessTopic let j=index">
+              <div class="business-blk">
+                <div class="busImg"> <img [src]="busTopic?.field_business_profile_topic_ima"/> </div>
+                <div class="form-group filled-form"> <span>Topic</span>
+                  <p>{{busTopic?.field_topic}}</p>
+                </div>
+                <div class="form-group filled-form busDesc"> <span>Description</span>
+                  <p innerHTML="{{busTopic?.field_business_profile_topic_des}}"></p>
+                </div>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+        <!-- deskWidth -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button (click)="onSubmit('post')" type="button" class="btn success-btn">Post Ad</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
-<!--<div id="myNav" class="overlay">
-  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-  <div class="overlay-content">
-    <a href="#">About</a>
-    <a href="#">Services</a>
-    <a href="#">Clients</a>
-    <a href="#">Contact</a>
-  </div>
-</div>
-<span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; open</span> -->

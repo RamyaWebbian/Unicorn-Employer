@@ -8,9 +8,9 @@ import { HwaBasicInfoRoutingModule } from './hwa-basic-info-routing.module';
 import { SharedModule } from '../../../shared/shared.module';
 import { UserService, HwaCommonService } from '../../../services/index';
 import {HeaderValidUserModule} from '../../../common/header-valid-user/header-valid-user.module';
-import { QuillEditorModule } from 'ng2-quill-editor';
-// declare var window:any
- // window.holdDataService = new HoldDataService();
+// import { QuillEditorModule } from 'ng2-quill-editor';
+import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
+
 
 @NgModule({
   imports: [
@@ -20,7 +20,9 @@ import { QuillEditorModule } from 'ng2-quill-editor';
     ReactiveFormsModule,
     SharedModule,
     HeaderValidUserModule,
-    QuillEditorModule
+    //QuillEditorModule
+    FroalaEditorModule.forRoot(),
+    FroalaViewModule.forRoot()
   ],
   declarations: [HwaBasicInfoComponent],
   providers:[HwaCommonService]

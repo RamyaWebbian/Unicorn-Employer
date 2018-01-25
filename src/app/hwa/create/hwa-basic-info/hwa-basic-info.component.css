@@ -160,3 +160,8 @@ h6 {
 }
 }
 
+/**/
+#hwaContainer{max-width: 900px; margin: auto}
+.heading{padding: 20px 0}
+.card{margin-bottom: 10px;}
+.card-header{border-bottom: 0; margin-bottom: 0; background: #f3f3f3}

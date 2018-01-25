@@ -30,7 +30,7 @@ export class SelectHiringLocationComponent implements OnInit {
               .map(opt => opt)
   }
 getSelectedAddress(){
-  console.log(this.selectedOptions);
+ // console.log(this.selectedOptions);
 }
 getAddress(user) {
    
@@ -53,9 +53,9 @@ getAddress(user) {
 
 onSubmit() {
 
- // console.log(this.selectedOptions);
+  console.log(this.selectedOptions);
   // const user = this.userService.isLogedin();
- // this.holdDataService.selectedAddres = this.selectedOptions;
+  this.holdDataService.selectedAddres = this.selectedOptions;
   this.holdDataService.setSelectedAddress(this.selectedOptions);
   //var abc = true;
   // this.holdDataService.setTest(abc);

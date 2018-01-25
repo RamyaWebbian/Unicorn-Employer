@@ -19,12 +19,12 @@ export class HoldDataService {
   private _message: string = '';
 
   private selectedAddress: BehaviorSubject<Array<any>> = new BehaviorSubject<Array<any>>([]);
+  private selectedAddressq: Subject<Array<any>> = new Subject<Array<any>>();
   private messageSource: BehaviorSubject<any> = new BehaviorSubject<any>('');
 
   constructor() { }
 
  setSelectedAddress(addressList: Array<any>): void {
- //  console.log('addressList', addressList)
  this._selectedAddr = addressList
     this.selectedAddress.next(this._selectedAddr);
   }

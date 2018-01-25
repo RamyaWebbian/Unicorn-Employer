@@ -15,9 +15,9 @@
       "es2017",
       "dom"
     ]
-  },
-  "include": [
-    "src/**/*",
-    "node_modules/ng2-quill-editor/index.ts"
-  ]
+  }
+ // "include": [
+   // "src/**/*",
+   // "node_modules/ng2-quill-editor/index.ts"
+ // ]
 }

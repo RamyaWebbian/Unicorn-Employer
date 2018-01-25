@@ -22,13 +22,13 @@
     "@angular/platform-browser-dynamic": "^5.1.0",
     "@angular/router": "^5.1.0",
     "@ng-bootstrap/ng-bootstrap": "^1.0.0-beta.9",
+    "angular-froala-wysiwyg": "^2.7.3",
     "angular2-jwt": "^0.2.3",
     "angular2-notifications": "^0.9.6",
     "bootstrap": "4.0.0-beta.2",
     "core-js": "^2.4.1",
     "jquery": "^3.2.1",
     "moment": "^2.20.1",
-    "ng2-quill-editor": "^2.0.0",
     "ngx-cookie-service": "^1.0.9",
     "ngx-mask": "^2.1.19",
     "popper.js": "^1.12.9",
@@ -36,7 +36,7 @@
     "zone.js": "^0.8.19"
   },
   "devDependencies": {
-    "@angular/cli": "1.6.4",
+    "@angular/cli": "^1.6.5",
     "@angular/compiler-cli": "^5.1.0",
     "@angular/language-service": "^5.1.0",
     "@types/jasmine": "~2.8.3",
