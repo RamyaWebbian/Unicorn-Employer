@@ -107,7 +107,7 @@ console.log(res);
   
             this.loading = false;
             if(res['current_user'].business_profile_created == 'yes') {
-              this.router.navigate(['/user-profile-view']);
+              this.router.navigate(['/landing-page']);
             }else{
               this.router.navigate(['user-profile']);
             }

@@ -171,12 +171,17 @@ if (abc) {
     }
 }
  this.showTextfield = false;
-      this.btndisabled = false;
+ this.btndisabled = false;
     // this.addressList =  this.holdDataService.selectedAddres;
-     // console.log( this.addressList  );
-  this.holdDataService.getSelectedAddress().subscribe((data: Array<any>) => {
-      console.log('data', data);
+      console.log( this.addressList  );
+this.holdDataService.getSelectedAddress().subscribe((data: Array<any>) => {
+    if(data.length) {
        this.addressList = data;
+        console.log( this.addressList  );
+    }else{
+       this.addressList = this.addressList;
+    }
+      
        if (this.addressList) {
        this.addressList.forEach((item, index) => {
           this.selectedNid[index] = item['nid'];
@@ -193,7 +198,7 @@ if (abc) {
 
  const user = this.userService.isLogedin();
 if (user) {
-  console.log(user);
+ // console.log(user);
 // this.loadbusProfile(pid)
 this.loaduserData(user.uid);
 }
@@ -201,7 +206,7 @@ this.loaduserData(user.uid);
 
   loadHwaDraftData(hwaId) {
     const user = this.userService.isLogedin();
-    console.log(hwaId, user.uid);
+   // console.log(hwaId, user.uid);
     this.hwaCommonService.loadDraftData(hwaId, user.uid).subscribe(
       res => {
         if (res) {
@@ -467,8 +472,12 @@ loadkoDraftData(hwaId) {
          sel = true;
         } else if (selected === 0) {
           sel = false;
+         } else if (selected === true) {
+          sel = true;
+         }else{
+           sel = false;
          }
-      console.log(todo.value, sel);
+     // console.log(todo.value, sel);
       control.push(this.initQuestion(todo.value, qnid, sel));
       todo.value = null;
       //   if (qnid){
