@@ -1,0 +1,100 @@
+<app-header-valid-user></app-header-valid-user>
+<img src="../assets/loader.gif" class="newLoader" *ngIf="!pageLoded">
+<div class="container desktop-width">
+  <div class="row">
+    <div class="col-12">
+  <simple-notifications [options]="options"></simple-notifications>
+  <section id="active-ads">
+  <div class="pageHeading">
+    <h2>Summary of Active help wanted ads</h2>
+  </div>
+  <div class="allApplicantsSortSection">
+    <p class="text-center f13">select your help wanted ad to view applicants</p>
+    <div class="actionButtons">
+      <button class="btn no-bg-btn" (click)="shortBy()">
+        <img src="../../../assets/import-export-arrows.png"/>{{status}}
+      </button>
+      <button class="btn transparent-btn float-right" (click)="downloadxsl()">
+        <img src="../../../assets/excelIcon.png"/>
+        Download as Excel</button>
+    </div>
+
+    <ngb-tabset>
+      <ngb-tab title="Active">
+        <ng-template ngbTabContent>
+            <div class="paginationSection">
+                <div class="text-right"> <span>1 - 10 of </span><span>45</span>
+                   <a><img src=".././../assets/previous.svg"></a> <a><img src=".././../assets/next.svg"></a>
+                </div>
+              </div>
+			<ul>  
+            <div *ngIf="noactive" class="jobadBlock">Currently No Active Help Wanted Ads</div>
+            
+                <li class="fadeInDown" *ngFor="let list of listData">
+                  <div class="jobadBlock cursor" *ngIf="list['total_application'] !== 0" [routerLink]="['/applicants-list', list['title'], list['nid'], list['users_field_data_node_field_data_uid']]">
+                      <a>{{list['title']}}</a>
+                    <div>
+                      <span *ngFor="let sub of list['stats']">
+                        <span class="colorGrey">{{sub.name}}</span>
+                        <span class="colorBlue">{{sub.counter}}</span>
+                        <span class="seperator">|</span>
+                      </span>
+                    </div>
+                    <div>
+                      <span class="colorGrey">Positions</span>
+                      <span class="colorBlack">{{list['position']}}</span>
+                      <span class="seperator">|</span>
+                      <span class="colorGrey">Expiring On</span>
+                      <span [ngClass]="{'colorRed': list['remaing_days'] <= 3 }">
+                          {{list['expirydate'] | date:'y/M/d' }}
+                      </span>
+                      <span class="seperator">|</span>
+                      <span class="colorGrey">Total Applicants</span>
+                      <span class="colorBlack">{{list['total_application']}}</span>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+        </ng-template>
+      </ngb-tab>
+      <ngb-tab title="Expired">
+        <ng-template ngbTabContent>
+            <div class="paginationSection">
+                <div class="text-right"> <span>1 - 10 of </span><span>45</span>
+                   <a><img src=".././../assets/previous.svg"></a> <a><img src=".././../assets/next.svg"></a>
+                </div>
+              </div>
+          <ul>
+              <div *ngIf="noexpired" class="jobadBlock">Currently No Expired Help Wanted Ads</div>
+              <li class="fadeInDown" *ngFor="let list of listData2">
+                  <div class="jobadBlock cursor" *ngIf="list['total_application'] !== 0" [routerLink]="['/applicants-list', list['title'], list['nid'], list['users_field_data_node_field_data_uid']]">
+                      <a>{{list['title']}}</a>
+                    <div>
+                      <span *ngFor="let sub of list['stats']">
+                        <span class="colorGrey">{{sub.name}}</span>
+                        <span class="colorBlue">{{sub.counter}}</span>
+                        <span class="seperator">|</span>
+                      </span>
+                    </div>
+                    <div>
+                      <span class="colorGrey">Positions</span>
+                      <span class="colorBlack">{{list['position']}}</span>
+                      <span class="seperator">|</span>
+                      <span class="colorGrey">Expiring On</span>
+                      <span [ngClass]="{'colorRed': list['remaing_days'] <= 3 }">{{list['expirydate'] | date:'y/M/d' }}</span>
+                      <span class="seperator">|</span>
+                      <span class="colorGrey">Total Applicants</span>
+                      <span class="colorBlack">{{list['total_application']}}</span>
+                    </div>
+                  </div>
+                </li>
+          </ul>
+        </ng-template>
+      </ngb-tab>
+    </ngb-tabset>
+  </div>
+  </section>
+      
+</div>
+</div>
+</div>

@@ -1,0 +1,450 @@
+<img class="loader" src="../assets/loader.gif" *ngIf="!pageLoded">
+<app-header-valid-user></app-header-valid-user>
+<section id="hwaContainer" *ngIf="pageLoded">
+  <div class="heading">
+    <div class="row">
+      <div class="col-8">
+        <h5>Create HWA</h5>
+      </div>
+      <div class="col-4 text-right dropdown">
+        <button class="btn success-btn" [disabled]="!this.creatHWAForm.valid" data-toggle="modal" data-target="#myModalFullscreen" contenteditable="false">Preview & Post Ad</button>
+        <a data-toggle="dropdown"> <img src="../../assets/menu.png" class="all-icon"/> </a>
+        <ul class="dropdown-menu dropdown-menu-right">
+          <li><a (click)="onSubmit('draft')" href="javascript:void(0)">Save as Draft</a></li>
+          <li><a (click)="discardAd()" href="javascript:void(0)">Discard Ad</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="mainBlocks">
+    <div id="accordion" role="tablist" aria-multiselectable="true">
+      <div class="card">
+        <div class="card-header" role="tab" id="headingOne">
+          <div class="row">
+            <div class="head-blk col-8">
+              <h6 class="mb-0 "> <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne"> Add Basic Information for Your Ad </a> </h6>
+            </div>
+            <div class="help-blk col-4 text-right"> <img class="ques-icon" src="../../assets/question.png"/> <img class="acc-arrow" src="../../assets/up-arrow.svg"/></div>
+          </div>
+        </div>
+        <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne">
+          <div class="card-block">
+            <form [formGroup]="creatHWAForm" novalidate>
+              <div class="input-section">
+                <div class="form-group filled-form">
+                  <label>positions you are hiring for?</label>
+                  <input type="hidden" formControlName="hwa_nid" [(ngModel)]="hwaNid"/>
+                  <input class="form-control myInputStyle" name="title" type="text" [(ngModel)]="fetchPosition" formControlName="title">
+                  <div [hidden]="creatHWAForm.controls['title'].valid || creatHWAForm.controls['title'].pristine" class="inline-error"> Please enter a position. </div>
+                </div>
+                <div class="form-group filled-form">
+                  <label>Number of openings</label>
+                  <input class="form-control myInputStyle" [(ngModel)]="fetchNoOfOpening" type="text" id="field_how_many_people_do_you_nee" formControlName="field_how_many_people_do_you_nee" pattern="^[1-9][0-9]*" required>
+                  <div [hidden]="creatHWAForm.controls['field_how_many_people_do_you_nee'].valid || creatHWAForm.controls['field_how_many_people_do_you_nee'].pristine" class="inline-error"> Please enter Number of openings. </div>
+                </div>
+                <div class="form-group filled-form">
+                  <label for="exampleSelect1">type of hire</label>
+                  <select class="form-control myInputStyle" [(ngModel)]="fetchTypeOfHire" formControlName="field_will_they_be_full_time_par" required id="exampleSelect1">
+                    <option selected="selected" value="Full-Time">Full-Time</option>
+                    <option value="Part-Time">Part-Time</option>
+                  </select>
+                  <div [hidden]="creatHWAForm.controls['field_will_they_be_full_time_par'].valid || creatHWAForm.controls['field_will_they_be_full_time_par'].pristine" class="inline-error"> Please Select one type of hire. </div>
+                </div>
+                <div class="form-group filled-form">
+                  <label>required work experience (in years)</label>
+                  <input class="form-control myInputStyle" [(ngModel)]="fetchReqExp" type="text" pattern="^[1-9][0-9]*" name="field_describe_the_skills_and_ex" formControlName="field_describe_the_skills_and_ex" required>
+                  <div [hidden]="creatHWAForm.controls['field_describe_the_skills_and_ex'].valid || creatHWAForm.controls['field_describe_the_skills_and_ex'].pristine" class="inline-error"> Please enter a experience </div>
+                </div>
+
+                <div class="form-group filled-form">
+                  <label>location(s) you are hiring for?</label>
+                  <div class="select-more-loc">
+                    <ng-container *ngFor="let addrs of selectedLocation; let i=index">
+                      <div class="row"  >
+                        <div class="col-12" > <img src="../../assets/locate.png" class="locate-icon"/>
+                          <!-- <input type="hidden" [value]="addrs?.nid" name="nid[]"> -->
+                          <span>{{addrs?.title}}, {{addrs?.field_address_line_2}}, {{addrs?.field_state}}, {{addrs?.field_city}}</span> </div>
+                      </div>
+                    </ng-container>
+                    <div class="error" *ngIf="creatHWAForm.controls['field_how_many_people_do_you_nee'].value == 1 && selectedLocation.length > 1" style="color: red;">
+                      Number of hiring locations selected cannot exceed the number being hired.
+                    </div>
+                    <div class="row">
+                      <div class="col-12"> <img src="../../assets/plus.png" class="all-icon add-icon"/> <a data-toggle="modal" data-target="#bizModel" contenteditable="false" >select hiring location</a> </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group filled-form">
+                  <label>Job Description</label>
+                <!--  <app-ngx-editor formControlName="field_how_would_you_describe_thi" [(ngModel)]="fetchJd" [config]="editorConfig"></app-ngx-editor>
+                  <!--  <div [hidden]="creatHWAForm.controls['describeSkill'].valid || creatHWAForm.controls['describeSkill'].pristine" class="inline-error">
+                Please Enter Job Description.
+              </div> -->
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <!-- first -->
+      <div class="card">
+        <div class="card-header" role="tab" id="headingTwo">
+          <div class="row">
+            <div class="head-blk col-8">
+              <h6 class="mb-0  "> <a class="collapsed"  data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"> Add Qualifying Questions </a> </h6>
+            </div>
+            <div class="help-blk col-4 text-right"> <img class="ques-icon" src="../../assets/question.png"/> <img class="acc-arrow" src="../../assets/down-arrow.svg"/></div>
+          </div>
+        </div>
+        <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo">
+          <form [formGroup]="koForm" novalidate>
+            <div class="w90 card-block">
+              <div class="default-question">
+                <h6>Mandatory questions</h6>
+                <div class="row">
+                  <div class="col-12"> <span>Q</span> <span>Are you over the age of 18?</span> </div>
+                </div>
+                <div class="row">
+                  <div class="col-12"> <span>Q</span> <span>Are you authorized to work in the USA?</span> </div>
+                </div>
+              </div>
+              <div  class="custom-ques-edit">
+                <h6>Custom Qualifying Question</h6>
+                <ng-container *ngFor="let qlist of customQList let i=index">
+                  <div>
+                    <div> <span>Q</span> <span>{{qlist?.qus}}</span>
+                      <div class=" kebab-menu col-1 text-right"  >
+                        <div class="dropdown"> <a  data-toggle="dropdown"> <img src="../../assets/menu.png" class="all-icon"/> </a>
+                          <ul class="dropdown-menu">
+                            <li><a (click)="addEditQuestion(i)" >Edit</a></li>
+                            <li><a (click)="deleteQuestion(i)" href="javascript:void(0)">Delete</a></li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </ng-container>
+              </div>
+
+              <div class="custom-ko" *ngIf="showTextfield">
+                <div class="row">
+                  <div class="col-12">
+                    <div class="input-section">
+                      <div class="form-group filled-form">
+                        <label>Type your question here</label>
+                        <input type="hidden" [(ngModel)]="qustionNid" formControlName="nid" #qnid/>
+                        <input type="text" id="inputqus" (keyup)="checkEmpty(customlist)" [(ngModel)]="questionInput" formControlName="qinput" name="qinput" maxlength="120" class="form-control myInputStyle" #customlist>
+                      </div>
+                      <button *ngIf="editCounter == null" (click)="addQuestion(customlist, qnid.value, true)" [disabled]="btndisabled" class="btn smallBtn light-blue">Add</button>
+                      <button *ngIf="editCounter != null" (click)="editQuestion(customlist)" [disabled]="btndisabled" class="btn smallBtn light-blue">Edit</button>
+                      <button type="button" (click)='cancleQustion()' class="btn smallBtn">Cancel</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row" *ngIf="!showTextfield">
+                <div class="col-12">
+                  <div class="add-new-cus"> <img src="../../assets/plus.png" class="all-icon add-icon"/>
+                    <button type="button" class="btn-text" (click)="addCustomQuestion()" [disabled]="btndisabled">Add new custom qualifying question</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <!-- second -->
+      <div class="card">
+        <div class="card-header" role="tab" id="headingThree">
+          <div class="row">
+            <div class="head-blk col-8">
+              <h6 class="mb-0"> <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree"> Add Skill Or Experience Questions </a> </h6>
+            </div>
+            <div class="help-blk col-4 text-right"> <img class="ques-icon" src="../../assets/question.png"/> <img class="acc-arrow" src="../../assets/down-arrow.svg"/> </div>
+          </div>
+        </div>
+        <div id="collapseThree" class="collapse card-block" role="tabpanel" aria-labelledby="headingThree"> <small>Minimum one Skill or Experience Question is required to post HWA</small>
+          <div class="">
+            <div class="row">
+              <div class="col-12">
+                <ng-container *ngFor="let sqlist of skillQuestionList let i=index">
+                  <div class="custom-ques-edit">
+                    <div class="row">
+                      <div class="col-1"><span class="q">Q</span></div>
+                      <div class="col-10">
+                        <span class="question-text">{{sqlist?.skill_exp_ques}}</span>
+                        <div *ngIf="sqlist?.field_experience_needed != ''" >Experience: {{sqlist?.field_experience_needed}}</div>
+                        <div *ngIf="sqlist?.field_expertise_needed != ''">Expertise: {{sqlist?.field_expertise_needed}}</div>
+                      </div>
+                      <div class="col-1 text-right kebab-menu">
+                        <div class="dropdown"> <a  data-toggle="dropdown"> <img src="../../assets/menu.png" class="all-icon"/> </a>
+                          <ul class="dropdown-menu dropdown-menu-right">
+                            <li><a (click)="editSkillQue(i)" >Edit</a></li>
+                            <li><a (click)="deleteSkill(i)" href="javascript:void(0)">Delete</a></li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+
+          </div>
+          <div *ngIf="showForm" class="card-wrapper remove-width">
+            <form [formGroup]="skillExpForm" novalidate>
+              <div  class="card-block">
+                <div  class="input-section">
+                  <div  class="">
+                    <div class="form-group filled-form">
+                      <label>Skill or Experience Question</label>
+                      <input type="hidden" name="nid" formControlName="nid" />
+                      <input maxlength="200" type="text" name="skill_exp_ques" formControlName="skill_exp_ques" class="form-control myInputStyle"  required>
+                      <div [hidden]="skillExpForm.controls['skill_exp_ques'].valid || skillExpForm.controls['skill_exp_ques'].pristine" class="inline-error"> Please enter a question </div>
+                    </div>
+                    <div class="radio-class">
+                      <label class="custom-control custom-radio">
+                        <input id="radio1" (change)='selectExpType($event)' type="radio" [value]="'experience'" formControlName="exp" class="custom-control-input">
+                        <span class="custom-control-indicator"></span> <span class="custom-control-description">Experience (Yrs)</span> </label>
+                      <label class="custom-control custom-radio active">
+                        <input id="radio2" (change)='selectExpType($event)' type="radio" [value]="'expertise'" formControlName="exp"  class="custom-control-input">
+                        <span class="custom-control-indicator"></span> <span class="custom-control-description">Expertise level</span> </label>
+                      <div [hidden]="skillExpForm.controls['exp'].valid || skillExpForm.controls['exp'].pristine" class="inline-error"> Please select Experience or Expertise</div>
+                    </div>
+
+                    <div [ngClass]="hideExpArray ? 'selectvisiblity' : ''" class="form-group filled-form">
+                      <label for="exampleSelect1">Select Expertise level</label>
+                      <select class="form-control myInputStyle" [(ngModel)]="expertiseValue" formControlName="field_expertise_needed" name="field_expertise_needed" id="exampleSelect1">
+                        <!-- <option value="N/A">N/A</option> -->
+                        <option value="Beginner">Beginner</option>
+                        <option value="Intermediate">Intermediate</option>
+                        <option value="Expert">Expert</option>
+                      </select>
+                      <!--  <div [hidden]="skillExpForm.controls['field_expertise_needed'].valid || skillExpForm.controls['field_expertise_needed'].pristine" class="inline-error"> Please Select a Expertise level </div> -->
+                    </div>
+                    <div [ngClass]="hideExpertiseArray ? 'selectvisiblity' : ''" class="form-group filled-form">
+                      <label for="exampleSelect1">Select Experience (Yrs)</label>
+                      <!-- (change)="hideExpertiseLevel()" -->
+                      <select class="form-control myInputStyle"  [(ngModel)]="experenceValue" formControlName="field_experience_needed" name="field_experience_needed" >
+                        <!-- <option value="N/A">N/A</option> -->
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="more than 10">more than 10</option>
+                      </select>
+                      <!-- <div [hidden]="skillExpForm.controls['field_experience_needed'].valid || skillExpForm.controls['field_experience_needed'].pristine" class="inline-error"> Please Select a Experience level </div>-->
+                    </div>
+                    <div class="align-left">
+                      <button type="button" *ngIf="skillCounter == null" (click)="addInList()" class="btn light-blue">Add</button>
+                      <button type="button" *ngIf="skillCounter != null" (click)="updateSkill()" class="btn light-blue">Update</button>
+                      <button type="button" (click)='cancleSkill()' class="btn smallBtn">Cancel</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <div class="add-new-cus"> <img src="../../assets/plus.png" class="all-icon add-icon"/> <a  (click)="showHideFrom()">Add new custom qualifying question</a> </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- third -->
+    </div>
+    <!-- accordion -->
+  </div>
+  <!-- deskWidth -->
+</section>
+<div class="modal fade modal-fullscreen hwa-preview  footer-to-bottom" id="myModalFullscreen" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog animated zoomInLeft">
+    <div class="modal-content modal-body-hwa-content">
+      <div class="modal-header">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-7">
+              <h4 class="modal-title text-left">HWA Preview</h4>
+            </div>
+            <div class="col-sm-5 text-right">
+              <div class=" kebab-menu"  >
+                <div class="dropdown">
+                  <button (click)="onSubmit('post')" class="btn success-btn">Post Ad</button>
+                  <a  data-toggle="dropdown"> <img src="../../assets/menu.png" class="all-icon"/> </a>
+                  <ul class="dropdown-menu dropdown-menu-right">
+                    <li><a (click)="onSubmit('draft')" > Save as Draft</a></li>
+                    <li><a (click)="discardAd()" >Discard Ad</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-body modal-body-hwa">
+        <div class="con">
+          <div class="hwa-details">
+            <div class="divider-block">
+              <div class="basic_hwa">
+
+                <div class="onePositionOneLocation">
+                  <div *ngIf="creatHWAForm.controls['field_how_many_people_do_you_nee'].value == 1 && selectedLocation.length == 1">
+                    <strong>{{businessName || 'Hureka'}}</strong> is looking to hire a <strong>{{ creatHWAForm.controls['title'].value }}</strong> at our <span class="font-weight-bold">{{selectedLocation[0]?.title}}, {{selectedLocation[0]?.field_address_line_2}}, {{selectedLocation[0]?.field_state}}, {{selectedLocation[0]?.field_city}}</span> location.
+                    <p>This is a <strong>{{ creatHWAForm.controls['field_will_they_be_full_time_par'].value }}</strong> position.</p>
+                  </div>
+                </div>
+                <div class="multiPositionOneLocation">
+                  <div *ngIf="creatHWAForm.controls['field_how_many_people_do_you_nee'].value > 1 && selectedLocation.length === 1 ">
+                    <strong>{{businessName || 'Hureka'}}</strong> is looking to hire <strong>{{ creatHWAForm.controls['field_how_many_people_do_you_nee'].value }} {{ creatHWAForm.controls['title'].value }}s</strong> at our <span class="font-weight-bold">{{selectedLocation[0]?.title}}, {{selectedLocation[0]?.field_address_line_2}}, {{selectedLocation[0]?.field_state}}, {{selectedLocation[0]?.field_city}}</span>
+                    location.
+                    <p>These are <strong>{{ creatHWAForm.controls['field_will_they_be_full_time_par'].value }}</strong> positions.</p>
+                  </div>
+                </div>
+                <div class="multiPositionMultiLocation">
+                  <div *ngIf="creatHWAForm.controls['field_how_many_people_do_you_nee'].value > 1 && selectedLocation.length > 1 ">
+                    <strong>{{businessName || 'Hureka'}}</strong> is looking to hire a total of <strong>{{ creatHWAForm.controls['field_how_many_people_do_you_nee'].value }} {{ creatHWAForm.controls['title'].value }}s</strong> at these locations;
+                    <ul>
+                      <li *ngFor="let addrs of selectedLocation; let i=index">
+                        {{addrs?.title}}, {{addrs?.field_address_line_2}}, {{addrs?.field_state}}, {{addrs?.field_city}}
+                      </li>
+                    </ul>
+                    <p>These are <strong>{{ creatHWAForm.controls['field_will_they_be_full_time_par'].value }}</strong> positions.</p>
+                  </div>
+                </div>
+                <div class="multiPositionMultiLocation">
+                  <div *ngIf="creatHWAForm.controls['field_how_many_people_do_you_nee'].value == 1 && selectedLocation.length > 1 ">
+                    <p style="color: red">Number of hiring locations selected cannot exceed the number being hired.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="divider-block">
+              <h5 class="q-blue">Job Description</h5>
+              <div class="business-profile" innerHTML="{{creatHWAForm.controls['field_how_would_you_describe_thi'].value}}"> </div>
+            </div>
+            <div class="divider-block">
+              <h5 class="q-blue">Knock Out Questions</h5>
+              <ul class="custom-list-style">
+                <li>Are you over the age of 18?</li>
+                <li>Are you authorized to work in the USA?</li>
+                <ng-container *ngFor="let qlistview of customQList let i=index">
+                  <li *ngIf="qlistview != ''">{{qlistview.qus}}?</li>
+                </ng-container>
+              </ul>
+            </div>
+            <div class="divider-block">
+              <h5 class="q-blue">Skill or Experience Questions</h5>
+              <ul class="custom-list-style">
+                <ng-container *ngFor="let sqlist of skillQuestionList let i=index">
+                  <li>
+                    <span>{{sqlist?.skill_exp_ques}}</span>
+                    <div *ngIf="sqlist?.field_experience_needed != ''" ><strong class="q-blue">Experience:</strong> {{sqlist?.field_experience_needed}}</div>
+                    <div *ngIf="sqlist?.field_expertise_needed != ''"><strong class="q-blue">Expertise:</strong> {{sqlist?.field_expertise_needed}}</div>
+                  </li>
+                </ng-container>
+              </ul>
+            </div>
+            <div class="business-profile">
+              <h5 class="q-blue">Business Profile</h5>
+              <ng-container *ngFor="let busTopic of businessTopic let j=index">
+                <div class="business-blk list-group">
+                  <div class="row">
+                    <div class="col-4"><img class="img-fluid img-thumbnail" [src]="busTopic?.field_business_profile_topic_ima"/> </div>
+                    <div class="col-8">
+                      <h6>{{busTopic?.field_topic}}</h6>
+                      <p innerHTML="{{busTopic?.field_business_profile_topic_des}}"></p>
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
+              <br>
+            </div>
+          </div>
+        </div>
+        <!-- deskWidth -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button (click)="onSubmit('post')" type="button" class="btn success-btn">Post Ad</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+<!-- /.modal -->
+
+<div class="modal location-overlay fade footer-to-bottom" id="bizModel" tabindex="-1" role="dialog" aria-labelledby="bisLocationModel" aria-hidden="true">
+  <div class="modal-dialog animated zoomInLeft">
+    <div class="modal-content">
+      <div class="modal-body">
+        <section id="selectLocation">
+          <div class="mainBlock">
+            <div class="section-title">
+              <div class="row">
+                <div class="col-sm-9">
+                  <h5>Select Hiring Location </h5>
+                </div>
+                <div class="col-sm-3 text-right"><img data-dismiss="modal" src="assets/back.svg"  class="back"></div>
+              </div>
+            </div>
+            <form>
+              <div class="block">
+                <div class="def-address">
+                  <h6>Default business Location</h6>
+                  <ng-container *ngFor="let addrs of  addressList; let i=index">
+                    <div *ngIf="addrs.field_make_default == '1'" class="form-check">
+                      <label class="form-check-label">
+                        <input type="checkbox"
+                               name="test2"
+                               class="form-check-input"
+                               value="addrs.nid"
+                               [(ngModel)]="addrs.checked"
+                              [checked]="addrs.checked"
+                               (change)="selectLoc($event, i)"/>
+                        {{addrs?.title}}, {{addrs?.field_address_line_2}}, {{addrs?.field_state}}, {{addrs?.field_city}} </label>
+                    </div>
+                  </ng-container>
+                </div>
+                <div class="additional-address">
+                  <h6>Additional Location(s)</h6>
+                  <ng-container *ngFor="let addrs of addressList; let i=index">
+                    <div *ngIf="addrs.field_make_default != '1'" class="form-check">
+                      <label class="form-check-label">
+                        <input type="checkbox"
+                               name="test"
+                               class="form-check-input"
+                               value="addrs.nid"
+                               [(ngModel)]="addrs.checked"
+                                [checked]="addrs.checked"
+                               (change)="selectLoc($event, i)"
+                        />
+                        {{addrs?.title}}, {{addrs?.field_address_line_2}}, {{addrs?.field_state}}, {{addrs?.field_city}} </label>
+                    </div>
+                  </ng-container>
+                  <div class="goToNextBtn text-left">
+                    <button type="button" class="btn btn-primary" (click)="addSelectedLocation()">Add Selected Location</button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </section>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+
+<!-- /.modal -->

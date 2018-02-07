@@ -1,53 +1,73 @@
 .w90 label {
-    margin-bottom: 18px;
+  margin-bottom: 18px;
 }
 .add-icon {
-    margin: 0 5px 0 0;
+  margin: 0 5px 0 0;
 }
 .card-wrapper {
-    width: 90%;
-    margin: 10px auto;
-    border: 1px solid #002d3f;
-    border-radius: 7px;
+  width: 90%;
+  margin: 10px auto;
+  border: 1px solid #002d3f;
+  border-radius: 7px;
 }
 #collapseThree .goToNextBtn {
-    padding: 10px 0;
+  padding: 10px 0;
 }
 .radio-class {
-    padding: 0 0 10px 5px;
+  padding: 0 0 10px 5px;
 }
 .custom-control {
-    margin-right: 0.5rem
+  margin-right: 0.5rem
 }
 small {
-    padding: 10px 0;
-    color: #2a63e7;
+  padding: 10px 0;
+  color: #2a63e7;
 }
 .custom-control-description {
-    color: #002d3f;
-    font-weight: 600;
+  color: #002d3f;
+  font-weight: 600;
 }
 .custom-ko {
-    padding: 15px 0;
+  padding: 15px 0;
 }
+.custom-ko .filled-form{margin-bottom: 10px;}
+.custom-ques-edit{margin-bottom: 20px}
+.custom-ques-edit h6{margin-bottom: 15px}
 .custom-ko .input.myInputStyle,
 .custom-ko .myInputStyle {
-    width: 100%;
+  width: 100%;
 }
+.question-text{color: #333; font-size: 20px;}
+.remove-width{width: 100%; margin: 0}
 button.btn.smallBtn {
-    min-width: 80px;
+  min-width: 80px;
 }
+.all-icon{vertical-align: middle}
+.radio-class{margin-bottom: 20px;}
+.add-new-cus{margin-top: 20px;}
+.divider-block{border-bottom: 1px solid #ccc; padding-bottom: 20px; margin-bottom: 20px;}
+.divider-block h5, .business-profile h5{color: #002c3f; font-size: 16px; font-weight: 700}
+.business-profile h6{font-size: 14px;color: #0c2731; font-weight: 700; margin: 0}
+.divider-block p{font-size: 14px; color: #666; line-height: 20px;}
+.business-profile p{font-size: 14px; color: #666; line-height: 20px;}
+
+.business-profile .business-blk{ margin-bottom: 20px;}
+.hwa-preview.modal{background:rgba(0,0,0,0.9);}
+.location-overlay{background:rgba(0,0,0,0.9);}
+.location-overlay .modal-content{background-color:transparent}
+.q-blue{color:#3879d9}
+
 #collapseTwo span:first-child,
-#collapseThree span:first-child {
-    width: auto;
-    color: #2a63e7;
-    font-size: 23px;
-    vertical-align: sub;
-    margin: 0 10px 0 0;
+#collapseThree span.q {
+  width: auto;
+  color: #2a63e7;
+  font-size: 23px;
+  vertical-align: sub;
+  margin: 0 10px 0 0;
 }
 h6 {
-    font-weight: 600;
-    text-transform: capitalize;
+  font-weight: 600;
+  text-transform: capitalize;
 }
 .selectvisiblity{ display: none}
 
@@ -134,7 +154,7 @@ h6 {
   -o-box-shadow: inherit;
   box-shadow: inherit;
   /* change bg color below */
- /* background:#1abc9c; */
+  /* background:#1abc9c; */
 }
 .modal.modal-fullscreen.force-fullscreen {
   /* Remove the padding inside the body */
@@ -155,13 +175,34 @@ h6 {
   bottom: 0!important;
 }
 @media (min-width: 576px){
-.modal-dialog {
+  .modal-dialog {
     max-width: 100%!important;
-}
+  }
 }
 
 /**/
 #hwaContainer{max-width: 900px; margin: auto}
 .heading{padding: 20px 0}
-.card{margin-bottom: 10px;}
-.card-header{border-bottom: 0; margin-bottom: 0; background: #f3f3f3}
+.btn-text{background: transparent; color:#064661; border: 0; font-weight: bold}
+.default-question{margin-bottom: 20px;}
+.custom-question h6{margin-bottom: 20px;}
+.hwa-preview .modal-content{max-width: 900px; margin: auto; padding: 20px;}
+.hwa-preview .modal-body{ overflow: auto}
+
+.hwa-preview .modal-header{padding-left: 0!important;padding-right: 0!important;padding-top: 0!important; display: block!important;  height: 10vh}
+.hwa-preview .modal-body{height: 70vh; margin: 5vh 0}
+.hwa-preview .modal-footer{height: 10vh}
+.btn.primary-blue{background: #3e7c95; color: #fff}
+.custom-wrapper{margin-bottom: 20px;}
+.custom-wrapper .form-group.filled-form {
+  margin-bottom: 10px;
+}
+.custom-edit{margin-top: 20px;}
+.def-address{border-bottom: 1px solid #eee; padding-bottom: 20px; margin-bottom: 20px;}
+#selectLocation{ padding: 0 20px;}
+#selectLocation .mainBlock{max-width: 900px; margin: auto; background: #fff; border-radius: 6px}
+.location-overlay .back{width: 40px; cursor: pointer}
+.location-overlay .block{padding: 20px 20px 0;box-shadow: 0 0 0 1px rgba(0,0,0,.1), 0 2px 3px rgba(0,0,0,.2);}
+.location-overlay .section-title{padding:0px 0 20px}
+.location-overlay .mainBlock{padding: 20px}
+.padding-zero{padding: 0}

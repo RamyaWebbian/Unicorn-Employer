@@ -1,0 +1,10 @@
+.offer p {
+    margin: 0;
+    line-height: 20px;
+    font-size: 11px;
+    color: khaki;
+}
+
+#interviewed-list .offerDetails p {
+    text-transform: none;
+}

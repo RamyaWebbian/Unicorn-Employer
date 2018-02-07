@@ -42,11 +42,11 @@
                           <div class="row" *ngIf="getDiffrencedays(list.field_extend_from_date,list.field_extend_to_date) < 4">
                           <div class="col-10">
 
-                            <p> <span class="text-wrap">{{list.field_hwa_post}}</span>
+                            <a (click)="getHwaId(list.field_hwa_post_1)" data-toggle="modal" data-target="#HwaPreviewCommon"> <p> <span class="text-wrap">{{list.field_hwa_post}}</span>
                               <small  style="color: red">
                                 Expiring in {{getDiffrencedays(list.field_extend_from_date,list.field_extend_to_date)}} day(s)
                               </small>
-                            </p>
+                            </p></a>
                           </div>
                           <div class="col-2  text-right">
                             <div class="dropdown"> <a data-toggle="dropdown"> <img src="../../assets/menu.png" class="all-icon"/> </a>
@@ -90,7 +90,7 @@
                       <div *ngFor="let list of allListofHwa">
                         <div class="row" *ngIf="getDiffrencedays(list.field_extend_from_date,list.field_extend_to_date) > 3">
                         <div class="col-10">
-                          <p> <span class="text-wrap">{{list.field_hwa_post}}</span> <small>Expiring in {{getDiffrencedays(list.field_extend_from_date,list.field_extend_to_date)}} day(s)</small> </p>
+                          <a (click)="getHwaId(list.field_hwa_post_1)" data-toggle="modal" data-target="#HwaPreviewCommon"><p > <span class="text-wrap">{{list.field_hwa_post}}</span> <small>Expiring in {{getDiffrencedays(list.field_extend_from_date,list.field_extend_to_date)}} day(s)</small> </p></a>
                         </div>
                         <div class="col-2  text-right">
                           <div class="dropdown"> <a data-toggle="dropdown"> <img src="../../assets/menu.png" class="all-icon"/> </a>
@@ -163,15 +163,13 @@
                   <div class="card-block">
                     <div class="row" *ngFor="let list of draftHwa">
                       <div class="col-10">
-                        <p> <span class="text-wrap">{{list.field_hwa_post}}</span> <small>Saved On {{list.created |  date:'shortDate' }}</small> </p>
+                        <p> <span class="text-wrap"><a (click)="getHwaId(list.field_hwa_post_1)" data-toggle="modal" data-target="#HwaPreviewCommon">{{list.field_hwa_post}}</a></span> <small>Saved On {{list.created |  date:'shortDate' }}</small> </p>
                       </div>
                       <div class="col-2  text-right">
                         <div class="dropdown"> <a data-toggle="dropdown"> <img src="../../assets/menu.png" class="all-icon"/> </a>
                           <ul class="dropdown-menu dropdown-menu-right">
-                            <li><a (click)="saveAsDraft()" href="javascript:void(0)">Edit</a></li>
-                            <li><a (click)="discardAd()" href="javascript:void(0)">Copy</a></li>
-                            <li><a (click)="discardAd()" href="javascript:void(0)">Extend</a></li>
-                            <li><a (click)="discardAd()" href="javascript:void(0)">Stop</a></li>
+                            <li><a [routerLink]="'/draft/'+list.uid+'/'+list.field_hwa_post_1">Edit</a></li>
+                            <li><a  (click)="discardAd(list.field_hwa_post_1)" href="javascript:void(0)" data-toggle="modal" data-target="#confirmModal">Delete</a></li>
                           </ul>
                         </div>
                       </div>
@@ -186,7 +184,7 @@
                   <div class="card-block">
                     <div class="row" *ngFor="let list of expiredHwa">
                       <div class="col-10">
-                        <p> <span class="text-wrap">{{list.field_hwa_post}}</span> <small>Expired on {{list.field_extend_to_date |  date:'shortDate' }}</small> </p>
+                        <p> <span class="text-wrap"><a (click)="getHwaId(list.field_hwa_post_1)" data-toggle="modal" data-target="#HwaPreviewCommon">{{list.field_hwa_post}}</a></span> <small>Expired on {{list.field_extend_to_date |  date:'shortDate' }}</small> </p>
                       </div>
                       <div class="col-2  text-right">
                         <div class="dropdown"> <a data-toggle="dropdown"> <img src="../../assets/menu.png" class="all-icon"/> </a>
@@ -210,3 +208,124 @@
   </div>
 </div>
 
+
+<div class="modal fade bd-example-modal-lg" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h5  id="exampleModalLongTitle">Delete HWA?</h5>
+      </div>
+      <div class="modal-body text-center">
+        Do you really want to delete?
+      </div>
+      <div class="modal-footer text-center">
+        <div class="half"><button type="button" class="btn-new bmain" (click)="discardHwa()">Yes</button></div>
+        <div class="half">
+          <button type="button" class="btn-new bsec" data-dismiss="modal">No</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="fixed-bottom "><a routerLink="/hwa-basic-info"><img src="../../assets/create.svg"></a></div>
+<div  class="modal fade modal-fullscreen hwa-preview  footer-to-bottom" id="HwaPreviewCommon" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg animated zoomInLeft">
+
+
+    <div class="modal-content modal-body-hwa-content" *ngIf="previewLoad">
+      <div class="modal-header">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-7">
+              <h4 class="modal-title text-left"  >{{jobTitle}}</h4>
+            </div>
+            <div class="col-sm-5 text-right">
+              <div class=" kebab-menu"  >
+                <div class="dropdown">
+                  <a  data-toggle="dropdown"> <img src="../../assets/menu.png" class="all-icon"/> </a>
+                  <ul class="dropdown-menu dropdown-menu-right">
+                    <li><a > Save as Draft</a></li>
+                    <li><a >Discard Ad</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-body modal-body-hwa">
+        <div class="con">
+
+          <div class="hwa-details">
+
+            <div class="divider-block">
+
+              <div class="basic_hwa">
+                <div class="onePositionOneLocation">
+                  <div *ngIf="previewNooFHire === 1 && previewLocationLength === 1">
+                    <strong>{{previewBname}}</strong> is looking to hire a <strong>{{ jobTitle }}</strong> at our <span class="font-weight-bold">{{previewLocations[0].title[0].value}}, {{previewLocations[0].field_state[0].value}}, {{previewLocations[0].field_city[0].value}}</span> location.
+                    <p>This is a <strong>{{ PreviewJobType }}</strong> position.</p>
+                  </div>
+                </div>
+                <div class="multiPositionOneLocation">
+                  <div *ngIf="previewNooFHire > 1 && previewLocationLength === 1 ">
+                    <strong>{{previewBname}}</strong> is looking to hire <strong>{{ previewNooFHire }} {{ jobTitle }}s</strong> at our <span class="font-weight-bold">{{previewLocations[0].title[0].value}}, {{previewLocations[0]?.field_state[0].value}}, {{previewLocations[0]?.field_city[0].value}}</span>
+                    location.
+                    <p>These are <strong>{{ PreviewJobType }}</strong> positions.</p>
+                  </div>
+                </div>
+                <div class="multiPositionMultiLocation">
+                  <div *ngIf="previewNooFHire > 1 && previewLocationLength > 1 ">
+                    <strong>{{previewBname}}</strong> is looking to hire a total of <strong>{{ previewNooFHire }} {{ jobTitle }}s</strong> at these locations;
+                    <ul>
+                      <li *ngFor="let addrs of previewLocations; let i=index">
+                        {{addrs.title[0].value}}, {{addrs.field_state[0].value}}, {{addrs.field_city[0].value}}
+                      </li>
+                    </ul>
+                    <p>These are <strong>{{ PreviewJobType }}</strong> positions.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="divider-block">
+              <h5 class="q-blue">Job Description</h5>
+              <p innerHTML="{{describeUrJob}}"></p>
+            </div>
+            <div class="divider-block">
+              <h5 class="q-blue">Knock Out Questions</h5>
+              <ul class="custom-list-style">
+                <li>Are you over the age of 18?</li>
+                <li>Are you authorized to work in the USA?</li>
+                <li *ngFor="let list of previewKo">{{list.title}}?</li>
+              </ul>
+            </div>
+            <div class="divider-block">
+              <h5 class="q-blue">Skill Or Exprience Questions</h5>
+              <ul class="custom-list-style">
+                <li *ngFor="let list of previewSkill">{{list.title}}?</li>
+              </ul>
+            </div>
+            <div class="divider-block">
+              <h5 class="q-blue">Business Profile</h5>
+                  <div class="container">
+                    <div class="business-blk list-group">
+                      <div class="row" *ngFor="let list of previewBusinessProfile">
+                        <div class="col-4"> <img [src]="list.field_business_profile_topic_ima" class="img-fluid"> </div>
+                        <div class="col-8">
+                          <h6>{{list.field_topic}}</h6>
+                          <p innerHTML="{{list.field_business_profile_topic_des}}"></p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+          </div>
+        </div>
+        <!-- deskWidth -->
+      </div>
+    </div>
+    <img class="loader" src="../assets/loader.gif" *ngIf="!previewLoad">
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>

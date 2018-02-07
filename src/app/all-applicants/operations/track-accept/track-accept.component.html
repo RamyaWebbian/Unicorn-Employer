@@ -1,0 +1,20 @@
+<div class="container desktop-width">
+  <div class="row">
+    <div class="col-12">
+      <div class="tracker-block">
+          <div class="contai text-center"  *ngIf="showThis">
+            Thank You,
+            <h3 class="text-center colorGreen"> {{ statusInfo }}</h3>
+          </div>
+          <div class="contai text-center" *ngIf="showThis1">
+            Thank You,
+            <h3 class="text-center colorRed">{{ statusInfo}}</h3>
+          </div>
+          <div class="contai text-center" *ngIf="showThis2">
+            <h3 class="text-center colorRed">{{statusInfo}}</h3>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+

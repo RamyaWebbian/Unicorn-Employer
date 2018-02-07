@@ -1,112 +1,98 @@
-label.radio {
-    display: block;
+.form-group.filled-form label {
+    left: 25px;
 }
-.radio span {
-    vertical-align: sub;
-}
-.cost-blk label {
+.cost-blk h6 {
+    text-transform: capitalize;
     color: #002d40;
+    font-weight: 600;
+    margin: 15px 0;
+}
+.summary-block,.cost-total {
+    border-top: 1px solid #ccc;
+}
+.summary-block .btn {
+    margin-top: -30px;
+}
+.cost-blk,.cost-details,.cost-total {
+    width: 60%;
+    margin: auto;
+    padding: 20px 0;
 }
 .cost-blk .btn {
-    float: right;
-    clear: both;
     color: #002d40;
     background-color: #fff;
 }
-.cost-blk label .btn {
+.cost-blk button .btn {
     box-shadow: 0px 0px 1px 1px #ddd;
-}
-.cost-blk label.active {
-    color: #fff;
-    background-color: #002d40;
-}
-
-.dotted-btn {
-    border: 1px dashed #ccc;
 }
 .cost-blk .coupon-btn .btn {
     float: none;
     display: inline-block;
     position: relative;
-    padding: 10px 70px;
+    padding: 5px 55px;
 }
-.coupon-btn {
+.dotted-btn {
+    border: 1px dashed #ccc;
     position: relative;
-    padding: 40px 0;
 }
 .next-icon {
     position: absolute;
-    width: 44px;
+    width: 33px;
     margin-left: -25px;
 }
-.cost-total {
-    border-top: 1px solid #ccc;
-}
-.summary-block {
-    border-top: 1px solid #ccc;
-    text-align: center;
-}
-.summary-block .btn {
-    margin-top: -30px;
-}
-.cost-blk {
-    width: 80%;
-    margin: auto;
-}
-.cost-blk p,
 .coupon-btn {
-    text-align: center;
-    margin: 0.25rem 0;
-}
-.cost-details,
-.cost-total {
-    width: 80%;
-    margin: auto;
-    padding: 10px 0;
-}
-.cost-details {
-    border-bottom: 1px solid #ccc;
-    padding: 5px 0 10px;
-}
-.summary-block .row {
-    padding: 5px 0 10px;
-}
-h4 {
-    font-size: 21px;
-    padding: 20px;
-    width: 80%;
-    margin: auto;
-}
-.success-msg {
-    font-size: 14px;
-}
-.cost-blk .radio input[type="radio"] {
-    left: 0;
-}
-label.radio {
-    width: 80%;
-    border: 2px solid #002d40;
-    border-radius: 35px;
-    margin: 10px auto;
-    padding: 10px 15px;
-    box-sizing: border-box;
-    overflow: hidden;
-}
-input[type="radio"]:checked:parent {
-    background-color: #002d40;
+    padding: 25px 0;
 }
 .post-info-text {
     color: #b8860b;
     font-weight: bold;
 }
-@media screen and (min-width: 1025px) {
-    label.radio {
-        width: 35%;
-        padding: 10px 30px;
-    }
+.hwa-info-blk {
+    padding: 10px 0;
+    width: 70%;
+    margin: auto;
 }
-@media screen and (min-width: 768px) and (max-width: 1024px) {
-    label.radio {
-        padding: 10px 40px;
+.hwa-info-blk h6 {
+    padding: 0 0 30px;
+}
+.btn.radio {
+    margin: 20px 0;
+    padding: 10px 0;
+    min-width: 300px;
+}
+.btn.radio .col-1,.btn.radio .col-8,.btn.radio .col-3 {
+    display: inline
+}
+.btn.radio .col-8 {
+    padding: 0;
+}
+.btn.radio input[type="radio"],.btn.radio span {
+    vertical-align: middle;
+}
+.col-6 {
+    text-align: right;
+}
+#paymentModel button.close, #paymentModel button.close:focus, 
+#paymentModel button.close:hover {
+    color: #000 !important;
+    font-size: 35px;
+}
+.modal-title {
+    align-self: center;
+}
+.payment_img {
+    margin: 5px;
+}
+@media screen and (max-width: 767px) {
+    .hwa-info-blk,
+    .cost-blk,.cost-details,.cost-total {
+        width: 100%;
+    }
+    .modal button {
+        width: 100%;
+    }
+    .payment_img {
+        margin: 10px 0;
+        width: 100%;
     }
 }

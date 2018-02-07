@@ -1,0 +1,19 @@
+
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <form [formGroup]="interviewNotes" novalidate>
+        <div class="reasonBlock">
+          <h4>Reason for Rejection(optional)</h4>
+          <textarea formControlName="notes" (keydown)="onKeydown($event)"></textarea>
+        </div>
+        <div class="goToNextBtn text-center">
+          <button class="btn btn-primary" [disabled]="!interviewNotes.valid" (click)="submitNotes()">{{btnText}} <em class="abs" *ngIf="abs"><span><b></b></span>
+            <span><b></b></span><span><b></b></span></em>
+          </button>
+          <button class="btn btn-primary" (click)="clearThis()">Clear</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

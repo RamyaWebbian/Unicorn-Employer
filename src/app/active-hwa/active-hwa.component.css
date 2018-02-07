@@ -1,0 +1,47 @@
+#dinerProfile {
+  border-radius: 4px;
+  box-shadow: 1px 1px 10px #999;
+  padding:15px;
+  background:#fff
+}
+#dinerProfile .head {
+  border-radius: 4px 4px 0 0; 
+  overflow:hidden
+}
+.position{
+  margin:0;
+  margin-bottom: 10px;
+  font-size:20px; 
+  font-weight:500; 
+  text-transform: capitalize; 
+  color:#3f7c94
+}
+.f14 {
+  font-size: 14px;
+}
+.morePos {
+  margin: 2px 0; 
+  padding: 0; 
+  padding-left: 20px; 
+  font-weight: 300;
+}
+.bus_img img {
+  height: 240px;
+}
+.with-bg-btn {
+  border: 1px solid #002d40;
+  border-radius: 50px;
+  background-color: #002d40;
+  color: #fff !important;
+}
+a.with-bg-btn:hover {
+  text-decoration: none !important;
+}
+.newWidth {
+  width: 800px;
+}
+@media screen and (max-width: 767px) {
+  .newWidth {
+    width: 100%;
+  }
+}

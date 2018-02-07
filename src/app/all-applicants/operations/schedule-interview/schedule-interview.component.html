@@ -1,0 +1,81 @@
+<app-header-valid-user></app-header-valid-user>
+<div class="container desktop-width">
+  <div class="row">
+    <div class="col-12">
+      <section id="interview-section">
+        <div class="interview-head">
+          Schedule Interview for,
+          <span>{{applicantName}}</span><span class="float-right">
+            <a (click)="goBack()">Back</a></span>
+        </div>
+        <simple-notifications [options]="options"></simple-notifications>
+        <div class="calender-block"[ngClass]="{'errorDate': invalidDate}">
+          
+          <form [formGroup]="scheduledInterview" novalidate>
+            <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-4">
+                  <div class="form-group filled-form">
+                    <label for="date">Interview Date</label>
+                    <input class="form-control myInputStyle" formControlName="date" [owlDateTimeTrigger]="dt1" [owlDateTime]="dt1">
+                    <owl-date-time [pickerMode]="'dialog'" [pickerType]="'calendar'" #dt1></owl-date-time>
+                  </div>
+              </div>
+              <div class="col-12 col-md-4">
+                  <div class="form-group filled-form">
+                    <label for="start-time">Start Time</label>
+                    <input class="form-control myInputStyle" formControlName="start" [owlDateTimeTrigger]="dt2" [owlDateTime]="dt2">
+                    <owl-date-time [pickerMode]="'dialog'" [pickerType]="'timer'" #dt2></owl-date-time>
+                  </div>
+              </div>
+              <div class="col-12 col-md-4">
+                <div class="form-group filled-form">
+                  <label for="end-time">End Time</label>
+                  <input class="form-control myInputStyle" formControlName="end" [owlDateTimeTrigger]="dt3" [owlDateTime]="dt3">
+                  <owl-date-time [pickerMode]="'dialog'" [pickerType]="'timer'" #dt3></owl-date-time>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12 col-md-4">
+                <div class="form-group filled-form">
+                  <label for="mode">Mode Of Interview</label>
+                  <select class="form-control myInputStyle" formControlName="mode" (change)="onChange($event.target.value)" id="mode">
+                      <option value>Select</option>
+                      <option value="telephonic">Telephonic</option>
+                      <option value="in person">In person</option>
+                      <option value="video">Video Call</option>
+                    </select>
+                </div>
+              </div>
+              <div class="col-12 col-md-8">
+                  <div class="form-group filled-form">
+                      <label>{{ dynamicLabel }}</label>
+                      <input class="form-control myInputStyle" formControlName="where" *ngIf="!hideInput">
+                      <select class="form-control myInputStyle" *ngIf="addressList.length !== 0 && showlist" formControlName="where" (change)="onChangeInner($event.target.value)">
+                        <option value="" >Select Address</option>
+                        <ng-container *ngFor="let address of addressList">
+                        <option [value]="address.nid">
+                          {{address.title}}, {{address.field_address_line_2}}, {{address.field_city}}, {{address.field_state}}
+                        </option>
+                        </ng-container>
+                        <option >Others</option>
+                      </select>
+                      <div class="gap-input-parent">
+                        <input formControlName="where" class="form-control myInputStyle gap" *ngIf="enableInput">
+                        <span class="close-gap" *ngIf="enableInput" (click)="closeOther()">close</span>
+                      </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+          </form>
+
+        </div>
+      </section>
+      <div class="text-center goToNextBtn">
+          <button [disabled]="!scheduledInterview.valid || invalidDate" (click)="saveDate()" class="btn btn-primary">{{btnText}} <em class="abs" *ngIf="abs"><span><b></b></span><span><b></b></span><span><b></b></span></em></button>
+        </div>
+      </div>
+    </div>
+  </div>    

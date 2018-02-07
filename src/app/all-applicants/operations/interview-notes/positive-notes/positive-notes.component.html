@@ -1,0 +1,28 @@
+
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+        <form [formGroup]="interviewNotes" novalidate>
+            <div class="commentsBlock">
+              <div>
+                <textarea formControlName="notes" (keydown)="onKeydown($event)">
+                  This candidate is average in skills but has deep knowledge in the clothing industry.
+                  We should consider him to face to face round. Candidate is average in skills but 
+                  has deep knowledge in the clothing industry.
+                </textarea>
+              </div>
+            </div>
+            <div class="goToNextBtn">
+                <button class="btn btn-primary" [disabled]="!interviewNotes.valid" (click)="goodToOffer()">
+                    {{good2Offer}} 
+                    <em class="abs" *ngIf="abs1"><span><b></b></span><span><b></b></span><span><b></b></span></em>
+                </button>
+                <button class="btn btn-primary" [disabled]="!interviewNotes.valid" (click)="onHold()">
+                    {{btnText}} <em class="abs" *ngIf="abs"><span><b></b></span><span><b></b></span><span><b></b></span></em>
+                </button>
+                <button class="btn btn-primary d-none d-md-block" (click)="clearThis()">Clear</button>
+            </div>
+        </form>
+    </div>
+  </div>
+</div>

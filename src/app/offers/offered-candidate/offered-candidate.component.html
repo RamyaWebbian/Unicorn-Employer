@@ -1,0 +1,72 @@
+<app-header-valid-user></app-header-valid-user>
+<div class="container desktop-width">
+  <div class="row">
+    <div class="col-12">
+      <div id="offered-candidate">
+        <div class="pageHeading">
+          <h2>Offer : <span>{{ hwaName }}</span></h2>
+        </div>
+        <div class="allApplicantsSortSection">
+          <ngb-tabset>
+            <ngb-tab title="Good to Offer Applicants">
+              <ng-template ngbTabContent>
+                <ul *ngIf="listOfGoodtoOffer?.length !== 0; else showtemp1 ">
+                  <li *ngFor="let list of listOfGoodtoOffer; let i = index ">
+                    <div class="jobadBlock" (click)="viewApplicant(list['field_applicant_author_1'], list['field_status'])">
+                      <div class="row">
+                        <div class="col-6 applicantName">
+                          <h6>{{ list['field_first_name'] }} {{ list['field_last_name'] }}</h6>
+                        </div>
+                        <div class="col-2"></div>
+                        <div class="col-4">
+                          <button class="btn with-bg-btn">Make Offer</button>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </ng-template>
+              <ng-template #showtemp1>
+                  <ul>
+                    <li>
+                      <div class="jobadBlock notfound ">
+                        <div class=""> No Records Found. </div>
+                      </div>
+                    </li>
+                  </ul>
+                </ng-template>
+            </ngb-tab>
+            <ngb-tab title="Offered Applicants">
+                <ng-template ngbTabContent>
+        <ul *ngIf="offeredApplicant.length !== 0; else showtemp ">
+          <li *ngFor="let list of offeredApplicant; let i = index ">
+                      <div class="jobadBlock" (click)="viewApplicant(list['field_applicant_author_1'], list['field_status'])">
+                        <div class="row">
+                          <div class="col-6 applicantName">
+                  <h6><a>{{ list['field_first_name'] }} {{ list['field_last_name'] }}</a></h6>
+                          </div>
+                          <div class="col-2"></div>
+                          <div class="col-4">
+                            <p class="m0">{{list['field_status']}}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </ng-template>
+                <ng-template #showtemp>
+                  <ul>
+                    <li>
+                      <div class="jobadBlock notfound ">
+                        <div class=""> No Records Found. </div>
+                      </div>
+                    </li>
+                  </ul>
+                </ng-template>
+              </ngb-tab>
+          </ngb-tabset>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,16 @@
+
+        <h4>Add Note(s)</h4>
+        <div class="fadeInDown" *ngFor="let list of simpleNote">
+          <p>{{list['field_message']}}</p>
+          <p align="right" class="author">by, {{list['field_first_name']}}, {{humanReadableTime(list['field_current_date'])  | date: 'y MMM d' }}</p>
+          <hr>
+        </div>
+        <form [formGroup]="simpleNotes" novalidate>
+        <div class="infoHeading">
+          <textarea maxlength="250" (keyup)="emptyValue()" (keydown)="emptyValue()" formControlName="notes" class="addNoteSection "></textarea>
+          <div class="goToNextBtn text-center">
+            <button class="btn btn-primary" [disabled]="!simpleNotes.valid || checkemptyVal" (click)="submitNotes()">{{btnText}} <em class="abs" *ngIf="abs"><span><b></b></span><span><b></b></span><span><b></b></span></em></button>
+            <button class="btn btn-primary" (click)="clearThis()">Clear</button>
+          </div>
+        </div>
+        </form>

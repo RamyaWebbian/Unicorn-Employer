@@ -8,7 +8,7 @@ import { CookieService } from 'ngx-cookie-service';
 
 @Injectable()
 export class HwaCommonService {
-  
+
   public switchUrl= this.userService.switchUrl;
   private create_hwa = this.switchUrl + 'create_hwa.json';
   private popupAddress= this.switchUrl + 'create_business_address.json';
@@ -144,7 +144,7 @@ getBusinessTopic(bisProfileObj): any {
   }
 
   getAllDataOfHwa(obj) {
-    return this.http.post(this.getAllDataOfHwaUrl, obj, { headers: this.authHeaders() })
+    return this.http.post(this.getAllDataOfHwaUrl, obj, this.jwt())
       .map((res: Response) => res.json())
       .catch((error: any) => error.json());
   }

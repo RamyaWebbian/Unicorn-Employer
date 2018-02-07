@@ -2,9 +2,12 @@
     text-align: center;
     display: block;
     padding: 10px 0 0 0;
+  font-weight: 300;
 }
+.greeting h2{font-weight: 500!important}
 .greeting img {
     vertical-align: bottom;
     margin: 0 5px;
-    width: 30px;
+    width: 20px;
 }
+.greeting{border-bottom: 1px solid #eee; margin-bottom: 40px; padding: 15px;}

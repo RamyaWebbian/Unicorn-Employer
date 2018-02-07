@@ -1,0 +1,26 @@
+<app-header-valid-user></app-header-valid-user>
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <div id="make-offer" *ngIf="pageLoded">
+        <div class="pageHeading">
+            <h2>Make Offer</h2>
+        </div>
+        <div class="">
+          <form [formGroup]="sendOffer" novalidate>
+
+            <div formControlName="emailContent">
+              <app-ngx-editor formControlName="emailContent" [config]="editorConfig"></app-ngx-editor>
+            </div>
+            <div class="goToNextBtn text-center">
+              <button class="btn with-bg-btn" (click)="sendEmail()" [disabled]="!sendOffer.valid">
+               {{shortlistedText}} <em class="abs" *ngIf="abs"><span><b></b></span><span><b></b></span><span><b></b></span></em>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

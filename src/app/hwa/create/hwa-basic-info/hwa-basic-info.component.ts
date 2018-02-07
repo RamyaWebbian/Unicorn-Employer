@@ -1,10 +1,7 @@
-import { Component, OnInit, Input, ViewChild, NgZone } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl, Validators, FormArray } from '@angular/forms';
+import { Component, OnInit, NgZone } from '@angular/core';
+import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService, HwaCommonService, ProfileService, HoldDataService } from '../../../services/index';
-// import {NotificationsService} from 'angular2-notifications';
-import {Subject} from 'rxjs/Subject';
-import {Observable} from 'rxjs/Observable';
 import { CookieService } from 'ngx-cookie-service';
 declare var $: any;
 
@@ -14,278 +11,197 @@ declare var $: any;
   styleUrls: ['./hwa-basic-info.component.css']
 })
 export class HwaBasicInfoComponent implements OnInit {
-  public creatHWAForm: FormGroup;
-  public addressList: Array<string> = [];
-  public disabledButton: boolean;
-  public addLocationForm: FormGroup;
-public selectedNid = [];
-    private toolbarOptions = [
-    'bold',
-    'italic',
-    'underline',
-    { 'align': '' },
-    { 'align': 'center' },
-    { 'align': 'right' },
-    { 'list': 'ordered' },
-    { 'list': 'bullet' },
-    { 'indent': '-1' },
-    { 'indent': '+1' }
-  ];
+  creatHWAForm: FormGroup;
+  addressList: Array<string> = [];
+  disabledButton: boolean;
+  selectedNid = [];
+  previewBname;
+  editorConfig: Object = {
+    'editable': true,
+    'spellcheck': true,
+    'height': '300',
+    'minHeight': '329',
+    'width': 'auto',
+    'minWidth': '0',
+    'translate': 'yes',
+    'enableToolbar': true,
+    'showToolbar': true,
+    'placeholder': 'Enter text here...',
+    'toolbar': [
+      ['bold', 'italic', 'underline']
+    ]
+  };
 
 // questom question
-  public defaultQLists = [];
-  public customQList = [];
-  public isEditable = [];
-  public showTextfield: boolean;
-  public enb: boolean;
- // public showDialog: boolean;
-//  public showKo: boolean;
-  public koForm: FormGroup;
- // public nodeId: any;
-  public hwaId: number;
-  public customlist: any;
- // public displayQuestionn: boolean;
-  public changeText = []; // 'Edit';
- // @ViewChild(EditableQuestions) input: EditableQuestions;
-  public koData: any = 'koData';
-  public show = false;
-//  public koDataStr = 'koData';
- // public qusInpitValue: any;
- // public level2: boolean;
-  public btndisabled: boolean;
- // public disableUntil: boolean;
- // public btntext = 'Save & Continue';
-public hwaNid = null;
-// skill ---------------
+  defaultQLists = [];
+  customQList = [];
+  isEditable = [];
+  showTextfield: boolean;
+  koForm: FormGroup;
+  changeText = []; // 'Edit';
+  koData: any = 'koData';
+  show = false;
+  btndisabled: boolean;
+  hwaNid = null;
+  skillExpForm: FormGroup;
+  hideExpArray = true;
+  hideExpertiseArray = true;
+  showActiveBtn: boolean;
+  expertiseValue = '';
+  experenceValue = '1';
+  skillQuestionList = [];
+  showForm: boolean;
+  deleteskills = [];
+  selectedLocation = [];
+  businessTopic = [];
+  questionInput: any;
+  qustionNid: any = '';
+  custObj: any;
+  businessName;
+  public editCounter: number = null;
+  public skillCounter: number = null;
 
-public skillExpForm: FormGroup;
- // public skillDataStr = 'skillData';
- // public showDialog: boolean;
-////  public showskill: boolean;
-  public fromSkill: any = 'fromSkill';
-  public hideExpArray = true;
-  public hideExpertiseArray = true;
-  public displayQuestionskill: boolean;
-  public showActiveBtn: boolean;
-public expertiseValue = 'N/A';
-public experenceValue = 'N/A';
-
-public skillQuestionList = [];
-public showForm: boolean;
-public  deleteskills = [];
-
-public businessTopic = [];
-
-  constructor(
-    private router: Router,
-    private zone: NgZone,
-    private formbuilder: FormBuilder,
-    private userService: UserService,
-    private profileService: ProfileService,
-     private hwaCommonService: HwaCommonService,
-     private holdDataService: HoldDataService,
-   // private _notificationsService: NotificationsService,
-    private cookieService: CookieService
-    ) { }
-
-
+  constructor(private router: Router, private zone: NgZone, private formbuilder: FormBuilder,
+              private userService: UserService, private profileService: ProfileService, private hwaCommonService: HwaCommonService,
+              private holdDataService: HoldDataService, private cookieService: CookieService) { }
 
   ngOnInit() {
-
-
+    const user = this.userService.isLogedin();
     this.selectedNid = [];
-      this.creatHWAForm = this.formbuilder.group({
+    this.creatHWAForm = this.formbuilder.group({
       'hwa_nid': [''],
-      'title': ['', {updateOn: 'change', validators: [Validators.required]}],
-      'field_how_many_people_do_you_nee': ['', {updateOn: 'change', validators: [Validators.required]}],
-      'field_will_they_be_full_time_par': ['', {updateOn: 'change', validators: [Validators.required]}],
-      'field_describe_the_skills_and_ex': ['', {updateOn: 'change', validators: [Validators.required]}],
+      'title': ['', {
+        updateOn: 'change',
+        validators: [Validators.required]
+      }],
+      'field_how_many_people_do_you_nee': ['', {
+        updateOn: 'change',
+        validators: [Validators.required]
+      }],
+      'field_will_they_be_full_time_par': ['', {
+        updateOn: 'change',
+        validators: [Validators.required]
+      }],
+      'field_describe_the_skills_and_ex': ['', {
+        updateOn: 'change',
+        validators: [Validators.required]
+      }],
       // 'locations': this.formbuilder.array([]),
-      'field_how_would_you_describe_thi': ['', {updateOn: 'change', validators: [Validators.required]}],
-      // 'email': ['',{updateOn: 'change',validators:[ Validators.compose([Validators.required, Validators.pattern(this.emailMask)])]}],
-//  'confirmemail': ['',{updateOn: 'change',validators: [ Validators.compose([Validators.required, Validators.pattern(this.emailMask)])]}],
-     // 'phone': ['', {updateOn: 'change', validators: [Validators.required]}]
-    }, {updateOn: 'change'}); // asyncValidators: [this.isEqualEmail]
-
-  // knout Question
- this.koForm = this.formbuilder.group({
+      'field_how_would_you_describe_thi': ['', {
+        updateOn: 'change',
+        validators: [Validators.required]
+      }],
+    }, {
+      updateOn: 'change'
+    }); // asyncValidators: [this.isEqualEmail]
+    // knout Question
+    this.koForm = this.formbuilder.group({
       'defaultQlists': this.formbuilder.array([]),
-      'customQlist': this.formbuilder.array([])
+      'customQlist': this.formbuilder.array([]),
+      'qinput': [''],
+      'nid': ['']
     });
     this.skillExpForm = this.formbuilder.group({
       'nid': [''],
       'skill_exp_ques': ['', Validators.required],
-      'field_expertise_needed': ['N/A' , Validators.required],
-      'field_experience_needed': ['N/A' , Validators.required],
-      'exp': [''],
+      'field_expertise_needed': [''],
+      'field_experience_needed': [1],
+       'exp': ['experience',  Validators.required],
       'status': '0'
-    });
-
-
-
- let oldHwaData = null;
-    let koData = null;
-    let skillData = null;
-    let hwaId = null;
-if (this.userService.isLocalStorage()) {
-  hwaId = localStorage.getItem('storeHwaNid');
-  oldHwaData =  JSON.parse(localStorage.getItem('hwaData'));
-   this.addressList =  JSON.parse(localStorage.getItem('address'));
-   // this.holdDataService.setSelectedAddress(this.addressList);
-  koData =  JSON.parse(localStorage.getItem('koData'));
-  skillData =  JSON.parse(localStorage.getItem('skillData'));
-} else {
-  hwaId = this.cookieService.get('storeHwaNid');
-  oldHwaData =  JSON.parse(this.cookieService.get('hwaData'));
-  this.addressList =  JSON.parse(this.cookieService.get('address'));
-  // this.holdDataService.setSelectedAddress(this.addressList);
-  koData = this.cookieService.get('koData');
-  skillData = this.cookieService.get('skillData');
-}
-const abc = false;
-if (abc) {
-  this.hwaNid = hwaId;
-  oldHwaData.hwa_nid = hwaId;
-  this.loadHwaDraftData(hwaId);
-  this.getKoQuestion(hwaId);
-  this.loadSkillDraftData(hwaId);
-} else {
-    if(oldHwaData) {
-    this.creatHWAForm.patchValue(oldHwaData);
+    }, { validator: this.checkBothFields});
+    // skill
+    this.expertiseValue = '';
+    this.hideExpArray = true;
+    this.hideExpertiseArray = false;
+    this.showActiveBtn = false;
+    // ko
+    this.showTextfield = false;
+    this.btndisabled = false;
+   // console.log(this.addressList);
+    this.showForm = true;
+    if (user) {
+      this.loaddefaultAddress(user);
+      // console.log(user);
+      // this.loadbusProfile(pid)
+      this.loaduserData(user.uid);
+      this.getBusinessName();
     }
-    if(koData) {
-     // this.koForm.controls['customQlist'].patchValue(koData);
-
-       koData.forEach((item, index) => {
-       //  console.log(item)
-          const todo = { 'value': item.inputval };
-              todo.value = item.inputval;
-        this.addQuestion(todo, item.nid, item.costomQus);
-       });
-    // console.log(koData)
-   //  this.koForm.patchValue(koData);
-    }
-    if(skillData) {
-      this.skillQuestionList = skillData;
-    // this.creatHWAForm.patchValue(oldHwaData);
-    }
-}
- this.showTextfield = false;
- this.btndisabled = false;
-    // this.addressList =  this.holdDataService.selectedAddres;
-      console.log( this.addressList  );
-this.holdDataService.getSelectedAddress().subscribe((data: Array<any>) => {
-    if(data.length) {
-       this.addressList = data;
-        console.log( this.addressList  );
-    }else{
-       this.addressList = this.addressList;
-    }
-      
-       if (this.addressList) {
-       this.addressList.forEach((item, index) => {
-          this.selectedNid[index] = item['nid'];
-      });
-    }
-
-   });
-
-
- /* this.holdDataService.getSelectedAddress().subscribe(data => this.zone.run(() => {;
-       console.log('zzzzzzzzzzzzzzz', data  );
-    }));*/
-
-
- const user = this.userService.isLogedin();
-if (user) {
- // console.log(user);
-// this.loadbusProfile(pid)
-this.loaduserData(user.uid);
-}
   }
-
-  loadHwaDraftData(hwaId) {
+  getBusinessName() {
     const user = this.userService.isLogedin();
-   // console.log(hwaId, user.uid);
-    this.hwaCommonService.loadDraftData(hwaId, user.uid).subscribe(
+    const obj = {
+      'uid': user.uid
+    };
+    this.userService.accesData(obj).subscribe(
       res => {
-        if (res) {
-          console.log('loaded HWA data', res);
-          console.log('loaded HWA data', res.title);
-          console.log('loaded HWA data', res['title']);
-
-        const hwaObj = { 'title' : res['title'][0].value,
-          'field_how_many_people_do_you_nee': res['field_how_many_people_do_you_nee'][0].value,
-          'field_will_they_be_full_time_par': res['field_will_they_be_full_time_par'][0].value,
-          'field_how_would_you_describe_thi': res['field_how_would_you_describe_thi'][0].value,
-          'field_describe_the_skills_and_ex': res['field_describe_the_skills_and_ex'][0].value
-        };
-       // this.addressList =
-          // this.creatHWAForm.patchValue([hwaObj]);
-        //  this.checkAddress(res[0].nid);
-
-         // localStorage.setItem('storeHwaNid', res['nid']);
-        }
-
-      },
-      error => {
+        this.previewBname = res['details']['field_name_of_your_business'][0].value;
+      }, error => {
+        console.log(error);
       });
   }
-
-/* getAddress(user) {
-
-    this.profileService.getaddress(user.uid).subscribe(
-      res => {
-       // console.log(res);
-        this.addressList = res;
-        this.addressList.forEach((item, index) => {
-          this.selectedNid[index]=item['nid']
-      });
-   // console.log(' this.selectedNid',  this.selectedNid);
-      },error=>{
-
-      });
-} */
-selectLocation() {
-this.storeData();
-this.router.navigate(['/select-hiring-location']);
-}
-
-storeData() {
-   const creteObj = {
-        'hwa_nid': this.creatHWAForm.value.hwa_nid,
-        'title': this.creatHWAForm.value.title,
-        'field_how_many_people_do_you_nee': this.creatHWAForm.value.field_how_many_people_do_you_nee,
-        'field_will_they_be_full_time_par': this.creatHWAForm.value.field_will_they_be_full_time_par,
-        'field_how_would_you_describe_thi': this.creatHWAForm.value.field_how_would_you_describe_thi,
-        'field_describe_the_skills_and_ex': this.creatHWAForm.value.field_describe_the_skills_and_ex,
-       // 'nid': this.selectedNid
+  checkBothFields(c) {
+    if (!c) {
+      return {
+        skillExpForm: true
       };
-const kodata = this.koForm.controls['customQlist'].value;
-    if (this.userService.isLocalStorage()) {
-
-      localStorage.setItem('hwaData', JSON.stringify(creteObj));
-       localStorage.setItem('address', JSON.stringify(this.addressList));
-      localStorage.setItem('koData', JSON.stringify(kodata));
-      localStorage.setItem('skillData', JSON.stringify( this.skillQuestionList));
-
+    }
+    if (c.get('field_expertise_needed')
+        .value !== '' || c.get('field_experience_needed')
+        .value !== '') {
+      return null;
     } else {
-        this.cookieService.delete('hwaData');
-        this.cookieService.set('hwaData', JSON.stringify(creteObj));
-         this.cookieService.delete('address');
-        this.cookieService.set('address', JSON.stringify(this.addressList));
+      return {
+        'skillExpForm': true
+      };
+    }
+  }
 
-        this.cookieService.delete('koData');
-        this.cookieService.set('koData', JSON.stringify(kodata));
-        this.cookieService.delete('skillData');
-        this.cookieService.set('skillData', JSON.stringify(this.skillQuestionList));
-
-        }
-}
-
-onSubmit(saveType) {
+  loaddefaultAddress(user) {
+    this.addressList = [];
+    this.selectedLocation = [];
+    this.selectedNid = [];
+    this.profileService.getaddress(user.uid)
+      .subscribe(res => {
+        res.forEach((item, index) => {
+          // this.selectedNid[index]=item['nid']
+          if (item.field_make_default === '1') {
+            item.checked = true;
+            this.addressList[index] = item;
+            this.selectedLocation.push(item);
+            this.selectedNid.push(item['nid']);
+          } else {
+            item.checked = false;
+            this.addressList[index] = item;
+          }
+        });
+      }, error => {});
+  }
+  get selectedOptions() {
+    return this.addressList.filter(opt => opt['checked'])
+      .map(opt => opt);
+  }
+  addSelectedLocation() {
+    if (this.selectedOptions.length) {
+      this.selectedNid = [];
+      this.selectedLocation = this.selectedOptions;
+      this.selectedLocation.forEach((item, index) => {
+        this.selectedNid[index] = item['nid'];
+      });
+      $('#bizModel')
+        .modal('hide');
+    } else {
+      this.holdDataService.setMessage({
+        msg: 'Select minmum one location',
+        sucsess: false
+      });
+    }
+  }
+  selectLocation() {
+    // this.storeData();
+    this.router.navigate(['/select-hiring-location']);
+  }
+  onSubmit(saveType) {
     this.disabledButton = true; // 'Processing...';
-
     if (this.creatHWAForm.valid) {
       const user = this.userService.isLogedin();
       const CreteObj = {
@@ -298,99 +214,102 @@ onSubmit(saveType) {
         'field_describe_the_skills_and_ex': this.creatHWAForm.value.field_describe_the_skills_and_ex,
         'nid': this.selectedNid
       };
-
-console.log(CreteObj);
-
-      this.hwaCommonService.createHWA(CreteObj).subscribe(
-        res => {
+      console.log(CreteObj);
+      this.hwaCommonService.createHWA(CreteObj)
+        .subscribe(res => {
           this.disabledButton = false;
           console.log(res);
-           this.onSubmitko(res['got_it'], saveType);
+          this.onSubmitko(res['got_it'], saveType);
           if (this.userService.isLocalStorage()) {
-          localStorage.setItem('storeHwaNid', res['got_it']);
+            localStorage.setItem('storeHwaNid', res['got_it']);
           } else {
-          this.cookieService.set('storeHwaNid', res['got_it']);
+            this.cookieService.set('storeHwaNid', res['got_it']);
           }
-
-    this.holdDataService.setMessage({msg: 'Your have created Help Wanted Ad Successfully', sucsess: true});
-
-
-    });
+          this.holdDataService.setMessage({
+            msg: 'Your have created Help Wanted Ad Successfully',
+            sucsess: true
+          });
+        });
     }
   }
-
-  saveAsDraft() {
-
-
-  }
-
+// saveAsDraft() {}
   discardAd() {
-
-  }
-// ---------------------------------------------------
-
-
-// -----------------ko coustom question ---------------------------------------
-
-loadkoDraftData(hwaId) {
     const user = this.userService.isLogedin();
-  //  const hwaId = localStorage.getItem('storeHwaNid');
-    if  (hwaId) {
-
-    } else {
-     // this.router.navigate(['/hwa_workflow']);
+    this.loaddefaultAddress(user);
+    this.deleteskills = [];
+    this.skillQuestionList = [];
+    this.addressList = [];
+    this.customQList = [];
+    this.creatHWAForm.reset();
+    $('#myModalFullscreen')
+      .modal('hide');
+    /* this.holdDataService.setMessage({
+         msg: 'discard', sucsess: true
+       }); */
+  }
+// Knockout Question Block
+  loadkoDraftData(hwaId) {
+    const user = this.userService.isLogedin();
+    //  const hwaId = localStorage.getItem('storeHwaNid');
+    if (hwaId) {} else {
+      // this.router.navigate(['/hwa_workflow']);
       return false;
     }
-    this.hwaCommonService.loadkosDraftData(hwaId, user.uid).subscribe(
-      res => {
+    this.hwaCommonService.loadkosDraftData(hwaId, user.uid)
+      .subscribe(res => {
         console.log(res);
-        if(res) {
-          const qarray: Array<any> = res as Array<any>;
+        if (res) {
+          const qarray: Array < any > = res as Array < any > ;
           for (let i = 0; i < qarray.length; i++) {
-            if  (qarray[i].field_question_type === 'Default') {
+            if (qarray[i].field_question_type === 'Default') {
               this.checkdefauldQuestion(qarray[i].title, qarray[i].nid, qarray[i].field_ko);
             } else {
-              const todo = { 'value': qarray[i].title };
+              const todo = {
+                'value': qarray[i].title
+              };
               todo.value = qarray[i].title;
               this.addQuestion(todo, qarray[i].nid, qarray[i].field_ko);
               this.btndisabled = false;
             }
           }
         }
-       // this.displayQuestionn = true;
-      },
-      error => {
+        // this.displayQuestionn = true;
+      }, error => {
+        console.log(error);
       });
-
   }
   checkdefauldQuestion(textval, nid, isSelected) {
     for (let i = 0; i < this.koForm.controls['defaultQlists'].value.length; i++) {
-
-      if  (this.koForm.controls['defaultQlists'].value[i].inputval === textval) {
+      if (this.koForm.controls['defaultQlists'].value[i].inputval === textval) {
         let selectedval = false;
-        if  (isSelected === 1) { selectedval = true;
-        } else if  (isSelected === 0) { selectedval = false; } else { selectedval = isSelected; }
+        if (isSelected === 1) {
+          selectedval = true;
+        } else if (isSelected === 0) {
+          selectedval = false;
+        } else {
+          selectedval = isSelected;
+        }
         const control = this.koForm.controls['defaultQlists']['controls'][i];
-        control.patchValue({ 'defaultQlist': selectedval, 'nid': nid });
+        control.patchValue({
+          'defaultQlist': selectedval,
+          'nid': nid
+        });
       }
     }
   }
   getKoQuestion(hwaId) {
-    this.hwaCommonService.defaultQuestion().subscribe(
-      res => {
+    this.hwaCommonService.defaultQuestion()
+      .subscribe(res => {
         this.defaultQLists = res;
-
         for (let j = 0; j < this.defaultQLists.length; j++) {
-          const control = <FormArray>this.koForm.controls['defaultQlists'];
+          const control = < FormArray > this.koForm.controls['defaultQlists'];
           // console.log(this.defaultQLists[j].name);
           control.push(this.initdefaultQuestion(this.defaultQLists[j].name, this.defaultQLists[j].nid));
         }
         this.loadkoDraftData(hwaId);
-      },
-      error => {
-
-      }
-    );
+      }, error => {
+        console.log(error);
+      });
   }
   initdefaultQuestion(val, qnid) {
     return this.formbuilder.group({
@@ -401,91 +320,85 @@ loadkoDraftData(hwaId) {
   }
   resetAllEditbutton(i) {
     for (let j = 0; j < this.isEditable.length; j++) {
-      if  (j !== i) {
+      if (j !== i) {
         this.changeText[j] = 'Edit';
         this.isEditable[j] = false;
       }
     }
   }
   checkEmpty(e) {
-    if  (e.value === '') {
+    if (e.value === '') {
       this.btndisabled = true;
     } else {
       this.btndisabled = false;
     }
-
   }
   toggleShow(i) {
     this.resetAllEditbutton(i);
     //  this.changeText[i] = 'Edit';
-    if  (this.isEditable[i] === true) {
+    if (this.isEditable[i] === true) {
       this.changeText[i] = 'Edit';
     } else {
       this.changeText[i] = 'Save';
     }
     this.isEditable[i] = !this.isEditable[i];
   }
-
-  editText(evt, i) {
-    if  (this.isEditable[i] === true) {
-      this.changeText[i] = 'Edit';
-    } else {
-      this.changeText[i] = 'Save';
-    }
-    this.isEditable[i] = !this.isEditable[i];
-    this.customQList[i] = evt.target.value;
-
+  editText(evt, i, nid) {
+    // this.isEditable[i] = !this.isEditable[i];
+    this.customQList[i].qus = evt.target.value;
+    this.customQList[i].nid = nid;
   }
-  finshCode() {
-  }
-
+  finshCode() {}
   deleteQuestion(i) {
-   const data_item = this.customQList[i];
-   if (data_item.nid) {
-     this.customQList.push(data_item.nid);
-   }
+    const data_item = this.customQList[i];
+    if (data_item.nid) {
+      //  this.customQList.push(data_item.nid);
+    }
     this.customQList.splice(i, 1);
     this.btndisabled = false;
   }
-
+  addEditQuestion(i) {
+    this.editCounter = i;
+    this.showTextfield = true;
+    this.btndisabled = false;
+    this.questionInput = this.customQList[i].qus;
+    this.qustionNid = this.customQList[i].nid;
+    // this.customQList.splice(i, 1);
+  }
+  editQuestion(input) {
+    // console.log(input.value);
+    this.customQList[this.editCounter].qus = input.value;
+    this.editCounter = null;
+    input.value = null;
+    this.btndisabled = false;
+    this.showTextfield = false;
+  }
+  cancleQustion() {
+    this.btndisabled = false;
+    this.showTextfield = false;
+    this.editCounter = null;
+  }
 // Add Custom question
   addCustomQuestion() {
-    if  (this.showTextfield) {
+    this.questionInput = '';
+    if (this.showTextfield) {
       this.showTextfield = false;
       this.btndisabled = false;
     } else {
       this.showTextfield = true;
       this.btndisabled = true;
-      // this.enb = false;
     }
-    // console.log(this.qusInpitValue)
-    //   this.btndisabled = true;
   }
   addQuestion(todo: any, qnid: any, selected: any) {
-    if  (todo.value !== '') {
-      this.customQList.push(todo.value);
-      this.isEditable.push(false);
-      this.changeText.push('Edit');
-      const control = <FormArray>this.koForm.controls['customQlist'];
-      let sel = false;
-      if (selected === 1) {
-         sel = true;
-        } else if (selected === 0) {
-          sel = false;
-         } else if (selected === true) {
-          sel = true;
-         }else{
-           sel = false;
-         }
-     // console.log(todo.value, sel);
-      control.push(this.initQuestion(todo.value, qnid, sel));
+    if (todo.value !== '') {
+      const Obj = {
+        qus: todo.value,
+        nid: qnid
+      };
+      this.customQList.push(Obj);
       todo.value = null;
-      //   if (qnid){
-      this.btndisabled = true;
-      //   }
-
-         this.showTextfield = false;
-      this.resetAllEditbutton(9999);
+      this.btndisabled = false;
+      this.showTextfield = false;
     }
     return false;
   }
@@ -496,256 +409,209 @@ loadkoDraftData(hwaId) {
       'nid': [qnid]
     });
   }
-
-
-  getSelectedQuestion(): Array<any> {
-    const customArray = [];
-    const control = this.koForm.controls['customQlist'].value;
-    for (let j = 0; j < control.length; j++) {
-      if  (control[j].costomQus) {
-        customArray.push(control[j].inputval);
-      }
-    }
-    return customArray;
-  }
-
-  getSelectedDfaultQus(): Array<any> {
-    const customArray = [];
-    const control = this.koForm.controls['defaultQlists'].value;
-    for (let j = 0; j < control.length; j++) {
-      // console.log(control[j])
-      if  (control[j].defaultQlist) {
-        customArray.push(control[j].inputval);
-      }
-    }
-    return customArray;
-  }
-
   onSubmitko(hwaId, saveType) {
-   // this.disableUntil = true;
-  //  this.btntext = 'Processing...';
-    if  (hwaId) { // localStorage.getItem('storeHwaNid')
+    // this.disableUntil = true;
+    //  this.btntext = 'Processing...';
+    if (hwaId) { // localStorage.getItem('storeHwaNid')
       const user = this.userService.isLogedin();
       // start
-      const dummyObj = [];
+      // const dummyObj = [];
       const dummyCustom = [];
-
-      const control = this.koForm.controls['customQlist'].value;
-      for (let j = 0; j < control.length; j++) {
-// console.log(control[j].inputval,control[j].nid);
-        const custObj = {
-          'nid': control[j].nid,
-          'question': control[j].inputval,
+      // const control = this.koForm.controls['customQlist'].value;
+      for (let j = 0; j < this.customQList.length; j++) {
+        // console.log(control[j].inputval,control[j].nid);
+        this.custObj = {
+          'nid': this.customQList[j].nid,
+          'question': this.customQList[j].qus,
           'field_question_type': 'custom',
-          'field_ko': control[j].costomQus ? 1 : 0,
+          'field_ko': '1',
           'status': '1'
         };
-        if (control[j].inputval !== '') {
-        dummyCustom.push(custObj);
-        }
+        dummyCustom.push(this.custObj);
       }
-      const control1 = this.koForm.controls['defaultQlists'].value;
-      for (let i = 0; i < control1.length; i++) {
-
-        const newObj = {
-          'nid': control1[i].nid,
-          'question': control1[i].inputval,
-          'field_question_type': 'default',
-          'field_ko': control1[i].defaultQlist ? 1 : 0,
-          'status': '1'
-        };
-        dummyObj.push(newObj);
-      }
-
-      const newObjValue = dummyObj.concat(dummyCustom);
       const objTemplate = {
         'uid': user.uid,
         'hwa_nid': hwaId, // localStorage.getItem('storeHwaNid'),
-        'ko': newObjValue
+        'ko': dummyCustom
       };
-
-      this.hwaCommonService.customQuestion(objTemplate).subscribe(
-        res => {
-console.log('complated costom question', res);
-          this.holdDataService.setMessage({msg: res['Message'], sucsess: true});
+      // console.log(objTemplate);
+      this.hwaCommonService.customQuestion(objTemplate)
+        .subscribe(res => {
+          // console.log('complated costom question', res);
+          this.holdDataService.setMessage({
+            msg: res['Message'],
+            sucsess: true
+          });
           this.onSubmitSkill(hwaId, saveType);
-
-        },
-        error => {
-        }
-      );
+        }, error => {});
     } else {
-
-       this.holdDataService.setMessage({msg: 'You must have to create and save first step of Help Wanted Ad', sucsess: false});
-
+      this.holdDataService.setMessage({
+        msg: 'You must have to create and save first step of Help Wanted Ad',
+        sucsess: false
+      });
     }
   }
-
-  // ------------------------ skill -----------------------
-
-
-selectExpType(event) {
-
-  if (this.skillExpForm.controls['exp'].value === 'expertise') {
-
-      this.experenceValue = 'N/A';
+// Skill Or Experience Question Block --------------------
+  selectExpType(event) {
+    if (this.skillExpForm.controls['exp'].value === 'expertise') {
+      this.experenceValue = '';
+      this.expertiseValue = 'Beginner';
       this.hideExpArray = false;
       this.hideExpertiseArray = true;
       this.showActiveBtn = true;
-  } else {
-
-        this.expertiseValue = 'N/A';
-    this.hideExpArray = true;
+    } else {
+      this.expertiseValue = '';
+      this.experenceValue = '1';
+      this.hideExpArray = true;
       this.hideExpertiseArray = false;
       this.showActiveBtn = false;
+    }
+    console.log(event.target.value);
   }
-console.log(event.target.value);
-
-}
-
-
-loadSkillDraftData(hwaId) {
+  loadSkillDraftData(hwaId) {
     const user = this.userService.isLogedin();
-   // const hwaId = localStorage.getItem('storeHwaNid');
-    if (hwaId) {
-    } else {
+    // const hwaId = localStorage.getItem('storeHwaNid');
+    if (hwaId) {} else {
       return false;
     }
-    this.hwaCommonService.loadSkillsDraftData(hwaId, user.uid).subscribe(
-      res => {
+    this.hwaCommonService.loadSkillsDraftData(hwaId, user.uid)
+      .subscribe(res => {
         if (res) {
-          const qarray: Array<any> = res as Array<any>;
+          const qarray: Array < any > = res as Array < any > ;
           if (qarray.length > 0) {
             for (let i = 0; i < qarray.length; i++) {
               let experi = '';
-              if ( qarray[i].field_expertise_needed === 'N/A') {
+              if (qarray[i].field_expertise_needed === 'N/A') {
                 experi = 'experience';
               } else {
                 experi = 'expertise';
               }
-             const Obj = { 'nid': qarray[i].nid,
-                        'skill_exp_ques': qarray[i].title,
-                        'field_expertise_needed': qarray[i].field_expertise_needed,
-                        'field_experience_needed': qarray[i].field_experience_needed,
-                        'exp': [experi]};
-
+              const Obj = {
+                'nid': qarray[i].nid,
+                'skill_exp_ques': qarray[i].title,
+                'field_expertise_needed': qarray[i].field_expertise_needed,
+                'field_experience_needed': qarray[i].field_experience_needed,
+                'exp': [experi]
+              };
               this.skillQuestionList.push(Obj);
-             // this.addUser(qarray[i].nid, qarray[i].title, qarray[i].field_expertise_needed, qarray[i].field_experience_needed);
-
+              // this.addUser(qarray[i].nid, qarray[i].title, qarray[i].field_expertise_needed, qarray[i].field_experience_needed);
             }
           } else {
             for (let i = 0; i < 1; i++) {
-             // this.addUser('', '', 'N/A', 'N/A');
+              // this.addUser('', '', 'N/A', 'N/A');
             }
           }
         }
-       // this.displayQuestionn = true;
-      },
-      error => {
+      }, error => {
+        console.log(error);
       });
   }
-
-
-  /* initQuestion_skill(nid: any, tital: string, expertis: any, experen: any, expertisDisabled: boolean, experenDisabled: boolean ){
-    return this.formbuilder.group({
-      'nid': [nid],
-      'skill_exp_ques': [tital, Validators.required],
-      'field_expertise_needed': [expertis , Validators.required],
-      'field_experience_needed': [experen , Validators.required],
-      'exp':['']
-    });
-  }
-
-hideExperenceLevel(i) {
-    const control = <FormArray>this.skillExpForm.controls['questionList'];
-    if (control.controls[i]['controls'].expertiseLevel.value === 'N/A') {
-      this.hideExpArray = false;
-      this.hideExpertiseArray = false;
-      this.showActiveBtn = false;
-    } else {
-      this.hideExpArray = false;
-      this.hideExpertiseArray = true;
-      this.showActiveBtn = true;
-      this.experenceValue='N/A'
-    }
-  }
-  hideExpertiseLevel(i) {
-
-    const control = <FormArray>this.skillExpForm.controls['questionList'];
-    if (control.controls[i]['controls'].experenceLevel.value === 'N/A') {
-      this.hideExpArray[i] = false;
-      this.hideExpertiseArray[i] = false;
-    } else {
-      this.hideExpArray[i] = true;
-      this.hideExpertiseArray[i] = false;
-      this.expertiseValue[i]="N/A"
-
-    }
-
-  }
-
-*/
-
-   showHideFrom() {
+  showHideFrom() {
     this.showForm = !this.showForm;
   }
-
   addInList() {
     if (this.skillExpForm.valid) {
       this.skillQuestionList.push(this.skillExpForm.value);
       this.skillExpForm.reset();
       this.showForm = false;
-    }
-
-  }
- editSkillQue(i) {
-   this.showForm = true;
-  // this.skillQuestionList[i];
-  this.skillExpForm.patchValue(this.skillQuestionList[i]);
-  // console.log(this.skillQuestionList[i].exp);
-   if (this.skillQuestionList[i].exp === 'experience') {
+      this.skillExpForm.patchValue({
+        exp: 'experience',
+        field_experience_needed: '1',
+        field_expertise_needed: '',
+        nid: '',
+        skill_exp_ques: ''
+      });
       this.hideExpArray = true;
       this.hideExpertiseArray = false;
-       this.expertiseValue = 'N/A';
-    this.experenceValue = this.skillQuestionList[i].field_experience_needed;
-
-  } else {
-     this.experenceValue = 'N/A';
+    }
+  }
+  editSkillQue(i) {
+    this.showForm = true;
+    // this.skillQuestionList[i];
+    this.skillExpForm.patchValue(this.skillQuestionList[i]);
+    // console.log(this.skillQuestionList[i].exp);
+    if (this.skillQuestionList[i].exp === 'experience') {
+      this.hideExpArray = true;
+      this.hideExpertiseArray = false;
+      this.expertiseValue = '';
+      this.experenceValue = this.skillQuestionList[i].field_experience_needed;
+    } else {
+      this.experenceValue = '';
       this.hideExpArray = false;
       this.hideExpertiseArray = true;
- this.expertiseValue = this.skillQuestionList[i].field_expertise_needed;
+      this.expertiseValue = this.skillQuestionList[i].field_expertise_needed;
+    }
+    this.skillCounter = i;
+    // this.skillQuestionList.splice(i, 1);
   }
-
-   this.skillQuestionList.splice(i, 1);
- }
-
- deleteSkill(i) {
-   const data_item = this.skillQuestionList[i];
-   if (data_item.nid) {
-     this.deleteskills.push(data_item.nid);
-   }
+  updateSkill() {
+    // if(this.skillCounter){
+    this.skillQuestionList[this.skillCounter] = this.skillExpForm.value;
+    this.skillCounter = null;
+    this.skillExpForm.reset();
+    this.skillExpForm.patchValue({
+      exp: 'experience',
+      field_experience_needed: '1',
+      field_expertise_needed: '',
+      nid: '',
+      skill_exp_ques: ''
+    });
+    this.hideExpArray = true;
+    this.hideExpertiseArray = false;
+    this.showForm = false;
+    // }
+  }
+  cancleSkill() {
+    this.skillCounter = null;
+    this.skillExpForm.reset();
+    this.showForm = false;
+    this.skillExpForm.patchValue({
+      exp: 'experience',
+      field_experience_needed: '1',
+      field_expertise_needed: '',
+      nid: '',
+      skill_exp_ques: ''
+    });
+    this.hideExpArray = true;
+    this.hideExpertiseArray = false;
+  }
+  deleteSkill(i) {
+    const data_item = this.skillQuestionList[i];
+    if (data_item.nid) {
+      this.deleteskills.push(data_item.nid);
+    }
     this.skillQuestionList.splice(i, 1);
+    this.skillCounter = null;
     // this.skillQuestionList = this.skillQuestionList.filter(item => item !== data_item);
- }
-
-
+  }
   onSubmitSkill(hwaId, saveType) {
-   // this.disableUntil = true;
-   // this.btntext = 'Processing...';
+    // this.disableUntil = true;
+    // this.btntext = 'Processing...';
     if (hwaId) {
       const user = this.userService.isLogedin();
       const pushSkillSet = [];
-//
-this.skillQuestionList.forEach((item, index) => {
- const skillQ = {
-            'nid': item.nid,
-            'skill_exp_ques': item.skill_exp_ques,
-            'field_experience_needed': item.field_experience_needed,
-            'field_expertise_needed': item.field_expertise_needed,
-            'status': '0'
-          };
-          pushSkillSet.push(skillQ);
-});
+      this.skillQuestionList.forEach((item) => {
+        let experience_temp = '';
+        let expertise_temp = '';
+        if (item.field_experience_needed === '') {
+          experience_temp = 'N/A';
+        } else {
+          experience_temp = item.field_experience_needed;
+        }
+        if (item.field_expertise_needed === '') {
+          expertise_temp = 'N/A';
+        } else {
+          expertise_temp = item.field_expertise_needed;
+        }
+        const skillQ = {
+          'nid': item.nid,
+          'skill_exp_ques': item.skill_exp_ques,
+          'field_experience_needed': experience_temp,
+          'field_expertise_needed': expertise_temp,
+          'status': '0'
+        };
+        pushSkillSet.push(skillQ);
+      });
       const skillObj = {
         'uid': user.uid,
         'hwa_nid': hwaId, // localStorage.getItem('storeHwaNid'),
@@ -753,86 +619,76 @@ this.skillQuestionList.forEach((item, index) => {
         'delete_nid': this.deleteskills
       };
       // console.log(pushSkillSet);
-       console.log(skillObj);
-      this.hwaCommonService.skillQusestion(skillObj).subscribe(
-        res => {
-this.deleteskills = [];
-         console.log(res);
-
-             localStorage.removeItem('hwaData');
-             this.cookieService.delete('hwaData');
-
-             localStorage.removeItem('koData');
-             this.cookieService.delete('koData');
-              localStorage.removeItem('skillData');
-             this.cookieService.delete('skillData');
-
-             localStorage.removeItem('storeHwaNid');
-             this.cookieService.delete('storeHwaNid');
-
-             localStorage.removeItem('address');
-             this.cookieService.delete('address');
-
-             this.skillQuestionList = [];
-             this.addressList = [];
-             this.customQList = [];
-             this.creatHWAForm.reset();
-            // this.defaultQlists = [];
-
-             this.holdDataService.setMessage(
-               {msg: 'You have created Skills Or Experience Questions Successfully', sucsess: true});
-
-   $('#myModalFullscreen').modal('hide');
-
-            if (saveType === 'post') {
-               this.router.navigate(['/post-hwa']);
-            } else {
-              this.router.navigate(['/landing-page']);
-            }
-        },
-        error => {
-
-        }
-      );
+      // console.log(skillObj);
+      this.hwaCommonService.skillQusestion(skillObj)
+        .subscribe(res => {
+          this.deleteskills = [];
+          console.log(res);
+          /* localStorage.removeItem('hwaData');
+                   this.cookieService.delete('hwaData');
+                   localStorage.removeItem('koData');
+                   this.cookieService.delete('koData');
+                   localStorage.removeItem('skillData');
+                   this.cookieService.delete('skillData');
+                   // localStorage.removeItem('storeHwaNid');
+                   // this.cookieService.delete('storeHwaNid');
+                   localStorage.removeItem('address');
+                   this.cookieService.delete('address');*/
+          this.skillQuestionList = [];
+          this.addressList = [];
+          this.customQList = [];
+          this.creatHWAForm.reset();
+          this.holdDataService.setMessage({
+            msg: 'You have created Skills Or Experience Questions Successfully',
+            sucsess: true
+          });
+          $('#myModalFullscreen')
+            .modal('hide');
+          if (saveType === 'post') {
+            // const hwid = this.userService.getHwaId();
+            this.router.navigate(['/post-hwa', ]);
+          } else {
+            this.router.navigate(['/all-hwa-list']);
+          }
+        }, error => {
+          console.log(error);
+        });
     } else {
-       this.holdDataService.setMessage(
-         {msg: 'You must have to create and save first step of \'Help Wanted Ad', sucsess: false});
-
+      this.holdDataService.setMessage({
+        msg: 'You must have to create and save first step of \'Help Wanted Ad',
+        sucsess: false
+      });
     }
   }
-
-  // load business profile
-loaduserData(uid) {
-  const userId = {'uid': uid };
-    this.userService.accesData(userId).subscribe(
-      res => {
+// load business profile
+  loaduserData(uid) {
+    const userId = {
+      'uid': uid
+    };
+    this.userService.accesData(userId)
+      .subscribe(res => {
         if (res['status']) {
-          const user =  res;
-
-           // this.addressList = res['address'];
-
+          // const user = res;
           if (res['business_profile_id'].length) {
-
-  this.loadbusProfile( res['business_profile_id'][0].nid);
-
+            this.loadbusProfile(res['business_profile_id'][0].nid);
           }
         }
       });
-}
-
-loadbusProfile(profileId) {
-  const pObj = {'bptnid': profileId};
-   this.hwaCommonService.getBusinessTopic(pObj).subscribe(
-         res => {
-          console.log(res);
-         // this.bisProfileImg = res['business_topic'][0].field_business_profile_topic_ima;
-          this.businessTopic = res['business_topic'];
-
-        }, error => {
-
-        console.log(error);
-
-      });
-
   }
+  loadbusProfile(profileId) {
+    const pObj = {
+      'bptnid': profileId
+    };
+    this.hwaCommonService.getBusinessTopic(pObj)
+      .subscribe(res => {
+        console.log(res);
+        this.businessTopic = res['business_topic'];
+      }, error => {
+        console.log(error);
+      });
+  }
+
 }
+
+
+

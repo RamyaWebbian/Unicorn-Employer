@@ -1,0 +1,106 @@
+<img src="../assets/loader.gif" class="newLoader" *ngIf="!pageLoded">
+<div class="container newWidth" *ngIf="pageLoded">
+<div class="row">
+  <div class="col-12">
+      <div *ngIf="validHwa" id="matchFound">
+        <div id="dinerProfile">
+          <h3 class="hwaMessage">{{hwaMessage}}</h3>
+          <div class="con1" *ngIf="activejobad">
+            <div class="ac">
+              <p class="position">{{position}}</p>
+              <p class="f14" *ngIf="noOfPosition == 1 && addressLenght == 1" ><strong>{{companyname}}</strong> in <strong>{{address3}} {{address1}} {{ address2 }}</strong> is looking for {{noOfPosition}} {{posType}} {{position}}</p>
+              <div class="multiPositionOneLocation">
+                <div class="f14" *ngIf="noOfPosition > 1 && addressLenght === 1">
+                  <strong>{{ companyname }}</strong> is looking to hire <strong> {{ noOfPosition }} {{ position }}s</strong> at our <strong>{{address3}} {{address1}} {{ address2 }}</strong>
+                  <span *ngFor="let loc of City; let i = index">
+              <b *ngIf="loc?.title"><strong>{{loc?.title[0].value+", "+ loc?.field_city[0].value+", "+loc?.field_state[0].value }}</strong></b>
+            </span> location.
+                  <p>These are <strong>{{ posType }}</strong> positions.</p>
+                </div>
+              </div>
+              <div class="multiPositionMultiLocation f14" >
+                <div *ngIf="noOfPosition > 1 && addressLenght > 1 ">
+                  <strong>{{ companyname }}</strong> is looking to hire a total of <strong>{{ noOfPosition }} {{ position }}s</strong> at these locations;
+
+                  <ul *ngFor="let loc of City; let i = index" class="morePos">
+                    <li *ngIf="loc?.title"><strong>{{loc?.title[0].value+", "+ loc?.field_city[0].value+", "+loc?.field_state[0].value }}</strong></li>
+                  </ul>
+                  <p>These are <strong class="cap">{{ posType }}</strong> positions.</p>
+                </div>
+              </div>
+              <div class="f14 multiPositionMultiLocation" >
+                <div *ngIf="noOfPosition == 1 && addressLenght > 1 ">
+                  <strong >{{ companyname }}</strong> is looking to hire a total of <strong>{{ noOfPosition }} {{ position }}s</strong> at these locations;
+                  <!-- *ngIf="loc.location === true" -->
+                  <ul *ngFor="let loc of City; let i = index" class="morePos">
+                    <li *ngIf="loc?.title"><strong>{{loc?.title[0].value+", "+ loc?.field_city[0].value+", "+loc?.field_state[0].value}}</strong></li>
+                  </ul>
+                  <p>These are <strong>{{ posType }}</strong> positions.</p>
+                </div>
+              </div>
+
+              <div class="editorHwa">
+                <div [innerHTML]="describePos" class="f13"></div>
+                <div [innerHTML]="describeSkill" class="f13"></div>
+              </div>
+              <p class="f13"><strong>Interested in this job?</strong> &nbsp;&nbsp;&nbsp;
+                <a target="_blank" class="btn with-bg-btn" [href]="applicantUrl">Apply Now</a>
+              </p>
+            </div> <!-- ac -->
+              
+            <div class="profileCreation" > <!-- *ngIf="!hideEntireBP" -->
+              <h2 class="text-center">{{ companyname }}</h2>
+              <div class="row">
+                <div class="img_wrap col-6" *ngIf="titalText1">
+                  <div class="bus_img">
+                    <img [src]="image1Url" *ngIf="!image1Url" style="height: 240px" />
+                    <img [src]="image1Url" *ngIf="image1Url" style="height: 240px" />
+                  </div>
+                  <div class="collapasile-title add-que ng-binding">{{titalText1}}</div>
+                  <div class="des ng-binding f13" [innerHTML]="bodyText1">
+
+                  </div>
+                </div>
+                <div class="img_wrap col-6" *ngIf="titalText2">
+                  <div class="bus_img">
+                    <img [src]="image2Url" *ngIf="!image2Url" style="height: 240px" />
+                    <img [src]="image2Url" *ngIf="image2Url" style="height: 240px" />
+                  </div>
+                  <div class="collapasile-title add-que ng-binding">{{titalText2}}</div>
+                  <div class="des ng-binding f13" [innerHTML]="bodyText2">
+
+                  </div>
+                </div>
+                
+                <div class="img_wrap col-6" *ngIf="titalText3">
+                  <div class="bus_img">
+                    <img [src]="image3Url" *ngIf="!image3Url" style="height: 240px" />
+                    <img [src]="image3Url" *ngIf="image3Url" style="height: 240px" />
+                  </div>
+                  <div class="collapasile-title add-que ng-binding">{{titalText3}}</div>
+                  <div class="des ng-binding f13" [innerHTML]="bodyText3">
+
+                  </div>
+                </div>
+                <div class="img_wrap col-6" *ngIf="titalText4">
+                  <div class="bus_img">
+                    <img [src]="image4Url" *ngIf="!image4Url" style="height: 240px" />
+                    <img [src]="image4Url" *ngIf="image4Url" style="height: 240px" />
+                  </div>
+                  <div class="collapasile-title add-que ng-binding">{{titalText4}}</div>
+                  <div class="des ng-binding f13" [innerHTML]="bodyText4">
+                  </div>
+                </div>
+              </div>
+            </div> <!-- profileCreation -->
+
+          </div> <!-- con1 -->
+        </div> <!-- dinerProfile -->
+      </div> <!-- validHwa -->
+      <div *ngIf="!validHwa" id="matchFound">
+        Location is not valid
+      </div> <!-- invalidHwa -->
+  </div> <!-- col-12 -->
+</div> <!-- row -->
+</div> <!-- container -->
+<div id="Neeraj"></div>

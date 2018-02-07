@@ -8,6 +8,8 @@ import { LandingPageRoutingModule } from './landing-page-routing.module';
 import { SharedModule } from '../../shared/shared.module';
 import { UserService, HwaCommonService } from '../../services/index';
 import {HeaderValidUserModule} from '../../common/header-valid-user/header-valid-user.module';
+import {AllApplicantServicesService} from '../../applicants_status/services/all-applicant-services.service';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -18,7 +20,8 @@ import {HeaderValidUserModule} from '../../common/header-valid-user/header-valid
     HeaderValidUserModule
   ],
   declarations: [LandingPageComponent],
-  providers:[HwaCommonService]
+  providers: [HwaCommonService, AllApplicantServicesService]
 })
 
-export class LandingPageModule { }
+export class LandingPageModule {
+}

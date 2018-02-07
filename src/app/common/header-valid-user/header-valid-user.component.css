@@ -1,7 +1,7 @@
 .navbar-brand {
     width: 250px;
     display: inline-block;
-    margin: 0 0 0 50px;
+    margin: 0 0 0 35px;
 
 }
 .navbar-toggler {
@@ -62,7 +62,7 @@ nav.navbar-light .navbar-toggler-icon {
 .notification {
     float: right;
     display: inline-block;
-    margin: 5px 0;
+    margin: 10px 0;
     clear: both;
 }
 .collapse.navbar-collapse .navbar-nav {

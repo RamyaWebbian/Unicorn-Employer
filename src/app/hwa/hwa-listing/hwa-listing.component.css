@@ -43,12 +43,21 @@ button.btn {
 .col-1 .dropdown.show {
   position: relative;
 }
-.dropdown-menu li {
-  border-bottom: 1px solid #ccc;
+.modal-header{justify-content:center}
+.modal-header h5{font-weight: 500}
+.modal-footer{justify-content:center; padding: 0;}
+.modal-footer .half{ width: 50%; display: inline-block;border-right: 1px solid #eee; padding: 10px; }
+.modal-footer .btn-new{margin: 0 5px; font-weight: 500; display: inline-block; background: transparent; border: 0;}
+.modal-footer .btn-new.bmain{color: red}
+
+@media (min-width: 576px) {
+  .modal-dialog {
+    width: 360px;
+  }
 }
-.dropdown-menu li:last-child {
-  border-bottom: 0;
-}
+
+
+
 .custom-ques-edit .dropdown {
   display: inline-block;
   float: right;
@@ -128,10 +137,21 @@ button.btn {
   float: right;
   clear: both;
 }
-
-
+.fixed-bottom{right: 20px; bottom: 20px; text-align: right; padding-right: 20px;}
+.fixed-bottom img{width: 60px; border-radius: 50%}
+.fixed-bottom img:hover{box-shadow: 11px 11px 50px #ccc}
+#HwaPreviewCommon.hwa-preview .modal-body{ overflow: auto}
+#HwaPreviewCommon.hwa-preview .modal-header{padding-left: 0!important;padding-right: 0!important;display: block!important;}
+#HwaPreviewCommon.hwa-preview .modal-body{height: 70vh; margin: 5vh 0}
+#HwaPreviewCommon.hwa-preview .modal-footer{height: 10vh}
 .text-wrap{white-space: normal!important; }
+.divider-block{border-bottom: 1px solid #ccc; padding-bottom: 20px; margin-bottom: 20px;}
+.divider-block h5, .business-profile h5{color: #002c3f; font-size: 16px; font-weight: 700}
+.business-profile h6{font-size: 14px;color: #0c2731; font-weight: 700; margin: 0}
+.divider-block p{font-size: 14px; color: #666; line-height: 20px;}
+.business-profile p{font-size: 14px; color: #666; line-height: 20px;}
 
+.business-profile .business-blk{ margin-bottom: 20px;}
 @media screen and (max-width: 767px) {
 
 }

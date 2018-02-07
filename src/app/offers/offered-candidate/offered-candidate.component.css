@@ -1,0 +1,9 @@
+.jobadBlock .col-6 {
+    align-self: center;
+}
+.jobadBlock .col-4 {
+    text-align: right;
+}
+.jobadBlock .col-4 p {
+    margin: 0;
+}

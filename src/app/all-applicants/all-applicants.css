@@ -1,0 +1,186 @@
+button {
+    margin: 0;
+}
+textarea {
+    width: 100%;
+    padding: 15px;
+    box-sizing: border-box;
+    min-height: 80px;
+}
+.pageHeading {
+    border-bottom: 1px solid #ccc;
+}
+.pageHeading h2 {
+    text-transform: capitalize;
+    margin: 1rem 0;
+}
+.f13 {
+    font-size: 13px;
+}
+p.f13 {
+    text-transform: capitalize;
+    margin: 1rem 0;
+}
+.bigIcon {
+    width: 50px;
+}
+.resume-info p {
+    font-size: 10px;
+}
+button.btn img {
+    vertical-align: sub;
+    width: 18px;
+    margin: 0 5px
+}
+
+button.btn a:hover,
+.btn a:hover {
+    text-decoration: none !important;
+}
+.actionButtons {
+    margin-bottom: 1rem;
+}
+.paginationSection img {
+    width: 18px;
+    vertical-align: sub;
+}
+.paginationSection {
+    padding: 10px 0;
+}
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.jobadBlock {
+    padding: 10px 13px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: -1px;
+    background-color: #fff;
+}
+.jobadBlock .col-5,.jobadBlock .col-4,.jobadBlock .col-3 {
+    align-self: center;
+}
+.jobadBlock span {
+    font-size: 14px;
+}
+.cursor {
+    cursor: pointer;
+    text-transform: capitalize;
+}
+.colorGrey {
+    color: #787878;
+}
+.colorRed {
+    color: red;
+    font-weight: bold;
+}
+.colorBlue {
+    color: #000033;
+}
+.colorOldBlue {
+    color: #0c4b62;
+    font-weight: bold;
+}
+.colorBlack {
+    color: #000;
+    font-weight: bold;
+}
+.colorOrange {
+    color: orangered;
+}
+.applicantName a {
+    font-weight: 400;
+}
+.applicantName,
+.position-applied {
+    word-break: break-all;
+    text-transform: capitalize;
+}
+.applicantName .date {
+    text-transform: none;
+}
+.applicantStatus a {
+    color: #555 !important;
+    font-weight: normal;
+    text-transform: capitalize;
+}
+.applicantStatus a:hover,
+.applicantName a:hover {
+    color: #000 !important;
+    text-decoration: none !important;
+}
+.applicantRating {
+    text-align: right;
+}
+.applicantRating p {
+    margin: 0;
+}
+.applicantRating img:hover {
+    cursor: pointer;
+}
+.card-block p.question {
+    color: #000;
+}
+.calender-block .row {
+    padding: 30px 0;
+}
+.card-block p {
+    margin: 5px 0;
+    color: #555;
+}
+.notes-section {
+    background-color: #fdfcc3;
+}
+.basic-info .col-md-4,
+.basic-info .col-md-6 {
+    border-right: 1px solid #ccc;
+}
+.basic-info .col-md-4:last-child,
+.basic-info .col-md-6:last-child {
+    border-right: 0;
+}
+.applicantName h6 {
+    margin: 0;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+
+}
+@media screen and (max-width: 767px) {
+    .jobadBlock .col-5,.jobadBlock .col-4,.jobadBlock .col-3 {
+        padding: 0;
+        align-self: auto;
+    }
+
+    .calender-block .row {
+        padding: 0;
+    }
+    .calender-block .col-12 {
+        padding: 0 0 20px 0;
+    }
+    .hideMobile {
+        display: none;
+    }
+    .basic-info .col-md-4,
+    .basic-info .col-md-6 {
+        padding: 10px;
+        border-bottom: 1px solid #ccc;
+        border-right: 0;
+    }
+    .basic-info .col-md-4:last-child,
+    .basic-info .col-md-6:last-child {
+        border-bottom: 0;
+        border-right: 0;
+    }
+    .applicantStatus {
+        text-align: center;
+    }
+    .applicantStatus span {
+        display: block;
+    }
+    .applicantRating button.btn.transparent-btn {
+        padding: 0;
+    }
+}

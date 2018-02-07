@@ -1,0 +1,364 @@
+<app-header-valid-user></app-header-valid-user>
+<img src="../assets/loader.gif" *ngIf="!pageLoded">
+<div class="container desktop-width" *ngIf="pageLoded">
+    <div class="row">
+        <div class="col-12">
+            <div id="view-applicant">
+            <div class="pageHeading">
+                <h2 class="text-center">
+                    <span class="dropdown">
+                        <span class="goBack" data-toggle="dropdown">
+                            <img src="../../assets/left-arrow.svg"/>
+                        </span>
+                        <ul class="dropdown-menu">
+                            <li (click)="allHwa()">All HWA</li>
+                            <li (click)="allApp()">All Applicants</li>
+                        </ul>
+                    </span>
+                    {{firstName}} {{lastName}}'s Application
+                </h2>
+            </div>
+            <div class="cta-buttons" *ngIf="!removeCta">
+                <button [disabled]="hideAction" class="btn with-bg-btn" (click)="statusAction()">
+                    <img src="../../../assets/star.png"/>
+                    {{shortlistedText}} <em class="abs" *ngIf="abs"><span><b></b></span><span><b></b></span><span><b></b></span></em>
+                </button>
+                <button class="dropdown btn no-bg-btn">
+                    <a data-toggle="dropdown">More Actions<img src="../../../assets/down-arrow.png" class="all-icon"/> </a>
+                    <ul class="dropdown-menu dropdown-menu-right">
+                        <li><a (click)="interviewScheduled()"  *ngIf="!removeThis">
+                            <img src="../../../assets/chat.png"/>
+                            {{sInterviewText}}</a>
+                        </li>
+                        <li><a (click)="rejectCandidate()" *ngIf="!removeReject">
+                            <img src="../../../assets/dont-like.png"/>
+                            Reject</a>
+                        </li>
+                    </ul>
+                </button>
+
+                <button class="btn dropdown float-right transparent-btn">
+                    <a data-toggle="dropdown"> <img src="../../assets/menu.png" class="all-icon"/> </a>
+                    <ul class="dropdown-menu dropdown-menu-right">
+                      <li><a (click)="goTo()">Add Note</a></li>
+                      <li><a [href]="staticURL" target="_blank">Download</a></li>
+                      <li><a (click)="print()">Print</a></li>
+                    </ul>
+                </button>
+            </div>
+            <div class="applicants-detail">
+                <div id="accordion" role="tablist" aria-multiselectable="true">
+                    <div class="card">
+                      <div class="card-header" role="tab" id="headingOne">
+                        <h6 class="mb-0">
+                          <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            Basic Information
+                          </a>
+                        </h6>
+                      </div>
+
+                      <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne">
+                        <div *ngIf="resumeFile; else withoutDoc">
+
+                        <div class="card-block basic-info withDoc">
+                            <div class="row">
+                                <div class="col-12 col-md-4">
+                                    <p class="colorOldBlue"><strong>{{firstName}} {{lastName}}</strong></p>
+                                    <p class="f13">{{city}}, {{state}}, {{ zip}}</p>
+                                    <p class="f13">{{email | lowercase }}</p>
+                                    <p class="f13">{{phoneNumber}}</p>
+                                </div>
+                                <div class="col-12 col-md-4">
+                                    <p class="f13">HWA Applied for,</p>
+                                    <p class="position-applied"><strong>{{ positionName}} Position</strong></p>
+                                    <span class="f13">
+                                        <img *ngIf="score >= '50'" src="../assets/tup.svg"/>
+                                        <img *ngIf="score < 50 && score !== '' " src="../assets/thumbsDown.svg"/>
+                                        <img *ngIf="score === '' " src="../assets/warning.svg"/>
+                                        <span *ngIf="score !== '' ">{{score}}%</span>
+                                        <span *ngIf="score === '' ">No Skill</span>
+                                    </span>
+                                </div>
+                                <div class="col-12 col-md-4 resume-info">
+                                    <a (click)="viewResume()">
+                                        <img class="bigIcon" src="../../../assets/file.svg"/>
+                                        <p>Resume_{{firstName}}{{lastName}}</p>
+                                        <img src="../../../assets/eye.svg"/><small>View</small>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                        <!-- If there is no resume then load the below section -->
+                        <ng-template #withoutDoc>
+                            <div class="card-block basic-info withoutDoc">
+                                <div class="row">
+                                    <div class="col-12 col-md-6">
+                                        <p class="colorOldBlue"><strong>{{firstName}} {{lastName}}</strong></p>
+                                        <p class="f13">{{city}}, {{state}}, {{ zip}}</p>
+                                        <p class="f13">{{email | lowercase }}</p>
+                                        <p class="f13">{{phoneNumber}}</p>
+                                    </div>
+                                    <div class="col-12 col-md-6">
+
+                                        <p class="f13">HWA Applied for,</p>
+                                        <p class="position-applied"><strong>{{ positionName}} Position</strong></p>
+                                        <p>
+                                                <span class="f13">
+                                                    <img *ngIf="score >= '50'" src="../assets/tup.svg"/>
+                                                    <img *ngIf="score < 50 && score !== '' " src="../assets/thumbsDown.svg"/>
+                                                    <img *ngIf="score === '' " src="../assets/warning.svg"/>
+                                                    <span *ngIf="score !== '' ">{{score}}%</span>
+                                                    <span *ngIf="score === '' ">No Skill</span>
+                                                </span>
+                                            </p>
+                                    </div>
+                                </div>
+                            </div>  <!-- without doc cardblock -->
+                        </ng-template> <!-- #withoutDoc -->
+
+                      </div> <!-- collapseOne -->
+                    </div> <!-- card -->
+                    <div class="card">
+                      <div class="card-header" role="tab" id="headingTwo">
+                        <h6 class="mb-0">
+                          <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            Qualifying Questions
+                          </a>
+                        </h6>
+                      </div>
+                      <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo">
+                        <div class="card-block">
+                            <div class="fadeText">
+                                <div *ngIf="koList !== null; else showko">
+                                    <div class="ques_ans_blk" *ngFor="let list of koList">
+                                        <p class="question">{{list.title}}</p>
+                                        <p><span *ngIf="list.Value === '1'">Yes</span><span *ngIf="list.Value === '0'">No</span></p>
+                                    </div>
+                                </div>
+                                <ng-template #showko>
+                                    <p class="question">Didn't create knockout questions for your help wanted ad ?</p>
+                                    <p>By turning this section on, you won't have to spend time looking at applicants that don't meet your minimum job requirements.</p>
+                                </ng-template>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card">
+                      <div class="card-header" role="tab" id="headingThree">
+                        <h6 class="mb-0">
+                          <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            Skill Questions
+                          </a>
+                        </h6>
+                      </div>
+                      <div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree">
+                        <div class="card-block">
+                            <div class="fadeText">
+                                <div *ngIf="skillList !== null; else showSkill">
+                                    <div class="ques_ans_blk" *ngFor="let list of skillList">
+                                    <p>{{list.title}}</p>
+                                    <p *ngIf="list.Value !== 'null' ">{{list.Value}}</p>
+                                    <p *ngIf="list.Value === 'null' ">N/A</p>
+                                    </div>
+                                </div>
+                                <ng-template #showSkill>
+                                    <p class="question">Didn't create skill questions for your help wanted ad ?</p>
+                                    <p>By turning this section on, you won't have to spend time looking at applicants that don't meet your minimum job requirements.</p>
+                                </ng-template>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div  *ngIf="resumeBuilder">
+                        <div class="card">
+                            <div class="card-header" role="tab" id="headingFour">
+                                <h6 class="mb-0">
+                                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                    Career Objective
+                                    </a>
+                                </h6>
+                            </div>
+                            <div id="collapseFour" class="collapse" role="tabpanel" aria-labelledby="headingFour">
+                                <div class="card-block">
+                                    <div class="fadeInDown">
+                                        <div *ngIf="objective !== undefined; else object">
+                                        <p> {{objective[0].value}} </p>
+                                        </div>
+                                        <ng-template #object>N/A</ng-template>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> <!-- Career Objective card -->
+                        <div class="card">
+                            <div class="card-header" role="tab" id="headingFive">
+                                <h6 class="mb-0">
+                                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                                        Your Accomplishments / Skills
+                                    </a>
+                                </h6>
+                            </div>
+                            <div id="collapseFive" class="collapse" role="tabpanel" aria-labelledby="headingFive">
+                                <div class="card-block">
+                                    <div class="fadeInDown">
+                                        <div *ngIf="accomplishment !== undefined; else sk">
+                                            <p [innerHTML]="accomplishment[0].value"> </p>
+                                        </div>
+                                        <ng-template #sk>N/A</ng-template>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> <!-- Your Accomplishments / Skills  card -->
+                        <div class="card">
+                            <div class="card-header" role="tab" id="headingSix">
+                                <h6 class="mb-0">
+                                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                                        Employment Details
+                                    </a>
+                                </h6>
+                            </div>
+                            <div id="collapseSix" class="collapse" role="tabpanel" aria-labelledby="headingSix">
+                                <div class="card-block">
+                                    <div class="fadeText">
+                                        <div *ngIf="employerData !== undefined; else emp">
+                                            <div class="row" *ngFor="let empList of employerData">
+                                                <div class="address">
+                                                <p>{{empList['field_employer_s_name'][0].value}}</p>
+                                                <p>{{empList['field_position_held'][0].value}}</p>
+                                                <p>{{empList['field_city'][0].value}}, {{empList['field_state'][0].value}}</p>
+                                                <p>({{convertTimestapm(empList['field_joining_date'][0].value )  | date: 'MMM'}} , {{convertTimestapm(empList['field_joining_date'][0].value )  | date: 'y'}}) <em *ngIf="empList['field_re_leaving_date'] === undefined">to <em>Present</em></em> <em *ngIf="empList['field_re_leaving_date'] !== undefined"><em>till</em> ({{convertTimestapm(empList['field_re_leaving_date'][0].value )  | date: 'MMM'}} , {{convertTimestapm(empList['field_re_leaving_date'][0].value )  | date: 'y'}})</em></p>
+                                                </div>
+                                                <p>{{empList['field_job_responsibilities'][0].value}}</p>
+                                                <hr>
+                                            </div>
+                                        </div>
+                                        <ng-template #emp>N/A</ng-template>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> <!-- Employment Details card -->
+                        <div class="card">
+                            <div class="card-header" role="tab" id="headingSeven">
+                                <h6 class="mb-0">
+                                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+                                        Education Details
+                                    </a>
+                                </h6>
+                            </div>
+                            <div id="collapseSeven" class="collapse" role="tabpanel" aria-labelledby="headingSeven">
+                                <div class="card-block">
+                                    <div class="fadeText">
+                                        <div *ngIf="educationalData !== undefined; else edu">
+                                            <div class="row" *ngFor="let eduList of educationalData">
+                                                <div class="address">
+                                                <p>{{eduList['field_name_of_school'][0].value}} , {{eduList['field_city'][0].value}}, {{eduList['field_state'][0].value}}</p>
+                                                <p>{{eduList['field_type_of_degree_earned'][0].value}}</p>
+                                                <p>{{convertTimestapm(eduList['field_year_graduated'][0].value )  | date: 'MMM'}} , {{convertTimestapm(eduList['field_year_graduated'][0].value )  | date: 'y'}}</p>
+                                                </div>
+                                                <hr>
+                                            </div>
+                                        </div>
+                                        <ng-template #edu>N/A</ng-template>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> <!-- Education Details card -->
+                        <div class="card">
+                                <div class="card-header" role="tab" id="headingEight">
+                                    <h6 class="mb-0">
+                                        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
+                                            Licence /  Certifications
+                                        </a>
+                                    </h6>
+                                </div>
+                                <div id="collapseEight" class="collapse" role="tabpanel" aria-labelledby="headingEight">
+                                    <div class="card-block">
+                                        <div class="fadeText">
+                                            <div *ngIf="licenceData !== undefined; else lic">
+                                                <div class="row" *ngFor="let list of licenceData">
+                                                    <div class="address">
+                                                    <p>{{list['field_name_of_licenses_or_certif'][0].value}}</p>
+                                                    <p>{{list['field_name_of_issuing_authority'][0].value}}</p>
+                                                    <p>{{list['field_licenses_city'][0].value}}, {{list['field_licenses_state'][0].value}}</p>
+                                                    <p>({{convertTimestapm(list['field_year_obtained'][0].value )  | date: 'MMM'}} , {{convertTimestapm(list['field_year_obtained'][0].value )  | date: 'y'}})</p>
+                                                    </div>
+                                                    <hr>
+                                                </div>
+                                            </div>
+                                            <ng-template #lic>N/A</ng-template>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> <!-- Licence /  Certifications  card -->
+                            <div class="card">
+                                <div class="card-header" role="tab" id="headingNine">
+                                    <h6 class="mb-0">
+                                        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseNine" aria-expanded="false" aria-controls="collapseNine">
+                                                Military History
+                                        </a>
+                                    </h6>
+                                </div>
+                                <div id="collapseNine" class="collapse" role="tabpanel" aria-labelledby="headingNine">
+                                    <div class="card-block">
+                                        <div class="fadeText">
+                                            <div *ngIf="militryData !== undefined; else mil">
+                                                <div class="address">
+                                                    <h6>{{ militryData[0].field_branch_of_military_served_[0].value }} ({{militryData[0].field_rank_at_the_time_of_discha[0].value}})</h6>
+                                                    <p>{{ convertTimestapm(militryData[0].field_date_of_your_discharge[0].value)  | date: 'MMM' }} , {{ convertTimestapm(militryData[0].field_date_of_your_discharge[0].value)  | date: 'y' }} ({{militryData[0].field_number_of_years_served[0].value}}) Years</p>
+                                                    <p></p>
+                                                </div>
+                                            </div>
+                                            <ng-template #mil>N/A</ng-template>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> <!-- Military History  card -->
+                            <div class="card">
+                                <div class="card-header" role="tab" id="headingTen">
+                                    <h6 class="mb-0">
+                                        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTen" aria-expanded="false" aria-controls="collapseTen">
+                                                Reference
+                                        </a>
+                                    </h6>
+                                </div>
+                                <div id="collapseTen" class="collapse" role="tabpanel" aria-labelledby="headingTen">
+                                    <div class="card-block">
+                                        <div class="fadeText">
+                                            <div *ngIf="refData !== undefined; else ref">
+                                                <div  class="row" *ngFor="let list of refData">
+                                                    <div class="address">
+                                                    <h6 class="colorBlack font15">{{ list['field_name_of_reference'][0].value }}</h6>
+                                                    <p>{{ list['field_organization_name'][0].value }}</p>
+                                                    <p>{{ list['field_email'][0].value }}</p>
+                                                    <p>{{ list['field_phone_number'][0].value }}</p>
+                                                    </div>
+                                                    <hr>
+                                                </div>
+                                            </div>
+                                            <ng-template #ref>N/A</ng-template>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> <!-- Reference card -->
+                    </div> <!-- resume builder -->
+                </div> <!-- accordion -->
+            </div> <!-- applicants details -->
+            <div class="jobadBlock notes-section">
+                <h4 id="myAnchor"></h4>
+                <app-simple-notes [hwaID]="HwaId" [applicantId]="applicantId" [authorId]="HwaAuthor" [statusId]="currentStatus"></app-simple-notes>
+            </div>
+            <div class="jobadBlock notes-section" *ngIf="hideIntNotes !== 0 ">
+                <div class="infoHeading">
+                    <h4>Interview Note(s)</h4>
+                    <div *ngFor="let list of interviewNotes">
+                    <p>{{list['field_interview_note']}}</p>
+                    <p align="right" class="author">by, {{list['field_first_name']}}, {{humanReadableTime(list['field_current_date'])  | date: 'y MMM d' }}</p>
+                    <hr>
+                    </div>
+                    <!-- <app-positive-notes [hwaID]="HwaId" [applicantId]="applicantId" [authorId]="HwaAuthor" ></app-positive-notes> -->
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>

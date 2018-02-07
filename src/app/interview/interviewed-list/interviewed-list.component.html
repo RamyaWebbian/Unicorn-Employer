@@ -1,0 +1,24 @@
+<app-header-valid-user></app-header-valid-user>
+
+<div class="container desktop-width">
+  <div class="row">
+    <div class="col-12">
+      <section id="interviewed-list">  
+        <div class="offerSection">
+          <div class="pageHeading">
+            <h2>Select your help wanted ad</h2>
+          </div>
+          <div *ngFor="let list of listData">
+            <div class="offer" (click)="goToapplicant(list['nid'], list['title'])" *ngIf="list['total_application'] !== 0 ">
+              <img class="offerIcon" src="assets/hwa.svg" />
+              <div class="offerDetails">
+                  <p><a class="designation">{{list['title']}}</a></p>
+                  <p><span>{{list['total_application']}} </span>Applicant(s)</p>
+              </div>
+            </div>
+          </div> 
+        </div>
+      </section>
+    </div>
+  </div>
+</div>

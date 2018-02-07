@@ -1,0 +1,499 @@
+<app-header-valid-user></app-header-valid-user>
+<img src="../assets/ripple.gif" class="newLoader" *ngIf="!pageLoded">
+<div class="container desktop-width" *ngIf="pageLoded">
+  <div class="row">
+    <div class="col-12">
+<div id="applicants-list">
+<div class="pageHeading">
+    <h2>All Applicants : {{hwaName}} Position</h2>
+  </div>
+  <div class="allApplicantsSortSection">
+      <simple-notifications [options]="options"></simple-notifications>
+        <ngb-tabset>
+            <ngb-tab title="All">
+              <ng-template ngbTabContent>
+                  <div class="paginationSection">
+                    <div class="text-right"> <span>1 - 10 of </span><span>45</span>
+                      <a><img src="../assets/previous.svg"></a> <a><img src="../assets/next.svg"></a>
+                    </div>
+                  </div>
+                  <div class="" *ngIf="getAllApplicant.length !== 0">
+                    <ul class="fadeInDown">
+                      <li *ngFor="let list of getAllApplicant; let i = index">
+                        <!-- All Applicant List-->
+                          <div class="jobadBlock" *ngIf="(list['field_status'] !== 'interview') && (list['field_status'] !== 'interview-accepted') && (list['field_status'] !== 'interview-declined') && (list['field_status'] !== 'interviewed-on-hold')">
+                              <div class="container">
+                                <div class="row">
+                                  <div class="col-5">
+                                    <div class="applicantName">
+                                      <h6><a [routerLink]="['/view-applicant', hwaName, hwaId, list['field_applicant_author_1'], hwaAuthor]">{{list['field_first_name']}} {{list['field_last_name']}}</a></h6>
+                                    </div>
+                                  </div>
+                                  <div class="col-4">
+                                    <div class="applicantStatus">
+                                      <a [routerLink]="['/view-applicant', hwaName, hwaId, list['field_applicant_author_1'], hwaAuthor]" class="colorAsh">{{list['field_status']}}</a>
+                                    </div>
+                                  </div>
+                                  <div class="col-3">
+                                    <div class="applicantRating">
+                                      <img *ngIf="list['score'] >= '50'" src="../assets/tup.svg" class="thumbsUpIcon">
+                                      <img *ngIf="list['score'] <= '49' && list['score'] >= '1'" src="../assets/thumbsDown.svg" class="thumbsUpIcon">
+                                      <img *ngIf="list['score'] < 1 && list['score'] !== '' " src="../assets/thumbsDown.svg" class="thumbsUpIcon">
+                                      <img *ngIf="list['score'] === '' " src="../assets/warning.svg" class="thumbsUpIcon">
+                                      <p class="rate" *ngIf="list['score'] !== '' ">{{list['score']}}%</p>
+                                      <p class="rate" *ngIf="list['score'] === '' ">No Skill</p>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                          </div>
+                            <!-- All Applicant List-->
+
+                  <!-- Interview Scheduled List-->
+                  <div class="jobadBlock" *ngIf="list['field_status'] === 'interview'">
+                      <div class="container">
+                        <div class="row">
+                          <div class="col-5">
+                              <div class="applicantName">
+                                <h6><a [routerLink]="['/view-applicant', hwaName, hwaId, list['field_applicant_author_1'], hwaAuthor]">{{list['field_first_name']}} {{list['field_last_name']}}</a></h6>
+                                <div class="date">
+                                    <span>{{ humanReadableTime(list['field_interview_start_datetime']) | date: 'y MMM d'}}</span> at 
+                                    <span>{{ humanReadableTime(list['field_interview_start_datetime']) | date: 'h:mm a'}}</span>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="col-4">
+                              <div class="applicantStatus">
+                                  <a [routerLink]="['/view-applicant', hwaName, hwaId, list['field_applicant_author_1'], hwaAuthor]" class="colorAsh">
+                                    <span *ngIf="compareDate(list['field_interview_end_datetime']) === false">Interview Pending</span>
+                                    <span *ngIf="compareDate(list['field_interview_end_datetime']) === true">No Response</span>
+                                  </a> 
+                              </div>
+                          </div>
+                          <div class="col-3">
+                            <div class="applicantRating">
+                              <button class="btn dropdown float-right transparent-btn">
+                                <a data-toggle="dropdown"> <img src="../../assets/kebab.svg" class="all-icon"/> </a>
+                                <ul class="dropdown-menu dropdown-menu-right">
+                                    <li *ngIf="list['field_status'] === 'interviewed-on-hold'" (click)="goodToOffer(list['field_applicant_author_1'])">Good to Offer</li>
+                                    <li (click)="rescheduledInterview(i)">Reschedule</li>
+                                    <li (click)="interviewLater(i)">Postpone Interview</li>
+                                    <li (click)="reject(i)">Reject</li>
+                                </ul>
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- Interview Scheduled List--> 
+                    
+                  <!-- Interview Accepted and Rejected List If NO Time lapse -->
+                    <div class="jobadBlock" *ngIf="compareDate(list['field_interview_end_datetime']) === false && list['field_status'] === 'interview-accepted' || list['field_status'] === 'interview-declined' || list['field_status'] === 'interviewed-on-hold'">
+                        <div class="container">
+                          <div class="row">
+                            <div class="col-5">
+                                <div class="applicantName">
+                                  <h6><a [routerLink]="['/view-applicant', hwaName, hwaId, list['field_applicant_author_1'], hwaAuthor]">{{list['field_first_name']}} {{list['field_last_name']}}</a></h6>
+                                  <div class="date">
+                                      <span>{{ humanReadableTime(list['field_interview_start_datetime']) | date: 'y MMM d'}}</span> at 
+                                      <span>{{ humanReadableTime(list['field_interview_start_datetime']) | date: 'h:mm a'}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="applicantStatus">
+                                    <a [routerLink]="['/view-applicant', hwaName, hwaId, list['field_applicant_author_1'], hwaAuthor]" class="colorAsh">{{list['field_status']}}</a> 
+                                </div>
+                            </div>
+                            <div class="col-3">
+                              <div class="applicantRating">
+                                <button class="btn dropdown float-right transparent-btn">
+                                  <a data-toggle="dropdown"> <img src="../../assets/kebab.svg" class="all-icon"/> </a>
+                                  <ul class="dropdown-menu dropdown-menu-right">
+                                    <li *ngIf="list['field_status'] === 'interviewed-on-hold'" (click)="goodToOffer(list['field_applicant_author_1'])">Good to Offer</li>
+                                    <li (click)="rescheduledInterview(i)">Reschedule</li>
+                                    <li (click)="interviewLater(i)">Postpone Interview</li>
+                                    <li (click)="reject(i)">Reject</li>
+                                  </ul>
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- Interview Accepted and Rejected List If Time lapse -->
+
+                    <!-- Interview Accepted and Rejected List If NO Time lapse -->
+                    <div class="jobadBlock" *ngIf="compareDate(list['field_interview_end_datetime']) === true &&  list['field_status'] === 'interview-accepted' ">
+                        <div class="container">
+                          <div class="row">
+                            <div class="col-5">
+                                <div class="applicantName">
+                                  <h6><a [routerLink]="['/view-applicant', hwaName, hwaId, list['field_applicant_author_1'], hwaAuthor]">{{list['field_first_name']}} {{list['field_last_name']}}</a></h6>
+                                  <div class="date">
+                                      <span>{{ humanReadableTime(list['field_interview_start_datetime']) | date: 'y MMM d'}}</span> at 
+                                      <span>{{ humanReadableTime(list['field_interview_start_datetime']) | date: 'h:mm a'}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="applicantStatus">
+                                    Interviewed? <span><a class="cursor" (click)="openDialog(i)">Yes</a> | <a class="cursor" (click)="openNegativeDialog(i)">No</a></span> 
+                                </div>
+                            </div>
+                            <div class="col-3">
+                              <div class="applicantRating">
+                                <button class="btn dropdown float-right transparent-btn">
+                                  <a data-toggle="dropdown"> <img src="../../assets/kebab.svg" class="all-icon"/> </a>
+                                  <ul class="dropdown-menu dropdown-menu-right">
+                                      <li *ngIf="list['field_status'] === 'interviewed-on-hold'" (click)="goodToOffer(list['field_applicant_author_1'])">Good to Offer</li>
+                                      <li (click)="rescheduledInterview(i)">Reschedule</li>
+                                      <li (click)="interviewLater(i)">Postpone Interview</li>
+                                      <li (click)="reject(i)">Reject</li>
+                                  </ul>
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-12">
+                              <p class="bottom-line">Interview Not Conducted / Applicants Not Responded / Interview Notes Not Available</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                   </li>
+                  </ul>
+                    <div *ngIf="getAllApplicant.length === 0" class="jobadBlock">No records found</div>
+                </div>
+              
+              </ng-template>
+            </ngb-tab>
+           
+           <ngb-tab title="New">
+              <ng-template ngbTabContent>
+                  <div class="paginationSection">
+                    <div class="text-right"> <span>1 - 10 of </span><span>45</span>
+                        <a><img src="../assets/previous.svg"></a> <a><img src="../assets/next.svg"></a>
+                    </div>
+                  </div>
+                  <div class="jobadBlock notfound " *ngIf="statusKey['new'].length === 0 ">
+                    <div> No Records Found. </div>
+                  </div>
+                    <ul>
+                      <li *ngFor="let list of getAllApplicant; let i = index">
+                        <div class="jobadBlock" *ngIf="(list['field_status'] === 'new')">
+                          <div class="container">
+                            <div class="row">
+                              <div class="col-5">
+                                <div class="applicantName">
+                                  <h6><a [routerLink]="['/view-applicant', hwaName, hwaId, list['field_applicant_author_1'], hwaAuthor]">{{list['field_first_name']}} {{list['field_last_name']}}</a></h6>
+                                </div>
+                              </div>
+                              <div class="col-4">
+                                <div class="applicantStatus">
+                                  <a [routerLink]="['/view-applicant', hwaName, hwaId, list['field_applicant_author_1'], hwaAuthor]" class="colorAsh">{{list['field_status']}}</a> 
+                                </div>
+                              </div>
+                              <div class="col-3">
+                                <div class="applicantRating">
+                                  <img *ngIf="list['score'] >= '50'" src="../assets/tup.svg" class="thumbsUpIcon">
+                                  <img *ngIf="list['score'] <= '49' && list['score'] >= '1'" src="../assets/thumbsDown.svg" class="thumbsUpIcon">
+                                  <img *ngIf="list['score'] < 1 && list['score'] !== '' " src="../assets/thumbsDown.svg" class="thumbsUpIcon">
+                                  <img *ngIf="list['score'] === '' " src="../assets/warning.svg" class="thumbsUpIcon">
+                                  <p class="rate" *ngIf="list['score'] !== '' ">{{list['score']}}%</p>
+                                  <p class="rate" *ngIf="list['score'] === '' ">No Skill</p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </li>
+                    </ul>
+              </ng-template>
+            </ngb-tab> 
+            <ngb-tab title="Viewed">
+              <ng-template ngbTabContent>
+                  <div class="paginationSection">
+                      <div class="text-right"> <span>1 - 10 of </span><span>45</span>
+                         <a><img src="../assets/previous.svg"></a> <a><img src="../assets/next.svg"></a>
+                      </div>
+                    </div>
+                    <div class="jobadBlock notfound fadeInDown" *ngIf="statusKey['viewed'].length === 0 ">
+                        <div> No Records Found. </div>
+                      </div>
+                    <ul>
+                        <li *ngFor="let list of getAllApplicant; let i = index">
+                            <div class="jobadBlock" *ngIf="(list['field_status'] === 'viewed')">
+                                <div class="container">
+                                    <div class="row">
+                                      <div class="col-5">
+                                          <div class="applicantName">
+                                              <h6><a [routerLink]="['/view-applicant', hwaName, hwaId, list['field_applicant_author_1'], hwaAuthor]">{{list['field_first_name']}} {{list['field_last_name']}}</a></h6>
+                                            </div>
+                                      </div>
+                                      <div class="col-4">
+                                          <div class="applicantStatus">
+                                            <a [routerLink]="['/view-applicant', hwaName, hwaId, list['field_applicant_author_1'], hwaAuthor]" class="colorAsh">{{list['field_status']}}</a> 
+                                          </div>
+                                      </div>
+                                      <div class="col-3">
+                                          <div class="applicantRating">
+                                            <img *ngIf="list['score'] >= '50'" src="../assets/tup.svg" class="thumbsUpIcon">
+                                            <img *ngIf="list['score'] <= '49' && list['score'] >= '1'" src="../assets/thumbsDown.svg" class="thumbsUpIcon">
+                                            <img *ngIf="list['score'] < 1 && list['score'] !== '' " src="../assets/thumbsDown.svg" class="thumbsUpIcon">
+                                            <img *ngIf="list['score'] === '' " src="../assets/warning.svg" class="thumbsUpIcon">
+                                            <p class="rate" *ngIf="list['score'] !== '' ">{{list['score']}}%</p>
+                                            <p class="rate" *ngIf="list['score'] === '' ">No Skill</p>
+                                          </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                              </div>
+                        </li>
+                      </ul>
+              </ng-template>
+            </ngb-tab>
+            <ngb-tab title="Shortlisted">
+              <ng-template ngbTabContent>
+                  <div class="paginationSection">
+                      <div class="text-right"> <span>1 - 10 of </span><span>45</span>
+                         <a><img src="../assets/previous.svg"></a> <a><img src="../assets/next.svg"></a>
+                      </div>
+                    </div>
+                    <div class="jobadBlock notfound fadeInDown" *ngIf="statusKey['shortlisted'].length === 0 ">
+                        <div > No Records Found. </div>
+                      </div>
+                      <ul>
+                        <li *ngFor="let list of getAllApplicant; let i = index">
+                            <div class="jobadBlock" *ngIf="(list['field_status'] === 'shortlisted')">
+                                <div class="container">
+                                    <div class="row">
+                                      <div class="col-5">
+                                          <div class="applicantName">
+                                              <h6><a [routerLink]="['/view-applicant', hwaName, hwaId, list['field_applicant_author_1'], hwaAuthor]">{{list['field_first_name']}} {{list['field_last_name']}}</a></h6>
+                                            </div>
+                                      </div>
+                                      <div class="col-4">
+                                          <div class="applicantStatus">
+                                            <a [routerLink]="['/view-applicant', hwaName, hwaId, list['field_applicant_author_1'], hwaAuthor]" class="colorAsh">{{list['field_status']}}</a> 
+                                          </div>
+                                      </div>
+                                      <div class="col-3">
+                                          <div class="applicantRating">
+                                              <img *ngIf="list['score'] >= '50'" src="../assets/tup.svg" class="thumbsUpIcon">
+                                              <img *ngIf="list['score'] <= '49' && list['score'] >= '1'" src="../assets/thumbsDown.svg" class="thumbsUpIcon">
+                                              <img *ngIf="list['score'] < 1 && list['score'] !== '' " src="../assets/thumbsDown.svg" class="thumbsUpIcon">
+                                              <img *ngIf="list['score'] === '' " src="../assets/warning.svg" class="thumbsUpIcon">
+                                              <p class="rate" *ngIf="list['score'] !== '' ">{{list['score']}}%</p>
+                                              <p class="rate" *ngIf="list['score'] === '' ">No Skill</p>
+                                            </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                              </div>
+                        </li>
+                      </ul>
+                 
+              </ng-template>
+            </ngb-tab>
+            <ngb-tab title="Interview Scheduled">
+              <ng-template ngbTabContent>
+                  <div class="paginationSection">
+                    <div class="text-right"> <span>1 - 10 of </span><span>45</span>
+                      <a><img src="../assets/previous.svg"></a> <a><img src="../assets/next.svg"></a>
+                    </div>
+                  </div>
+                  <div class="jobadBlock notfound fadeInDown" *ngIf="statusKey['interview'].length === 0 ">
+                      <div> No Records Found. </div>
+                    </div>
+                    <div class="jobadBlock notfound fadeInDown" *ngIf="interviewLifeCycle.length === 0 ">
+                      <div> No Records Found. </div>
+                    </div>
+                    <ul class="fadeInDown">
+                        <li *ngFor="let list of getAllApplicant; let i = index">
+                          
+                            <div class="jobadBlock" *ngIf="(list['field_status'] === 'interview')">
+                                <div class="container">
+                                    <div class="row">
+                                      <div class="col-5">
+                                          <div class="applicantName">
+                                              <h6><a [routerLink]="['/view-applicant', hwaName, hwaId, list['field_applicant_author_1'], hwaAuthor]">{{list['field_first_name']}} {{list['field_last_name']}}</a></h6>
+                                            </div>
+                                      </div>
+                                      <div class="col-4">
+                                          <div class="applicantStatus">
+                                              <a [routerLink]="['/view-applicant', hwaName, hwaId, list['field_applicant_author_1'], hwaAuthor]" class="colorAsh">
+                                                <span *ngIf="compareDate(list['field_interview_end_datetime']) === false">Interview Pending</span>
+                                                <span *ngIf="compareDate(list['field_interview_end_datetime']) === true">No Response</span>
+                                              </a> 
+                                          </div>
+                                      </div>
+                                      <div class="col-3">
+                                          <div class="applicantRating">
+                                              <button class="btn dropdown float-right transparent-btn">
+                                                <a data-toggle="dropdown"> <img src="../../assets/kebab.svg" class="all-icon"/> </a>
+                                                <ul class="dropdown-menu dropdown-menu-right">
+                                                    <li *ngIf="list['field_status'] === 'interviewed-on-hold'" (click)="goodToOffer(list['field_applicant_author_1'])">Good to Offer</li>
+                                                    <li (click)="rescheduledInterview(i)">Reschedule</li>
+                                                    <li (click)="interviewLater(i)">Postpone Interview</li>
+                                                    <li (click)="reject(i)">Reject</li>
+                                                </ul>
+                                              </button>
+                                            </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                              </div>
+                        
+                        <div class="jobadBlock" *ngIf="compareDate(list['field_interview_end_datetime']) === false && list['field_status'] === 'interview-accepted' || list['field_status'] === 'interview-declined' || list['field_status'] === 'interviewed-on-hold'">
+                            <div class="container">
+                                <div class="row">
+                                  <div class="col-5">
+                                      <div class="applicantName">
+                                          <h6><a [routerLink]="['/view-applicant', hwaName, hwaId, list['field_applicant_author_1'], hwaAuthor]">{{list['field_first_name']}} {{list['field_last_name']}}</a></h6>
+                                        </div>
+                                  </div>
+                                  <div class="col-4">
+                                      <div class="applicantStatus">
+                                          <a [routerLink]="['/view-applicant', hwaName, hwaId, list['field_applicant_author_1'], hwaAuthor]" class="colorAsh">
+                                            <span *ngIf="compareDate(list['field_interview_end_datetime']) === false">Interview Pending</span>
+                                            <span *ngIf="compareDate(list['field_interview_end_datetime']) === true">No Response</span>
+                                          </a> 
+                                      </div>
+                                  </div>
+                                  <div class="col-3">
+                                      <div class="applicantRating">
+                                          <button class="btn dropdown float-right transparent-btn">
+                                            <a data-toggle="dropdown"> <img src="../../assets/kebab.svg" class="all-icon"/> </a>
+                                            <ul class="dropdown-menu dropdown-menu-right">
+                                                <li *ngIf="list['field_status'] === 'interviewed-on-hold'" (click)="goodToOffer(list['field_applicant_author_1'])">Good to Offer</li>
+                                                <li (click)="rescheduledInterview(i)">Reschedule</li>
+                                                <li (click)="interviewLater(i)">Postpone Interview</li>
+                                                <li (click)="reject(i)">Reject</li>
+                                            </ul>
+                                          </button>
+                                        </div>
+                                  </div>
+                                </div>
+                              </div>
+                          </div>
+              
+                        <div class="jobadBlock" *ngIf="compareDate(list['field_interview_end_datetime']) === true &&  list['field_status'] === 'interview-accepted' ">
+                            <div class="container">
+                                <div class="row">
+                                  <div class="col-5">
+                                      <div class="applicantName">
+                                          <h6><a [routerLink]="['/view-applicant', hwaName, hwaId, list['field_applicant_author_1'], hwaAuthor]">{{list['field_first_name']}} {{list['field_last_name']}}</a></h6>
+                                        </div>
+                                  </div>
+                                  <div class="col-4">
+                                      <div class="applicantStatus">
+                                          Interviewed ? <span><a class="cursor" (click)="openDialog(i)">Yes</a> | <a class="cursor" (click)="openNegativeDialog(i)">No</a></span> 
+                                      </div>
+                                  </div>
+                                  <div class="col-3">
+                                      <div class="applicantRating">
+                                          <button class="btn dropdown float-right transparent-btn">
+                                            <a data-toggle="dropdown"> <img src="../../assets/kebab.svg" class="all-icon"/> </a>
+                                            <ul class="dropdown-menu dropdown-menu-right">
+                                                <li *ngIf="list['field_status'] === 'interviewed-on-hold'" (click)="goodToOffer(list['field_applicant_author_1'])">Good to Offer</li>
+                          <li (click)="rescheduledInterview(i)">Reschedule</li>
+                          <li (click)="interviewLater(i)">Postpone Interview</li>
+                          <li (click)="reject(i)">Reject</li>
+                                            </ul>
+                                          </button>
+                                        </div>
+                                  </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                      <p class="bottom-line">Interview Not Conducted / Applicants Not Responded / Interview Notes Not Available</p>
+                                    </div>
+                                  </div>
+                              </div>
+                          </div>                   
+                       
+                          </li>
+                      </ul> 
+              </ng-template>
+            </ngb-tab>
+            <ngb-tab title="Rejected">
+              <ng-template ngbTabContent>
+                  <div class="paginationSection">
+                    <div class="text-right"> <span>1 - 10 of </span><span>45</span>
+                        <a><img src="../assets/previous.svg"></a> <a><img src="../assets/next.svg"></a>
+                    </div>
+                  </div>
+                  <div class="jobadBlock notfound fadeInDown" *ngIf="statusKey['rejected'].length === 0 ">
+                    <div> No Records Found. </div>
+                  </div>
+                      <ul class="fadeInDown">
+                          <li *ngFor="let list of getAllApplicant; let i = index">
+                              <div class="jobadBlock" *ngIf="(list['field_status'] === 'rejected')">
+                                  <div class="container">
+                                    <div class="row">
+                                      <div class="col-5">
+                                        <div class="applicantName">
+                                          <h6><a [routerLink]="['/view-applicant', hwaName, hwaId, list['field_applicant_author_1'], hwaAuthor]">{{list['field_first_name']}} {{list['field_last_name']}}</a></h6>
+                                        </div>
+                                      </div>
+                                      <div class="col-4">
+                                        <div class="applicantStatus">
+                                          <a [routerLink]="['/view-applicant', hwaName, hwaId, list['field_applicant_author_1'], hwaAuthor]" class="colorAsh">{{list['field_status']}}</a>
+                                        </div>
+                                      </div>
+                                      <div class="col-3">
+                                        <div class="applicantRating">
+                                          <img *ngIf="list['score'] >= '50'" src="../assets/tup.svg" class="thumbsUpIcon"/>
+                                          <img *ngIf="list['score'] <= '49' && list['score'] >= '1'" src="../assets/thumbsDown.svg" class="thumbsUpIcon"/>
+                                          <img *ngIf="list['score'] < 1 && list['score'] !== '' " src="../assets/thumbsDown.svg" class="thumbsUpIcon"/>
+                                          <img *ngIf="list['score'] === '' " src="../assets/warning.svg" class="thumbsUpIcon">
+                                          <p class="rate" *ngIf="list['score'] !== '' ">{{list['score']}}%</p>
+                                          <p class="rate" *ngIf="list['score'] === '' ">No Skill</p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                </li>
+                      </ul>
+              </ng-template>
+            </ngb-tab>
+          </ngb-tabset>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="overlay" *ngIf="showPopup">
+    <div class="overlay-wrapper popup simplebar">
+      <div class="overlay2text fadeInDown">
+        <div class="overlayHead"> 
+          <span class="overlayTitle">Interview feedback</span> 
+          <span class="overlayClose colorBlack" (click)="closeDialog()">close</span> 
+        </div>
+        <div class="component">
+          <div *ngIf="hideOther">
+            <app-positive-notes *ngIf="hideOther" [applicantId]="applicantIdFinal" [authorId]="hwaAuthor" (formSubmit)="formReload($event)"></app-positive-notes>
+          </div>
+          <div *ngIf="!hideOther" >
+            <div class="btn with-bg-btn no-dialog">
+              <p>Do you want to,</p>
+              <button (click)="rescheduledInterview2()" class="btn with-bg-btn"> 
+                Reschedule interview 
+              </button>
+              <button (click)="reject2()" class="btn with-bg-btn"> 
+                Reject applicant 
+              </button>
+            </div>
+            <app-negative-notes *ngIf="!hideOther && showThis"  [applicantId]="applicantIdFinal" [authorId]="hwaAuthor" (submitndClose)="formReload($event)" [buttonFalse]="showPopup" ></app-negative-notes>
+           
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

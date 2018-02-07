@@ -1,0 +1,55 @@
+/*.infoHeading h4, h4 {font-size: 17px;font-weight:500; margin: 0}
+textarea{width: 100%; padding: 15px; box-sizing: border-box; min-height: 80px;}
+.simpleBtn {
+  border: 1px solid #245c70;
+  border-radius: 20px;
+  background-color: #fff;
+  margin-right: 10px;
+  cursor: pointer;
+  padding: 0 20px;
+}
+.noBorderButtons{padding-top: 10px;}
+.noBorderButtons button:focus{background: none; color: #013d53}
+.simpleBtn.activeBtn {
+  background-color: #00384F;
+  color: #fff;
+
+}
+.simpleBtn.activeBtn:disabled{background: #ccc}
+@keyframes blink {
+  0% {
+    opacity: .2;
+    color: #000;
+  }
+
+  20% {
+    opacity: 1;color: #000;
+  }
+
+  100% {
+    opacity: .2;color: #000;
+  }
+}
+
+button.simpleBtn span {
+  animation-name: blink;
+  animation-duration: 1.4s;
+  animation-iteration-count: infinite;
+  animation-fill-mode: both;
+  margin-left: 2px;
+}
+
+button.simpleBtn span:nth-child(2) {
+  animation-delay: .2s;
+}
+
+button.simpleBtn span:nth-child(3) {
+  animation-delay: .4s;
+}
+.abs{display: inline-block}
+.abs b{width: 5px; height:5px; display: inline-block; background: #00c853; border-radius: 50%;}
+button.simpleBtn:disabled .abs b{background: #000;}
+p.author{
+  color: #666;
+}
+*/

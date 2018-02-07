@@ -1,0 +1,19 @@
+.pageHeading span.dropdown {
+    position: absolute;
+    left: 15px;
+    cursor: pointer;
+}
+.pageHeading h3 {
+    position: relative;
+}
+img {
+    width: 20px;
+    margin: 0 5px 0 0;
+    vertical-align: bottom;
+}
+.card {
+    width: 100%;
+}
+.card .card-block {
+    padding: 15px 0;
+}

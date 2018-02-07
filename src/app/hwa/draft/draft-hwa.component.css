@@ -1,0 +1,207 @@
+.w90 label {
+  margin-bottom: 18px;
+}
+.add-icon {
+  margin: 0 5px 0 0;
+}
+.card-wrapper {
+  width: 90%;
+  margin: 10px auto;
+  border: 1px solid #002d3f;
+  border-radius: 7px;
+}
+#collapseThree .goToNextBtn {
+  padding: 10px 0;
+}
+.radio-class {
+  padding: 0 0 10px 5px;
+}
+.custom-control {
+  margin-right: 0.5rem
+}
+small {
+  padding: 10px 0;
+  color: #2a63e7;
+}
+.custom-control-description {
+  color: #002d3f;
+  font-weight: 600;
+}
+.custom-ko {
+  padding: 15px 0;
+}
+.custom-ko .filled-form{margin-bottom: 10px;}
+.custom-ques-edit{margin-bottom: 20px}
+.custom-ques-edit h6{margin-bottom: 15px}
+.custom-ko .input.myInputStyle,
+.custom-ko .myInputStyle {
+  width: 100%;
+}
+.question-text{color: #333; font-size: 20px;}
+.remove-width{width: 100%; margin: 0}
+button.btn.smallBtn {
+  min-width: 80px;
+}
+.all-icon{vertical-align: middle}
+.radio-class{margin-bottom: 20px;}
+.add-new-cus{margin-top: 20px;}
+.divider-block{border-bottom: 1px solid #ccc; padding-bottom: 20px; margin-bottom: 20px;}
+.divider-block h5, .business-profile h5{color: #002c3f; font-size: 16px; font-weight: 700}
+.business-profile h6{font-size: 14px;color: #0c2731; font-weight: 700; margin: 0}
+.divider-block p{font-size: 14px; color: #666; line-height: 20px;}
+.business-profile p{font-size: 14px; color: #666; line-height: 20px;}
+
+.business-profile .business-blk{ margin-bottom: 20px;}
+.hwa-preview.modal{background:rgba(0,0,0,0.9);}
+.location-overlay{background:rgba(0,0,0,0.9);}
+.location-overlay .modal-content{background-color:transparent}
+.q-blue{color:#3879d9}
+
+#collapseTwo span:first-child,
+#collapseThree span.q {
+  width: auto;
+  color: #2a63e7;
+  font-size: 23px;
+  vertical-align: sub;
+  margin: 0 10px 0 0;
+}
+h6 {
+  font-weight: 600;
+  text-transform: capitalize;
+}
+.selectvisiblity{ display: none}
+
+/* overlay */
+/* .overlay {
+    height: 100%;
+    width: 100%;
+    display: none;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0, 0.9);
+}
+
+.overlay-content {
+    position: relative;
+    top: 25%;
+    width: 100%;
+    text-align: center;
+    margin-top: 30px;
+}
+
+.overlay a {
+    padding: 8px;
+    text-decoration: none;
+    font-size: 36px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.overlay a:hover, .overlay a:focus {
+    color: #f1f1f1;
+}
+
+.overlay .closebtn {
+    position: absolute;
+    top: 20px;
+    right: 45px;
+    font-size: 60px;
+}
+
+@media screen and (max-height: 450px) {
+  .overlay a {font-size: 20px}
+  .overlay .closebtn {
+    font-size: 40px;
+    top: 15px;
+    right: 35px;
+  }
+} */
+
+.modal.modal-fullscreen {
+  /* Maximize the main wrappers on the screen */
+  /* Make the parent wrapper of the modal box a full-width block */
+  /* Remove borders and effects on the content */
+  /**
+	 * /!\ By using this feature, you force the header and footer to be placed
+	 * in an absolute position. You must handle by yourself the margin of the
+	 * content.
+	 */
+}
+.modal.modal-fullscreen .modal-dialog,
+.modal.modal-fullscreen .modal-content {
+  bottom: 0!important;
+  left: 0!important;
+  position: absolute !important;
+  right: 0!important;
+  top: 0!important;
+}
+.modal.modal-fullscreen .modal-dialog {
+  margin: 0;
+  width: 100% !important;
+  height: auto;
+  animation-duration:0.6s;
+}
+.modal.modal-fullscreen .modal-content {
+  border: none;
+  -moz-border-radius: 0;
+  border-radius: 0;
+  -webkit-box-shadow: inherit;
+  -moz-box-shadow: inherit;
+  -o-box-shadow: inherit;
+  box-shadow: inherit;
+  /* change bg color below */
+  /* background:#1abc9c; */
+}
+.modal.modal-fullscreen.force-fullscreen {
+  /* Remove the padding inside the body */
+}
+.modal.modal-fullscreen.force-fullscreen .modal-body {
+  padding: 0;
+}
+.modal.modal-fullscreen.force-fullscreen .modal-header,
+.modal.modal-fullscreen.force-fullscreen .modal-footer {
+  left: 0!important;
+  position: absolute;
+  right: 0!important;
+}
+.modal.modal-fullscreen.force-fullscreen .modal-header {
+  top: 0;
+}
+.modal.modal-fullscreen.force-fullscreen .modal-footer {
+  bottom: 0!important;
+}
+@media (min-width: 576px){
+  .modal-dialog {
+    max-width: 100%!important;
+  }
+}
+
+/**/
+#hwaContainer{max-width: 900px; margin: auto}
+.heading{padding: 20px 0}
+.btn-text{background: transparent; color:#064661; border: 0; font-weight: bold}
+.default-question{margin-bottom: 20px;}
+.custom-question h6{margin-bottom: 20px;}
+.hwa-preview .modal-content{max-width: 900px; margin: auto; padding: 20px;}
+.hwa-preview .modal-body{ overflow: auto}
+
+.hwa-preview .modal-header{padding-left: 0!important;padding-right: 0!important;padding-top: 0!important; display: block!important;  height: 10vh}
+.hwa-preview .modal-body{height: 70vh; margin: 5vh 0}
+.hwa-preview .modal-footer{height: 10vh}
+.btn.primary-blue{background: #3e7c95; color: #fff}
+.custom-wrapper{margin-bottom: 20px;}
+.custom-wrapper .form-group.filled-form {
+  margin-bottom: 10px;
+}
+.custom-edit{margin-top: 20px;}
+.def-address{border-bottom: 1px solid #eee; padding-bottom: 20px; margin-bottom: 20px;}
+#selectLocation{ padding: 0 20px;}
+#selectLocation .mainBlock{max-width: 900px; margin: auto; background: #fff; border-radius: 6px}
+.location-overlay .back{width: 40px; cursor: pointer}
+.location-overlay .block{padding: 20px 20px 0;box-shadow: 0 0 0 1px rgba(0,0,0,.1), 0 2px 3px rgba(0,0,0,.2);}
+.location-overlay .section-title{padding:0px 0 20px}
+.location-overlay .mainBlock{padding: 20px}
