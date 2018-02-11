@@ -5,12 +5,15 @@ import { Component, OnInit, NgZone, AfterViewInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { UserService, HwaCommonService, ProfileService, HoldDataService } from '../../services/index';
 declare var $: any;
+
 @Component({
   selector: 'app-draft-hwa',
   templateUrl: './draft-hwa.component.html',
   styleUrls: ['./draft-hwa.component.css']
 })
 export class DraftHwaComponent implements OnInit, AfterViewInit {
+  public draftType = 'Edit'; // null, Edit, Copy
+
   subscription: Subscription;
   hwaPramId;
   uidPramId;
@@ -126,12 +129,9 @@ export class DraftHwaComponent implements OnInit, AfterViewInit {
     // ko
     this.showTextfield = false;
     this.btndisabled = false;
-    // console.log(this.addressList);
     this.showForm = true;
     if (user) {
       this.loaddefaultAddress(user);
-      // console.log(user);
-      // this.loadbusProfile(pid)
       this.loaduserData(user.uid);
     }
     // Get Url Parameter
@@ -139,11 +139,16 @@ export class DraftHwaComponent implements OnInit, AfterViewInit {
       (param: any) => {
         this.hwaPramId = param['hwaId'];
         this.uidPramId = param['uid'];
+        if (param['hwaId']) {
+          this.loadDraftData(param['hwaId'], user.uid);
+          this.loadkoDraftData(param['hwaId']);
+          this.loadSkillDraftData(param['hwaId']);
+        }
       });
   }
   // Load Hwa Draft Data
-  loadDraftData() {
-    this.hwaCommonService.loadDraftData(this.hwaPramId, this.uidPramId).subscribe(
+  loadDraftData(hwaId, uid) {
+    this.hwaCommonService.loadDraftData(hwaId, uid).subscribe(
       res => {
         console.log(res);
         this.fetchPosition = res['title'][0].value;
@@ -153,16 +158,52 @@ export class DraftHwaComponent implements OnInit, AfterViewInit {
         this.fetchLocation = res['field_which_location_s_are_you_h'];
         this.fetchJd = res['field_how_would_you_describe_thi'][0].value;
         this.pageLoded = true;
- console.log('fetchLocation', this.fetchLocation);
+/**
+ * If assinged hwaid to this var "this.hwaNid" then hwa will update with same hwaid
+ * If you want edit hwa then assign hwaid to "this.hwaNid"
+ * If you want use copy then assign null to "this.hwaNid"
+ */
+  if ( this.draftType === 'Edit') {
+    this.hwaNid = hwaId;
+  } else if ( this.draftType === 'Copy') {
+    this.hwaNid = null;
+  }
+
+
+
       let arrayTemp = [];
       arrayTemp = this.resetcheckbox();
 
-       this.selectedLocation = [];
+      if (arrayTemp.length) {
+        this.updateLocation(arrayTemp);
+      }
+
+      if (arrayTemp.length === 0) {
+         setTimeout(() => {
+          this.updateLocation(arrayTemp);
+          }, 2000);
+      }
+
+
+/* Observable.interval(10000)
+    .takeWhile(() => !stopCondition)
+    .subscribe(i => {
+        // This will be called every 10 seconds until `stopCondition` flag is set to true
+    }) */
+
+      }, error => {
+        console.log(error);
+      }
+    );
+  }
+
+updateLocation(arrayTemp) {
+ this.selectedLocation = [];
        this.selectedNid = [];
         for ( let i = 0; i < arrayTemp.length; i++) {
           for ( let j = 0; j < this.fetchLocation.length; j++) {
               if (arrayTemp[i]['nid'] === this.fetchLocation[j].nid[0].value) {
- console.log('mid', arrayTemp[i]['nid']);
+ // console.log('mid', arrayTemp[i]['nid']);
                 arrayTemp[i]['checked'] = true;
                 this.selectedLocation.push(arrayTemp[i]);
                 this.selectedNid.push(arrayTemp[i]['nid']);
@@ -172,11 +213,7 @@ export class DraftHwaComponent implements OnInit, AfterViewInit {
         }
         this.addressList = arrayTemp;
         console.log( this.addressList);
-      }, error => {
-        console.log(error);
-      }
-    );
-  }
+}
   // Create HWA PART Logic
   checkBothFields(c) {
     if (!c) {
@@ -217,7 +254,7 @@ export class DraftHwaComponent implements OnInit, AfterViewInit {
             this.addressList[index] = item;
           }
         });
-         this.loadDraftData();
+        // this.loadDraftData();
       }, error => {});
   }
 
@@ -237,13 +274,13 @@ export class DraftHwaComponent implements OnInit, AfterViewInit {
       .map(opt => opt);
   }
   selectLoc(evt, indx) {
-console.log(evt.target.checked);
      this.addressList[indx]['checked'] = evt.target.checked;
   }
   addSelectedLocation() {
     if (this.selectedOptions.length) {
      this.selectedNid = [];
       this.selectedLocation = this.selectedOptions;
+      console.log( this.selectedLocation);
       this.selectedLocation.forEach((item, index) => {
         this.selectedNid[index] = item['nid'];
       });
@@ -279,11 +316,13 @@ console.log(evt.target.checked);
         .subscribe(res => {
           this.disabledButton = false;
           console.log(res);
-          this.onSubmitko(res['got_it'], saveType);
+          const edit_hwaid = res['details'][0].nid[0].value;
+          console.log(edit_hwaid);
+          this.onSubmitko(edit_hwaid, saveType);
           if (this.userService.isLocalStorage()) {
-            localStorage.setItem('storeHwaNid', res['got_it']);
+            localStorage.setItem('storeHwaNid', edit_hwaid);
           } else {
-            this.cookieService.set('storeHwaNid', res['got_it']);
+            this.cookieService.set('storeHwaNid', edit_hwaid);
           }
           this.holdDataService.setMessage({
             msg: 'Your have created Help Wanted Ad Successfully',
@@ -317,19 +356,19 @@ console.log(evt.target.checked);
     }
     this.hwaCommonService.loadkosDraftData(hwaId, user.uid)
       .subscribe(res => {
-        console.log(res);
+
         if (res) {
           const qarray: Array < any > = res as Array < any > ;
           for (let i = 0; i < qarray.length; i++) {
             if (qarray[i].field_question_type === 'Default') {
-              this.checkdefauldQuestion(qarray[i].title, qarray[i].nid, qarray[i].field_ko);
+             // this.checkdefauldQuestion(qarray[i].title, qarray[i].nid, qarray[i].field_ko);
             } else {
-              const todo = {
-                'value': qarray[i].title
-              };
-              todo.value = qarray[i].title;
-              this.addQuestion(todo, qarray[i].nid, qarray[i].field_ko);
-              this.btndisabled = false;
+        const Obj = {
+        qus: qarray[i].title,
+        nid: qarray[i].nid
+      };
+      this.customQList.push(Obj);
+             // this.btndisabled = false;
             }
           }
         }
@@ -338,7 +377,7 @@ console.log(evt.target.checked);
         console.log(error);
       });
   }
-  checkdefauldQuestion(textval, nid, isSelected) {
+ /*  checkdefauldQuestion(textval, nid, isSelected) {
     for (let i = 0; i < this.koForm.controls['defaultQlists'].value.length; i++) {
       if (this.koForm.controls['defaultQlists'].value[i].inputval === textval) {
         let selectedval = false;
@@ -356,8 +395,9 @@ console.log(evt.target.checked);
         });
       }
     }
-  }
-  getKoQuestion(hwaId) {
+  } */
+
+  /* getKoQuestion(hwaId) {
     this.hwaCommonService.defaultQuestion()
       .subscribe(res => {
         this.defaultQLists = res;
@@ -366,11 +406,11 @@ console.log(evt.target.checked);
           // console.log(this.defaultQLists[j].name);
           control.push(this.initdefaultQuestion(this.defaultQLists[j].name, this.defaultQLists[j].nid));
         }
-        this.loadkoDraftData(hwaId);
+       // this.loadkoDraftData(hwaId);
       }, error => {
         console.log(error);
       });
-  }
+  } */
   initdefaultQuestion(val, qnid) {
     return this.formbuilder.group({
       'defaultQlist': [true], //  , Validators.required
@@ -408,6 +448,7 @@ console.log(evt.target.checked);
     this.customQList[i].qus = evt.target.value;
     this.customQList[i].nid = nid;
   }
+
   finshCode() {}
   deleteQuestion(i) {
     const data_item = this.customQList[i];
@@ -494,10 +535,10 @@ console.log(evt.target.checked);
         'hwa_nid': hwaId, // localStorage.getItem('storeHwaNid'),
         'ko': dummyCustom
       };
-      // console.log(objTemplate);
+
       this.hwaCommonService.customQuestion(objTemplate)
         .subscribe(res => {
-          // console.log('complated costom question', res);
+         //  console.log('complated costom question', res);
           this.holdDataService.setMessage({
             msg: res['Message'],
             sucsess: true
@@ -511,7 +552,12 @@ console.log(evt.target.checked);
       });
     }
   }
-// Skill Or Experience Question Block --------------------
+
+
+/**
+ * Skill Or Experience Question Block
+ *
+ */
   selectExpType(event) {
     if (this.skillExpForm.controls['exp'].value === 'expertise') {
       this.experenceValue = '';
@@ -526,8 +572,9 @@ console.log(evt.target.checked);
       this.hideExpertiseArray = false;
       this.showActiveBtn = false;
     }
-    console.log(event.target.value);
+   // console.log(event.target.value);
   }
+
   loadSkillDraftData(hwaId) {
     const user = this.userService.isLogedin();
     // const hwaId = localStorage.getItem('storeHwaNid');
@@ -537,35 +584,46 @@ console.log(evt.target.checked);
     this.hwaCommonService.loadSkillsDraftData(hwaId, user.uid)
       .subscribe(res => {
         if (res) {
+          console.log(res);
           const qarray: Array < any > = res as Array < any > ;
           if (qarray.length > 0) {
             for (let i = 0; i < qarray.length; i++) {
               let experi = '';
+              let experience_temp = '';
+             let expertise_temp = '';
               if (qarray[i].field_expertise_needed === 'N/A') {
                 experi = 'experience';
+                expertise_temp = '';
               } else {
                 experi = 'expertise';
+                expertise_temp = qarray[i].field_expertise_needed;
               }
+ if (qarray[i].field_experience_needed === 'N/A') {
+               // experi = 'experience';
+                experience_temp = '';
+              } else {
+               // experi = 'expertise';
+                experience_temp = qarray[i].field_experience_needed;
+              }
+
               const Obj = {
                 'nid': qarray[i].nid,
                 'skill_exp_ques': qarray[i].title,
-                'field_expertise_needed': qarray[i].field_expertise_needed,
-                'field_experience_needed': qarray[i].field_experience_needed,
+                'field_expertise_needed': expertise_temp,
+                'field_experience_needed': experience_temp,
                 'exp': [experi]
               };
               this.skillQuestionList.push(Obj);
-              // this.addUser(qarray[i].nid, qarray[i].title, qarray[i].field_expertise_needed, qarray[i].field_experience_needed);
             }
           } else {
-            for (let i = 0; i < 1; i++) {
-              // this.addUser('', '', 'N/A', 'N/A');
-            }
+
           }
         }
       }, error => {
         console.log(error);
       });
   }
+
   showHideFrom() {
     this.showForm = !this.showForm;
   }
@@ -587,9 +645,7 @@ console.log(evt.target.checked);
   }
   editSkillQue(i) {
     this.showForm = true;
-    // this.skillQuestionList[i];
     this.skillExpForm.patchValue(this.skillQuestionList[i]);
-    // console.log(this.skillQuestionList[i].exp);
     if (this.skillQuestionList[i].exp === 'experience') {
       this.hideExpArray = true;
       this.hideExpertiseArray = false;
@@ -606,6 +662,7 @@ console.log(evt.target.checked);
   }
   updateSkill() {
     // if(this.skillCounter){
+
     this.skillQuestionList[this.skillCounter] = this.skillExpForm.value;
     this.skillCounter = null;
     this.skillExpForm.reset();
@@ -645,8 +702,6 @@ console.log(evt.target.checked);
     // this.skillQuestionList = this.skillQuestionList.filter(item => item !== data_item);
   }
   onSubmitSkill(hwaId, saveType) {
-    // this.disableUntil = true;
-    // this.btntext = 'Processing...';
     if (hwaId) {
       const user = this.userService.isLogedin();
       const pushSkillSet = [];
@@ -678,8 +733,7 @@ console.log(evt.target.checked);
         'seq': pushSkillSet,
         'delete_nid': this.deleteskills
       };
-      // console.log(pushSkillSet);
-      // console.log(skillObj);
+
       this.hwaCommonService.skillQusestion(skillObj)
         .subscribe(res => {
           this.deleteskills = [];
@@ -747,5 +801,5 @@ console.log(evt.target.checked);
         console.log(error);
       });
   }
-
+// -----------------------------------------------------
 }

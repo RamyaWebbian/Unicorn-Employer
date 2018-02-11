@@ -77,7 +77,7 @@
 
                 <div class="form-group filled-form">
                   <label>Job Description</label>
-                <!--  <app-ngx-editor formControlName="field_how_would_you_describe_thi" [(ngModel)]="fetchJd" [config]="editorConfig"></app-ngx-editor>
+                  <app-ngx-editor formControlName="field_how_would_you_describe_thi" [(ngModel)]="fetchJd" [config]="editorConfig"></app-ngx-editor>
                   <!--  <div [hidden]="creatHWAForm.controls['describeSkill'].valid || creatHWAForm.controls['describeSkill'].pristine" class="inline-error">
                 Please Enter Job Description.
               </div> -->
@@ -403,15 +403,16 @@
                 <div class="def-address">
                   <h6>Default business Location</h6>
                   <ng-container *ngFor="let addrs of  addressList; let i=index">
-                    <div *ngIf="addrs.field_make_default == '1'" class="form-check">
+                    <div *ngIf="addrs.field_make_default == 1" class="form-check">
                       <label class="form-check-label">
                         <input type="checkbox"
-                               name="test2"
+                               name="addrsOpt"
                                class="form-check-input"
-                               value="addrs.nid"
-                               [(ngModel)]="addrs.checked"
-                              [checked]="addrs.checked"
+                               [value]="addrs.nid"
+                               [id]="addrs.checked"
+                                [checked]="addrs.checked"
                                (change)="selectLoc($event, i)"/>
+
                         {{addrs?.title}}, {{addrs?.field_address_line_2}}, {{addrs?.field_state}}, {{addrs?.field_city}} </label>
                     </div>
                   </ng-container>
@@ -419,16 +420,15 @@
                 <div class="additional-address">
                   <h6>Additional Location(s)</h6>
                   <ng-container *ngFor="let addrs of addressList; let i=index">
-                    <div *ngIf="addrs.field_make_default != '1'" class="form-check">
+                    <div *ngIf="addrs.field_make_default != 1" class="form-check">
                       <label class="form-check-label">
                         <input type="checkbox"
-                               name="test"
+                               name="addrsOptn"
                                class="form-check-input"
-                               value="addrs.nid"
-                               [(ngModel)]="addrs.checked"
-                                [checked]="addrs.checked"
-                               (change)="selectLoc($event, i)"
-                        />
+                               [id]="addrs.nid"
+                               [value]="addrs.nid"
+                               [checked]="addrs.checked"
+                               (change)="selectLoc($event, i)" />
                         {{addrs?.title}}, {{addrs?.field_address_line_2}}, {{addrs?.field_state}}, {{addrs?.field_city}} </label>
                     </div>
                   </ng-container>

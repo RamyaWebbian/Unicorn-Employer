@@ -9,7 +9,7 @@ import { UserService } from '../../services/index';
 import {HeaderValidUserModule} from '../../common/header-valid-user/header-valid-user.module';
 import {DraftHwaRoutingModule} from './draft-hwa-routing.module';
 import {HwaCommonService} from '../../services';
-import {NgxEditorModule} from 'ngx-editor';
+ import {NgxEditorModule} from 'ngx-editor';
 
 @NgModule({
   imports: [

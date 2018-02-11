@@ -1,19 +1,17 @@
 <app-header-valid-user></app-header-valid-user>
 <section id="hwaContainer">
   <div class="heading">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-8 col-6 padding-zero">
-          <h5>Create HWA</h5>
-        </div>
-        <div class="col-md-4 col-6 text-right padding-zero dropdown">
-          <button class="btn success-btn" [disabled]="!this.creatHWAForm.valid" data-toggle="modal" data-target="#myModalFullscreen" contenteditable="false">Preview & Post Ad</button>
-          <a data-toggle="dropdown"> <img src="../../assets/menu.png" class="all-icon"/> </a>
-          <ul class="dropdown-menu dropdown-menu-right">
-            <li><a (click)="onSubmit('draft')" href="javascript:void(0)">Save as Draft</a></li>
-            <li><a (click)="discardAd()" href="javascript:void(0)">Discard Ad</a></li>
-          </ul>
-        </div>
+    <div class="row">
+      <div class="col-8">
+        <h5>Create HWA</h5>
+      </div>
+      <div class="col-4 text-right dropdown">
+        <button class="btn success-btn" [disabled]="!this.creatHWAForm.valid" data-toggle="modal" data-target="#myModalFullscreen" contenteditable="false">Preview & Post Ad</button>
+        <a data-toggle="dropdown"> <img src="../../assets/menu.png" class="all-icon"/> </a>
+        <ul class="dropdown-menu dropdown-menu-right">
+          <li><a (click)="onSubmit('draft')" href="javascript:void(0)">Save as Draft</a></li>
+          <li><a (click)="discardAd()" href="javascript:void(0)">Discard Ad</a></li>
+        </ul>
       </div>
     </div>
   </div>
